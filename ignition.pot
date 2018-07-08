@@ -16,7 +16,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 404.php:19
-msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgid "It looks like nothing was found at this location."
+msgstr ""
+
+#: 404.php:20
+msgid "Go To Home"
 msgstr ""
 
 #. translators: %s: post title
@@ -112,15 +116,15 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: index.php:121, search.php:60, template-parts/blocks/the_loop.php:63
+#: index.php:122, search.php:60, template-parts/blocks/the_loop.php:63
 msgid "Previous page"
 msgstr ""
 
-#: index.php:122, search.php:61, template-parts/blocks/the_loop.php:64
+#: index.php:123, search.php:61, template-parts/blocks/the_loop.php:64
 msgid "Next page"
 msgstr ""
 
-#: index.php:123, search.php:62, template-parts/blocks/the_loop.php:65
+#: index.php:124, search.php:62, template-parts/blocks/the_loop.php:65
 msgid "Page"
 msgstr ""
 
@@ -241,11 +245,11 @@ msgid "%s<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
 #: template-parts/footer/site-info.php:12
-msgid "https://seasalt.press/"
+msgid "https://ignition.press/"
 msgstr ""
 
 #: template-parts/footer/site-info.php:12
-msgid "Proudly powered by %s"
+msgid "Created with Ignition. Proudly powered by %s"
 msgstr ""
 
 #: template-parts/page/content.php:49, template-parts/post/content.php:41

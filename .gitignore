@@ -19,3 +19,4 @@ node_modules
 /sitemap.xml.gz
 
 /.DS_Store
+/.idea
