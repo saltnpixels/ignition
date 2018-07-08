@@ -1,0 +1,201 @@
+//when the right panel should overlay instead of pushing over the rest of the site (when it should become position absolute)
+$panel-right-absolute: 1030px;
+
+//sidebar width
+$sidebar-width: 350px;
+
+//Styling can be found at the bottom of this file
+/*--------------------------------------------------------------
+# Panel Right button
+--------------------------------------------------------------*/
+.panel-right-toggle {
+  z-index: $z-index-top;
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: 0;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  outline: none;
+  font-size: 22px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/*------- default if no icon is found with svg --------*/
+.sidebar-icon {
+  border: 2px solid white;
+  border-radius: 1px;
+  position: relative;
+  height: 1.3rem; //may have to play to get it matching font size
+  width: 22px;
+  display: block;
+
+  &:after {
+    content: '';
+    width: 30%;
+    background: white;
+    height: 100%;
+    position: absolute;
+    right: 0;
+  }
+}
+
+//hide button if sidebar empty. button must be after sidebar
+#panel-right:empty ~ .panel-right-toggle {
+  display: none;
+}
+
+
+//add room for panel-right button if the menu is up against edge of screen
+@media (max-width: $container + $gap){
+  #panel-right:not(:empty) ~ .site .site-top .container {
+    padding-right: 52px;
+  }
+}
+
+//if site nav is full width, add room for sidebar button always
+#panel-right:not(:empty) ~ .site .site-top .container-fluid {
+  padding-right: 52px;
+}
+
+//open panel 
+#panel-right.open:not(:empty) {
+  flex-basis: $sidebar-width;
+  flex-shrink: 0;
+}
+
+
+/*--------------------------------------------------------------
+# Panel Breakpoint to become absolute. no longer a flexed item
+--------------------------------------------------------------*/
+@media(max-width: $panel-right-absolute) {
+  #panel-right {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    padding-top: 50px;
+    z-index: 90;
+    width: 0;
+
+    &.open {
+      width: $sidebar-width;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# When sidebar is in panel right
+--------------------------------------------------------------*/
+#panel-right {
+  .sidebar-holder { //the holder with data-moveto attr
+    padding-top: $gutters;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    min-width: $sidebar-width;
+    -webkit-overflow-scrolling: touch;
+  }
+  @extend .hide-scroll;
+}
+
+
+/*--------------------------------------------------------------
+# Inline Sidebar
+--------------------------------------------------------------*/
+//hide secondary if empty
+#secondary:empty {
+  display: none;
+}
+
+/*------- Sidebar on left ordering --------*/
+.sidebar-left #secondary {
+  order: 0;
+}
+
+.sidebar-left #primary {
+  order: 1;
+}
+
+.sidebar-right, .sidebar-left{
+  @extend .no-gutters;
+}
+
+//sidebar-template holds article and sidebar under header
+//entry-content.container content doesnt need padding, its inside container
+.sidebar-template .entry-content {
+  padding: 0;
+}
+
+//the header gets pulled out and put above. BUT until js loads its inside with the content and it will look strange.
+//so we load it
+//loads full inside container. gets pulled out with javascript very fast but not fast enough to see strange layout. fix with this
+.sidebar-template .entry-header {
+  margin-left: - #{$gutters};
+  margin-right: - #{$gutters};
+}
+
+.no-js .sidebar-template{
+  max-width: 100%;
+}
+
+//when js pulls out header it also adds class active. until that class is added we dont show sidebar
+.js .sidebar-template:not(.active) {
+  #secondary {
+    display: none;
+  }
+  max-width: 100%;
+}
+
+.sidebar-holder {
+  position: relative;
+}
+
+
+
+/*--------------------------------------------------------------
+# Widgets
+--------------------------------------------------------------*/
+.widget {
+  h2 {
+    text-transform: capitalize;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    position: relative;
+    margin: 0;
+    color: inherit;
+    transition: all .5s;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    a {
+      text-decoration: none;
+      outline: none;
+      padding: 5px 0;
+      color: inherit;
+      cursor: pointer;
+    }
+  }
+}
+
+.sidebar-holder .widget {
+  padding: $gap $gutters 0 $gutters;
+}
+
+.sidebar-holder .widget_nav_menu{
+  padding: $gap 0 $gap;
+}
+
+
+

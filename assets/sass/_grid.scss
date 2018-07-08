@@ -1,0 +1,286 @@
+/*--------------------------------------------------------------
+# CSS Grids and Containers
+--------------------------------------------------------------*/
+/*
+  - Containers can be used anywhere for holding main content.
+  - They have padding on both sides so on mobile the content wont hit the edges.
+  - They have a max-width and are centered. They also have a width of 100% to work nicely inside flex items and grids.
+  - It's best to keep containers surrounding content on their own div. Dont combine with grids and layouts in one div.
+ */
+/*------- Containers --------*/
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 $gutters;
+}
+
+.container-fluid {
+  width: 100%;
+  margin: auto;
+  padding: 0 $gutters;
+}
+
+/*------- Special Container Content For articles --------*/
+/*
+- Container-Content is meant to hold an article's content after the header.
+- It's for actual words and makes sure the line is not too long
+- It cleverly allows for items inside to go full width and "break out" with alignwide and alignfull
+- The container itself has no max-width, instead its items within. So make sure you dont use grid with container-content on same div.
+- Any items inside with full-width or .alignfull will NOT have a max-width and will fill page
+- Dont surround container-content with a container or full items wont be full width!
+*/
+.container-content {
+  padding: 0 $gutters;
+
+  > *:not( .alignwide ):not( .alignfull ):not(.ful-width) {
+    max-width: $content-container !important; //needs to override the figures or any other elements with inline widths
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  > .full-width, > .alignfull {
+    width: auto; //override gutenberg, otherwise negative margins below wont work
+    margin-left: -#{$gutters}; //negative margins to counteract the containers padding
+    margin-right: -#{$gutters};
+  }
+
+}
+
+/*--------------------------------------------------------------
+# WP Align Wide has a max width.
+--------------------------------------------------------------*/
+
+.alignwide {
+  width: 100%;
+  max-width: $container;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*--------------------------------------------------------------
+# CARD GRIDS
+--------------------------------------------------------------*/
+
+/*------- Grid Layouts --------*/
+/*
+- Simple Responsive grid of equal sized items
+- Create your own responsive grid!
+- Add @include grid($min-size-of-items);
+- The default min size is 350
+- Items grow if there is room to grow, or fall to next row fi there isnt.
+ */
+.card-grid {
+  @include card-grid(); //items stretch to fill space always if there arent enough cards
+}
+
+.card-grid-fill {
+  @include card-grid(350px, 1fr, $gap, auto-fill); //only stretches items if theres no room for another item on row
+}
+
+.flex-card-grid {
+  @include flex-card-grid(); //almost the same except cards on lowest row will not be same size if there isnt an even amount
+}
+
+/*--------------------------------------------------------------
+# 12 Column CSS Grids
+--------------------------------------------------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(1px, 1fr));
+  grid-gap: $gap;
+
+  //span on individuals overrides span-all
+  @for $i from 1 through 12 {
+    .span-#{$i}, &.span-all-#{$i} > * {
+      grid-column: span #{$i};
+    }
+  }
+}
+
+.span-full {
+  grid-column: 1 / -1;
+  flex-basis: 100%;
+}
+
+.grid {
+  //large and below size on items
+  @media(min-width: $media-medium) {
+    @for $i from 1 through 12 {
+      div & > .large-span-#{$i}, &.large-span-all-#{$i} > * {
+        grid-column: span #{$i};
+      }
+    }
+  }
+
+  //medium and below size on items
+  @media(max-width: $media-medium) {
+    @for $i from 1 through 12 {
+      div & > .medium-span-#{$i}, &.medium-span-all-#{$i} > * {
+        grid-column: span #{$i};
+      }
+    }
+  }
+
+  //small and below size on items. a bit stronger specificity
+  @media(max-width: $media-small) {
+
+    //only small-span can override this. has extra specificity
+    @if ($collapse-on-small == true) {
+      div.site & > * {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @for $i from 1 through 12 {
+      div & > .small-span-#{$i}, &.small-span-all-#{$i} > * {
+        grid-column: span #{$i};
+      }
+    }
+
+  }
+
+}
+
+/*--------------------------------------------------------------
+# Flexbox grids. 99% same as css grid
+--------------------------------------------------------------*/
+
+.flex, .flex-grid {
+  display: flex;
+
+  //gutters via margins. the flex-basis makes sure it can be sized right
+  & > * {
+    margin-right: $gutters;
+    margin-left: $gutters;
+    flex: 1;
+  }
+
+  @for $i from 1 through 12 {
+    .span-#{$i}, &.span-all-#{$i} > * {
+      $width: 100% / (12/$i);
+      flex-basis: calc(#{$width} - #{$gap});
+    }
+
+    div & > .span-#{$i}{
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+  }
+
+}
+
+.flex.no-gutters, .flex-grid.no-gutters {
+  & > * {
+    margin: 0;
+  }
+}
+
+//many rows has margin bottom and wraps
+.flex-grid {
+  flex-wrap: wrap;
+  & > * {
+    margin-bottom: $gap;
+  }
+}
+
+//pull out to match containers edge
+.container .flex, .container-fluid .flex,
+.container .flex-grid, .container-fluid .flex-grid,
+.container-content .flex, .container-content .flex-grid {
+  margin-left: -#{$gutters};
+  margin-right: -#{$gutters};
+
+  &.no-gutters {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.flex-grid, .flex {
+
+  //large and below size on items
+  @media(min-width: $media-medium) {
+    @for $i from 1 through 12 {
+      div & > .large-span-#{$i}, &.large-span-all-#{$i} > * {
+        $width: 100% / (12/$i);
+        flex-basis: calc(#{$width} - #{$gap});
+      }
+      div & > .large-span-#{$i}{
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  //medium and below size on items
+  @media(max-width: $media-medium) {
+    @for $i from 1 through 12 {
+      div & > .medium-span-#{$i}, &.medium-span-all-#{$i} > * {
+        $width: 100% / (12/$i);
+        flex-basis: calc(#{$width} - #{$gap});
+      }
+
+      div & > .medium-span-#{$i}{
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  //small and below size on items
+  @media(max-width: $media-small) {
+
+    //no need to add class if set to collapse on small is always true. overrides any spans
+    @if ($collapse-on-small == true) {
+      flex-wrap: wrap;
+      div.site & > * {
+        flex-basis: calc(100% - #{$gap});
+      }
+    }
+
+    @for $i from 1 through 12 {
+      div & > .small-span-#{$i}, &.small-span-all-#{$i} > * {
+        $width: 100% / (12/$i);
+        flex-basis: calc(#{$width} - #{$gap});
+      }
+
+      div & > .small-span-#{$i}{
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+}
+
+/*--------------------------------------------------------------
+# Grid Helpers
+--------------------------------------------------------------*/
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.layout-center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+  

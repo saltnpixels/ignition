@@ -1,0 +1,35 @@
+{
+  "name": "ignition",
+  "author": "Eric Greenfield",
+  "version": "1.0.1",
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadawais/WPGulp"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "browser-sync": "^2.23.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^6.1.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-filter": "^5.1.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-line-ending-corrector": "^1.0.1",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^3.2.1",
+    "gulp-sort": "^2.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglifycss": "^1.1.0",
+    "gulp-wp-pot": "^2.3.1",
+    "minimatch": "^3.0.4",
+    "wp-pot": "^1.6.1"
+  }
+}

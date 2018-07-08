@@ -1,0 +1,50 @@
+/*--------------------------------------------------------------
+# Site Wide Variables
+--------------------------------------------------------------*/
+
+/*------- Fonts --------*/
+// - Change fonts as needed. you may of course need to add a link to your fonts for them to work in functions.php
+$font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$line-height: 1.5;
+$font-pre: 'Source Code Pro', monospace;
+$line-height-pre: 22px;
+
+
+/*------- Grid and Layout --------*/
+$container: 1200px; //the max size of site content
+$content-container: 700px; //Size of actual article content
+$gutters: 15px;
+$gap: $gutters * 2;
+
+
+/*------- Media Query Sizes --------*/
+$media-small: 576px;
+$media-medium: 767px;
+$media-large: 1030px;
+$media-container: $container;
+
+$collapse-on-small: true; //collapse grid and flex-grid and flex on small devices automatically. small-span can override
+
+
+/*------- Z-index --------*/
+$z-index-top: 99;
+$z-index-overlay: 95;
+$z-index-menu-button: 90;
+$z-index-menu: 80;
+$z-index-behind: -1;
+
+
+
+//Colors
+$black: #191919;
+$orange: #ffa62c;
+$pink: #ff4a6b;
+$grey: #cacaca;
+
+
+
+//Applied Colors
+$color-main: $black;
+$color-highlight: $pink;
+$color-subtle: $grey;

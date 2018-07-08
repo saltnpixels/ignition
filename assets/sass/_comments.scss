@@ -1,0 +1,27 @@
+/*
+	This file is for styling your comment sections
+*/
+
+//if comments is inside container-content because of a sidebar, make sure #comments is full width
+.container-content #comments{
+  margin-left: -#{$gutters};
+  margin-right: -#{$gutters};
+}
+
+#comments{
+
+}
+
+
+.comments-holder{
+  max-width: 730px;
+  margin: auto;
+  padding: $gutters;
+}
+
+.comment-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+

@@ -1,0 +1,230 @@
+/*--------------------------------------------------------------
+# Layout Fixes for ie11
+--------------------------------------------------------------*/
+
+@media all and (-ms-high-contrast: none) {
+  /*--------------------------------------------------------------
+# Flexbox grids. 99% same as css grid
+--------------------------------------------------------------*/
+
+  .flex, .flex-grid, .grid {
+    display: flex;
+
+
+    //gutters via margins. the flex-basis makes sure it can be sized right
+    & > * {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      margin-right: $gutters;
+      margin-left: $gutters;
+    }
+
+    @for $i from 1 through 12 {
+      div & .span-#{$i}, &.span-all-#{$i} > * {
+        $width: 100% / (12/$i);
+        width: calc(#{$width} - #{$gap});
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: auto;
+      }
+    }
+
+  }
+
+  .grid.no-gutters {
+    & > * {
+      margin: 0;
+    }
+  }
+
+  //many rows has margin bottom and wraps
+  .grid {
+    flex-wrap: wrap;
+    & > * {
+      margin-bottom: $gap;
+    }
+  }
+
+  //pull out to match containers edge
+  .container .flex, .container-fluid .flex,
+  .container .flex-grid, .container-fluid .flex-grid,
+  .container-content .flex, .container-content .flex-grid,
+  .container .grid, .container-fluid .grid, .container-content .grid {
+    margin-left: -#{$gutters};
+    margin-right: -#{$gutters};
+
+    &.no-gutters {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .flex-grid, .flex, .grid {
+
+    //large and below size on items
+    @media(min-width: $media-medium) {
+      @for $i from 1 through 12 {
+        div & > .large-span-#{$i}, &.large-span-all-#{$i} > * {
+          $width: 100% / (12/$i);
+          width: calc(#{$width} - #{$gap});
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: auto;
+        }
+      }
+    }
+
+    //medium and below size on items
+    @media(max-width: $media-medium) {
+      @for $i from 1 through 12 {
+        div & > .medium-span-#{$i}, &.medium-span-all-#{$i} > * {
+          $width: 100% / (12/$i);
+          width: calc(#{$width} - #{$gap});
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: auto;
+        }
+      }
+    }
+
+    //small and below size on items
+    @media(max-width: $media-small) {
+
+      //no need to add class if set to collapse on small is always true. overrides any spans
+      @if ($collapse-on-small == true) {
+        flex-wrap: wrap;
+        div.site & > * {
+          width: calc(100% - #{$gap});
+          flex-basis: auto;
+        }
+      }
+
+      @for $i from 1 through 12 {
+        div & > .small-span-#{$i}, &.small-span-all-#{$i} > * {
+          $width: 100% / (12/$i);
+          width: calc(#{$width} - #{$gap});
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: auto;
+        }
+      }
+    }
+
+  }
+
+  .layout-center-content > * {
+    margin: 0; //ie11 freaks out if the inner div has a margin: auto;
+  }
+
+  .container .grid, .container-fluid .grid, .container-content .grid {
+    margin-left: -#{$gutters};
+    margin-right: -#{$gutters};
+  }
+
+}
+
+/*--------------------------------------------------------------
+# Sticky Footer "Fix"
+--------------------------------------------------------------*/
+//todo why?
+@media all and (-ms-high-contrast: none) {
+  .site-content {
+    min-height: 100vh;
+  }
+}
+
+/*--------------------------------------------------------------
+# Header fix
+--------------------------------------------------------------*/
+
+//ie11
+@media all and (-ms-high-contrast: none) {
+  .entry-header {
+    height: 20vw;
+  }
+
+  .header-basic {
+    height: auto;
+  }
+}
+
+/*--------------------------------------------------------------
+# Old Broswer notice
+--------------------------------------------------------------*/
+
+/*!--------------------------------------------------------------------
+STYLES "Outdated Browser"
+Version:    1.1.2 - 2015
+author:     Burocratik
+website:    http://www.burocratik.com
+* @preserve
+-----------------------------------------------------------------------*/
+#outdated {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 170px;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 1500;
+  background-color: #f25648;
+  color: #ffffff;
+  h6 {
+    font-size: 25px;
+    line-height: 25px;
+    margin: 30px 0 10px;
+  }
+  p {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+  }
+  #btnUpdateBrowser {
+    display: block;
+    position: relative;
+    padding: 10px 20px;
+    margin: 30px auto 0;
+    width: 230px; /*need for IE*/
+    color: #ffffff;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    &:hover {
+      color: #f25648;
+      background-color: #ffffff;
+    }
+  }
+  .last {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    width: 20px;
+    height: 20px;
+    &[dir='rtl'] {
+      right: auto !important;
+      left: 25px !important;
+    }
+  }
+  #btnCloseUpdateBrowser {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 36px;
+    line-height: 36px;
+  }
+  * html & {
+    position: absolute;
+  }
+}
+
+@media all and (-ms-high-contrast: none) {
+  #outdated {
+    display: block;
+  }
+}

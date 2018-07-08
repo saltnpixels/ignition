@@ -1,0 +1,259 @@
+/**
+ - Here is where you can add styles for global elements appearing on many pages of your site
+ */
+/*--------------------------------------------------------------
+# Body
+--------------------------------------------------------------*/
+body {
+  background: white;
+}
+
+/*--------------------------------------------------------------
+# Logo
+--------------------------------------------------------------*/
+.site-logo {
+  @include font-size(2.2);
+  color: white;
+  text-transform: uppercase;
+}
+
+/*--------------------------------------------------------------
+# Site Top Styling
+--------------------------------------------------------------*/
+//some variables can be set in navigation_menu.scss
+.site-top {
+  background: linear-gradient(90deg, #FF5115 0%, #FFA72C 100%);
+}
+
+/*------- Nav Menu Button --------*/
+body .navigation-menu-icon {
+  border-color: white;
+  color: white;
+
+  &:after, &:before {
+    background: white;
+  }
+}
+
+/*--------------------------------------------------------------
+# Panel Styling
+--------------------------------------------------------------*/
+//some variables can be set in navigation_menu.scss
+#panel-left {
+  background-image: linear-gradient(90deg, #FF5115 0%, #FEBC4A 100%);
+}
+
+/*--------------------------------------------------------------
+# Menu Styling
+--------------------------------------------------------------*/
+//desktop styles for site top menu when its horizontal
+@media(min-width: $nav-breakpoint-collapse) {
+  .site-top .menu {
+    li {
+      color: white;
+    }
+
+    //top level items
+    .top-level-item {
+      &.current-menu-item .menu-item-link, .menu-item-link:hover {
+        background: transparent;
+        color: black;
+      }
+      //top level submenu dropdown
+      & > .sub-menu {
+        background: #FEBC4A;
+
+        //inside sub menu
+        .menu-item-link:hover, .current-menu-item .menu-item-link {
+          background: rgba(0, 0, 0, .5);
+          color: white;
+        }
+      }
+
+    }
+  }
+}
+
+
+/*------- panel-left/mobile styling --------*/
+.menu li{
+  color: black;
+}
+#panel-left .current-menu-item > .menu-item-link {
+  background: rgba(0, 0, 0, .5);
+  color: white;
+}
+
+
+
+/*--------------------------------------------------------------
+# Panel Right and Sidebar Styling
+--------------------------------------------------------------*/
+//some widget styles can be found at bottom of sidebar.scss
+
+/*-------  #panel Right --------*/
+#panel-right {
+  background: rgb(30, 30, 34);
+  color: white;
+}
+
+//button to open sidebar
+.panel-right-toggle {
+  color: white;
+  background: transparent;
+}
+
+.panel-right-toggle.toggled-on {
+  color: white;
+}
+
+
+/*------- Inline Sidebar Background --------*/
+#secondary .sidebar-holder:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 50vw;
+  top: 0;
+  left: 0;
+  background: #efefef;
+  z-index: -1;
+}
+
+//background when on left
+.sidebar-left #secondary .sidebar-holder:after {
+  left: auto;
+  right: 0;
+}
+
+/*------- Widgets --------*/
+.widget{
+  color: white;
+}
+
+.widget .menu li{
+  color: white;
+}
+
+
+
+/*--------------------------------------------------------------
+# Headers
+--------------------------------------------------------------*/
+.entry-header, .page-header {
+  position: relative;
+  min-height: 22vw;
+  padding: 30px 0;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  h1 {
+    margin: 0;
+  }
+
+  .cover-image {
+    height: 500px;
+  }
+
+}
+
+/*------- Items directly under header should have padding --------*/
+.container-content > *:first-child {
+  padding-top: $gap;
+}
+
+/*------- When header has no min-height and text isnt on top of any image --------*/
+.header-basic {
+  background: transparent;
+  min-height: 0;
+  height: auto;
+  color: black;
+  padding: 0;
+  margin-bottom: $gap;
+
+  .cover-image {
+    margin-bottom: $gap; //above title
+  }
+}
+
+/*--------------------------------------------------------------
+# Articles
+--------------------------------------------------------------*/
+.edit-link {
+  @include font-size(.7);
+}
+
+
+/*------- Card Pagination  --------*/
+.pagination{
+  text-align: center;
+  padding: $gap 0;
+  .page-numbers{
+    background: $pink;
+    color: white;
+    margin: 0 3px;
+    padding: 3px 8px;
+  }
+
+  .page-numbers.current{
+    background: $grey;
+  }
+
+  .page-numbers.dots{
+    background: transparent;
+    color: $grey;
+    margin: 0;
+  }
+}
+
+/*--------------------------------------------------------------
+# Site Footer
+--------------------------------------------------------------*/
+
+.site-footer {
+  padding-top: $gap;
+  padding-bottom: 5px;
+  background: $black;
+  color: $grey;
+  @include font-size(.7);
+}
+
+/*--------------------------------------------------------------
+# Error 404 Page
+--------------------------------------------------------------*/
+.error404 {
+  background: #4F4F4F;
+  color: white;
+
+  .site-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-footer, .site-top {
+    display: none;
+  }
+
+  .title-404 {
+    @include scss-font-lock(90px, 200px);
+    font-weight: bold;
+    line-height: 1;
+    color: #727272;
+    text-shadow: 1px 1px white;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Icon Tweaks
+--------------------------------------------------------------*/
+.icon-angle-right{
+  top: -1px;
+}
+
+.icon-arrow-right{
+  top: -2px;
+}
+

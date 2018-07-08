@@ -1,0 +1,17 @@
+.acf-fields.-left{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.acf-field{
+    flex: 1 1 100%;
+}
+
+.acf-field.flex-of-2{
+    max-width: 50%;
+    border-right: #EEEEEE solid 1px;
+}
+
+
+
+

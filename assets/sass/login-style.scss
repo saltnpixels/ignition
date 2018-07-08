@@ -1,0 +1,34 @@
+body {
+  display: flex;
+  align-items: center;
+}
+
+body #login{
+  padding: 0;
+}
+
+#login h1 a,
+.login h1 a {
+  display: none;
+  padding-bottom: 30px;
+}
+
+body .custom-logo-link {
+  margin: 0 auto 30px;
+  display: block;
+  text-align: center;
+}
+
+.custom-logo-link svg {
+  max-width: 100%;
+}
+
+.site-title{
+  font-size: 2rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.site-title a{
+  text-decoration: none;
+}

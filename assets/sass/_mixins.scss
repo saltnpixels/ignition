@@ -1,0 +1,206 @@
+/*--------------------------------------------------------------
+Mixins
+--------------------------------------------------------------*/
+/*------- Rem with px fallback --------*/
+@mixin font-size($sizeValue: 1) {
+  font-size: ($sizeValue * 20) * 1px;
+  font-size: $sizeValue * 1rem;
+}
+
+/*------- Clearfix --------*/
+@mixin clearfix() {
+  content: "";
+  display: table;
+  table-layout: fixed;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+  clear: both;
+}
+
+/*------- Retina --------*/
+@mixin retina {
+  @media
+  screen and (-webkit-min-device-pixel-ratio: 2),
+  screen and (min-resolution: 192dpi),
+  screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+/*------- Deep Shadow Mixin --------*/
+/// @param {Color} $color - color to tint
+/// @param {Size} $number - how many times to do the shadow
+@mixin deep-shadow($color, $size) {
+  //add layers of text shadow to $text-shadow
+  $text-shadow: '1px 1px #{$color}';
+  $comma: ',';
+
+  @for $i from 2 through $size {
+    $text-shadow: #{$text-shadow} #{$comma} #{$i}px #{$i}px 0 $color;
+  }
+
+  text-shadow: $text-shadow;
+}
+
+/*------- Lighten and shade colors --------*/
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+/*------- Fluid Font Lock --------*/
+// Fluid Font (CSS Lock) from https://github.com/alexerlandsson/scss-font-lock
+@function sfl-strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@mixin scss-font-lock($min-size, $max-size, $min-width: 400px, $max-width: 1000px, $base-font-size: 16px) {
+  $error: false;
+
+  /* Add variables to a map */
+  $var-list: (min-size: $min-size, max-size: $max-size, min-width: $min-width, max-width: $max-width);
+
+  /* Control unit of passed variables */
+  @each $key, $val in $var-list {
+    @if (unit($val) != px) and (unit($val) != em) {
+      @warn "`#{$key}` needs to be set in px or em.";
+      $error: true;
+    } @else if (unit($val) == em) {
+      /* Set max-size in px if set in em */
+      $val: (sfl-strip-unit($val) * $base-font-size);
+      $var-list: map-merge($var-list, ($key: $val));
+    }
+  }
+
+  /* Set the new values to the variables */
+  $min-size: map-get($var-list, min-size);
+  $max-size: map-get($var-list, max-size);
+  $min-width: map-get($var-list, min-width);
+  $max-width: map-get($var-list, max-width);
+
+  @if ($error == false) {
+    font-size: $min-size;
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      $size-increase: (sfl-strip-unit($max-size) - sfl-strip-unit($min-size));
+      font-size: calc(#{$min-size} + #{$size-increase} * (100vw - #{$min-width}) / (#{sfl-strip-unit($max-width)} - #{sfl-strip-unit($min-width)}));
+    }
+    @media (min-width: ($max-width + 1px)) {
+      font-size: $max-size;
+    }
+  } @else {
+    @warn "There is an error in `@include scss-font-lock();`";
+    /* Print error message on page */
+    &:before {
+      content: "There is an error in @include scss-font-lock();";
+      position: absolute;
+      padding: 10px 15px;
+      white-space: nowrap;
+      background-color: red;
+      border-radius: 10px;
+      color: white;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+
+}
+
+/*------- Grid --------*/
+//perfect grid of responsive items, no media query required!
+@mixin card-grid($min: 350px, $max: 1fr, $grid-gap: $gap, $auto-type: auto-fit) {
+  display: grid;
+  grid-template-columns: repeat(#{$auto-type}, minmax($min, $max));
+  grid-gap: $grid-gap;
+  justify-content: center;
+
+//if width and gap is size of screen.
+    @media (max-width: $min + 30px) {
+      grid-template-columns: 1fr;
+    }
+
+  //fallback for ie11
+  @media all and (-ms-high-contrast: none) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & > * {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      min-width: calc(#{$min - $grid-gap});
+      margin: $grid-gap / 2 ;
+      margin-top: 0;
+      margin-bottom: $grid-gap;
+    }
+
+    &.no-gutters{
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &.no-gutters > * {
+      margin: 0;
+    }
+
+    .conainer &, .container-fluid &, .container-content &{
+      margin-left: -#{$gutters};
+      margin-right: -#{$gutters};
+
+      &.no-gutters {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
+@mixin flex-card-grid($min: 350px, $grow: 1, $shrink: 1, $grid-gap: $gap){
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  $grid-gutter: $grid-gap/2;
+  margin-left: -#{$grid-gutter};
+  margin-right: -#{$grid-gutter};
+
+   > *{
+     flex-grow: $grow;
+     flex-shrink: $shrink;
+     flex-basis: calc(#{$min - $grid-gap}); //using calc we can even allow % based widths
+     margin: 0 $grid-gutter $grid-gap $grid-gutter;
+   }
+
+  &.no-gutters{
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  &.no-gutters > * {
+    margin: 0;
+  }
+
+  @media all and (-ms-high-contrast: none) {
+    > *{
+      flex-basis: auto;
+      min-width: calc(#{$min - $grid-gap}); //using calc we can even allow % based widths
+    }
+  }
+}
+

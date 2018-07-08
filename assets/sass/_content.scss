@@ -1,0 +1,58 @@
+/*--------------------------------------------------------------
+# Cards on Archive pages
+--------------------------------------------------------------*/
+
+//to have this only affect post-type posts use .post.card
+.card {
+  box-shadow: 0 1px 12px rgba(black, .3);
+  border-radius: 5px;
+  position: relative;
+  color: $color-main;
+  display: flex;
+  flex-direction: column;
+
+  > *{
+    padding: 0 $gutters;
+  }
+
+  /*------- Card Header --------*/
+  .cover-image{
+    padding: 0;
+    img{
+      height: 250px;
+    }
+
+  }
+
+  .card-title {
+    @include font-size(1.6);
+    margin-bottom: $gutters;
+  }
+
+  a.term-link {
+    @include scss-font-lock(12px, 14px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .more-link {
+    @extend .button;
+  }
+
+  .card-content {
+    flex: 1 0 auto;
+  }
+
+  //hide the published date if there is a modified date
+  .published.updated {
+    display: none;
+  }
+
+  time, time a {
+    @include scss-font-lock(12px, 14px);
+  }
+
+}
+
+
+

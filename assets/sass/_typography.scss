@@ -1,0 +1,196 @@
+/*--------------------------------------------------------------
+# Typography Basics
+--------------------------------------------------------------*/
+
+html {
+	font-size: 100%;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	@include font-size(1); //16px usually is default
+	line-height: 1.5;
+	font-family: $font;
+	color: $color-main;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+}
+
+article{
+  @include font-size(1.125);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+	font: $font-alt;
+	margin: 0 0 .2em 0;
+}
+
+p {
+	margin: 0 0 1em 0;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+
+*:focus {
+	outline: none;
+}
+
+/*------- Quick text alignment classes --------*/
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-left {
+	text-align: left;
+}
+
+//only center the heading inside this section or div
+.heading-center {
+	h1, h2, h3, h4, h5, h6 {
+		text-align: center;
+	}
+}
+
+
+/*--------------------------------------------------------------
+# Content Headings
+--------------------------------------------------------------*/
+
+h1, .h1 {
+	@include scss-font-lock(30px, 60px); //goes between 30 and 60px as window changes size.
+	line-height: 1.3;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+h2, .h2 {
+	@include font-size(1.7);
+	font-weight: normal;
+}
+
+h3, .h3 {
+	@include font-size(1.3);
+}
+
+h4, .h4 {
+	@include font-size(1.1);
+}
+
+/*--------------------------------------------------------------
+# Basic Links
+--------------------------------------------------------------*/
+
+a {
+	color: $color-highlight;
+	text-decoration: none;
+}
+
+
+/*--------------------------------------------------------------
+# Selection Highlighting
+--------------------------------------------------------------*/
+::selection {
+	background: tint($color-highlight, 50%);
+}
+
+
+
+
+/*--------------------------------------------------------------
+# quotes and code
+--------------------------------------------------------------*/
+dfn,
+cite,
+em,
+blockquote {
+	font-style: italic;
+}
+
+blockquote {
+	quotes: "“" "”";
+	overflow: hidden;
+	position: relative;
+	margin: 0 0 2em 0;
+	font-family: $font;
+	background: transparent;
+
+	p {
+		padding-left: 40px;
+	}
+
+	p:last-of-type {
+		margin: 0;
+	}
+
+	//quote mark
+	&:before {
+		content: open-quote;
+		@include font-size(2);
+		position: absolute;
+		top: 0;
+		line-height: 1;
+	}
+}
+
+//person quoted
+cite, .wp-block-quote cite {
+	font-family: $font;
+	float: right;
+	margin-top: 0;
+	font-size: 14px;
+	&:before {
+		content: '\2014';
+		margin-right: 1em;
+	}
+}
+
+//overriding gutenberg on front end
+.wp-block-quote.is-large {
+	&:before {
+		@include font-size(2.5);
+	}
+	p {
+		@include font-size(1.3);
+	}
+}
+
+q {
+	quotes: "“" "”" "‘" "’";
+}
+
+pre {
+	background: #f7f9fa;
+	border: 1px solid #e6e8eb;
+	font-family: $font-pre;
+	font-size: 14px;
+	line-height: $line-height-pre;
+	margin-bottom: 1.6em;
+	overflow: auto;
+	padding: 1.6em;
+	white-space: pre-wrap;
+}
+
+code,
+kbd,
+tt,
+var {
+	font-family: $font-pre;
+	font-size: 15px;
+}

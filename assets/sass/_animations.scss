@@ -1,0 +1,53 @@
+/*--------------------------------------------------------------
+# Animation Setup
+--------------------------------------------------------------*/
+//set element up for animations
+[data-scrollanimation], .animated, [data-toggle] {
+  animation-fill-mode: both;
+  animation-duration: 1s;
+  transform: translate(0);
+}
+
+.infinite{
+  animation-iteration-count: infinite;
+}
+
+.fixed-at-top {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+//for toggling a class on and off, an animation is best as it can contain a start and end.
+//for tweening you will need a start and end class. make sure the item has the start class already.
+/*--------------------------------------------------------------
+# Animations
+--------------------------------------------------------------*/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+
+
+/*--------------------------------------------------------------
+# Scrub animations. Expect to go from a start class to an end class. make sure to include data-scrollscrub, as well as a starting class to tween from
+--------------------------------------------------------------*/
+//if you plan on tweeing from an opacity of 0, add this class too.
+.js .animateIn {
+  opacity: 0; //start at nothing
+}

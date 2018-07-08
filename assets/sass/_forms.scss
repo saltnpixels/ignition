@@ -1,0 +1,171 @@
+/*--------------------------------------------------------------
+# Global Forms
+--------------------------------------------------------------*/
+
+label {
+  display: block;
+  font-weight: 800;
+}
+
+fieldset {
+  margin-bottom: $gap;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+input[type="file"],
+textarea {
+  border: 1px solid grey;
+  background: transparent;
+  color: grey;
+  width: 100%;
+  min-width: 0;
+  transition: all .5s;
+  padding: 3px 5px;
+  order: 1;
+
+  &:focus {
+    border: 1px solid $color-highlight;
+  }
+}
+
+select {
+  width: 100%;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+/*--------------------------------------------------------------
+# Buttons
+--------------------------------------------------------------*/
+button{
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn, .button, input[type="submit"] {
+  display: inline-block;
+  border: 1px solid transparent;
+  text-transform: capitalize;
+  background: $color-highlight;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 3px;
+  transition: all .5s;
+  cursor: pointer;
+
+  &:active, &:focus {
+    color: white;
+    box-shadow: 0 0 0 2px rgba($color-highlight, 0.5);
+  }
+
+  &:hover {
+    color: white;
+    background: shade($color-highlight, 15%);
+  }
+}
+
+.btn--o, .button--o {
+  border: 1px solid $color-highlight;
+  color: $color-highlight;
+  background: transparent;
+
+  &:hover {
+    background: $color-highlight;
+    color: white;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Input Placeholders
+--------------------------------------------------------------*/
+
+//each one needs its own line they cannot be combined selectors
+$placeholder_browsers:
+'::-webkit-input-placeholder',
+':-moz-placeholder',
+'::-moz-placeholder',
+':-ms-input-placeholder',
+'::-ms-input-placeholder',;
+
+@each $placeholder in $placeholder_browsers {
+  #{$placeholder} {
+    color: inherit;
+    opacity: .7;
+    font-family: $font;
+  }
+}
+
+
+
+/*--------------------------------------------------------------
+# Search Form
+--------------------------------------------------------------*/
+.search-form {
+  display: flex;
+  //input
+  .search-field {
+    flex: 1 1 auto;
+    padding: 3px 10px 3px 10px;
+    border: 1px solid $color-highlight;
+    border-radius: 3px;
+  }
+}
+
+/*------- input appends and prepends for icons --------*/
+/*
+ * when adding a button near an input you can make it a prepend or append
+ * all prepends and appends go AFTER the input. Never before or :focus wont affect the prepend.
+ */
+.input-prepend, .input-append {
+  transition: all .5s;
+  background: white;
+  z-index: 2;
+  color: $color-subtle;
+  box-shadow: none;
+}
+
+.input-append {
+  border-radius: 0 3px 3px 0;
+  margin-left: -2px;
+  order: 1;
+  border: 1px solid $color-highlight;
+  border-left: 0;
+}
+
+.input-prepend {
+  border-radius: 3px 0 0 3px;
+  margin-right: -2px;
+  order: 0;
+}
+
+input:focus + .input-prepend {
+  border-color: $color-highlight;
+}
+
+input:focus + .input-append {
+  border-color: $color-highlight;
+}
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* ==========================================
+Single-colored icons can be modified like so:
+.icon-name {
+  font-size: 32px;
+  color: red;
+}
+========================================== */
+
+.icon-images {
+  width: 1.125em;
+}
+
+.icon-connection {
+  width: 1.25em;
+}
+
+.icon-books {
+  width: 1.125em;
+}
+
+.icon-users {
+  width: 1.125em;
+}
+
+.icon-volume-high {
+  width: 1.0625em;
+}
+
+.icon-asterisk {
+  width: 0.9285714285714285em;
+}
+
+.icon-search {
+  width: 0.9285714285714285em;
+}
+
+.icon-search-plus {
+  width: 0.9285714285714285em;
+}
+
+.icon-search-minus {
+  width: 0.9285714285714285em;
+}
+
+.icon-cog {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-circle-o-down {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-circle-o-up {
+  width: 0.8571428571428571em;
+}
+
+.icon-edit {
+  width: 1.0005714285714284em;
+}
+
+.icon-share-square-o {
+  width: 0.9319285714285714em;
+}
+
+.icon-check-square-o {
+  width: 0.9324999999999999em;
+}
+
+.icon-question-circle {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-left {
+  width: 0.8928571428571428em;
+}
+
+.icon-arrow-right {
+  width: 0.8214285714285714em;
+}
+
+.icon-arrow-up {
+  width: 0.9285714285714285em;
+}
+
+.icon-arrow-down {
+  width: 0.9285714285714285em;
+}
+
+.icon-expand {
+  width: 0.8571428571428571em;
+}
+
+.icon-compress {
+  width: 0.8571428571428571em;
+}
+
+.icon-twitter-square {
+  width: 0.8849206349206348em;
+}
+
+.icon-facebook-square {
+  width: 0.8571428571428571em;
+}
+
+.icon-cogs {
+  width: 1.0714285714285714em;
+}
+
+.icon-thumbs-o-up {
+  width: 0.8571428571428571em;
+}
+
+.icon-thumbs-o-down {
+  width: 0.8571428571428571em;
+}
+
+.icon-sign-out {
+  width: 0.875em;
+}
+
+.icon-linkedin-square {
+  width: 0.8571428571428571em;
+}
+
+.icon-sign-in {
+  width: 0.8571428571428571em;
+}
+
+.icon-unlock {
+  width: 0.9285714285714285em;
+}
+
+.icon-feed {
+  width: 0.7862857142857141em;
+}
+
+.icon-arrow-circle-left {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-circle-right {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-circle-up {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-circle-down {
+  width: 0.8571428571428571em;
+}
+
+.icon-globe {
+  width: 0.8571428571428571em;
+}
+
+.icon-filter {
+  width: 0.7857142857142857em;
+}
+
+.icon-arrows-alt {
+  width: 0.8571428571428571em;
+}
+
+.icon-link {
+  width: 0.9285714285714285em;
+}
+
+.icon-paperclip {
+  width: 0.7857142857142857em;
+}
+
+.icon-bars {
+  width: 0.8571428571428571em;
+}
+
+.icon-linkedin {
+  width: 0.8571428571428571em;
+}
+
+.icon-rotate-left {
+  width: 0.8571428571428571em;
+}
+
+.icon-angle-left {
+  width: 0.375em;
+}
+
+.icon-angle-right {
+  width: 0.33928571428571425em;
+}
+
+.icon-angle-up {
+  width: 0.6428571428571428em;
+}
+
+.icon-angle-down {
+  width: 0.6428571428571428em;
+}
+
+.icon-desktop {
+  width: 1.0714285714285714em;
+}
+
+.icon-mail-reply-all {
+  width: 0.996642857142857em;
+}
+
+.icon-chain-broken {
+  width: 0.9285714285714285em;
+}
+
+.icon-chevron-circle-left {
+  width: 0.8571428571428571em;
+}
+
+.icon-chevron-circle-right {
+  width: 0.8571428571428571em;
+}
+
+.icon-chevron-circle-up {
+  width: 0.8571428571428571em;
+}
+
+.icon-chevron-circle-down {
+  width: 0.8571428571428571em;
+}
+
+.icon-html5 {
+  width: 0.7857142857142857em;
+}
+
+.icon-unlock-alt {
+  width: 0.6428571428571428em;
+}
+
+.icon-youtube-square {
+  width: 0.8571428571428571em;
+}
+
+.icon-stack-overflow {
+  width: 0.8571428571428571em;
+}
+
+.icon-apple {
+  width: 0.7773571428571427em;
+}
+
+.icon-windows {
+  width: 0.9285714285714285em;
+}
+
+.icon-trello {
+  width: 0.8571428571428571em;
+}
+
+.icon-female {
+  width: 0.7142857142857142em;
+}
+
+.icon-male {
+  width: 0.5714285714285714em;
+}
+
+.icon-arrow-circle-o-right {
+  width: 0.8571428571428571em;
+}
+
+.icon-arrow-circle-o-left {
+  width: 0.8571428571428571em;
+}
+
+.icon-file-image-o {
+  width: 0.8571428571428571em;
+}
+
+.icon-paper-plane {
+  width: 1.0011428571428571em;
+}
+
+.icon-paper-plane-o {
+  width: 1.0005714285714284em;
+}
+
+.icon-share-alt {
+  width: 0.8571428571428571em;
+}
+
+.icon-cc-visa {
+  width: 1.2857142857142856em;
+}
+
+.icon-cc-paypal {
+  width: 1.2857142857142856em;
+}
+
+.icon-cc-stripe {
+  width: 1.2857142857142856em;
+}
+
+.icon-bell-slash {
+  width: 1.1428571428571428em;
+}
+
+.icon-bell-slash-o {
+  width: 1.1428571428571428em;
+}
+
+.icon-facebook-official {
+  width: 0.8571428571428571em;
+}
+
+.icon-trademark {
+  width: 1.101em;
+}
+
+.icon-wikipedia-w {
+  width: 1.2857142857142856em;
+}
+
+.icon-question-circle-o {
+  width: 0.8571428571428571em;
+}
