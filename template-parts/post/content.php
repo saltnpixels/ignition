@@ -52,8 +52,8 @@ $id        = get_the_ID();
 	<section class="after-article container-content">
 		<?php
 		the_post_navigation( array(
-			'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'ignition' ) . '</span><div class="nav-title"><span class="nav-title-icon-wrapper">' . ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span><span>%title</span></div>',
-			'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'ignition' ) . '</span><div class="nav-title"><span>%title</span><span class="nav-title-icon-wrapper">' . ign_get_svg( array( 'icon' => 'arrow-right' ) ) . '</span></div>',
+			'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'ignition' ) . '</span><div class="nav-title"><span class="nav-title-icon-wrapper">' . ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span> <span>%title</span></div>',
+			'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'ignition' ) . '</span><div class="nav-title"><span>%title</span> <span class="nav-title-icon-wrapper">' . ign_get_svg( array( 'icon' => 'arrow-right' ) ) . '</span></div>',
 		) );
 
 		// If comments are open or we have at least one comment, load up the comment template.

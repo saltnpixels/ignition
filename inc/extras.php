@@ -323,34 +323,48 @@ function ignition_comments_callback( $comment, $args, $depth ) {
  *
  * @return string state label OR true
  */
-function ign_is_page_archive_header( $post_id, $return_state = false ) {
+function ign_is_page_archive_header( $post_id, $return_type = '' ) {
 
-	//get all post types that have an archive page and get the main post type post.
+	if( 'page' == get_post_type( $post_id ) ) {
+		//get all post types that have an archive page and get the main post type post.
 
-	$ignition_post_types   = get_post_types( array( '_builtin' => false, 'has_archive' => true ), 'objects' );
-	$ignition_post_types[] = get_post_type_object( 'post' ); //add this built in object only.
+		$ign_post_types   = get_post_types( array( '_builtin' => false, 'has_archive' => true ), 'objects' );
+		$ign_post_types[] = get_post_type_object( 'post' ); //add this built in object only.
 
 
-	if ( 'page' == get_post_type( $post_id ) && ! empty( $ignition_post_types ) ) {
+		if ( ! empty( $ign_post_types ) ) {
 
-		//foreach post type, if that post type has a theme mod associated with it and that id is equal to this page, return true
-		foreach ( $ignition_post_types as $key => $post_type ) {
+			//foreach post type, if that post type has a theme mod associated with it and that id is equal to this page, return true
+			foreach ( $ign_post_types as $key => $post_type ) {
 
-			if ( (int) get_theme_mod( 'ign_archive_' . $post_type->name ) == $post_id ) {
-				return $return_state ? __( 'Archive ', 'ignition' ) . $post_type->labels->singular_name . __( ' Header', 'ignition' ) : true;
-				break;
-			} //if theme mod with this post type has this page
-		} //foreach
-	} //if page
+				if ( (int) get_theme_mod( 'ign_archive_' . $post_type->name ) == $post_id ) {
+					if($return_type == 'label'){
+						return __( 'Archive ', 'cmlaw' ) . $post_type->labels->singular_name;
+					}
+
+					if($return_type == 'post_type'){
+						return $post_type->name;
+					}
+
+					else{
+						return true;
+					}
+					break;
+				} //if theme mod with this post type has this page
+			} //foreach
+		} //if page
+	}
 
 	return false;
 }
 
 
+
+
 //add state label to a page used as an archive header
 function custom_post_states( $states, $post ) {
 
-	$state = ign_is_page_archive_header( $post->ID, true );
+	$state = ign_is_page_archive_header( $post->ID, 'label' );
 
 	if ( $state ) {
 		$states[] = $state;
@@ -434,9 +448,12 @@ if ( ! function_exists( 'get_sub_field' ) ) {
  */
 function acf_loop_field( $field ) {
 	global $post;
-	if ( is_admin() && get_post_type() == 'page' && ign_is_page_archive_header( $post->ID ) ) {
-		$field['layouts']['5afb034fab739']['label'] = 'Archive Card List';
+	if($post){
+	$post_type = ign_is_page_archive_header( $post->ID, 'post_type' );
+	if ( is_admin() && get_post_type() == 'page' && $post_type ) {
+		$field['layouts']['5afb034fab739']['label'] = ucfirst($post_type) . ' Card List';
 	}
+}
 
 	return $field;
 }

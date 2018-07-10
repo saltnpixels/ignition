@@ -76,10 +76,8 @@ if ( $page_archive_id ) {
 			else:
 				?>
 
-                <header class="entry-header layout-center-content text-center">
-                    <div class="header-image background-image">
-						<?php echo ign_get_the_image($id, 'full'); ?>
-                    </div>
+                <header class="page-header layout-center-content text-center">
+                
 
                     <div class="header-content container-fluid">
                         <h1>
@@ -116,15 +114,15 @@ if ( $page_archive_id ) {
                     </section><!-- .entry-content -->
 
 
-						<?php
-
-						the_posts_pagination( array(
-							'prev_text'          => ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'ignition' ) . '</span>',
-							'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'ignition' ) . '</span>' . ign_get_svg( array( 'icon' => 'arrow-right' ) ),
-							'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'ignition' ) . ' </span>',
-						) );
-
-						?>
+				<div class="container card-pagination text-center">
+					<?php
+					the_posts_pagination( array(
+						'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cmlaw' ) . '</span>',
+						'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'cmlaw' ) . '</span>' . ign_get_svg( array( 'icon' => 'angle-right' ) ),
+						'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cmlaw' ) . ' </span>',
+					) );
+					?>
+                </div>
 
 
                 </div>

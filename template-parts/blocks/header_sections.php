@@ -20,12 +20,10 @@ if ( have_rows('header_layout', $id) ):
 else :
 //default header if no acf found or anything.
     ?>
-    <header class="entry-header layout-center-content text-center">
-        <div class="header-image background-image">
-	        <?php echo ign_get_the_image($id, 'full'); ?>
-        </div>
+     <header class="entry-header layout-center-content"
+            style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full', $image ); ?>');">
 
-        <div class="header-content container-fluid">
+        <div class="header-content container-fluid text-center">
             <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
         </div>
     </header>
