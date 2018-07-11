@@ -112,20 +112,8 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: index.php:88
+#: index.php:86
 msgid "Blog"
-msgstr ""
-
-#: index.php:122, search.php:60, template-parts/blocks/the_loop.php:63
-msgid "Previous page"
-msgstr ""
-
-#: index.php:123, search.php:61, template-parts/blocks/the_loop.php:64
-msgid "Next page"
-msgstr ""
-
-#: index.php:124, search.php:62, template-parts/blocks/the_loop.php:65
-msgid "Page"
 msgstr ""
 
 #: search.php:23
@@ -134,6 +122,18 @@ msgstr ""
 
 #: search.php:25
 msgid "Nothing Found"
+msgstr ""
+
+#: search.php:60, template-parts/blocks/the_loop.php:63
+msgid "Previous page"
+msgstr ""
+
+#: search.php:61, template-parts/blocks/the_loop.php:64
+msgid "Next page"
+msgstr ""
+
+#: search.php:62, template-parts/blocks/the_loop.php:65
+msgid "Page"
 msgstr ""
 
 #: searchform.php:16
@@ -199,22 +199,14 @@ msgstr ""
 msgid "Archive Page For "
 msgstr ""
 
-#: inc/extras.php:340
-msgid "Archive "
+#: inc/extras.php:400
 msgstr ""
 
-#: inc/extras.php:340
-msgid " Header"
-msgstr ""
-
-#: inc/extras.php:386
-msgstr ""
-
-#: inc/extras.php:397, inc/extras.php:401, inc/extras.php:407, inc/extras.php:413, inc/extras.php:419
+#: inc/extras.php:411, inc/extras.php:415, inc/extras.php:421, inc/extras.php:427, inc/extras.php:433
 msgid "Please install ACF Pro to use this function properly"
 msgstr ""
 
-#: inc/extras.php:425
+#: inc/extras.php:439
 msgid "Please install ACF Pro to use this funciton properly"
 msgstr ""
 
