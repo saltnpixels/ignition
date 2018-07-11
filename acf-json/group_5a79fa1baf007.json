@@ -100,7 +100,7 @@
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
-                            "layout": "table",
+                            "layout": "row",
                             "button_label": "",
                             "sub_fields": [
                                 {
@@ -270,5 +270,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1530885906
+    "modified": 1531336799
 }
