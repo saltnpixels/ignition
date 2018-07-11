@@ -505,12 +505,7 @@ to{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
 }.fadeInUp{-webkit-animation-name:fadeInUp;animation-name:fadeInUp}
 .js .animateIn{opacity:0}
 section{padding-top:30px;padding-bottom:30px}
-section .section-heading{margin-bottom:30px}
 section section{padding-top:0;padding-bottom:0}
-.no-padding-top{padding-top:0}
-.no-padding-bottom{padding-bottom:0}
-.chevron-down:before{-webkit-transform:skew(0,10deg) translateX(-49.9%);-ms-transform:skew(0,10deg) translateX(-49.9%);transform:skew(0,10deg) translateX(-49.9%)}
-.chevron-down:before,.chevron-down:after{position:absolute;z-index:-1;top:0;left:0;display:block;width:100%;height:100%;content:""}
 .container-content #comments{margin-left:-15px;margin-right:-15px}
 .comments-holder{max-width:730px;margin:auto;padding:15px}
 .comment-list{margin:0;padding:0;list-style:none}

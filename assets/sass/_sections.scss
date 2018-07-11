@@ -5,36 +5,9 @@ section {
 	padding-top: $gap;
 	padding-bottom: $gap;
 
-	.section-heading{
-		margin-bottom: $gap;
-	}
-
 	section {
 		padding-top: 0;
 		padding-bottom: 0;
 	}
 }
 
-.no-padding-top {
-	padding-top: 0;
-}
-
-.no-padding-bottom {
-	padding-bottom: 0;
-}
-
-.chevron-down {
-	&:before {
-		transform: skew(0deg, 10deg) translateX(-49.9%);
-	}
-	&:before, &:after {
-		position: absolute;
-		z-index: -1;
-		top: 0;
-		left: 0;
-		display: block;
-		width: 100%;
-		height: 100%;
-		content: "";
-	}
-}
