@@ -20,8 +20,8 @@ if ( have_rows('header_layout', $id) ):
 else :
 //default header if no acf found or anything.
     ?>
-     <header class="entry-header layout-center-content"
-            style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full', $image ); ?>');">
+      <header class="entry-header layout-center-content"
+            <?php if(is_singular() && has_post_thumbnail() ){ ?>style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full'); ?>');" <?php } ?>>
 
         <div class="header-content container-fluid text-center">
             <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
