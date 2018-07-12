@@ -64,7 +64,7 @@ function ign_time_link() {
 
 /**
  * @param string $taxonomy
- * @param bool   $get_all
+ * @param bool $get_all
  *
  * @return string|void
  * Get all or one term for a taxonomy for a post
@@ -137,10 +137,10 @@ endif;
  */
 function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
 	global $saving_sections;
-	if( $saving_sections){
+	if ( $saving_sections ) {
 		return;
 	}
-	
+
 	if ( ! $id ) {
 		global $post;
 		$id = $post->ID;
@@ -181,6 +181,12 @@ function is_static_frontpage() {
  * @return string
  */
 function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $use_thumbnail_as_fallback = true ) {
+
+	//if were trying to get the header image, and the user specified not to, then return none.
+	if( $size == 'header_image' && get_field('no_image', $id)){
+		return '';
+	}
+
 	$image = '';
 	if ( $acf_image ) {
 		$image_id = $acf_image['id'];
@@ -205,7 +211,14 @@ function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $
  * @return string
  */
 function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_thumbnail_as_fallback = true ) {
+
+	//if were trying to get the header image, and the user specified not to, then return none.
+	if( $size == 'header_image' && get_field('no_image', $id)){
+		return '';
+	}
+
 	$image = '';
+
 	if ( $acf_image ) {
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image_url( $image_id, $size, '' );
@@ -217,3 +230,4 @@ function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_th
 
 	return $image;
 }
+

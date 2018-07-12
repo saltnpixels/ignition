@@ -4,12 +4,13 @@
  */
 $class   = get_sub_field( 'class' );
 $heading = get_sub_field( 'heading' );
-$image   = get_sub_field( 'background_image' );
-
+$image   = get_field( 'header_image' );
+$bg_image = ign_get_the_image_url( get_the_ID(), 'header_image', $image );
 ?>
 
+
 <header class="entry-header layout-center-content <?php echo $class; ?> <?php echo $header; ?>"
-        style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full', $image ); ?>');">
+        <?php if ( $bg_image ){ ?>style="background-image: url('<?php echo $bg_image; ?>');"<?php } ?>>
 
 	<div class="container">
 

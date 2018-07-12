@@ -4,17 +4,20 @@
  */
 $class   = get_sub_field( 'class' );
 $heading = get_sub_field( 'heading' );
+$image = get_field( 'header_image' );
+$bg_image = ign_get_the_image( get_the_ID(), 'full', $image );
 
 ?>
 
 <header class="entry-header <?php echo $class; ?> <?php echo $header; ?>">
 
-	<?php $image = get_sub_field( 'cover_image' ); ?>
-	<?php $bg_image = ign_get_the_image( get_the_ID(), 'full', $image ); ?>
+	<?php
+	if($bg_image): ?>
 
 	<div class="header-image cover-image">
 		<?php echo $bg_image; ?>
 	</div>
+	<?php endif; ?>
 
 	<div class="container">
 

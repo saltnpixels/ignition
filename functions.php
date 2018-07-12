@@ -55,7 +55,7 @@ function ignition_setup() {
 
 	//default image size for cards
 	set_post_thumbnail_size( 300, 300, true );
-	add_image_size('header', '2000', '600');
+	add_image_size('header_image', '2000', '600');
 
 	//menus
 	register_nav_menus( array(

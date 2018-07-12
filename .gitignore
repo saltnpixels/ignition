@@ -21,3 +21,4 @@ node_modules
 /.DS_Store
 /.idea
 /template-parts/blocks/.DS_Store
+.DS_Store
