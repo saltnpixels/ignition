@@ -1,3 +1,49 @@
 /*--------------------------------------------------------------
 # Editor Styling
 --------------------------------------------------------------*/
+
+/*------- Mixins --------*/ 
+@import "mixins";
+
+/*------- variables --------*/ 
+@import "variables";
+
+/*------- Normalize --------*/
+@import "normalize"; //includes outdated browser notice
+
+/*------- Base Layout --------*/
+@import "base_layout";
+
+/*------- CSS Grid --------*/
+@import "grid";
+
+/*------- Typography --------*/ 
+@import "typography";
+
+/*------- Forms --------*/
+@import "forms";
+
+/*------- Content --------*/
+@import "content";
+
+/*------- media --------*/
+@import "media";
+
+/*------- Nav Menu  --------*/
+@import "navigation_menu";
+
+
+/*------- Global elements --------*/ 
+@import "elements";
+
+
+/*------- Animations --------*/
+@import "animations";
+
+
+/*------- Sections --------*/ 
+@import "sections";
+
+
+/*------- IE 11 --------*/
+@import "ie11";

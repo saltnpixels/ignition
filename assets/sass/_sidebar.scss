@@ -125,9 +125,7 @@ $sidebar-width: 350px;
   @extend .no-gutters;
 }
 
-//sidebar-template holds article and sidebar under header
-//entry-content.container content doesnt need padding, its inside container
-.sidebar-template .entry-content {
+.sidebar-template{
   padding: 0;
 }
 

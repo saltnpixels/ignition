@@ -27,7 +27,7 @@
                             "label": "Header Class",
                             "name": "class",
                             "type": "text",
-                            "instructions": "",
+                            "instructions": "classes can change the look and feel of the header.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -59,30 +59,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5a79fcbb9ce42",
-                            "label": "Background image",
-                            "name": "background_image",
-                            "type": "image",
-                            "instructions": "Add background image to use, or leave blank to use featured image",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "post-thumbnail",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
                         },
                         {
                             "key": "field_5afb049703172",
@@ -209,30 +185,6 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
-                        },
-                        {
-                            "key": "field_5a79fdd99ce47",
-                            "label": "Cover Image",
-                            "name": "cover_image",
-                            "type": "image",
-                            "instructions": "Add background image to use, or leave blank to use featured image",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "thumbnail",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
                         }
                     ],
                     "min": "",
@@ -270,5 +222,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1531334946
+    "modified": 1531489700
 }

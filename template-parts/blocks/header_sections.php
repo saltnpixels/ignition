@@ -18,22 +18,22 @@ if ( have_rows( 'header_layout', $id ) ):
 	endwhile;
 
 else :
-//default header if no acf found or anything.
-
-//if(singular, check for image)
-	if ( is_singular() ) {
-		$image    = get_field( 'header_image' );
-		$bg_image = ign_get_the_image_url( get_the_ID(), 'header_image', $image );
-	} ?>
 
 
-	<header class="entry-header layout-center-content"
-	        <?php if ( $bg_image ) { ?>style="background-image: url('<?php echo $bg_image; ?>');" <?php } ?>>
+	//if singular, check for header image
+$bg_image = '';
+if ( is_singular() ) {
+	$bg_image = ign_get_the_header_image( get_the_ID() );
+} ?>
 
-		<div class="header-content container-fluid text-center">
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		</div>
-	</header>
+
+<header class="entry-header layout-center-content"
+		<?php if ( $bg_image ) { ?>style="background-image: url('<?php echo $bg_image; ?>');" <?php } ?>>
+
+	<div class="header-content container-fluid text-center">
+		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	</div>
+</header>
 
 <?php
 

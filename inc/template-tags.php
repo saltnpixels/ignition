@@ -212,11 +212,6 @@ function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $
  */
 function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_thumbnail_as_fallback = true ) {
 
-	//if were trying to get the header image, and the user specified not to, then return none.
-	if( $size == 'header_image' && get_field('no_image', $id)){
-		return '';
-	}
-
 	$image = '';
 
 	if ( $acf_image ) {
@@ -229,5 +224,21 @@ function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_th
 	}
 
 	return $image;
+}
+
+
+
+function ign_get_the_header_image($id, $kind = 'url', $attr = ''){
+	if( get_field('no_image', $id) ){
+		return '';
+	}
+
+	$image = get_field('header_image');
+	if($kind == 'url'){
+		return ign_get_the_image_url($id, 'header_image', $image);
+	}
+	else{
+		return ign_get_the_image($id, 'header_image', $image, $attr);
+	}
 }
 

@@ -79,7 +79,7 @@ body .navigation-menu-icon {
 .menu li{
   color: black;
 }
-#panel-left .current-menu-item > .menu-item-link {
+#panel-left .menu .current-menu-item > .menu-item-link {
   background: rgba(0, 0, 0, .5);
   color: white;
 }
@@ -160,7 +160,7 @@ body .navigation-menu-icon {
 }
 
 /*------- Items directly under header should have padding --------*/
-.container-content > *:first-child {
+.entry-content > *:first-child {
   padding-top: $gap;
 }
 

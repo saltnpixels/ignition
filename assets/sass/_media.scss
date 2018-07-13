@@ -42,6 +42,11 @@
   background-position: center;
 }
 
+.no-objectfit .cover-image{
+  min-height: 300px;
+  background-repeat: none;
+}
+
 .no-objectfit .background-image img,
 .no-objectfit .cover-image img {
   display: none;

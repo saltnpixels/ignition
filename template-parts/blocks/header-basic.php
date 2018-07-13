@@ -4,8 +4,8 @@
  */
 $class   = get_sub_field( 'class' );
 $heading = get_sub_field( 'heading' );
-$image = get_field( 'header_image' );
-$bg_image = ign_get_the_image( get_the_ID(), 'full', $image );
+
+$bg_image = ign_get_the_header_image( get_the_ID(), 'image');
 
 ?>
 
@@ -26,7 +26,7 @@ $bg_image = ign_get_the_image( get_the_ID(), 'full', $image );
 			if ( ! $heading ) {
 				the_title( '<h1 class="entry-title">', '</h1>' );
 			} else {
-				echo '<h1>' . $heading . '</h1>';
+				echo '<h1 class="entry-title">' . $heading . '</h1>';
 			}
 
 			the_sub_field( 'header_text' );

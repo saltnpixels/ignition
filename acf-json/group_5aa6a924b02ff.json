@@ -174,7 +174,7 @@
                                 "id": ""
                             },
                             "default_value": "card-grid",
-                            "placeholder": "",
+                            "placeholder": "card-grid | grid | flex-grid",
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
@@ -444,5 +444,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1530886563
+    "modified": 1531490300
 }

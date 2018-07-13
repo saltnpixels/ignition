@@ -4,8 +4,8 @@
  */
 $class   = get_sub_field( 'class' );
 $heading = get_sub_field( 'heading' );
-$image   = get_field( 'header_image' );
-$bg_image = ign_get_the_image_url( get_the_ID(), 'header_image', $image );
+
+$bg_image = ign_get_the_header_image( get_the_ID());
 ?>
 
 
