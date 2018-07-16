@@ -10,7 +10,7 @@
  * data-scrollscrub = tweens between two classes. tween expects a duration, else duration will be 100
  *
  */
-
+let scrollMagicController = '';
 jQuery(function ($) {
     if (typeof ScrollMagic != "undefined") {
         //fixed at top items can ruin layout.
@@ -19,7 +19,7 @@ jQuery(function ($) {
         fixedItems.wrap(`<div class="fixed-holder" style="height: ${fixedItems.css('height')};"></div>`);
 
 
-        let scrollMagicController = new ScrollMagic.Controller();
+        scrollMagicController = new ScrollMagic.Controller();
 
         //for simple animations
         $('[data-scrollanimation]').each(function () {
@@ -99,7 +99,7 @@ jQuery(function ($) {
                     duration: $duration
 
                 }).setClassToggle(this, $class).addTo(scrollMagicController)
-                    .addIndicators()
+                    //.addIndicators()
                 ;
             }
 

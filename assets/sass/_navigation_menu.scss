@@ -209,6 +209,11 @@ $panel-left-width: 300px; //width of panel-left when open
   flex-wrap: wrap;
   position: relative;
   justify-content: center;
+  height: 100%;
+
+  .site-top-container{
+    height: 100%;
+  }
 
   .site-navigation__nav-holder{
     display: flex;

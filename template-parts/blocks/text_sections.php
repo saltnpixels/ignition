@@ -11,7 +11,9 @@ $image = get_sub_field( 'background_image' );
 $heading = get_sub_field( 'heading' );
 ?>
 
-<section id="section-<?php echo $section_hash; ?>" class="alignfull section-paragraphs <?php echo $class; ?>" style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full', $image); ?>');">
+<section id="section-<?php echo $section_hash; ?>" class="alignfull section-paragraphs <?php echo $class; ?>"
+	<?php if($image){ ?> style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full', $image);
+	?>');" <?php } ?>>
 	<div class="<?php echo $container; ?>">
 		<?php
 		if ( $heading ) {

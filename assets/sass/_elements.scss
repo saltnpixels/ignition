@@ -35,13 +35,6 @@ body .navigation-menu-icon {
   }
 }
 
-/*--------------------------------------------------------------
-# Panel Styling
---------------------------------------------------------------*/
-//some variables can be set in navigation_menu.scss
-#panel-left {
-  background-image: linear-gradient(90deg, #FF5115 0%, #FEBC4A 100%);
-}
 
 /*--------------------------------------------------------------
 # Menu Styling
@@ -84,6 +77,14 @@ body .navigation-menu-icon {
   color: white;
 }
 
+
+/*--------------------------------------------------------------
+# Panel Styling
+--------------------------------------------------------------*/
+//some variables can be set in navigation_menu.scss
+#panel-left {
+  background-image: linear-gradient(90deg, #FF5115 0%, #FEBC4A 100%);
+}
 
 
 /*--------------------------------------------------------------
@@ -151,7 +152,7 @@ body .navigation-menu-icon {
 
   h1 {
     margin: 0;
-  } 
+  }
 
   .cover-image {
     height: 500px;
