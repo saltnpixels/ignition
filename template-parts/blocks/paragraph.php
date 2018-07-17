@@ -3,7 +3,7 @@
 $class = get_sub_field( 'class' );
 ?>
 
-<section id="section-<?php echo $section_hash; ?>" class="<?php echo $class; ?> section-paragraph">
+<section id="section-<?php echo $section_hash; ?>" class="<?php echo $class; echo ' ' . get_row_layout(); ?> section-paragraph">
 	<?php the_sub_field( 'paragraph' ); ?>
 </section>
 

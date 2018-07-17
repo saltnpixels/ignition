@@ -25,7 +25,7 @@ $container = ( $container == '' ) ? 'container' : $container;
 $loop_class = get_sub_field( 'loop_class' );
 $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 ?>
-	<section id="section-<?php echo $section_hash; ?>" class="alignfull <?php echo $class; ?>">
+	<section id="section-<?php echo $section_hash; ?>" class="alignfull <?php echo esc_attr($class); ?>">
 		<div class="<?php echo $container; ?>">
 
 			<?php
@@ -38,7 +38,7 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 			<?php
 			if ( is_post_type_archive() || is_home() || is_search() || is_archive() ) { ?>
 
-				<div class="loop-holder <?php echo $loop_class; ?>">
+				<div class="loop-holder <?php echo esc_attr($loop_class); ?>">
 
 					<?php
 					while ( have_posts() ) : the_post();

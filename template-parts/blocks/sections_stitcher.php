@@ -1,4 +1,5 @@
-<section id="section-<?php echo $section_hash; ?>" class="alignfull <?php the_sub_field( 'class' ); ?>">
+<section id="section-<?php echo $section_hash; ?>"
+         class="alignfull <?php echo esc_attr( get_sub_field( 'class' ) ); ?> <?php echo get_row_layout(); ?>">
 	<?php
 	//connect sections together from different posts and pages!
 	$ids = get_sub_field( 'post_items' );

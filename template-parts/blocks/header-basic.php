@@ -9,7 +9,7 @@ $bg_image = ign_get_the_header_image( get_the_ID(), 'image');
 
 ?>
 
-<header class="entry-header <?php echo $class; ?> <?php echo $header; ?>">
+<header class="entry-header <?php echo esc_attr($class); ?> <?php echo get_row_layout(); ?>">
 
 	<?php
 	if($bg_image): ?>

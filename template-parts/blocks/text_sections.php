@@ -11,7 +11,7 @@ $image = get_sub_field( 'background_image' );
 $heading = get_sub_field( 'heading' );
 ?>
 
-<section id="section-<?php echo $section_hash; ?>" class="alignfull section-paragraphs <?php echo $class; ?>"
+<section id="section-<?php echo $section_hash; ?>" class="alignfull section-paragraphs <?php echo esc_attr($class); ?>"
 	<?php if($image){ ?> style="background-image: url('<?php echo ign_get_the_image_url( get_the_ID(), 'full', $image);
 	?>');" <?php } ?>>
 	<div class="<?php echo $container; ?>">
@@ -24,7 +24,7 @@ $heading = get_sub_field( 'heading' );
 
 		<?php
 		if ( have_rows( 'paragraphs' ) ) { ?>
-			<div class="<?php echo $grid_class; ?> paragraphs-holder">
+			<div class="<?php echo esc_attr($grid_class); ?> paragraphs-holder">
 				<?php while ( have_rows( 'paragraphs' ) ): the_row(); ?>
 
 					<div class="text-section <?php the_sub_field( 'paragraph_class' ); ?>">
