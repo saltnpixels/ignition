@@ -406,39 +406,45 @@ function add_archive_edit_link($admin_bar) {
 /*--------------------------------------------------------------
 # ACF functions if not installed. Just some text
 --------------------------------------------------------------*/
-if ( ! function_exists( 'have_rows' ) ) {
-	function have_rows( $field = '', $id = 0 ) {
-		return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+function plugin_init() {
+	if ( ! function_exists( 'have_rows' ) ) {
+		function have_rows( $field = '', $id = 0 ) {
+			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+		}
 	}
 
-	function the_row() {
-		return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+	if ( ! function_exists( 'the_row' ) ) {
+		function the_row() {
+			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+		}
+	}
+
+	if ( ! function_exists( 'get_field' ) ) {
+		function get_field( $field = '', $id = 0 ) {
+			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+		}
+	}
+
+	if ( ! function_exists( 'the_field' ) ) {
+		function the_field( $field = '', $id = 0 ) {
+			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+		}
+	}
+
+	if ( ! function_exists( 'the_sub_field' ) ) {
+		function the_sub_field( $field = '', $id = 0 ) {
+			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+		}
+	}
+
+	if ( ! function_exists( 'get_sub_field' ) ) {
+		function get_sub_field( $field = '', $id = 0 ) {
+			return __( 'Please install ACF Pro to use this funciton properly', 'ignition' );
+		}
 	}
 }
 
-if ( ! function_exists( 'get_field' ) ) {
-	function get_field( $field = '', $id = 0 ) {
-		return __( 'Please install ACF Pro to use this function properly', 'ignition' );
-	}
-}
-
-if ( ! function_exists( 'the_field' ) ) {
-	function the_field( $field = '', $id = 0 ) {
-		return __( 'Please install ACF Pro to use this function properly', 'ignition' );
-	}
-}
-
-if ( ! function_exists( 'the_sub_field' ) ) {
-	function the_sub_field( $field = '', $id = 0 ) {
-		return __( 'Please install ACF Pro to use this function properly', 'ignition' );
-	}
-}
-
-if ( ! function_exists( 'get_sub_field' ) ) {
-	function get_sub_field( $field = '', $id = 0 ) {
-		return __( 'Please install ACF Pro to use this funciton properly', 'ignition' );
-	}
-}
+add_action( 'plugins_loaded', 'plugin_init' );
 
 /**
  * @param $field
