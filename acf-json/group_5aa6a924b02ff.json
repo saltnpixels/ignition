@@ -71,6 +71,25 @@
                     "display": "row",
                     "sub_fields": [
                         {
+                            "key": "field_5ab1271d738a8",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5ab12942d7607",
                             "label": "Section Class",
                             "name": "class",
@@ -105,7 +124,8 @@
                             "choices": {
                                 "container": "Site Width",
                                 "container-fluid": "Full Width",
-                                "container-content": "Content Width"
+                                "container-content": "Content Width",
+                                "no-container": "None"
                             },
                             "default_value": [
                                 "container"
@@ -140,25 +160,6 @@
                             "max_height": "",
                             "max_size": "",
                             "mime_types": ""
-                        },
-                        {
-                            "key": "field_5ab1271d738a8",
-                            "label": "Heading",
-                            "name": "heading",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
                         },
                         {
                             "key": "field_5b0824b276b77",
@@ -249,6 +250,25 @@
                     "display": "row",
                     "sub_fields": [
                         {
+                            "key": "field_5afb036bab73b",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5afb0356ab73a",
                             "label": "Section Class",
                             "name": "class",
@@ -294,25 +314,6 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
-                        },
-                        {
-                            "key": "field_5afb036bab73b",
-                            "label": "Heading",
-                            "name": "heading",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
                         },
                         {
                             "key": "field_5afb037aab73c",
@@ -444,5 +445,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1531490300
+    "modified": 1532095885
 }

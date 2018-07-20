@@ -202,11 +202,11 @@ msgstr ""
 #: inc/extras.php:400
 msgstr ""
 
-#: inc/extras.php:411, inc/extras.php:415, inc/extras.php:421, inc/extras.php:427, inc/extras.php:433
+#: inc/extras.php:412, inc/extras.php:418, inc/extras.php:424, inc/extras.php:430, inc/extras.php:436
 msgid "Please install ACF Pro to use this function properly"
 msgstr ""
 
-#: inc/extras.php:439
+#: inc/extras.php:442
 msgid "Please install ACF Pro to use this funciton properly"
 msgstr ""
 

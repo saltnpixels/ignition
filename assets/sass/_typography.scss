@@ -146,7 +146,7 @@ blockquote {
 	//quote mark
 	&:before {
 		content: open-quote;
-		@include font-size(2);
+		@include font-size(30);
 		position: absolute;
 		top: 0;
 		line-height: 1;
@@ -168,10 +168,10 @@ cite, .wp-block-quote cite {
 //overriding gutenberg on front end
 .wp-block-quote.is-large {
 	&:before {
-		@include font-size(2.5);
+		@include font-size(40);
 	}
 	p {
-		@include font-size(1.3);
+		@include font-size(20);
 	}
 }
 

@@ -3,8 +3,14 @@ Mixins
 --------------------------------------------------------------*/
 /*------- Rem with px fallback --------*/
 @mixin font-size($sizeValue: 1) {
-  font-size: ($sizeValue * 20) * 1px;
-  font-size: $sizeValue * 1rem;
+  @if($sizeValue < 6){
+    font-size: ($sizeValue) * 16px;
+    font-size: $sizeValue * 1rem;
+  }
+  @else {
+    font-size: ($sizeValue) * 1px;
+    font-size: $sizeValue / 16 + 0rem;
+  }
 }
 
 /*------- Clearfix --------*/
