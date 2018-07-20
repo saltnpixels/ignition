@@ -12,7 +12,7 @@
  */
 
 get_header(); ?>
-<div class="container sidebar-template">
+<div class="sidebar-template">
 	<div class="flex sidebar-left">
 
 		<div id="primary" class="content-area">

@@ -23,12 +23,12 @@
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^3.2.1",
+    "gulp-sass": "^4.0.1",
     "gulp-sort": "^2.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.1.0",
-    "gulp-wp-pot": "^2.3.1",
+    "gulp-wp-pot": "^2.3.2",
     "minimatch": "^3.0.4",
     "wp-pot": "^1.6.1"
   }

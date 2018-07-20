@@ -148,3 +148,36 @@ figure {
   width: 100%;
   height: 100%;
 }
+
+
+/*--------------------------------------------------------------
+# Gallery
+--------------------------------------------------------------*/
+.gallery{
+  @include card-grid(250px);
+
+  img{
+    margin: auto;
+    display: block;
+    flex-grow: 1;
+  }
+
+  .gallery-item{
+    display: flex;
+    flex-direction: column;
+  }
+
+  figcaption{
+    text-align: center;
+    @include font-size(14);
+  }
+}
+
+.caption-first .gallery-item {
+  .gallery-icon{
+    order: 2;
+  }
+  figcaption {
+    order: 1;
+  }
+}

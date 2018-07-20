@@ -112,6 +112,10 @@ $sidebar-width: 350px;
   display: none;
 }
 
+#secondary .sidebar-holder{
+  max-width: $sidebar-width;
+}
+
 /*------- Sidebar on left ordering --------*/
 .sidebar-left #secondary {
   order: 0;

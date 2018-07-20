@@ -121,6 +121,10 @@ body .navigation-menu-icon {
   z-index: -1;
 }
 
+#secondary .widget, #secondary .menu li{
+  color: $black;
+}
+
 //background when on left
 .sidebar-left #secondary .sidebar-holder:after {
   left: auto;

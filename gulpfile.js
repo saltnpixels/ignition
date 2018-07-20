@@ -200,11 +200,11 @@ gulp.task('styles', function () {
             precision: 10
         } ) )
         .on('error', console.error.bind(console))
-        .pipe( sourcemaps.write( { includeContent: false } ) )
-        //.pipe( sourcemaps.init( { loadMaps: true } ) )
+        //.pipe( sourcemaps.write( { includeContent: false } ) )
+        .pipe( sourcemaps.init( { loadMaps: true } ) )
         .pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
 
-        //.pipe( sourcemaps.write ( './' ) )
+        .pipe( sourcemaps.write ( './' ) )
         .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
         .pipe( gulp.dest( styleDestination ) )
 
