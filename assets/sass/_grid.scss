@@ -12,13 +12,13 @@
   width: 100%;
   max-width: 1200px;
   margin: auto;
-  padding: 0 $gutters;
+  padding: 0 $gap;
 }
 
 .container-fluid {
   width: 100%;
   margin: auto;
-  padding: 0 $gutters;
+  padding: 0 $gap;
 }
 
 /*------- Special Container Content For articles --------*/
@@ -31,7 +31,7 @@
 - Dont surround container-content with a container or full items wont be full width!
 */
 .container-content {
-  padding: 0 $gutters;
+  padding: 0 $gap;
 
   > *:not( .alignwide ):not( .alignfull ):not(.ful-width) {
     max-width: $content-container !important; //needs to override the figures or any other elements with inline widths
@@ -41,10 +41,16 @@
 
   > .full-width, > .alignfull {
     width: auto; //override gutenberg, otherwise negative margins below wont work
-    margin-left: -#{$gutters}; //negative margins to counteract the containers padding
-    margin-right: -#{$gutters};
+    margin-left: -#{$gap}; //negative margins to counteract the containers padding
+    margin-right: -#{$gap};
   }
 
+}
+
+
+.no-gutters{
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /*--------------------------------------------------------------
@@ -93,7 +99,7 @@
 
   //span on individuals overrides span-all
   @for $i from 1 through 12 {
-    .span-#{$i}, &.span-all-#{$i} > * {
+    div & .span-#{$i}, &.span-all-#{$i} > * {
       grid-column: span #{$i};
     }
   }
@@ -104,7 +110,7 @@
   flex-basis: 100%;
 }
 
-.grid {
+div .grid {
   //large and below size on items
   @media(min-width: $media-medium) {
     @for $i from 1 through 12 {
@@ -158,7 +164,7 @@
   }
 
   @for $i from 1 through 12 {
-    .span-#{$i}, &.span-all-#{$i} > * {
+    div & .span-#{$i}, &.span-all-#{$i} > * {
       $width: 100% / (12/$i);
       flex-basis: calc(#{$width} - #{$gap});
     }
@@ -198,7 +204,7 @@
   }
 }
 
-.flex-grid, .flex {
+div .flex-grid, div .flex {
 
   //large and below size on items
   @media(min-width: $media-medium) {

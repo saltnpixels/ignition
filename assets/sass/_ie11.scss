@@ -60,7 +60,7 @@
     }
   }
 
-  .flex-grid, .flex, .grid {
+  div .flex-grid, div .flex, div .grid {
 
     //large and below size on items
     @media(min-width: $media-medium) {
