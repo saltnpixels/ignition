@@ -297,7 +297,7 @@ function ignition_scripts() {
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
-	wp_enqueue_script( 'ignition-custom', get_theme_file_uri( '/assets/js/min/custom.min.js' ), array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom', get_theme_file_uri( '/assets/js/custom.min.js' ), array( 'jquery' ),
 		'1.0', true );
 
 	//AJAX ready for .custom.js files
