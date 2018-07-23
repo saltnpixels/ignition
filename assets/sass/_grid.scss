@@ -112,7 +112,7 @@
 
 div .grid {
   //large and below size on items
-  @media(min-width: $media-medium) {
+  @media(max-width: $media-large) {
     @for $i from 1 through 12 {
       div & > .large-span-#{$i}, &.large-span-all-#{$i} > * {
         grid-column: span #{$i};
