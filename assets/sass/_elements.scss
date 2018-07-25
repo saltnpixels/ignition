@@ -39,6 +39,7 @@ body .navigation-menu-icon {
 /*--------------------------------------------------------------
 # Menu Styling
 --------------------------------------------------------------*/
+
 //desktop styles for site top menu when its horizontal
 @media(min-width: $nav-breakpoint-collapse) {
   .site-top .menu {
@@ -72,6 +73,7 @@ body .navigation-menu-icon {
 .menu li{
   color: black;
 }
+
 #panel-left .menu .current-menu-item > .menu-item-link {
   background: rgba(0, 0, 0, .5);
   color: white;
