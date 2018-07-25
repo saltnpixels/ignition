@@ -76,7 +76,7 @@ $panel-left-width: 300px; //width of panel-left when open
 
       //inner items move over a bit
       .menu-item-link {
-        padding-left: 1.5em;
+        padding-left: $gap;
       }
     }
 
