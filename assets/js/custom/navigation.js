@@ -42,11 +42,11 @@ jQuery(function ($) {
         menus.find('.page_item_has_children .menu-item-link a').after(dropdownToggle);
 
 
-        // Set the active submenu to be toggled on
-        let currentSubmenus = menus.find('.current-menu-ancestor > .sub-menu, .current_page_ancestor > .children');
-        if (currentSubmenus.css('display') === 'none') {
+        // Set the active submenu to be toggled on on mobile or not horizontal menus
+        let currentSubmenus = menus.find('.current-menu-ancestor > .sub-menu, .current_page_ancestor > .children, .current-menu-item > .sub-menu');
+        if (currentSubmenus.css('display') === 'none') { //submenus are set to display none only in vertical menus which is what we want
             //add toggled on to the li and the button
-            menus.find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current_page_ancestor > button, .current_page_parent')
+            menus.find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current_page_ancestor > button, .current_page_parent, .current-menu-item button')
                 .addClass('toggled-on')
                 .attr('aria-expanded', 'true')
                 .find('.screen-reader-text')

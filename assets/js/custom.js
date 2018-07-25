@@ -245,11 +245,12 @@ jQuery(function ($) {
         menus.find('.page_item:not(.menu-item) a').wrap('<div class="menu-item-link"></div>');
         menus.find('.page_item_has_children .menu-item-link a').after(dropdownToggle);
 
-        // Set the active submenu to be toggled on
-        var currentSubmenus = menus.find('.current-menu-ancestor > .sub-menu, .current_page_ancestor > .children');
+        // Set the active submenu to be toggled on on mobile or not horizontal menus
+        var currentSubmenus = menus.find('.current-menu-ancestor > .sub-menu, .current_page_ancestor > .children, .current-menu-item > .sub-menu');
         if (currentSubmenus.css('display') === 'none') {
+            //submenus are set to display none only in vertical menus which is what we want
             //add toggled on to the li and the button
-            menus.find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current_page_ancestor > button, .current_page_parent').addClass('toggled-on').attr('aria-expanded', 'true').find('.screen-reader-text').text(screenReaderText.collapse);
+            menus.find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current_page_ancestor > button, .current_page_parent, .current-menu-item button').addClass('toggled-on').attr('aria-expanded', 'true').find('.screen-reader-text').text(screenReaderText.collapse);
 
             currentSubmenus.addClass('toggled-on').slideDown();
         }
