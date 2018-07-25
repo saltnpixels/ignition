@@ -60,7 +60,7 @@ var jsCustomFile            = 'custom'; // Compiled JS custom file name.
 // Default set to custom i.e. custom.js.
 
 var babel = require('gulp-babel');
-
+var stripDebug = require('gulp-strip-debug');
 // Images related.
 var imagesSRC               = './assets/img/raw/**/*.{png,jpg,gif,svg}'; // Source folder of images which should be optimized.
 var imagesDestination       = './assets/img/'; // Destination folder of optimized images. Must be different from the imagesSRC folder.
@@ -259,6 +259,7 @@ gulp.task( 'customJS', function() {
             suffix: '.min'
         }))
         .pipe( uglify() )
+        .pipe(stripDebug())
         .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
         .pipe( gulp.dest( jsCustomDestination ) )
         .pipe( notify( { message: 'TASK: "customJs" Completed! 💯', onLast: true } ) );

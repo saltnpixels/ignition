@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
         $siteTopHeight = document.querySelector('.site-top').clientHeight;
 
         menuButtons.forEach(button =>{
-            console.log(button);
+            //console.log(button);
             button.style.height = $siteTopHeight + 'px';
         });
 

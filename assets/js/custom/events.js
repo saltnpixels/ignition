@@ -99,7 +99,7 @@ jQuery(function ($) {
                     duration: $duration
 
                 }).setClassToggle(this, $class).addTo(scrollMagicController)
-                    //.addIndicators()
+                //.addIndicators()
                 ;
             }
 
@@ -187,9 +187,17 @@ jQuery(function ($) {
 
             //if the screen is smaller than moveAt (1030), move to destination
             if (windowWidth < moveAt) {
-                destination.appendChild(item);
+                if(item.hasAttribute('data-moveto-pos')){
+                    destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
+                }else{
+                    destination.appendChild(item);
+                }
             } else {
-                source.appendChild(item);
+                if(item.hasAttribute('data-movefrom-pos')){
+                    source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
+                }else{
+                    source.appendChild(item);
+                }
             }
 
             //show it

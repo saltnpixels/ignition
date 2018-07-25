@@ -174,9 +174,17 @@ jQuery(function ($) {
 
             //if the screen is smaller than moveAt (1030), move to destination
             if (windowWidth < moveAt) {
-                destination.appendChild(item);
+                if (item.hasAttribute('data-moveto-pos')) {
+                    destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
+                } else {
+                    destination.appendChild(item);
+                }
             } else {
-                source.appendChild(item);
+                if (item.hasAttribute('data-movefrom-pos')) {
+                    source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
+                } else {
+                    source.appendChild(item);
+                }
             }
 
             //show it
@@ -475,7 +483,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $siteTopHeight = document.querySelector('.site-top').clientHeight;
 
         menuButtons.forEach(function (button) {
-            console.log(button);
+            //console.log(button);
             button.style.height = $siteTopHeight + 'px';
         });
     }
