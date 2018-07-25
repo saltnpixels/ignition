@@ -84,6 +84,12 @@ $panel-left-width: 300px; //width of panel-left when open
 
 }
 
+#panel-left, #panel-right{
+  .current-menu-item .sub-menu, .current-menu-parent .sub-menu{
+    display: block;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Horizontal Menus
@@ -363,7 +369,7 @@ $panel-left-width: 300px; //width of panel-left when open
 #panel-left{
   .site-navigation__nav-holder{
     min-width: $panel-left-width;
-    padding-top: 80px;
+    padding-top: 11vh;
     padding-bottom: $gap;
   }
 }
