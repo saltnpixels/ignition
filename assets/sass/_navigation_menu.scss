@@ -331,10 +331,23 @@ $panel-left-width: 300px; //width of panel-left when open
   overflow: auto;
 }
 
-.menu-open #panel-left, #panel-left.open{
+.menu-open #panel-left{
   flex-basis: $panel-left-width;
   flex-shrink: 0;
   transform: translate(0,0);
+}
+
+//if left panel starts open, leave open until mobile, and hide button till mobile
+@media(min-width: $nav-breakpoint-collapse){
+  #panel-left.stay-open{
+    flex-basis: $panel-left-width;
+    flex-shrink: 0;
+    transform: translate(0,0);
+
+    & ~ .panel-left-toggle, & ~ .site-top .panel-left-toggle{
+      display: none;
+    }
+  }
 }
 
 //panel becomes absolute

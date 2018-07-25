@@ -68,6 +68,19 @@ $sidebar-width: 350px;
   flex-shrink: 0;
 }
 
+//if right panel starts open, leave open until mobile, and hide button till mobile
+@media(min-width: $panel-right-absolute){
+  #panel-right.stay-open{
+    flex-basis: $sidebar-width;
+    flex-shrink: 0;
+    transform: translate(0,0);
+
+    & ~ .panel-right-toggle{
+      display: none;
+    }
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Panel Breakpoint to become absolute. no longer a flexed item
