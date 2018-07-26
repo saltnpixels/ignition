@@ -185,9 +185,9 @@ pre {
 	font-family: $font-pre;
 	font-size: 14px;
 	line-height: $line-height-pre;
-	margin-bottom: 1.6em;
+	margin-bottom: $gap;
 	overflow: auto;
-	padding: 1.6em;
+	padding: 20px;
 	white-space: pre-wrap;
 }
 
