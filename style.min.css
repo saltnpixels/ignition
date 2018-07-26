@@ -346,9 +346,12 @@ input:focus+.input-append{border-color:#ff4a6b}
 .no-objectfit .background-image img,.no-objectfit .cover-image img{display:none}
 article img{display:block}
 figure{margin-bottom:1em}
+img.alignright{float:right;margin-left:30px;margin-bottom:1em}
+img.alignleft{float:left;margin-right:30px;margin-bottom:1em}
 figure{margin:0}
-.alignleft img{display:block;float:left;width:50%;margin-right:2em}
-.alignright img{display:block;float:right;width:50%;margin-left:2em}
+.wp-block-image.is-resized{width:auto}
+.alignleft img{display:block;float:left;max-width:50%;margin-right:2em}
+.alignright img{display:block;float:right;max-width:50%;margin-left:2em}
 .alignright figcaption,.alignleft figcaption{color:#cacaca;width:50%;margin-bottom:1em}
 .alignleft figcaption{float:left;clear:left;margin-right:2em}
 .alignright figcaption{float:right;clear:right;margin-left:2em}

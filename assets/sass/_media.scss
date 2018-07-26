@@ -70,6 +70,18 @@ figure {
 /*--------------------------------------------------------------
 # Image Alignments
 --------------------------------------------------------------*/
+img.alignright{
+  float: right;
+  margin-left: $gap;
+  margin-bottom: 1em;
+}
+
+img.alignleft{
+  float: left;
+  margin-right: $gap;
+  margin-bottom: 1em;
+}
+
 /*
   - Gutenberg does not make this easy
   - We float the img inside the figure that has .alignleft applied.
@@ -80,17 +92,21 @@ figure {
   margin: 0;
 }
 
+.wp-block-image.is-resized{
+  width: auto;
+}
+
 .alignleft img {
   display: block;
   float: left;
-  width: 50%;
+  max-width: 50%;
   margin-right: 2em;
 }
 
 .alignright img {
   display: block;
   float: right;
-  width: 50%;
+  max-width: 50%;
   margin-left: 2em;
 }
 
@@ -148,7 +164,6 @@ figure {
   width: 100%;
   height: 100%;
 }
-
 
 /*--------------------------------------------------------------
 # Gallery
