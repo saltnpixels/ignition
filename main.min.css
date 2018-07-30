@@ -353,8 +353,8 @@ div div .flex-grid>.small-span-12,div .flex-grid.small-span-all-12>*,div div .fl
 .submenu-dropdown-toggle,.submenu-dropdown-toggle:focus{background:0;border:0;margin:0;display:inline;outline:0;cursor:pointer;min-width:1.5em;text-align:left;font-size:inherit;color:inherit}
 .submenu-dropdown-toggle.toggled-on .icon,.submenu-dropdown-toggle:focus.toggled-on .icon{-webkit-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg)}
 .site-top{z-index:80;width:100%;position:relative}
+.site-top .site-top-container{height:100%}
 .site-navigation{-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;position:relative;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:100%}
-.site-navigation .site-top-container{height:100%}
 .site-navigation .site-navigation__nav-holder{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:end;-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end}
 .site-navigation .site-logo{padding:3px 0}
 .site-navigation .site-logo a+a{display:none}
@@ -378,7 +378,7 @@ div div .flex-grid>.small-span-12,div .flex-grid.small-span-all-12>*,div div .fl
 #panel-left{overflow:auto}
 .menu-open #panel-left{-webkit-flex-basis:300px;-ms-flex-preferred-size:300px;flex-basis:300px;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transform:translate(0,0);-ms-transform:translate(0,0);transform:translate(0,0)}
 @media(min-width:800px){#panel-left.stay-open{-webkit-flex-basis:300px;-ms-flex-preferred-size:300px;flex-basis:300px;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transform:translate(0,0);-ms-transform:translate(0,0);transform:translate(0,0)}
-#panel-left.stay-open ~ .panel-left-toggle,#panel-left.stay-open ~ .site-top .panel-left-toggle{display:none}
+#panel-left.stay-open ~ .panel-left-toggle,#panel-left.stay-open ~ .site .panel-left-toggle{display:none}
 }@media(max-width:500px){#panel-left{position:absolute;height:100%;left:0;-webkit-transform:translate(-100%,0);-ms-transform:translate(-100%,0);transform:translate(-100%,0)}
 }#panel-left .site-navigation__nav-holder{min-width:300px;padding-top:11vh;padding-bottom:30px}
 @media(max-width:500px){.app-menu #panel-left{-webkit-transition:none;transition:none;-webkit-transform:translate(0,0);-ms-transform:translate(0,0);transform:translate(0,0);width:100%;z-index:79}
@@ -523,8 +523,8 @@ img.alignright{float:right;margin-left:30px;margin-bottom:1em}
 img.alignleft{float:left;margin-right:30px;margin-bottom:1em}
 figure{margin:0}
 .wp-block-image.is-resized{width:auto}
-.alignleft img{display:block;float:left;max-width:50%;margin-right:2em}
-.alignright img{display:block;float:right;max-width:50%;margin-left:2em}
+.alignleft img{display:block;float:left;max-width:50%;margin-right:2em;margin-bottom:1em}
+.alignright img{display:block;float:right;max-width:50%;margin-left:2em;margin-bottom:1em}
 .alignright figcaption,.alignleft figcaption{color:#cacaca;width:50%;margin-bottom:1em}
 .alignleft figcaption{float:left;clear:left;margin-right:2em}
 .alignright figcaption{float:right;clear:right;margin-left:2em}
@@ -585,7 +585,8 @@ input:focus+.input-append{border-color:#ff4a6b}
 .error404 .title-404{font-size:90px;font-weight:bold;line-height:1;color:#727272;text-shadow:1px 1px white}
 @media(min-width:400px) and (max-width:1000px){.error404 .title-404{font-size:calc(90px + 110 * (100vw - 400px) / (1000 - 400))}
 }@media(min-width:1001px){.error404 .title-404{font-size:200px}
-}.card{-webkit-box-shadow:0 1px 12px rgba(0,0,0,0.3);box-shadow:0 1px 12px rgba(0,0,0,0.3);border-radius:5px;position:relative;color:#191919;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
+}.after-article{clear:both}
+.card{-webkit-box-shadow:0 1px 12px rgba(0,0,0,0.3);box-shadow:0 1px 12px rgba(0,0,0,0.3);border-radius:5px;position:relative;color:#191919;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
 .card>*{padding:0 15px}
 .card .cover-image{padding:0}
 .card .cover-image img{height:250px}

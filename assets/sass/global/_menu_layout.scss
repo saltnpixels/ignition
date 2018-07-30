@@ -207,6 +207,10 @@ $panel-left-width: 300px; //width of panel-left when open
   z-index: $z-index-menu;
   width: 100%;
   position: relative;
+
+  .site-top-container{
+    height: 100%;
+  }
 }
 
 /*------- Navigation --------*/
@@ -216,9 +220,6 @@ $panel-left-width: 300px; //width of panel-left when open
   justify-content: center;
   height: 100%;
 
-  .site-top-container{
-    height: 100%;
-  }
 
   .site-navigation__nav-holder{
     display: flex;
