@@ -44,6 +44,7 @@ jQuery(function ($) {
 
         // Set the active submenu to be toggled on on mobile or not horizontal menus
         let currentSubmenus = menus.find('.current-menu-ancestor > .sub-menu, .current-menu-parent > .sub-menu, .current_page_ancestor > .children, .current-menu-item > .sub-menu');
+        console.log(currentSubmenus);
         if (currentSubmenus.css('display') === 'none' || currentSubmenus.find('#panel-left, #panel-right')) { //submenus are set to display none only in vertical menus which is what we want
             //add toggled on to the li and the button
             menus.find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current-menu-parent button, .current_page_ancestor > button, .current_page_parent, .current-menu-item button')

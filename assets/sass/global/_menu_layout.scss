@@ -1,10 +1,9 @@
 /*--------------------------------------------------------------
 # Main Navigation on site
 --------------------------------------------------------------*/
-$nav-breakpoint-collapse: 800px; //when main menu goes vertical. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
+$nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
 $nav-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
-$desktop-menu-alignment: center; //can be flex-end or flex-start or center for menu-items positioning
-$logo-width: 350px; //max width of logo in menu
+$desktop-menu-alignment: center; //can be flex-end or flex-start or center for menu-items positioning on desktop
 $panel-left-width: 300px; //width of panel-left when open
 
 
@@ -55,7 +54,7 @@ $panel-left-width: 300px; //width of panel-left when open
       }
 
       button {
-        padding-left: $gutters;
+        padding-left: 10px;
         padding-right: 0;
         display: inline-block;
         color: inherit;
@@ -227,7 +226,6 @@ $panel-left-width: 300px; //width of panel-left when open
   }
 
   .site-logo {
-    max-width: $logo-width;
     padding: 3px 0;
     a + a {
       display: none;

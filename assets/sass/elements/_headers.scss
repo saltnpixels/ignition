@@ -1,0 +1,40 @@
+/*--------------------------------------------------------------
+# Headers
+--------------------------------------------------------------*/
+.entry-header, .page-header {
+  position: relative;
+  min-height: 22vw;
+  padding: 30px 0;
+  color: white;
+  background: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  h1 {
+    margin: 0;
+  }
+
+  .cover-image {
+    height: 500px;
+  }
+
+}
+
+/*------- Items directly under header should have padding --------*/
+.entry-content > *:first-child {
+  padding-top: $gap;
+}
+
+/*------- When header has no min-height and text isnt on top of any image --------*/
+.header-basic {
+  background: transparent;
+  min-height: 0;
+  height: auto;
+  color: black;
+  padding: 0;
+  margin-bottom: $gap;
+
+  .cover-image {
+    margin-bottom: $gap; //above title
+  }
+}

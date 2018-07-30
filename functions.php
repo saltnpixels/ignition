@@ -286,8 +286,8 @@ function ignition_scripts() {
 	// Theme stylesheet.
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', '1.0' );
 
-	//Theme overrides without needing sass every time. Useful for small changes later down the road
-	wp_enqueue_style( 'ignition-style-overrides', get_theme_file_uri( '/overrides.css' ), '', '1.0' );
+	//Sass compiles styles
+	wp_enqueue_style( 'sass-styles', get_theme_file_uri( '/main.css' ), '', '1.0' );
 
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );
@@ -297,7 +297,7 @@ function ignition_scripts() {
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
-	wp_enqueue_script( 'ignition-custom', get_theme_file_uri( '/assets/js/custom.min.js' ), array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom', get_theme_file_uri( '/assets/js/custom.js' ), array( 'jquery' ),
 		'1.0', true );
 
 	//AJAX ready for .custom.js files

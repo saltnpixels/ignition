@@ -1,0 +1,30 @@
+/*--------------------------------------------------------------
+# Panel Left Styling
+--------------------------------------------------------------*/
+#panel-left {
+  background-image: linear-gradient(90deg, #FF5115 0%, #FEBC4A 100%);
+}
+
+
+/*--------------------------------------------------------------
+# Panel Right
+--------------------------------------------------------------*/
+//some widget styles can be found at bottom of sidebar.scss
+
+/*-------  #panel Right --------*/
+#panel-right {
+  background: rgb(30, 30, 34);
+  color: white;
+}
+
+//button to open panel
+.panel-right-toggle {
+  color: white;
+  background: transparent;
+}
+
+.panel-right-toggle.toggled-on {
+  color: white;
+}
+
+

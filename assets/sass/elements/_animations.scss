@@ -19,7 +19,7 @@
 }
 
 //for toggling a class on and off, an animation is best as it can contain a start and end.
-//for tweening you will need a start and end class. make sure the item has the start class already.
+//for scrub/tweening you will need a start and end class. make sure the item has the start class already.
 /*--------------------------------------------------------------
 # Animations
 --------------------------------------------------------------*/
@@ -42,12 +42,14 @@
   animation-name: fadeInUp;
 }
 
+//Add more animations here!
+
 
 
 /*--------------------------------------------------------------
-# Scrub animations. Expect to go from a start class to an end class. make sure to include data-scrollscrub, as well as a starting class to tween from
+# Scrub animations. Expect to go from a start class of transitions to an end class. make sure to include data-scrollscrub, as well as a starting class to tween from
 --------------------------------------------------------------*/
-//if you plan on tweeing from an opacity of 0, add this class too.
+//if you plan on tweening from an opacity of 0, add this class too.
 .js .animateIn {
   opacity: 0; //start at nothing
 }

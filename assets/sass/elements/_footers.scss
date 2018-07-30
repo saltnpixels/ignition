@@ -1,0 +1,11 @@
+/*--------------------------------------------------------------
+# Site Footer
+--------------------------------------------------------------*/
+
+.site-footer {
+  padding-top: $gap;
+  padding-bottom: 5px;
+  background: $black;
+  color: $grey;
+  @include font-size(.7);
+}

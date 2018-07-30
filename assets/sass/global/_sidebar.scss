@@ -1,0 +1,33 @@
+/*------- Inline Sidebar Background --------*/
+#secondary .sidebar-holder:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 50vw;
+  top: 0;
+  left: 0;
+  background: #efefef;
+  z-index: -1;
+}
+
+
+//background when on left
+.sidebar-left #secondary .sidebar-holder:after {
+  left: auto;
+  right: 0;
+}
+
+
+//some widget styling might be found in panels.scss
+/*------- Widgets --------*/
+.widget{
+  color: white;
+}
+
+.widget .menu li{
+  color: white;
+}
+
+#secondary .widget, #secondary .menu li{
+  color: $black;
+}

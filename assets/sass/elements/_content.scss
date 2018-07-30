@@ -1,8 +1,7 @@
 /*--------------------------------------------------------------
 # Cards on Archive pages
 --------------------------------------------------------------*/
-
-//to have this only affect post-type posts use .post.card
+//to have this only affect post-type posts, change to .post.card
 .card {
   box-shadow: 0 1px 12px rgba(black, .3);
   border-radius: 5px;
@@ -11,14 +10,14 @@
   display: flex;
   flex-direction: column;
 
-  > *{
+  > * {
     padding: 0 $gutters;
   }
 
   /*------- Card Header --------*/
-  .cover-image{
+  .cover-image {
     padding: 0;
-    img{
+    img {
       height: 250px;
     }
 
@@ -43,16 +42,42 @@
     flex: 1 0 auto;
   }
 
-  //hide the published date if there is a modified date
-  .published.updated {
-    display: none;
-  }
-
   time, time a {
     @include scss-font-lock(12px, 14px);
   }
 
 }
 
+//hide the published date if there is a modified date
+.published.updated {
+  display: none;
+}
 
+
+/*--------------------------------------------------------------
+# Default Card Pagination
+--------------------------------------------------------------*/
+.pagination{
+  text-align: center;
+  padding: $gap 0;
+  .page-numbers{
+    background: $pink;
+    color: white;
+    margin: 0 3px;
+    padding: 3px 8px;
+  }
+
+  .page-numbers.current{
+    background: $grey;
+  }
+
+  .page-numbers.dots{
+    background: transparent;
+    color: $grey;
+    margin: 0;
+  }
+}
+
+
+//ADD MORE CARDS FOR POST TYPES BELOW
 

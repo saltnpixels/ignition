@@ -3,47 +3,47 @@
 --------------------------------------------------------------*/
 
 /*------- Mixins --------*/ 
-@import "mixins";
+@import "base/mixins";
 
 /*------- variables --------*/ 
-@import "variables";
+@import "base/variables";
 
 /*------- Normalize --------*/
-@import "normalize"; //includes outdated browser notice
+@import "libs/normalize"; //includes outdated browser notice
 
 /*------- Base Layout --------*/
-@import "base_layout";
+@import "base/base_layout";
 
 /*------- CSS Grid --------*/
-@import "grid";
+@import "base/grid";
 
 /*------- Typography --------*/ 
-@import "typography";
+@import "elements/typography";
 
 /*------- Forms --------*/
-@import "forms";
+@import "elements/forms";
 
 /*------- Content --------*/
-@import "content";
+@import "elements/content";
 
 /*------- media --------*/
-@import "media";
+@import "elements/media";
 
 /*------- Nav Menu  --------*/
-@import "navigation_menu";
+@import "global/menu_layout";
  
 
 /*------- Global elements --------*/ 
-@import "elements";
+@import "elements/icons";
 
 
 /*------- Animations --------*/
-@import "animations";
+@import "elements/animations";
 
 
 /*------- Sections --------*/ 
-@import "sections";
+@import "elements/sections";
 
 
 /*------- IE 11 --------*/
-@import "ie11";
+@import "base/ie11";

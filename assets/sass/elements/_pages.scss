@@ -1,0 +1,28 @@
+
+
+
+/*--------------------------------------------------------------
+# Error 404 Page
+--------------------------------------------------------------*/
+.error404 {
+  background: #4F4F4F;
+  color: white;
+
+  .site-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-footer, .site-top {
+    display: none;
+  }
+
+  .title-404 {
+    @include scss-font-lock(90px, 200px);
+    font-weight: bold;
+    line-height: 1;
+    color: #727272;
+    text-shadow: 1px 1px white;
+  }
+}
