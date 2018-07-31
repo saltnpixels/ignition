@@ -64,8 +64,7 @@ figure {
   margin-bottom: 1em;
 }
 
-.wp-block-images figcaption {
-}
+
 
 /*--------------------------------------------------------------
 # Image Alignments
@@ -90,6 +89,7 @@ img.alignleft{
  */
 figure {
   margin: 0;
+  margin-bottom: $gap;
 }
 
 .wp-block-image.is-resized{
@@ -114,7 +114,6 @@ figure {
 
 .alignright figcaption,
 .alignleft figcaption {
-  color: $color-subtle;
   width: 50%;
   margin-bottom: 1em;
 }
@@ -170,8 +169,10 @@ figure {
 /*--------------------------------------------------------------
 # Gallery
 --------------------------------------------------------------*/
-.gallery{
+.gallery, #page .wp-block-gallery{
   @include card-grid(250px);
+  padding: $gap 0;
+  margin: 0;
 
   img{
     margin: auto;
@@ -179,14 +180,25 @@ figure {
     flex-grow: 1;
   }
 
-  .gallery-item{
+  .gallery-item, figure{
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
+
+  .blocks-gallery-item{
+    width: 100% !important;
+    margin: 0;
+  }
+
 
   figcaption{
     text-align: center;
+    position: relative;
+    background: transparent;
+    padding: 0;
     @include font-size(14);
+    color: #6c7781;
   }
 }
 
@@ -194,6 +206,7 @@ figure {
   .gallery-icon{
     order: 2;
   }
+
   figcaption {
     order: 1;
   }

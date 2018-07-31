@@ -521,28 +521,29 @@ article img{display:block}
 figure{margin-bottom:1em}
 img.alignright{float:right;margin-left:30px;margin-bottom:1em}
 img.alignleft{float:left;margin-right:30px;margin-bottom:1em}
-figure{margin:0}
+figure{margin:0;margin-bottom:30px}
 .wp-block-image.is-resized{width:auto}
 .alignleft img{display:block;float:left;max-width:50%;margin-right:2em;margin-bottom:1em}
 .alignright img{display:block;float:right;max-width:50%;margin-left:2em;margin-bottom:1em}
-.alignright figcaption,.alignleft figcaption{color:#cacaca;width:50%;margin-bottom:1em}
+.alignright figcaption,.alignleft figcaption{width:50%;margin-bottom:1em}
 .alignleft figcaption{float:left;clear:left;margin-right:2em}
 .alignright figcaption{float:right;clear:right;margin-left:2em}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto}
 .full-width>img,.alignfull>img,.alignwide>img{width:100%;height:100%;-o-object-fit:cover;object-fit:cover}
 .videowrapper{float:none;clear:both;width:100%;position:relative;padding-bottom:56.25%;padding-top:0;height:0}
 .videowrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));grid-gap:30px;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-@media(max-width:280px){.gallery{grid-template-columns:1fr}
-}@media all and (-ms-high-contrast:none){.gallery{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}
-.gallery>*{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;-webkit-flex-shrink:1;-ms-flex-negative:1;flex-shrink:1;-webkit-flex-basis:0;-ms-flex-preferred-size:0;flex-basis:0;min-width:calc(220px);margin:15px;margin-top:0;margin-bottom:30px}
-.gallery.no-gutters,.gallery.sidebar-right,.gallery.sidebar-left{margin-left:0;margin-right:0}
-.gallery.no-gutters>*,.gallery.sidebar-right>*,.gallery.sidebar-left>*{margin:0}
-.conainer .gallery,.container-fluid .gallery,.container-content .gallery{margin-left:-15px;margin-right:-15px}
-.conainer .gallery.no-gutters,.conainer .gallery.sidebar-right,.conainer .gallery.sidebar-left,.container-fluid .gallery.no-gutters,.container-fluid .gallery.sidebar-right,.container-fluid .gallery.sidebar-left,.container-content .gallery.no-gutters,.container-content .gallery.sidebar-right,.container-content .gallery.sidebar-left{margin-left:0;margin-right:0}
-}.gallery img{margin:auto;display:block;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1}
-.gallery .gallery-item{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
-.gallery figcaption{text-align:center;font-size:14px;font-size:.875rem}
+.gallery,#page .wp-block-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));grid-gap:30px;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;padding:30px 0;margin:0}
+@media(max-width:280px){.gallery,#page .wp-block-gallery{grid-template-columns:1fr}
+}@media all and (-ms-high-contrast:none){.gallery,#page .wp-block-gallery{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}
+.gallery>*,#page .wp-block-gallery>*{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;-webkit-flex-shrink:1;-ms-flex-negative:1;flex-shrink:1;-webkit-flex-basis:0;-ms-flex-preferred-size:0;flex-basis:0;min-width:calc(220px);margin:15px;margin-top:0;margin-bottom:30px}
+.gallery.no-gutters,.gallery.sidebar-right,.gallery.sidebar-left,#page .wp-block-gallery.no-gutters,#page .wp-block-gallery.sidebar-right,#page .wp-block-gallery.sidebar-left{margin-left:0;margin-right:0}
+.gallery.no-gutters>*,.gallery.sidebar-right>*,.gallery.sidebar-left>*,#page .wp-block-gallery.no-gutters>*,#page .wp-block-gallery.sidebar-right>*,#page .wp-block-gallery.sidebar-left>*{margin:0}
+.conainer .gallery,.container-fluid .gallery,.container-content .gallery,.conainer #page .wp-block-gallery,.container-fluid #page .wp-block-gallery,.container-content #page .wp-block-gallery{margin-left:-15px;margin-right:-15px}
+.conainer .gallery.no-gutters,.conainer .gallery.sidebar-right,.conainer .gallery.sidebar-left,.container-fluid .gallery.no-gutters,.container-fluid .gallery.sidebar-right,.container-fluid .gallery.sidebar-left,.container-content .gallery.no-gutters,.container-content .gallery.sidebar-right,.container-content .gallery.sidebar-left,.conainer #page .wp-block-gallery.no-gutters,.conainer #page .wp-block-gallery.sidebar-right,.conainer #page .wp-block-gallery.sidebar-left,.container-fluid #page .wp-block-gallery.no-gutters,.container-fluid #page .wp-block-gallery.sidebar-right,.container-fluid #page .wp-block-gallery.sidebar-left,.container-content #page .wp-block-gallery.no-gutters,.container-content #page .wp-block-gallery.sidebar-right,.container-content #page .wp-block-gallery.sidebar-left{margin-left:0;margin-right:0}
+}.gallery img,#page .wp-block-gallery img{margin:auto;display:block;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1}
+.gallery .gallery-item,.gallery figure,#page .wp-block-gallery .gallery-item,#page .wp-block-gallery figure{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.gallery .blocks-gallery-item,#page .wp-block-gallery .blocks-gallery-item{width:100% !important;margin:0}
+.gallery figcaption,#page .wp-block-gallery figcaption{text-align:center;position:relative;background:transparent;padding:0;font-size:14px;font-size:.875rem;color:#6c7781}
 .caption-first .gallery-item .gallery-icon{-webkit-box-ordinal-group:3;-webkit-order:2;-ms-flex-order:2;order:2}
 .caption-first .gallery-item figcaption{-webkit-box-ordinal-group:2;-webkit-order:1;-ms-flex-order:1;order:1}
 .entry-header,.page-header{position:relative;min-height:22vw;padding:30px 0;color:white;background:black;background-size:cover;background-repeat:no-repeat}
