@@ -121,7 +121,7 @@ function ignition_google_fonts_url() {
 	$font_families = array();
 
 	//add your fonts here into array
-	//when adding form google remove the + between words
+	//when adding from google remove the + between words
 	//dont forget to add your fonts in sass under variables.scss
 	$font_families[] = 'Roboto:400,400i,700,700i';
 	$font_families[] = 'Roboto Slab:400,700';
