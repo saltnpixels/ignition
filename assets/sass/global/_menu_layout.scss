@@ -347,7 +347,7 @@
 }
 
 //panel becomes absolute
-@media(max-width: $nav-absolute){
+@media(max-width: $panel-left-absolute){
   #panel-left{
     position: absolute;
     height: 100%;
@@ -365,7 +365,7 @@
 }
 
 /*------- Cool App like menu for mobile --------*/
-@media(max-width: $nav-absolute) {
+@media(max-width: $panel-left-absolute) {
   .app-menu {
     #panel-left{
       transition: none;

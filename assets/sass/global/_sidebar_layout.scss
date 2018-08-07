@@ -1,4 +1,3 @@
-//Styling can be found at the bottom of this file
 /*--------------------------------------------------------------
 # Panel Right button
 --------------------------------------------------------------*/
@@ -58,14 +57,14 @@
 
 //open panel 
 #panel-right.open:not(:empty) {
-  flex-basis: $sidebar-width;
+  flex-basis: $panel-right-width;
   flex-shrink: 0;
 }
 
 //if right panel starts open, leave open until mobile, and hide button till mobile
 @media(min-width: $panel-right-absolute){
   #panel-right.stay-open{
-    flex-basis: $sidebar-width;
+    flex-basis: $panel-right-width;
     flex-shrink: 0;
     transform: translate(0,0);
 
@@ -90,7 +89,7 @@
     width: 0;
 
     &.open {
-      width: $sidebar-width;
+      width: $panel-right-width;
     }
   }
 }
@@ -104,7 +103,7 @@
     height: 100%;
     overflow: auto;
     overflow-x: hidden;
-    min-width: $sidebar-width;
+    min-width: $panel-right-width;
     -webkit-overflow-scrolling: touch;
   }
   @extend .hide-scroll;
@@ -120,7 +119,7 @@
 }
 
 #secondary .sidebar-holder{
-  max-width: $sidebar-width;
+  max-width: $panel-right-width;
 }
 
 /*------- Sidebar on left ordering --------*/

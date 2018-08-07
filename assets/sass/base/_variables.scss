@@ -11,26 +11,25 @@ $font-pre: 'Source Code Pro', monospace;
 $line-height-pre: 22px;
 
 
+/*------- Menu layout --------*/
+$nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
+$desktop-menu-alignment: center; //can be flex-end or flex-start or center for menu-items positioning on desktop
+
+
+/*------- Panels --------*/
+$panel-left-width: 300px; //width of panel-left when open
+$panel-left-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
+
+$panel-right-width: 350px;
+$panel-right-absolute: 1030px;
+
+
+
 /*------- Grid and Layout --------*/
 $container: 1200px; //the max size of site content
 $content-container: 700px; //Size of actual article content
 $gutters: 15px;
 $gap: $gutters * 2;
-
-
-/*------- Menu layout --------*/
-$nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
-$nav-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
-$desktop-menu-alignment: center; //can be flex-end or flex-start or center for menu-items positioning on desktop
-$panel-left-width: 300px; //width of panel-left when open
-
-
-/*------- Sidebar Layout --------*/
-//when the right panel should overlay instead of pushing over the rest of the site (when it should become position absolute)
-$panel-right-absolute: 1030px;
-
-//sidebar width
-$sidebar-width: 350px;
 
 
 
