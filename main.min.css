@@ -503,6 +503,8 @@ ol{list-style:decimal}
 li>ul,li>ol{margin-bottom:0;margin-left:1.5em}
 dt{font-weight:700}
 dd{margin:0 1.5em 1.5em}
+.entry-content ul,.entry-content ol{padding-left:30px}
+.entry-content ul li,.entry-content ol li{padding:5px 0}
 table{border-collapse:collapse;margin:0 0 1.5em;width:100%}
 thead th{border-bottom:2px solid #bbb;padding-bottom:.5em}
 th{padding:.4em;text-align:left}
