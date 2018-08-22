@@ -12,7 +12,7 @@ $line-height-pre: 22px;
 
 
 /*------- Menu layout --------*/
-$nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
+$nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. Also used by default for all horizontal menus. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
 $desktop-menu-alignment: center; //can be flex-end or flex-start or center for menu-items positioning on desktop
 
 

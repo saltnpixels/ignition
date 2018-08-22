@@ -1,6 +1,26 @@
 /*--------------------------------------------------------------
 # Articles
 --------------------------------------------------------------*/
+.single article{
+
+  .entry-content{
+    margin-bottom: $gap;
+  }
+
+  h2{
+    margin-top: 30px;
+    @include font-size(32);
+    margin-bottom: 0;
+  }
+
+  h3{
+    @include font-size(24);
+    margin: 0;
+  }
+
+}
+
+
 .after-article{
   clear: both;
 }

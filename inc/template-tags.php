@@ -180,7 +180,7 @@ function is_static_frontpage() {
  *
  * @return string
  */
-function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $use_thumbnail_as_fallback = true ) {
+function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $use_thumbnail_as_fallback = false ) {
 
 	//if were trying to get the header image, and the user specified not to, then return none.
 	if( $size == 'header_image' && get_field('no_image', $id)){
@@ -210,7 +210,7 @@ function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $
  *
  * @return string
  */
-function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_thumbnail_as_fallback = true ) {
+function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_thumbnail_as_fallback = false ) {
 
 	$image = '';
 
@@ -235,10 +235,10 @@ function ign_get_the_header_image($id, $kind = 'url', $attr = ''){
 
 	$image = get_field('header_image');
 	if($kind == 'url'){
-		return ign_get_the_image_url($id, 'header_image', $image);
+		return ign_get_the_image_url($id, 'header_image', $image, true);
 	}
 	else{
-		return ign_get_the_image($id, 'header_image', $image, $attr);
+		return ign_get_the_image($id, 'header_image', $image, $attr, true);
 	}
 }
 

@@ -267,8 +267,8 @@ p:last-child{margin-bottom:0}
 h1,.h1{font-size:30px;line-height:1.3;font-weight:normal;text-transform:uppercase}
 @media(min-width:400px) and (max-width:1000px){h1,.h1{font-size:calc(30px + 30 * (100vw - 400px) / (1000 - 400))}
 }@media(min-width:1001px){h1,.h1{font-size:60px}
-}h2,.h2{font-size:27.2px;font-size:1.7rem;font-weight:normal}
-h3,.h3{font-size:20.8px;font-size:1.3rem}
+}h2,.h2{font-size:25px;font-size:1.5625rem;font-weight:normal}
+h3,.h3{font-size:20px;font-size:1.25rem}
 h4,.h4{font-size:17.6px;font-size:1.1rem}
 a{color:#ff4a6b;text-decoration:none}
 ::-moz-selection{background:#ffa5b5}
@@ -284,7 +284,7 @@ cite:before,.wp-block-quote cite:before{content:'\2014';margin-right:1em}
 .wp-block-quote.is-large:before{font-size:40px;font-size:2.5rem}
 .wp-block-quote.is-large p{font-size:20px;font-size:1.25rem}
 q{quotes:"“" "”" "‘" "’"}
-pre{background:#f7f9fa;border:1px solid #e6e8eb;font-family:"Source Code Pro",monospace;font-size:14px;line-height:22px;margin-bottom:30px;overflow:auto;padding:20px;white-space:pre-wrap}
+pre{background:#f7f9fa;border:1px solid #e6e8eb;font-family:"Source Code Pro",monospace;font-size:14px;line-height:22px;margin-top:20px;margin-bottom:20px;overflow:auto;padding:20px;white-space:pre-wrap}
 code,kbd,tt,var{font-family:"Source Code Pro",monospace;font-size:15px}
 label{display:block;font-weight:800}
 fieldset{margin-bottom:30px}
@@ -310,6 +310,9 @@ button{display:inline-block;cursor:pointer}
 .input-prepend{border-radius:3px 0 0 3px;margin-right:-2px;-webkit-box-ordinal-group:1;-webkit-order:0;-ms-flex-order:0;order:0}
 input:focus+.input-prepend{border-color:#ff4a6b}
 input:focus+.input-append{border-color:#ff4a6b}
+.single article .entry-content{margin-bottom:30px}
+.single article h2{margin-top:30px;font-size:32px;font-size:2rem;margin-bottom:0}
+.single article h3{font-size:24px;font-size:1.5rem;margin:0}
 .after-article{clear:both}
 .card{-webkit-box-shadow:0 1px 12px rgba(0,0,0,0.3);box-shadow:0 1px 12px rgba(0,0,0,0.3);border-radius:5px;position:relative;color:#191919;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
 .card>*{padding:0 15px}

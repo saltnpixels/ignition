@@ -22,9 +22,9 @@ else :
 
 	//if singular, check for header image
 $bg_image = '';
-if ( is_singular() ) {
+
 	$bg_image = ign_get_the_header_image( get_the_ID() );
-} ?>
+?>
 
 
 <header class="entry-header layout-center-content"
