@@ -109,7 +109,7 @@
 //even if everything collpases, the browser expects 12 gaps of 30 pixels of room to exist. and adding container gutters brings us to 420. below this the grid won fit unless we lower the gap.
 @media(max-width: 420px){
   .grid{
-    grid-gap: 20px;
+    grid-gap: 30px 20px;
   }
 }
 

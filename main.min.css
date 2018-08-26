@@ -114,7 +114,7 @@ div .grid .span-9,.grid.span-all-9>*{grid-column:span 9}
 div .grid .span-10,.grid.span-all-10>*{grid-column:span 10}
 div .grid .span-11,.grid.span-all-11>*{grid-column:span 11}
 div .grid .span-12,.grid.span-all-12>*{grid-column:span 12}
-@media(max-width:420px){.grid{grid-gap:20px}
+@media(max-width:420px){.grid{grid-gap:30px 20px}
 }.grid.no-gutters,.grid.sidebar-right,.grid.sidebar-left{grid-gap:0}
 .span-full{grid-column:1 / -1;-webkit-flex-basis:100%;-ms-flex-preferred-size:100%;flex-basis:100%}
 @media(max-width:1030px){div div .grid>.large-span-1,div .grid.large-span-all-1>*{grid-column:span 1}
