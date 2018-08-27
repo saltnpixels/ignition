@@ -105,12 +105,18 @@ function ignition_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
 	  */
-	add_editor_style( array( 'editor-style.css', ignition_google_fonts_url() ) );
+	add_editor_style( array( 'editor-style.min.css', ignition_google_fonts_url() ) );
 
 	$GLOBALS['content_width'] = 730;
 }
 
 add_action( 'after_setup_theme', 'ignition_setup' );
+
+function ign_gutenberg_styles() {
+	// Load the theme styles within Gutenberg.
+	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
+}
+add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
 
 
 /**

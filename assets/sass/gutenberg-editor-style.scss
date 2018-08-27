@@ -1,0 +1,44 @@
+/*--------------------------------------------------------------
+# gutenberg Editor Styling
+--------------------------------------------------------------*/
+/*------- Mixins --------*/
+@import "base/mixins";
+
+/*------- variables --------*/
+@import "base/variables";
+
+
+.edit-post-visual-editor {
+
+  /*------- CSS Grid --------*/
+  @import "base/grid";
+
+  /*------- Forms --------*/
+  @import "elements/_forms";
+
+  /*------- Typography --------*/
+  @import "elements/typography";
+
+
+  /*------- media --------*/
+  @import "elements/media";
+
+  /*------- Global elements --------*/
+  @import "elements/icons";
+
+  /*------- Animations --------*/
+  @import "elements/animations";
+
+  /*------- Sections --------*/
+  @import "elements/sections";
+
+  /*------- Gutenberg --------*/
+  @import "global/gutenberg";
+}
+
+
+//outside so it can apply to post types specifically
+//you can add post type classes for gutenberg like .gutenberg-editor-page.post-type-portfolio .card...
+/*------- Content --------*/
+@import "elements/content";
+
