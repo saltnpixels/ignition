@@ -254,7 +254,15 @@ div div .flex-grid>.small-span-12,div div .flex>.small-span-12{-webkit-box-flex:
 .flex-wrap{-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}
 .flex-column{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
 .layout-center-content{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-html{font-size:100%}
+.layout-cards-7>*{grid-column:span 4}
+.layout-cards-7>* .hide-on-small-card{display:none}
+.layout-cards-7>*:nth-child(7n - 3),.layout-cards-7>*:nth-child(7n - 6){grid-column:span 8}
+.layout-cards-7>*:nth-child(7n - 3) .hide-on-small-card,.layout-cards-7>*:nth-child(7n - 6) .hide-on-small-card{display:block}
+@media all and (-ms-high-contrast:none){.layout-cards-7>*{width:calc(33.333% - $gap)}
+.layout-cards-7>* .hide-on-small-card{display:none}
+.layout-cards-7>*:nth-child(7n - 3),.layout-cards-7>*:nth-child(7n - 6){width:calc(66.66666% - $gap)}
+.layout-cards-7>*:nth-child(7n - 3) .hide-on-small-card,.layout-cards-7>*:nth-child(7n - 6) .hide-on-small-card{display:block}
+}html{font-size:100%}
 body,button,input,select,textarea{font-size:16px;font-size:1rem;line-height:1.5;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;color:#191919;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}
 article{font-size:18px;font-size:1.125rem}
 h1,h2,h3,h4,h5,h6{clear:both;font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;margin:0 0 .2em 0}
