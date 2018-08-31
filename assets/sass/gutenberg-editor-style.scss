@@ -3,7 +3,6 @@
 --------------------------------------------------------------*/
 /*------- Mixins --------*/
 @import "base/mixins";
-
 /*------- variables --------*/
 @import "base/variables";
 
@@ -18,7 +17,6 @@
 
   /*------- Typography --------*/
   @import "elements/typography";
-
 
   /*------- media --------*/
   @import "elements/media";
@@ -35,7 +33,6 @@
   /*------- Gutenberg --------*/
   @import "global/gutenberg";
 }
-
 
 //outside so it can apply to post types specifically
 //you can add post type classes for gutenberg like .gutenberg-editor-page.post-type-portfolio .card...

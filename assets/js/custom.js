@@ -105,11 +105,14 @@ jQuery(function ($) {
 
 
     //TOGGLE BUTTONS
+    //adding new custom event for after the element is toggled
+    var ToggleEvent = new Event('afterToggle');
+
     //add aria to buttons currently on page
     var buttons = document.querySelectorAll('[data-toggle]');
     buttons.forEach(function (button) {
         button.setAttribute('role', 'switch');
-        button.setAttribute('aria-expanded', button.classList.contains('toggled-on') ? 'true' : 'false');
+        button.setAttribute('aria-checked', button.classList.contains('toggled-on') ? 'true' : 'false');
     });
 
     //toggling the buttons with delegation click
@@ -127,13 +130,18 @@ jQuery(function ($) {
             var $class = item.getAttribute('data-toggle'),
                 $target = document.querySelectorAll(item.getAttribute('data-target'));
 
-            if ($target.length) {
-                $target.forEach(function (targetItem) {
-                    targetItem.classList.toggle($class);
-                });
-            } else {
-                item.classList.toggle($class);
+            if ($class) {
+                if ($target.length) {
+                    $target.forEach(function (targetItem) {
+                        targetItem.classList.toggle($class);
+                    });
+                } else {
+                    item.classList.toggle($class);
+                }
             }
+
+            //trigger optional after toggle event
+            item.dispatchEvent(ToggleEvent);
         }
     });
 
