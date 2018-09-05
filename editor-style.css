@@ -263,7 +263,7 @@ img { max-width: 100%; height: auto; }
 /* - Simple Responsive grid of equal sized items - Create your own responsive grid! - Add @include grid($min-size-of-items); - The default min size is 350 - Items grow if there is room to grow, or fall to next row fi there isnt. */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); grid-gap: 30px; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; }
 
-@media (max-width: 380px) { .card-grid { grid-template-columns: 1fr; } }
+@media (max-width: 410px) { .card-grid { grid-template-columns: 1fr; } }
 
 @media all and (-ms-high-contrast: none) { .card-grid { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; }
   .card-grid > * { -webkit-box-flex: 1; -webkit-flex-grow: 1; -ms-flex-positive: 1; flex-grow: 1; -webkit-flex-shrink: 1; -ms-flex-negative: 1; flex-shrink: 1; -webkit-flex-basis: 0; -ms-flex-preferred-size: 0; flex-basis: 0; min-width: calc(320px); margin: 15px; margin-top: 0; margin-bottom: 30px; }
@@ -274,7 +274,7 @@ img { max-width: 100%; height: auto; }
 
 .card-grid-fill { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); grid-gap: 30px; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; }
 
-@media (max-width: 380px) { .card-grid-fill { grid-template-columns: 1fr; } }
+@media (max-width: 410px) { .card-grid-fill { grid-template-columns: 1fr; } }
 
 @media all and (-ms-high-contrast: none) { .card-grid-fill { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; }
   .card-grid-fill > * { -webkit-box-flex: 1; -webkit-flex-grow: 1; -ms-flex-positive: 1; flex-grow: 1; -webkit-flex-shrink: 1; -ms-flex-negative: 1; flex-shrink: 1; -webkit-flex-basis: 0; -ms-flex-preferred-size: 0; flex-basis: 0; min-width: calc(320px); margin: 15px; margin-top: 0; margin-bottom: 30px; }
@@ -807,7 +807,7 @@ figure { margin: 0; margin-bottom: 30px; }
 --------------------------------------------------------------*/
 .gallery, #page .wp-block-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 30px; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; padding: 30px 0; margin: 0; }
 
-@media (max-width: 280px) { .gallery, #page .wp-block-gallery { grid-template-columns: 1fr; } }
+@media (max-width: 310px) { .gallery, #page .wp-block-gallery { grid-template-columns: 1fr; } }
 
 @media all and (-ms-high-contrast: none) { .gallery, #page .wp-block-gallery { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; }
   .gallery > *, #page .wp-block-gallery > * { -webkit-box-flex: 1; -webkit-flex-grow: 1; -ms-flex-positive: 1; flex-grow: 1; -webkit-flex-shrink: 1; -ms-flex-negative: 1; flex-shrink: 1; -webkit-flex-basis: 0; -ms-flex-preferred-size: 0; flex-basis: 0; min-width: calc(220px); margin: 15px; margin-top: 0; margin-bottom: 30px; }

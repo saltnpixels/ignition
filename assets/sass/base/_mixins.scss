@@ -137,7 +137,7 @@ Mixins
   justify-content: center;
 
 //if width and gap is size of screen.
-    @media (max-width: $min + 30px) {
+    @media (max-width: $min + $grid-gap*2) {
       grid-template-columns: 1fr;
     }
 
