@@ -8,6 +8,7 @@
   transform: translate(0);
 }
 
+
 .infinite{
   animation-iteration-count: infinite;
 }
@@ -49,6 +50,10 @@
 /*--------------------------------------------------------------
 # Scrub animations. Expect to go from a start class of transitions to an end class. make sure to include data-scrollscrub, as well as a starting class to tween from
 --------------------------------------------------------------*/
+.site-container [data-scrollscrub]{
+  transition: none;
+}
+
 //if you plan on tweening from an opacity of 0, add this class too.
 .js .animateIn {
   opacity: 0; //start at nothing

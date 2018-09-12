@@ -158,7 +158,7 @@ figure {
   height: 0;
 }
 
-.videowrapper iframe {
+.videowrapper iframe, .videowrapper video, .videowrapper object {
   position: absolute;
   top: 0;
   left: 0;

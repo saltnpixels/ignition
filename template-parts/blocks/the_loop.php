@@ -5,7 +5,7 @@
  */
 
 /**
- * Reset post data just in case it was touched, or is poitning to something else and then put it back.
+ * Reset post data just in case it was touched, or is pointing to something else and then put it back.
  * This can be used to get cards for an archive page.
  */
 
