@@ -413,7 +413,9 @@
 //ios must have position relative on body for lock to work
 @supports (-webkit-overflow-scrolling: touch) {
   /* CSS specific to iOS devices */
-  position: fixed; // todo check on ios that it works
+  .menu-lock {
+    position: fixed; // todo check on ios that it works
+  }
 }
 
 

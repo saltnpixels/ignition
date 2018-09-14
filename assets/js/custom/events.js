@@ -152,7 +152,7 @@ jQuery(function ($) {
                 }
             }
 
-            //trigger optional after toggle event
+            //trigger optional afterToggle event
             item.dispatchEvent(ToggleEvent);
 
 

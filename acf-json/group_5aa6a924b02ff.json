@@ -414,6 +414,35 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5b9ae6ef4d2fe": {
+                    "key": "layout_5b9ae6ef4d2fe",
+                    "name": "code",
+                    "label": "Code",
+                    "display": "row",
+                    "sub_fields": [
+                        {
+                            "key": "field_5b9ae6f54d2ff",
+                            "label": "Code",
+                            "name": "code",
+                            "type": "textarea",
+                            "instructions": "Add styles and scripts here. Looks nicer when used with a code area.\r\nYou can install ACF Code Field by Peter Tasker and use a code field type instead.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Section",
@@ -438,5 +467,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1532098030
+    "modified": 1536883991
 }

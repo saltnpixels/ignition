@@ -449,7 +449,7 @@ add_action( 'plugins_loaded', 'plugin_init' );
  */
 function acf_loop_field( $field ) {
 	global $post;
-	if($post){
+	if($post && is_admin()){
 	$post_type = ign_is_page_archive_header( $post->ID, 'post_type' );
 	if ( is_admin() && get_post_type() == 'page' && $post_type ) {
 		$field['layouts']['5afb034fab739']['label'] = ucfirst($post_type) . ' Card List';
