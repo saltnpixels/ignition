@@ -31,7 +31,7 @@ h4,
 h5,
 h6 {
 	clear: both;
-	font: $font-alt;
+	font-family: $font-alt;
 	margin: 0 0 .2em 0;
 }
 
@@ -45,6 +45,10 @@ p:last-child {
 
 .entry-content p{
 	margin-bottom: 1em;
+
+	&:last-child{
+		margin-bottom: 0;
+	}
 }
 
 *:focus {

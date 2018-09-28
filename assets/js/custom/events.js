@@ -1,5 +1,3 @@
-
-
 /**
  * element can have these data attributes:
  * data-scrollanimation = a class to add to this element on scroll
@@ -47,7 +45,7 @@ jQuery(function ($) {
             }
 
             //scrolling animations will go haywire if the item moves vertically. the scroll will change where it starts and ends continuously!
-            if ($class.indexOf('Up') !== -1 || $class.indexOf('Down') !== -1 ) {
+            if ($class.indexOf('Up') !== -1 || $class.indexOf('Down') !== -1) {
                 //get parent element and make that the trigger, but use an offset from that
                 $triggerElem = $this.parent();
                 $offset = ($this.offset().top - $triggerElem.offset().top) + $offset;
@@ -141,7 +139,7 @@ jQuery(function ($) {
             let $class = item.getAttribute('data-toggle'),
                 $target = document.querySelectorAll(item.getAttribute('data-target'));
 
-            if( $class) {
+            if ($class) {
                 if ($target.length) {
                     $target.forEach(targetItem => {
                         targetItem.classList.toggle($class);
@@ -177,7 +175,7 @@ jQuery(function ($) {
                 source = item.getAttribute('data-movefrom');
             moveAt = moveAt ? moveAt : 1030;
 
-            if( ! destination){
+            if (!destination) {
                 return;
             }
             //if no data movefrom is found add one to parent so we can move items back in. now they go back and forth
@@ -197,15 +195,15 @@ jQuery(function ($) {
 
             //if the screen is smaller than moveAt (1030), move to destination
             if (windowWidth < moveAt) {
-                if(item.hasAttribute('data-moveto-pos')){
+                if (item.hasAttribute('data-moveto-pos')) {
                     destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
-                }else{
+                } else {
                     destination.appendChild(item);
                 }
             } else {
-                if(item.hasAttribute('data-movefrom-pos')){
+                if (item.hasAttribute('data-movefrom-pos')) {
                     source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
-                }else{
+                } else {
                     source.appendChild(item);
                 }
             }
@@ -218,7 +216,6 @@ jQuery(function ($) {
     window.addEventListener('resize', throttle(moveItems, 250));
 
     moveItems();
-
 
 
 });
