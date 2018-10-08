@@ -312,7 +312,7 @@ function ignition_scripts() {
 		'nonce'   => wp_create_nonce( 'ajax_nonce' ),
 	) );
 
-	wp_localize_script( 'ignition-custom', 'ignitionScreenReaderText', array(
+	wp_localize_script( 'ignition-custom', 'screenReaderText', array(
 		'quote'    => ign_get_svg( array( 'icon' => 'quote-right' ) ),
 		'expand'   => __( 'Expand child menu', 'ignition' ),
 		'collapse' => __( 'Collapse child menu', 'ignition' )

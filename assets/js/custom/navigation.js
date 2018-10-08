@@ -1,4 +1,4 @@
-//when navigation should go mobile
+//This file takes care of menus and navigation at the top
 let iconAngleRight = "<span class='arrow'></span>";
 
 //if using wordpress, icons may have already been localized. use those. otherwise add it
@@ -25,7 +25,7 @@ jQuery(function ($) {
 
 
     submenuButtons = function () {
-        // Add dropdown arrow toggle button to submenus.
+        // Add dropdown arrow toggle button to all submenus.
         var dropdownToggle = $('<button />', {
             'class': 'submenu-dropdown-toggle',
             'aria-expanded': false
@@ -43,38 +43,34 @@ jQuery(function ($) {
 
 
         // Set the active submenu to be toggled on on mobile or not horizontal menus
-        let currentSubmenus = menus.find('.current-menu-ancestor > .sub-menu, .current-menu-parent > .sub-menu, .current_page_ancestor > .children, .current-menu-item > .sub-menu');
-        console.log(currentSubmenus);
-        if (currentSubmenus.css('display') === 'none' || currentSubmenus.find('#panel-left, #panel-right')) { //submenus are set to display none only in vertical menus which is what we want
-            //add toggled on to the li and the button
-            menus.find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current-menu-parent button, .current_page_ancestor > button, .current_page_parent, .current-menu-item button')
-                .addClass('toggled-on')
-                .attr('aria-expanded', 'true')
-                .find('.screen-reader-text')
-                .text(screenReaderText.collapse);
+        let currentSubmenus = menus.find('.current-menu-item > .sub-menu, .current_page_item > .sub-menu, .current_page_ancestor > .sub-menu, .current-menu-ancestor > .sub-menu');
 
-            currentSubmenus.addClass('toggled-on').slideDown();
-        }
+    currentSubmenus.each( function() {
+	    if ($(this).css('display') === 'none' || $(this).parents('#panel-left, #panel-right').length) { //submenus are set to display none only in vertical menus which is what we want
+		    //add toggled on to the li and the button
+		    $(this).find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current-menu-parent button, .current_page_ancestor > button, .current_page_parent, .current-menu-item button')
+          .trigger('click');
+
+	    }
+    });
 
 
-        //SUBMENU CLICK EVENT
-        $('body').on('click', '.submenu-dropdown-toggle', function (e) {
+    //special after toggle event
+      let dropdownButtons = document.querySelectorAll('.submenu-dropdown-toggle');
+      for (const dropdownButton of dropdownButtons){
+          dropdownButton.addEventListener('afterToggle', e => {
 
-            var _this = $(this),
-                screenReaderSpan = _this.find('.screen-reader-text'),
-                submenus = _this.closest('li').find('> .children, > .sub-menu');
+              //toggle the li. closest still best support with jquery
+	          $(dropdownButton).closest('li').toggleClass('toggled-on');
+	          //toggle the sub menu
+	          let submenus = $(dropdownButton).closest('li').find('> .children, > .sub-menu');
+	            submenus.toggleClass('toggled-on').slideToggle();
 
-            e.preventDefault();
+	            let screenReaderSpan = $(dropdownButton).find('.screen-reader-text');
+	          screenReaderSpan.text(screenReaderSpan.text() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand);
+          });
+      }
 
-            _this.toggleClass('toggled-on');
-            //toggle li parent
-            _this.closest('li').toggleClass('toggled-on');
-            //toggle actual .sub-menu
-            submenus.toggleClass('toggled-on').slideToggle();
-            _this.attr('aria-expanded', _this.attr('aria-expanded') === 'false' ? 'true' : 'false');
-
-            screenReaderSpan.text(screenReaderSpan.text() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand);
-        });
     };
 
     submenuButtons();
@@ -85,42 +81,37 @@ jQuery(function ($) {
         return;
     }
 
-    //move button into site-top
+    //move button into site-top if app-menu type so the button shrinks too
     if (body.hasClass('app-menu')) {
         navigation.append(menuToggle);
     }
 
+    menuToggle[0].addEventListener('afterToggle', e =>{
+	    //if button is set to open
+	    if (menuToggle.hasClass('toggled-on')) {
 
-    menuToggle.on('click', function (e) {
+	        //if its an app-menu, add the menu-lock onto body
+		    if (body.hasClass('app-menu')) {
+			    body.addClass('menu-lock');
+		    }
 
-        body.toggleClass('menu-open');
+		    //clicking anywhere outside the menu will close it
+		    $('.site-content').one('click.Menu', function () {
+			    e.preventDefault();
+			    menuToggle.trigger('click'); //recursively calls click and closes
+		    });
+	    } else {
 
-        menuToggle.attr('aria-expanded', body.hasClass('menu-open')).toggleClass('toggled-on');
+		    $('.site-content').off('click.Menu');
 
-        //if its open
-        if (menuToggle.hasClass('toggled-on')) {
-
-            //if its an app-menu, add the menu-lock onto body
-            if (body.hasClass('app-menu')) {
-                body.addClass('menu-lock');
-            }
-
-            //clicking anywhere outside the menu will close it
-            $('.site-content').one('click.Menu', function () {
-                e.preventDefault();
-                menuToggle.trigger('click'); //recursively calls click and closes
-            });
-        } else {
-            console.log('its closing');
-            $('.site-content').off('click.Menu');
-
-
-            page.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-                body.removeClass('menu-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-            });
-        }
+		    page.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+			    body.removeClass('menu-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+		    });
+	    }
 
     });
+
+
 
 
     //move logo in middle of menu on desktop if logo is middle position
@@ -128,6 +119,7 @@ jQuery(function ($) {
     let navigationLi = $('.site-navigation__nav-holder .menu li');
         let middle = Math.floor($(navigationLi).length / 2) - 1;
 
+        //add logo tot he middle when page loads
         $('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'));
         $('.site-logo').clone().appendTo('.li-logo-holder');
     }
