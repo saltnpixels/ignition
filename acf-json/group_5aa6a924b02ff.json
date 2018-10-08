@@ -443,6 +443,75 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5bbaa47e5d157": {
+                    "key": "layout_5bbaa47e5d157",
+                    "name": "section_menu",
+                    "label": "Section Menu",
+                    "display": "row",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bbaa4935d158",
+                            "label": "Section Names",
+                            "name": "section_names",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5bbaa4ad5d159",
+                                    "label": "Section Name",
+                                    "name": "section_name",
+                                    "type": "text",
+                                    "instructions": "Name for the menu item.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5bbaa4b95d15a",
+                                    "label": "Section ID",
+                                    "name": "section_id",
+                                    "type": "text",
+                                    "instructions": "The number next to the section is the ID you want to scroll to when this menu item is clicked.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Section",
@@ -467,5 +536,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1538654091
+    "modified": 1538958598
 }
