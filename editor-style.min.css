@@ -340,30 +340,6 @@ div .flex .span-12,.flex.span-all-12>*,div .flex-grid .span-12,.flex-grid.span-a
 }@media(min-width:400px) and (max-width:1000px){h1,.h1{font-size:calc(30px + 30 * (100vw - 400px) / (1000 - 400))}
 .card a.term-link{font-size:calc(12px + 2 * (100vw - 400px) / (1000 - 400))}
 .card time,.card time a{font-size:calc(12px + 2 * (100vw - 400px) / (1000 - 400))}
-}@media(min-width:767px){div div .flex-grid>.large-span-1,div .flex-grid.large-span-all-1>*,div div .flex>.large-span-1,div .flex.large-span-all-1>*{-ms-flex-preferred-size:calc(8.3333333333% - 30px);flex-basis:calc(8.3333333333% - 30px)}
-div div .flex-grid>.large-span-1,div div .flex>.large-span-1{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-2,div .flex-grid.large-span-all-2>*,div div .flex>.large-span-2,div .flex.large-span-all-2>*{-ms-flex-preferred-size:calc(16.6666666667% - 30px);flex-basis:calc(16.6666666667% - 30px)}
-div div .flex-grid>.large-span-2,div div .flex>.large-span-2{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-3,div .flex-grid.large-span-all-3>*,div div .flex>.large-span-3,div .flex.large-span-all-3>*{-ms-flex-preferred-size:calc(25% - 30px);flex-basis:calc(25% - 30px)}
-div div .flex-grid>.large-span-3,div div .flex>.large-span-3{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-4,div .flex-grid.large-span-all-4>*,div div .flex>.large-span-4,div .flex.large-span-all-4>*{-ms-flex-preferred-size:calc(33.3333333333% - 30px);flex-basis:calc(33.3333333333% - 30px)}
-div div .flex-grid>.large-span-4,div div .flex>.large-span-4{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-5,div .flex-grid.large-span-all-5>*,div div .flex>.large-span-5,div .flex.large-span-all-5>*{-ms-flex-preferred-size:calc(41.6666666667% - 30px);flex-basis:calc(41.6666666667% - 30px)}
-div div .flex-grid>.large-span-5,div div .flex>.large-span-5{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-6,div .flex-grid.large-span-all-6>*,div div .flex>.large-span-6,div .flex.large-span-all-6>*{-ms-flex-preferred-size:calc(50% - 30px);flex-basis:calc(50% - 30px)}
-div div .flex-grid>.large-span-6,div div .flex>.large-span-6{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-7,div .flex-grid.large-span-all-7>*,div div .flex>.large-span-7,div .flex.large-span-all-7>*{-ms-flex-preferred-size:calc(58.3333333333% - 30px);flex-basis:calc(58.3333333333% - 30px)}
-div div .flex-grid>.large-span-7,div div .flex>.large-span-7{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-8,div .flex-grid.large-span-all-8>*,div div .flex>.large-span-8,div .flex.large-span-all-8>*{-ms-flex-preferred-size:calc(66.6666666667% - 30px);flex-basis:calc(66.6666666667% - 30px)}
-div div .flex-grid>.large-span-8,div div .flex>.large-span-8{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-9,div .flex-grid.large-span-all-9>*,div div .flex>.large-span-9,div .flex.large-span-all-9>*{-ms-flex-preferred-size:calc(75% - 30px);flex-basis:calc(75% - 30px)}
-div div .flex-grid>.large-span-9,div div .flex>.large-span-9{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-10,div .flex-grid.large-span-all-10>*,div div .flex>.large-span-10,div .flex.large-span-all-10>*{-ms-flex-preferred-size:calc(83.3333333333% - 30px);flex-basis:calc(83.3333333333% - 30px)}
-div div .flex-grid>.large-span-10,div div .flex>.large-span-10{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-11,div .flex-grid.large-span-all-11>*,div div .flex>.large-span-11,div .flex.large-span-all-11>*{-ms-flex-preferred-size:calc(91.6666666667% - 30px);flex-basis:calc(91.6666666667% - 30px)}
-div div .flex-grid>.large-span-11,div div .flex>.large-span-11{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-div div .flex-grid>.large-span-12,div .flex-grid.large-span-all-12>*,div div .flex>.large-span-12,div .flex.large-span-all-12>*{-ms-flex-preferred-size:calc(100% - 30px);flex-basis:calc(100% - 30px)}
-div div .flex-grid>.large-span-12,div div .flex>.large-span-12{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
 }@media all and (-ms-high-contrast:none) and (min-width:767px){div div .flex-grid>.large-span-1,div .flex-grid.large-span-all-1>*,div div .flex>.large-span-1,div .flex.large-span-all-1>*,div div .grid>.large-span-1,div .grid.large-span-all-1>*{width:calc(8.3333333333% - 30px);-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}
 div div .flex-grid>.large-span-2,div .flex-grid.large-span-all-2>*,div div .flex>.large-span-2,div .flex.large-span-all-2>*,div div .grid>.large-span-2,div .grid.large-span-all-2>*{width:calc(16.6666666667% - 30px);-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}
 div div .flex-grid>.large-span-3,div .flex-grid.large-span-all-3>*,div div .flex>.large-span-3,div .flex.large-span-all-3>*,div div .grid>.large-span-3,div .grid.large-span-all-3>*{width:calc(25% - 30px);-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}
@@ -396,6 +372,30 @@ div div .flex-grid>.large-span-12,div .flex-grid.large-span-all-12>*,div div .fl
 }@media(min-width:1001px){h1,.h1{font-size:60px}
 .card a.term-link{font-size:14px}
 .card time,.card time a{font-size:14px}
+}@media(min-width:1030px){div div .flex-grid>.large-span-1,div .flex-grid.large-span-all-1>*,div div .flex>.large-span-1,div .flex.large-span-all-1>*{-ms-flex-preferred-size:calc(8.3333333333% - 30px);flex-basis:calc(8.3333333333% - 30px)}
+div div .flex-grid>.large-span-1,div div .flex>.large-span-1{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-2,div .flex-grid.large-span-all-2>*,div div .flex>.large-span-2,div .flex.large-span-all-2>*{-ms-flex-preferred-size:calc(16.6666666667% - 30px);flex-basis:calc(16.6666666667% - 30px)}
+div div .flex-grid>.large-span-2,div div .flex>.large-span-2{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-3,div .flex-grid.large-span-all-3>*,div div .flex>.large-span-3,div .flex.large-span-all-3>*{-ms-flex-preferred-size:calc(25% - 30px);flex-basis:calc(25% - 30px)}
+div div .flex-grid>.large-span-3,div div .flex>.large-span-3{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-4,div .flex-grid.large-span-all-4>*,div div .flex>.large-span-4,div .flex.large-span-all-4>*{-ms-flex-preferred-size:calc(33.3333333333% - 30px);flex-basis:calc(33.3333333333% - 30px)}
+div div .flex-grid>.large-span-4,div div .flex>.large-span-4{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-5,div .flex-grid.large-span-all-5>*,div div .flex>.large-span-5,div .flex.large-span-all-5>*{-ms-flex-preferred-size:calc(41.6666666667% - 30px);flex-basis:calc(41.6666666667% - 30px)}
+div div .flex-grid>.large-span-5,div div .flex>.large-span-5{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-6,div .flex-grid.large-span-all-6>*,div div .flex>.large-span-6,div .flex.large-span-all-6>*{-ms-flex-preferred-size:calc(50% - 30px);flex-basis:calc(50% - 30px)}
+div div .flex-grid>.large-span-6,div div .flex>.large-span-6{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-7,div .flex-grid.large-span-all-7>*,div div .flex>.large-span-7,div .flex.large-span-all-7>*{-ms-flex-preferred-size:calc(58.3333333333% - 30px);flex-basis:calc(58.3333333333% - 30px)}
+div div .flex-grid>.large-span-7,div div .flex>.large-span-7{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-8,div .flex-grid.large-span-all-8>*,div div .flex>.large-span-8,div .flex.large-span-all-8>*{-ms-flex-preferred-size:calc(66.6666666667% - 30px);flex-basis:calc(66.6666666667% - 30px)}
+div div .flex-grid>.large-span-8,div div .flex>.large-span-8{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-9,div .flex-grid.large-span-all-9>*,div div .flex>.large-span-9,div .flex.large-span-all-9>*{-ms-flex-preferred-size:calc(75% - 30px);flex-basis:calc(75% - 30px)}
+div div .flex-grid>.large-span-9,div div .flex>.large-span-9{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-10,div .flex-grid.large-span-all-10>*,div div .flex>.large-span-10,div .flex.large-span-all-10>*{-ms-flex-preferred-size:calc(83.3333333333% - 30px);flex-basis:calc(83.3333333333% - 30px)}
+div div .flex-grid>.large-span-10,div div .flex>.large-span-10{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-11,div .flex-grid.large-span-all-11>*,div div .flex>.large-span-11,div .flex.large-span-all-11>*{-ms-flex-preferred-size:calc(91.6666666667% - 30px);flex-basis:calc(91.6666666667% - 30px)}
+div div .flex-grid>.large-span-11,div div .flex>.large-span-11{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
+div div .flex-grid>.large-span-12,div .flex-grid.large-span-all-12>*,div div .flex>.large-span-12,div .flex.large-span-all-12>*{-ms-flex-preferred-size:calc(100% - 30px);flex-basis:calc(100% - 30px)}
+div div .flex-grid>.large-span-12,div div .flex>.large-span-12{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
 }@media(max-width:1230px){#panel-left:not(:empty) ~ .site .site-top .container{padding-left:52px}
 }@media(max-width:1030px){div div .grid>.large-span-1,div .grid.large-span-all-1>*{grid-column:span 1}
 div div .grid>.large-span-2,div .grid.large-span-all-2>*{grid-column:span 2}

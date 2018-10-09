@@ -206,7 +206,10 @@ div .edit-post-visual-editor .flex>.span-12,div .edit-post-visual-editor .flex-g
 }@media(min-width:400px) and (max-width:1000px){.edit-post-visual-editor h1,.edit-post-visual-editor .h1{font-size:calc(30px + 30 * (100vw - 400px) / (1000 - 400))}
 .card a.term-link{font-size:calc(12px + 2 * (100vw - 400px) / (1000 - 400))}
 .card time,.card time a{font-size:calc(12px + 2 * (100vw - 400px) / (1000 - 400))}
-}@media(min-width:767px){div .edit-post-visual-editor div .flex-grid>.large-span-1,.edit-post-visual-editor div .flex-grid.large-span-all-1>*,div .edit-post-visual-editor div .flex>.large-span-1,.edit-post-visual-editor div .flex.large-span-all-1>*{-ms-flex-preferred-size:calc(8.3333333333% - 30px);flex-basis:calc(8.3333333333% - 30px)}
+}@media(min-width:1001px){.edit-post-visual-editor h1,.edit-post-visual-editor .h1{font-size:60px}
+.card a.term-link{font-size:14px}
+.card time,.card time a{font-size:14px}
+}@media(min-width:1030px){div .edit-post-visual-editor div .flex-grid>.large-span-1,.edit-post-visual-editor div .flex-grid.large-span-all-1>*,div .edit-post-visual-editor div .flex>.large-span-1,.edit-post-visual-editor div .flex.large-span-all-1>*{-ms-flex-preferred-size:calc(8.3333333333% - 30px);flex-basis:calc(8.3333333333% - 30px)}
 div .edit-post-visual-editor div .flex-grid>.large-span-1,div .edit-post-visual-editor div .flex>.large-span-1{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
 div .edit-post-visual-editor div .flex-grid>.large-span-2,.edit-post-visual-editor div .flex-grid.large-span-all-2>*,div .edit-post-visual-editor div .flex>.large-span-2,.edit-post-visual-editor div .flex.large-span-all-2>*{-ms-flex-preferred-size:calc(16.6666666667% - 30px);flex-basis:calc(16.6666666667% - 30px)}
 div .edit-post-visual-editor div .flex-grid>.large-span-2,div .edit-post-visual-editor div .flex>.large-span-2{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
@@ -230,9 +233,6 @@ div .edit-post-visual-editor div .flex-grid>.large-span-11,.edit-post-visual-edi
 div .edit-post-visual-editor div .flex-grid>.large-span-11,div .edit-post-visual-editor div .flex>.large-span-11{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
 div .edit-post-visual-editor div .flex-grid>.large-span-12,.edit-post-visual-editor div .flex-grid.large-span-all-12>*,div .edit-post-visual-editor div .flex>.large-span-12,.edit-post-visual-editor div .flex.large-span-all-12>*{-ms-flex-preferred-size:calc(100% - 30px);flex-basis:calc(100% - 30px)}
 div .edit-post-visual-editor div .flex-grid>.large-span-12,div .edit-post-visual-editor div .flex>.large-span-12{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0}
-}@media(min-width:1001px){.edit-post-visual-editor h1,.edit-post-visual-editor .h1{font-size:60px}
-.card a.term-link{font-size:14px}
-.card time,.card time a{font-size:14px}
 }@media(max-width:1030px){div .edit-post-visual-editor div .grid>.large-span-1,.edit-post-visual-editor div .grid.large-span-all-1>*{grid-column:span 1}
 div .edit-post-visual-editor div .grid>.large-span-2,.edit-post-visual-editor div .grid.large-span-all-2>*{grid-column:span 2}
 div .edit-post-visual-editor div .grid>.large-span-3,.edit-post-visual-editor div .grid.large-span-all-3>*{grid-column:span 3}
