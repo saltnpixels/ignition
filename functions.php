@@ -13,6 +13,7 @@
  */
 if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
+
 	return;
 }
 
@@ -55,7 +56,7 @@ function ignition_setup() {
 
 	//default image size for cards
 	set_post_thumbnail_size( 300, 300, true );
-	add_image_size('header_image', '2000', '600');
+	add_image_size( 'header_image', '2000', '600' );
 
 	//menus
 	register_nav_menus( array(
@@ -116,6 +117,7 @@ function ign_gutenberg_styles() {
 	// Load the theme styles within Gutenberg.
 	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
 }
+
 add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
 
 
@@ -325,10 +327,10 @@ function ignition_scripts() {
 	) );
 
 	//scrolling animation
-	wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/TweenMax.min.js');
-	wp_enqueue_script('scrollMagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js', array('jquery'));
-	wp_enqueue_script('scrollMagic-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js', array('jquery'));
-	wp_enqueue_script('scrollmagic-indicators', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js');
+	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/TweenMax.min.js' );
+	wp_enqueue_script( 'scrollMagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'scrollMagic-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'scrollmagic-indicators', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -339,9 +341,6 @@ function ignition_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'ignition_scripts' );
-
-
-
 
 
 /**
@@ -369,3 +368,23 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
  */
 require get_parent_theme_file_path( '/inc/extras.php' );
 
+
+/*
+ * Add any post type functions and hooks
+ */
+function ign_post_type_functions() {
+	$ign_post_types   = get_post_types( array( '_builtin' => false ) );
+	$ign_post_types[] = 'post';
+	$ign_post_types[] = 'page';
+
+
+	//var_dump( $ign_post_types );
+	foreach ( $ign_post_types as $type ) {
+		$type = sanitize_key( $type );
+		if ( file_exists( locate_template( 'template-parts/' . $type . '/functions.php' ) ) ) {
+			include( locate_template( 'template-parts/' . $type . '/functions.php' ) );
+		}
+	}
+}
+
+add_action( 'init', 'ign_post_type_functions', 15 );
