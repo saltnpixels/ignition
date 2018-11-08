@@ -27,6 +27,8 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
 
 .gform_footer {
   margin-bottom: $gap;
+  margin-top: $gap;
+  text-align: center;
 }
 
 /*--------------------------------------------------------------
@@ -48,9 +50,13 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
 }
 
 //Every gfield has margin bottom and gutters on both sides
-.gfield {
-  margin-bottom: $gap;
+.gform_wrapper .gfield {
   grid-column: span 12;
+  padding: 0;
+}
+
+.gform_wrapper .gform_fields{
+  padding-left: 0;
 }
 
 //fields with more than one input
