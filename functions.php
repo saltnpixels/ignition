@@ -370,7 +370,7 @@ require get_parent_theme_file_path( '/inc/extras.php' );
 
 
 /*
- * Add any post type functions and hooks
+ * Require any functions.php for each post type
  */
 function ign_post_type_functions() {
 	$ign_post_types   = get_post_types( array( '_builtin' => false ) );

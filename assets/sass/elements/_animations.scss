@@ -58,3 +58,5 @@
 .js .animateIn {
   opacity: 0; //start at nothing
 }
+
+//if tweening from off the screen use .js and as class for the starting position. js will make sure javascript is present
