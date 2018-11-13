@@ -42,7 +42,7 @@ body .navigation-menu-icon {
       color: white;
     }
 
-    //top level items
+    //top level items: current and hovered
     .top-level-item {
       &.current-menu-item .menu-item-link, .menu-item-link:hover {
         background: transparent;
@@ -52,7 +52,7 @@ body .navigation-menu-icon {
       & > .sub-menu {
         background: #FEBC4A;
 
-        //inside sub menu
+        //inside sub menu: current and hovered
         .menu-item-link:hover, .current-menu-item .menu-item-link {
           background: rgba(0, 0, 0, .5);
           color: white;
@@ -65,7 +65,7 @@ body .navigation-menu-icon {
 
 
 /*--------------------------------------------------------------
-# Menu Styling
+# Menu Styling: Mobile and Vertical menus
 --------------------------------------------------------------*/
 .menu li{
   color: black;

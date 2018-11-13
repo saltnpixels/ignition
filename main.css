@@ -934,7 +934,7 @@ body .navigation-menu-icon:after, body .navigation-menu-icon:before { background
   .site-top .menu .top-level-item > .sub-menu .menu-item-link:hover, .site-top .menu .top-level-item > .sub-menu .current-menu-item .menu-item-link { background: rgba(0, 0, 0, 0.5); color: white; } }
 
 /*--------------------------------------------------------------
-# Menu Styling
+# Menu Styling: Mobile and Vertical menus
 --------------------------------------------------------------*/
 .menu li { color: black; }
 

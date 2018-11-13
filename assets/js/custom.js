@@ -55,7 +55,7 @@ jQuery(function ($) {
       }
 
       if ($this.data('scrolltrigger') != null) {
-        $triggerElem = $this.data('scrolltrigger');
+        $triggerElem = $($this.data('scrolltrigger'));
       } //make triggerElement a dom node
 
 
