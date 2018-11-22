@@ -2,7 +2,7 @@ body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:cent
 body #login{padding:0}
 #login h1 a,.login h1 a{display:none;padding-bottom:30px}
 body .custom-logo-link{margin:0 auto 30px;display:block;text-align:center}
-.custom-logo-link svg{max-width:100%}
+.custom-logo-link svg{max-width:100%;height:auto}
 .custom-logo-link img{max-width:100%;height:auto}
 .site-title{font-size:2rem;text-align:center;text-transform:capitalize}
 .site-title a{text-decoration:none}

@@ -448,17 +448,18 @@ function throttle(fn, threshhold, scope) {
     }
   };
 } //create menu and sidebar button sizing
-//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open.
-//this makes sure the buttons are centered on top of site-top
+//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under panels.
+//this makes sure the buttons are centered, but still  on top of site-top
 
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   var $siteTopHeight = document.querySelector('.site-top').clientHeight;
-  var menuButtons = ''; //if the menu button is outside site-top. get both buttons
+  var menuButtons = ''; //if the menu button is outside site-top. get both buttons for centering both.
 
   if (!document.querySelector('.app-menu')) {
     menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
   } else {
+    //otherwise the menu button does not need to be centered because its part of the app menu and moves.
     menuButtons = document.querySelectorAll('.panel-right-toggle');
     document.querySelector('.panel-left-toggle').classList.remove('hidden');
   }
