@@ -12,7 +12,7 @@
  */
 var scrollMagicController = '';
 jQuery(function ($) {
-  if (typeof ScrollMagic != "undefined") {
+  if ('undefined' != typeof ScrollMagic) {
     //fixed at top items can ruin layout.
     //surround with a div thats same height and is part of layout
     var fixedItems = $('[data-scrollanimation="fixed-at-top"]');
@@ -26,23 +26,23 @@ jQuery(function ($) {
           $triggerElem = $this;
       var $offset = $this.data('scrolloffset');
 
-      if ($offset == null) {
+      if (null == $offset) {
         $offset = 0;
       }
 
       var $triggerHook = $this.data('scrollhook');
 
-      if ($triggerHook == null) {
+      if (null == $triggerHook) {
         $triggerHook = 'onEnter';
       }
 
-      if ($class.indexOf('fixed-at-top') !== -1) {
+      if (-1 !== $class.indexOf('fixed-at-top')) {
         $triggerHook = 'onLeave';
         $triggerElem = $this.parent();
       } //scrolling animations will go haywire if the item moves vertically. the scroll will change where it starts and ends continuously!
 
 
-      if ($class.indexOf('Up') !== -1 || $class.indexOf('Down') !== -1) {
+      if (-1 !== $class.indexOf('Up') || -1 !== $class.indexOf('Down')) {
         //get parent element and make that the trigger, but use an offset from that
         $triggerElem = $this.parent();
         $offset = $this.offset().top - $triggerElem.offset().top + $offset;
@@ -50,11 +50,11 @@ jQuery(function ($) {
 
       var $duration = $this.data('scrollduration');
 
-      if ($duration == null) {
+      if (null == $duration) {
         $duration = 0;
       }
 
-      if ($this.data('scrolltrigger') != null) {
+      if (null != $this.data('scrolltrigger')) {
         $triggerElem = $($this.data('scrolltrigger'));
       } //make triggerElement a dom node
 
@@ -64,7 +64,7 @@ jQuery(function ($) {
       var $tween = $this.data('scrollscrub');
       var scene = '';
 
-      if ($tween != null) {
+      if (null != $tween) {
         if (!$duration) {
           $duration = 100;
         }
@@ -155,6 +155,7 @@ jQuery(function ($) {
 
         if (!sourceElem) {
           item.parentElement.setAttribute('id', 'move-' + movedId);
+          movedId++;
           sourceElem = item.parentElement.id;
         }
 

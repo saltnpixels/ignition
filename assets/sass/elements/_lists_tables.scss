@@ -30,7 +30,8 @@ dd {
 	margin: 0 1.5em 1.5em;
 }
 
-.entry-content ul, .entry-content ol{
+//Gutenberg fix
+.entry-content > ul, .entry-content > ol{
 	padding-left: $gap;
 
 	li{

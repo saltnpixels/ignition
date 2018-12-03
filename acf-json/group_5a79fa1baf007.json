@@ -23,6 +23,22 @@
                     "display": "row",
                     "sub_fields": [
                         {
+                            "key": "field_5c05783aecbb9",
+                            "label": "Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a7c85435c1f7",
                             "label": "Heading",
                             "name": "heading",
@@ -36,26 +52,7 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_5a79fc979ce41",
-                            "label": "Header Class",
-                            "name": "class",
-                            "type": "text",
-                            "instructions": "classes can change the look and feel of the header.",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "(optional)",
+                            "placeholder": "defaults to the title if left empty",
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
@@ -77,7 +74,7 @@
                             "min": 0,
                             "max": 0,
                             "layout": "row",
-                            "button_label": "",
+                            "button_label": "Add Item",
                             "sub_fields": [
                                 {
                                     "key": "field_5afb26e688a8c",
@@ -118,6 +115,41 @@
                                     "delay": 0
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5c05785aecbba",
+                            "label": "Advanced",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5a79fc979ce41",
+                            "label": "Header Class",
+                            "name": "class",
+                            "type": "text",
+                            "instructions": "classes can change the look and feel of the header.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "(optional)",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
                         }
                     ],
                     "min": "",
@@ -149,25 +181,6 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_5b0d76bcc905b",
-                            "label": "Header Class",
-                            "name": "class",
-                            "type": "text",
-                            "instructions": "Add title to be used in header. Leave blank to use title of page.",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "100",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "(optional)",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
                             "key": "field_5a79fded9ce48",
                             "label": "header text",
                             "name": "header_text",
@@ -185,6 +198,25 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5b0d76bcc905b",
+                            "label": "Header Class",
+                            "name": "class",
+                            "type": "text",
+                            "instructions": "Add title to be used in header. Leave blank to use title of page.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "(optional)",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
                         }
                     ],
                     "min": "",
@@ -215,5 +247,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1532098088
+    "modified": 1543863679
 }

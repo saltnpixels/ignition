@@ -35,15 +35,15 @@ h6 {
 	margin: 0 0 .2em 0;
 }
 
-p {
-	margin: 0 0 1em 0;
+//clients expect a carriage return not to add margins in editor.
+p{
+	margin: 0;
 }
 
-p:last-child {
-	margin-bottom: 0;
-}
 
-.entry-content p{
+
+//only way to target Gutenberg paragraphs for now.
+.entry-content > p{
 	margin-bottom: 1em;
 
 	&:last-child{

@@ -94,10 +94,9 @@ div .edit-post-visual-editor .flex>.span-12,div .edit-post-visual-editor .flex-g
 .edit-post-visual-editor body,.edit-post-visual-editor button,.edit-post-visual-editor input,.edit-post-visual-editor select,.edit-post-visual-editor textarea{font-size:16px;font-size:1rem;line-height:1.5;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;color:#191919;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}
 .edit-post-visual-editor article{font-size:18px;font-size:1.125rem}
 .edit-post-visual-editor h1,.edit-post-visual-editor h2,.edit-post-visual-editor h3,.edit-post-visual-editor h4,.edit-post-visual-editor h5,.edit-post-visual-editor h6{clear:both;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;margin:0 0 .2em 0}
-.edit-post-visual-editor p{margin:0 0 1em 0}
-.edit-post-visual-editor p:last-child{margin-bottom:0}
-.edit-post-visual-editor .entry-content p{margin-bottom:1em}
-.edit-post-visual-editor .entry-content p:last-child{margin-bottom:0}
+.edit-post-visual-editor p{margin:0}
+.edit-post-visual-editor .entry-content>p{margin-bottom:1em}
+.edit-post-visual-editor .entry-content>p:last-child{margin-bottom:0}
 .edit-post-visual-editor *:focus{outline:0}
 .edit-post-visual-editor .text-center{text-align:center}
 .edit-post-visual-editor .text-right{text-align:right}
