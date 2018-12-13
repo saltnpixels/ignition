@@ -35,17 +35,14 @@ h6 {
 	margin: 0 0 .2em 0;
 }
 
-//clients expect a carriage return not to add margins in editor.
-p{
-	margin: 0;
-}
 
+p{
+	 margin-bottom: 1em;
+}
 
 
 //only way to target Gutenberg paragraphs for now.
 .entry-content > p{
-	margin-bottom: 1em;
-
 	&:last-child{
 		margin-bottom: 0;
 	}
@@ -69,6 +66,10 @@ p{
 	text-align: left;
 }
 
+.text-justify{
+	text-align: justify;
+}
+
 //only center the heading inside this section or div
 .heading-center {
 	h1, h2, h3, h4, h5, h6 {
@@ -80,7 +81,6 @@ p{
 /*--------------------------------------------------------------
 # Content Headings
 --------------------------------------------------------------*/
-
 h1, .h1 {
 	@include scss-font-lock(30px, 60px); //goes between 30 and 60px as window changes size.
 	line-height: 1.3;
@@ -127,7 +127,7 @@ a {
 }
 
 /*--------------------------------------------------------------
-# quotes and code
+# quotes
 --------------------------------------------------------------*/
 dfn,
 cite,
@@ -188,6 +188,10 @@ q {
 	quotes: "“" "”" "‘" "’";
 }
 
+
+/*--------------------------------------------------------------
+# Code
+--------------------------------------------------------------*/
 pre {
 	background: #f7f9fa;
 	border: 1px solid #e6e8eb;

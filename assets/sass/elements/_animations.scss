@@ -1,26 +1,44 @@
 /*--------------------------------------------------------------
 # Animation Setup
 --------------------------------------------------------------*/
-//set element up for animations
+//set element up for animations. Defaults
 [data-scrollanimation], .animated, [data-toggle] {
   animation-fill-mode: both;
   animation-duration: 1s;
   transform: translate(0);
 }
 
-
+/*------- infinite animation --------*/
 .infinite{
   animation-iteration-count: infinite;
 }
 
+/*------- Special class for fixing at top. Useful with scrollanimation --------*/
 .fixed-at-top {
   position: fixed;
   width: 100%;
   top: 0;
 }
 
-//for toggling a class on and off, an animation is best as it can contain a start and end.
+
 //for scrub/tweening you will need a start and end class. make sure the item has the start class already.
+/*--------------------------------------------------------------
+# Scrub animations.
+# Expect to go from a start class of transitions to an end class.
+# make sure to include data-scrollscrub, as well as a starting class to tween from
+--------------------------------------------------------------*/
+.site-container [data-scrollscrub]{
+  transition: none;
+}
+
+//if you plan on tweening from an opacity of 0, add this class too.
+.js .animateIn {
+  opacity: 0; //start at nothing
+}
+
+
+//some animations included
+//Example: use data-scrollanimation="fadeInUp"
 /*--------------------------------------------------------------
 # Animations
 --------------------------------------------------------------*/
@@ -47,16 +65,4 @@
 
 
 
-/*--------------------------------------------------------------
-# Scrub animations. Expect to go from a start class of transitions to an end class. make sure to include data-scrollscrub, as well as a starting class to tween from
---------------------------------------------------------------*/
-.site-container [data-scrollscrub]{
-   transition: none;
-}
 
-//if you plan on tweening from an opacity of 0, add this class too.
-.js .animateIn {
-  opacity: 0; //start at nothing
-}
-
-//if tweening from off the screen use .js and as class for the starting position. js will make sure javascript is present
