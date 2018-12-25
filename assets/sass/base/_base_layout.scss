@@ -173,7 +173,10 @@ img {
   margin-bottom: $gap;
 }
 
-
+//hide moveto events until they are in position, easily overridable
+.events-loading [data-moveto]{
+  display: none;
+}
 
 
   

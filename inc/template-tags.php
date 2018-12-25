@@ -17,7 +17,7 @@ function ign_posted_by() {
 	$author_name        = sprintf( __( '%s by %s', 'ignition' ), '<a href="' . $author_link . '" class="author-name"><span class="byline">', '</span>' . get_the_author() . '</a>' );
 	$author_description = '<div class="author-description">' . get_the_author_meta( 'description' ) . '</div>';
 
-	return '<div class="posted-by">' . $author_image . '<div class="author-info">' . $author_name . $author_description . '</div></div>';
+	echo '<div class="posted-by">' . $author_image . '<div class="author-info">' . $author_name . $author_description . '</div></div>';
 
 }
 

@@ -22,16 +22,6 @@ body {
   background: linear-gradient(90deg, #FF5115 0%, #FFA72C 100%);
 }
 
-/*------- Nav Menu Button/Panel left button --------*/
-body .navigation-menu-icon {
-  border-color: white;
-  color: white;
-
-  &:after, &:before {
-    background: white;
-  }
-}
-
 
 /*--------------------------------------------------------------
 # Desktop Menu Styling
@@ -68,7 +58,7 @@ body .navigation-menu-icon {
 # Menu Styling: Mobile and Vertical menus
 --------------------------------------------------------------*/
 .menu li{
-  color: black;
+  color: white;
 }
 
 #panel-left .menu .current-menu-item > .menu-item-link {

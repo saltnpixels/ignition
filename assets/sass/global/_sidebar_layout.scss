@@ -1,100 +1,4 @@
 /*--------------------------------------------------------------
-# Panel Right button
---------------------------------------------------------------*/
-.panel-right-toggle {
-  z-index: $z-index-top;
-  position: absolute;
-  right: 0;
-  top: 0;
-  line-height: 0;
-  border: none;
-  padding: 0 15px;
-  cursor: pointer;
-  outline: none;
-  font-size: 22px;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-/*------- default if no icon is found with svg --------*/
-.sidebar-icon {
-  border: 2px solid white;
-  border-radius: 1px;
-  position: relative;
-  height: 1.3rem; //may have to play to get it matching font size
-  width: 22px;
-  display: block;
-
-  &:after {
-    content: '';
-    width: 30%;
-    background: white;
-    height: 100%;
-    position: absolute;
-    right: 0;
-  }
-}
-
-//hide button if sidebar empty. button must be after sidebar
-#panel-right:empty ~ .panel-right-toggle {
-  display: none;
-}
-
-
-//add room for panel-right button if the menu is up against edge of screen
-@media (max-width: $container + $gap){
-  #panel-right:not(:empty) ~ .site .site-top .container {
-    padding-right: 52px;
-  }
-}
-
-//if site nav is full width, add room for sidebar button always
-#panel-right:not(:empty) ~ .site .site-top .container-fluid {
-  padding-right: 52px;
-}
-
-//open panel 
-#panel-right.open:not(:empty) {
-  flex-basis: $panel-right-width;
-  flex-shrink: 0;
-}
-
-//if right panel starts open, leave open until mobile, and hide button till mobile
-@media(min-width: $panel-right-absolute){
-  #panel-right.stay-open{
-    flex-basis: $panel-right-width;
-    flex-shrink: 0;
-    transform: translate(0,0);
-
-    & ~ .panel-right-toggle{
-      display: none;
-    }
-  }
-}
-
-
-/*--------------------------------------------------------------
-# Panel Breakpoint to become absolute. no longer a flexed item
---------------------------------------------------------------*/
-@media(max-width: $panel-right-absolute) {
-  #panel-right {
-    position: absolute;
-    height: 100%;
-    right: 0;
-    top: 0;
-    padding-top: 50px;
-    z-index: 90;
-    width: 0;
-
-    &.open {
-      width: $panel-right-width;
-    }
-  }
-}
-
-/*--------------------------------------------------------------
 # When sidebar is in panel right
 --------------------------------------------------------------*/
 #panel-right {
@@ -105,14 +9,17 @@
     overflow-x: hidden;
     min-width: $panel-right-width;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    @extend .hide-scroll;
   }
-  @extend .hide-scroll;
+
 }
 
 
 /*--------------------------------------------------------------
-# Inline Sidebar
+# Inline Sidebar #secondary
 --------------------------------------------------------------*/
+
 //hide secondary if empty
 #secondary:empty {
   display: none;
@@ -122,7 +29,7 @@
   max-width: $panel-right-width;
 }
 
-/*------- Sidebar on left ordering --------*/
+/*------- Sidebar on left/right ordering --------*/
 .sidebar-left #secondary {
   order: 0;
 }
@@ -131,32 +38,9 @@
   order: 1;
 }
 
+//sidebar-template items are flexed. Remove the gutters for #primary and #secondary.
 .sidebar-right, .sidebar-left{
   @extend .no-gutters;
-}
-
-.sidebar-template{
-  padding: 0;
-}
-
-//the header gets pulled out and put above. BUT until js loads its inside with the content and it will look strange.
-//so we load it
-//loads full inside container. gets pulled out with javascript very fast but not fast enough to see strange layout. fix with this
-.sidebar-template .entry-header {
-  margin-left: - #{$gutters};
-  margin-right: - #{$gutters};
-}
-
-.no-js .sidebar-template{
-  max-width: 100%;
-}
-
-//when js pulls out header it also adds class active. until that class is added we dont show sidebar
-.js .sidebar-template:not(.active) {
-  #secondary {
-    display: none;
-  }
-  max-width: 100%;
 }
 
 .sidebar-holder {
@@ -164,9 +48,40 @@
 }
 
 
+#secondary .sidebar-holder{
+  height: 100%;
+  display: block;
+}
+
+.sidebar-template.container, .sidebar-template.container-fluid{
+  .container-content{
+    padding: 0;
+  }
+}
 
 /*--------------------------------------------------------------
-# Widgets
+# Pulling out the header with .header-above
+--------------------------------------------------------------*/
+//by adding class .header-above to .sidebar-template, you can pull the header out of the article and put it above everything, even the sidebar.
+//This is done with javascript. a class active is added when it has finished moving
+
+//when js pulls out header it also adds class active. until that class is added we dont show sidebar, otherwise it jumps strangely
+.js .sidebar-template.header-above:not(.active) {
+  #secondary {
+    display: none;
+  }
+}
+
+//show the header full width even inside container for a split second before it moves out. looks smooth
+.js .sidebar-template.header-above.container:not(.active), .js .sidebar-template.header-above.container-fluid:not(.active){
+  max-width: 100%;
+  padding: 0;
+}
+
+
+
+/*--------------------------------------------------------------
+# Widgets Layout
 --------------------------------------------------------------*/
 .widget {
 
