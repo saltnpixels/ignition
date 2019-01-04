@@ -152,7 +152,7 @@ div .grid {
     }
 
     @for $i from 1 through 12 {
-      div & > .small-span-#{$i}, &.small-span-all-#{$i} > * {
+      div & > .small-span-#{$i}, div &.small-span-all-#{$i} > * {
         grid-column: span #{$i};
       }
     }

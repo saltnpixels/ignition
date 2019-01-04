@@ -21,7 +21,7 @@
 --------------------------------------------------------------*/
 
 //hide secondary if empty
-#secondary:empty {
+#secondary:empty, .sidebar-holder:empty {
   display: none;
 }
 
@@ -32,16 +32,16 @@
 /*------- Sidebar on left/right ordering --------*/
 .sidebar-left #secondary {
   order: 0;
+
+  .sidebar-holder{
+    float: right;
+  }
 }
 
 .sidebar-left #primary {
   order: 1;
 }
 
-//sidebar-template items are flexed. Remove the gutters for #primary and #secondary.
-.sidebar-right, .sidebar-left{
-  @extend .no-gutters;
-}
 
 .sidebar-holder {
   position: relative;
@@ -53,11 +53,24 @@
   display: block;
 }
 
-.sidebar-template.container, .sidebar-template.container-fluid{
+//fixing some padding issues between the inner container and the outter one
+.sidebar-template{
+  padding: 0 $gap; //in case theire is no .container on sidebar-template, there must be container-fluid or at least some padding.
+
+  .flex{
+    margin: 0 -#{$gutters}; //even if .container is missing flex must be negative margined
+  }
+  
   .container-content{
     padding: 0;
   }
+
+  .entry-header, .page-header{
+    margin: 0 -30px;
+  }
 }
+
+
 
 /*--------------------------------------------------------------
 # Pulling out the header with .header-above

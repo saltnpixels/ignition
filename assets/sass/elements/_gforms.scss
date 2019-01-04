@@ -62,6 +62,10 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
 //fields with more than one input
 .ginput_complex{
   @include card-grid(175px, 1fr, 15px);
+
+  label{
+    @include font-size(14);
+  }
 }
 
 /*--------------------------------------------------------------
@@ -135,6 +139,19 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
 .gfield_list_cell {
   vertical-align: baseline;
 }
+
+/*--------------------------------------------------------------
+# Privacy Policy
+--------------------------------------------------------------*/
+.ginput_container_consent{
+  display: flex;
+  align-items: center;
+  label{
+    @include font-size(1);
+    font-weight: normal;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Products and totals
@@ -258,6 +275,19 @@ $position-x: 0;
 /*--------------------------------------------------------------
 # Date Picker jquery ui crap!
 --------------------------------------------------------------*/
+.ginput_container_date{
+  display: flex;
+  align-items: center;
+  input{
+    max-width: 80%;
+    order: 0;
+  }
+
+  img{
+    margin-left: 15px;
+  }
+}
+
 
 /* DatePicker Container */
 .ui-datepicker {

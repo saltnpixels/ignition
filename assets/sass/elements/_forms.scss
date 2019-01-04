@@ -86,7 +86,7 @@ button{
   color: $color-highlight;
   background: transparent;
 
-  &:hover {
+  &:hover, &:focus {
     background: $color-highlight;
     color: white;
   }
