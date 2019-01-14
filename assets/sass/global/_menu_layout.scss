@@ -26,7 +26,7 @@
       .menu-item-link{
         padding: 5px $gutters;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         transition: all .5s;
 
         a{
@@ -50,6 +50,7 @@
         display: inline-block;
         color: inherit;
         flex-basis: 35px;
+        text-align: right;
       }
 
     }
@@ -127,13 +128,15 @@
 
       }
 
+      .sub-menu .menu-item-link{
+        padding: $gutters;
+      }
+
       //top level sub-menus opened
-      .top-level-item.focus, .top-level-item.toggled-on {
-        > .sub-menu {
+      .top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu {
           opacity: 1;
           visibility: visible;
           transition-delay: 0s;
-        }
       }
 
       //lower sub-menus
@@ -144,7 +147,7 @@
         transition: none;
 
         a{
-          padding-left: 1.5em;
+          padding-left: 10px;
         }
       }
 
@@ -375,7 +378,7 @@
 
       .menu-item-link{
         a{
-          max-width: 35vw;
+          max-width: 40vw;
         }
       }
     }

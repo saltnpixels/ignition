@@ -63,7 +63,7 @@ function ign_menu($item, $args){
     $classes = $args->classes;
   
     if(in_array('menu-item-has-children', (array) $classes)){
-        $item .= '<button data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg(array("icon"=>"angle-right")).'
+        $item .= '<button tabindex="-1" data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg(array("icon"=>"angle-right")).'
                     <span class="screen-reader-text">' . __( 'Expand child menu', 'ignition' ) . '</span></button>';
     }
     return '<div class="menu-item-link">' . $item . '</div>';

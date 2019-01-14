@@ -203,7 +203,7 @@ jQuery(function ($) {
 "use strict";
 
 //This file takes care of menus and navigation at the top
-var iconAngleRight = "<span class='arrow'></span>"; //if using wordpress, icons may have already been localized. use those. otherwise add it
+var iconAngleRight = '<span class=\'arrow\'></span>'; //if using wordpress, icons may have already been localized. use those. otherwise add it
 
 if (typeof icons !== 'undefined' && typeof icons.angleRight !== 'undefined') {
   iconAngleRight = icons.angleRight;
@@ -236,7 +236,7 @@ jQuery(function ($) {
     })); //ADDING THE BUTTON TO PAGE SUBMENU ITEMS
     //I CANT FIND A PAGE WALKER HOOK TO DO IT
 
-    menus.find('.page_item:not(.menu-item) a').wrap('<div class="menu-item-link"></div>');
+    menus.find('.page_item:not(.menu-item) a').wrap('<div class="menu-item-link" tabindex="0"></div>');
     menus.find('.page_item_has_children .menu-item-link a').after(dropdownToggle); // Set the active submenu to be toggled on on mobile or not horizontal menus
 
     var currentSubmenus = menus.find('.current-menu-item > .sub-menu, .current_page_item > .sub-menu, .current_page_ancestor > .sub-menu, .current-menu-ancestor > .sub-menu');
@@ -246,7 +246,7 @@ jQuery(function ($) {
         //add toggled on to the li and the button
         $(this).find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current-menu-parent button, .current_page_ancestor > button, .current_page_parent, .current-menu-item button').trigger('click');
       }
-    }); //special after toggle event
+    }); //special after toggle event for menu dropdowns
 
     var dropdownButtons = document.querySelectorAll('.submenu-dropdown-toggle');
     var _iteratorNormalCompletion = true;
@@ -269,7 +269,8 @@ jQuery(function ($) {
 
       for (var _iterator = dropdownButtons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         _loop();
-      }
+      } //allow for tabbing the anchors and setting focus on the menu item link. focus-within might be able to replace
+
     } catch (err) {
       _didIteratorError = true;
       _iteratorError = err;
@@ -281,6 +282,62 @@ jQuery(function ($) {
       } finally {
         if (_didIteratorError) {
           throw _iteratorError;
+        }
+      }
+    }
+
+    var menuItems = document.querySelectorAll('.menu-item-link a');
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      var _loop2 = function _loop2() {
+        var menuItemLink = _step2.value;
+        menuItemLink.addEventListener('focus', function (e) {
+          //if(e.code == '9' && menuItemLink)
+          console.log(document.activeElement);
+          menuItemLink.parentElement.classList.add('focus'); //add focus to menu-item-link for styling
+          //if this element has a dropdown near it, toggle it now
+
+          if (menuItemLink.nextElementSibling !== null) {
+            menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
+          }
+        });
+        menuItemLink.addEventListener('blur', function (e) {
+          menuItemLink.parentElement.classList.remove('focus');
+          var subMenu = menuItemLink.closest('.sub-menu'); //if it is inside a submenu
+
+          if (subMenu !== null) {
+            var subMenuParent = menuItemLink.closest('.sub-menu').closest('li.menu-item');
+            var parentMenu = menuItemLink.closest('li.menu-item'); //if it is the last element in the sub-menu and it has no children, close the sub-menu
+
+            if (parentMenu.nextElementSibling == null && menuItemLink.nextElementSibling == null) {
+              //close parent li
+              subMenuParent.querySelector('.submenu-dropdown-toggle').click(); //if parent li is the last of its sub-menu close that one
+
+              if (subMenuParent.nextElementSibling == null) {
+                subMenuParent.parentElement.closest('li.menu-item').querySelector('.submenu-dropdown-toggle').click();
+              }
+            }
+          }
+        });
+      };
+
+      for (var _iterator2 = menuItems[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        _loop2();
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
         }
       }
     }

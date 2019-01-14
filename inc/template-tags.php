@@ -113,15 +113,11 @@ if ( ! function_exists( 'ign_comment_link' ) ) :
 			}
 
 			if ( $comment_string ) {
-				$write_comments = '<a class="comment-link" href="' . get_comments_link() . '">' . ign_get_svg( array(
-						'icon' =>
-							'comments'
-					) ) . ' ' . $comments . '</a>';
+				$write_comments = '<a class="comment-link" href="' . get_comments_link() . '"><span class="screen-reader-text">Comments</span>' . ign_get_svg( array(
+						'icon' => 'comments' ) ) . ' ' . $comments . '</a>';
 			} else {
-				$write_comments = '<a class="comment-link" href="' . get_comments_link() . '">' . ign_get_svg( array(
-						'icon' =>
-							'comments'
-					) ) . ' ' . $num_comments . '</a>';
+				$write_comments = '<a class="comment-link" href="' . get_comments_link() . '"><span class="screen-reader-text">Comments</span>' . ign_get_svg( array(
+						'icon' => 'comments' ) ) . ' ' . $num_comments . '</a>';
 			}
 
 			return $write_comments;
@@ -183,7 +179,7 @@ function is_static_frontpage() {
 function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $use_thumbnail_as_fallback = false ) {
 
 	//if were trying to get the header image, and the user specified not to, then return none.
-	if( $size == 'header_image' && get_field('no_image', $id)){
+	if ( $size == 'header_image' && get_field( 'no_image', $id ) ) {
 		return '';
 	}
 
@@ -210,7 +206,7 @@ function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $
  *
  * @return string
  */
-function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_thumbnail_as_fallback = false ) {
+function ign_get_the_image_url( $id = '', $size = '', $acf_image = '', $use_thumbnail_as_fallback = false ) {
 
 	$image = '';
 
@@ -227,18 +223,16 @@ function ign_get_the_image_url( $id = '',  $size = '', $acf_image = '',  $use_th
 }
 
 
-
-function ign_get_the_header_image($id, $kind = 'url', $attr = ''){
-	if( get_field('no_image', $id) ){
+function ign_get_the_header_image( $id, $kind = 'url', $attr = '' ) {
+	if ( get_field( 'no_image', $id ) ) {
 		return '';
 	}
 
-	$image = get_field('header_image');
-	if($kind == 'url'){
-		return ign_get_the_image_url($id, 'header_image', $image, true);
-	}
-	else{
-		return ign_get_the_image($id, 'header_image', $image, $attr, true);
+	$image = get_field( 'header_image' );
+	if ( $kind == 'url' ) {
+		return ign_get_the_image_url( $id, 'header_image', $image, true );
+	} else {
+		return ign_get_the_image( $id, 'header_image', $image, $attr, true );
 	}
 }
 

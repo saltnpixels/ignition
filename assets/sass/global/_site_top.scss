@@ -34,7 +34,7 @@ body {
 
     //top level items: current and hovered
     .top-level-item {
-      &.current-menu-item .menu-item-link, .menu-item-link:hover {
+      &.current-menu-item .menu-item-link, .menu-item-link:hover, .menu-item-link.focus {
         background: transparent;
         color: black;
       }
@@ -43,7 +43,7 @@ body {
         background: #FEBC4A;
 
         //inside sub menu: current and hovered
-        .menu-item-link:hover, .current-menu-item .menu-item-link {
+        .menu-item-link:hover, .current-menu-item .menu-item-link, .menu-item-link.focus {
           background: rgba(0, 0, 0, .5);
           color: white;
         }
@@ -61,7 +61,7 @@ body {
   color: white;
 }
 
-#panel-left .menu .current-menu-item > .menu-item-link {
+#panel-left .menu .current-menu-item > .menu-item-link, #panel-left .menu .menu-item-link.focus{
   background: rgba(0, 0, 0, .5);
   color: white;
 }
