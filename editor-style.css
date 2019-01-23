@@ -590,13 +590,13 @@ h4, .h4 { font-size: 17.6px; font-size: 1.1rem; }
 /*--------------------------------------------------------------
 # Basic Links
 --------------------------------------------------------------*/
-a { color: #ff4a6b; text-decoration: none; }
+a { color: #cc4465; text-decoration: none; }
 
 /*--------------------------------------------------------------
 # Selection Highlighting
 --------------------------------------------------------------*/
-::-moz-selection { background: #ffa5b5; }
-::selection { background: #ffa5b5; }
+::-moz-selection { background: #e6a2b2; }
+::selection { background: #e6a2b2; }
 
 /*--------------------------------------------------------------
 # WP Edit Post Link
@@ -643,7 +643,7 @@ fieldset { margin-bottom: 30px; }
 
 input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"], input[type="file"], textarea { border: 1px solid grey; background: transparent; color: grey; width: 100%; min-width: 0; -webkit-transition: all .5s; transition: all .5s; padding: 3px 5px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="range"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="time"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="color"]:focus, input[type="file"]:focus, textarea:focus { border: 1px solid #ff4a6b; }
+input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="range"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="time"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="color"]:focus, input[type="file"]:focus, textarea:focus { border: 1px solid #cc4465; }
 
 select { width: 100%; }
 
@@ -654,15 +654,15 @@ input[type="radio"], input[type="checkbox"] { margin-right: 0.5em; }
 --------------------------------------------------------------*/
 button { display: inline-block; cursor: pointer; }
 
-.btn, .button, .card .more-link, input[type="submit"] { display: inline-block; border: 1px solid transparent; text-transform: capitalize; background: #ff4a6b; padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
+.btn, .button, .card .more-link, input[type="submit"] { display: inline-block; border: 1px solid transparent; text-transform: capitalize; background: #cc4465; padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
 
-.btn:active, .btn:focus, .button:active, .card .more-link:active, .button:focus, .card .more-link:focus, input[type="submit"]:active, input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(255, 74, 107, 0.5); box-shadow: 0 0 0 2px rgba(255, 74, 107, 0.5); }
+.btn:active, .btn:focus, .button:active, .card .more-link:active, .button:focus, .card .more-link:focus, input[type="submit"]:active, input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(204, 68, 101, 0.5); box-shadow: 0 0 0 2px rgba(204, 68, 101, 0.5); }
 
-.btn:hover, .button:hover, .card .more-link:hover, input[type="submit"]:hover { color: white; background: #d93f5b; }
+.btn:hover, .button:hover, .card .more-link:hover, input[type="submit"]:hover { color: white; background: #ad3a56; }
 
-.btn--o, .button--o { border: 1px solid #ff4a6b; color: #ff4a6b; background: transparent; }
+.btn--o, .button--o { border: 1px solid #cc4465; color: #cc4465; background: transparent; }
 
-.btn--o:hover, .btn--o:focus, .button--o:hover, .button--o:focus { background: #ff4a6b; color: white; }
+.btn--o:hover, .btn--o:focus, .button--o:hover, .button--o:focus { background: #cc4465; color: white; }
 
 /*--------------------------------------------------------------
 # Input Placeholders
@@ -682,19 +682,19 @@ button { display: inline-block; cursor: pointer; }
 --------------------------------------------------------------*/
 .search-form { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
-.search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #ff4a6b; border-radius: 3px; }
+.search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #cc4465; border-radius: 3px; }
 
 /*------- input appends and prepends for icons --------*/
 /* when adding a button near an input you can make it a prepend or append all prepends and appends go AFTER the input. Never before or :focus wont affect the prepend. */
 .input-prepend, .input-append { -webkit-transition: all .5s; transition: all .5s; background: white; z-index: 2; color: #cacaca; -webkit-box-shadow: none; box-shadow: none; }
 
-.input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #ff4a6b; border-left: 0; }
+.input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #cc4465; border-left: 0; }
 
 .input-prepend { border-radius: 3px 0 0 3px; margin-right: -2px; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; }
 
-input:focus + .input-prepend { border-color: #ff4a6b; }
+input:focus + .input-prepend { border-color: #cc4465; }
 
-input:focus + .input-append { border-color: #ff4a6b; }
+input:focus + .input-append { border-color: #cc4465; }
 
 /*------- Content --------*/
 /*--------------------------------------------------------------

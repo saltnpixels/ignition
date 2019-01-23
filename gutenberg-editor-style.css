@@ -376,7 +376,7 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor input[type="text"], .edit-post-visual-editor input[type="email"], .edit-post-visual-editor input[type="url"], .edit-post-visual-editor input[type="password"], .edit-post-visual-editor input[type="search"], .edit-post-visual-editor input[type="number"], .edit-post-visual-editor input[type="tel"], .edit-post-visual-editor input[type="range"], .edit-post-visual-editor input[type="date"], .edit-post-visual-editor input[type="month"], .edit-post-visual-editor input[type="week"], .edit-post-visual-editor input[type="time"], .edit-post-visual-editor input[type="datetime"], .edit-post-visual-editor input[type="datetime-local"], .edit-post-visual-editor input[type="color"], .edit-post-visual-editor input[type="file"], .edit-post-visual-editor textarea { border: 1px solid grey; background: transparent; color: grey; width: 100%; min-width: 0; -webkit-transition: all .5s; transition: all .5s; padding: 3px 5px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; }
 
-.edit-post-visual-editor input[type="text"]:focus, .edit-post-visual-editor input[type="email"]:focus, .edit-post-visual-editor input[type="url"]:focus, .edit-post-visual-editor input[type="password"]:focus, .edit-post-visual-editor input[type="search"]:focus, .edit-post-visual-editor input[type="number"]:focus, .edit-post-visual-editor input[type="tel"]:focus, .edit-post-visual-editor input[type="range"]:focus, .edit-post-visual-editor input[type="date"]:focus, .edit-post-visual-editor input[type="month"]:focus, .edit-post-visual-editor input[type="week"]:focus, .edit-post-visual-editor input[type="time"]:focus, .edit-post-visual-editor input[type="datetime"]:focus, .edit-post-visual-editor input[type="datetime-local"]:focus, .edit-post-visual-editor input[type="color"]:focus, .edit-post-visual-editor input[type="file"]:focus, .edit-post-visual-editor textarea:focus { border: 1px solid #ff4a6b; }
+.edit-post-visual-editor input[type="text"]:focus, .edit-post-visual-editor input[type="email"]:focus, .edit-post-visual-editor input[type="url"]:focus, .edit-post-visual-editor input[type="password"]:focus, .edit-post-visual-editor input[type="search"]:focus, .edit-post-visual-editor input[type="number"]:focus, .edit-post-visual-editor input[type="tel"]:focus, .edit-post-visual-editor input[type="range"]:focus, .edit-post-visual-editor input[type="date"]:focus, .edit-post-visual-editor input[type="month"]:focus, .edit-post-visual-editor input[type="week"]:focus, .edit-post-visual-editor input[type="time"]:focus, .edit-post-visual-editor input[type="datetime"]:focus, .edit-post-visual-editor input[type="datetime-local"]:focus, .edit-post-visual-editor input[type="color"]:focus, .edit-post-visual-editor input[type="file"]:focus, .edit-post-visual-editor textarea:focus { border: 1px solid #cc4465; }
 
 .edit-post-visual-editor select { width: 100%; }
 
@@ -384,15 +384,15 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor button { display: inline-block; cursor: pointer; }
 
-.edit-post-visual-editor .btn, .edit-post-visual-editor .button, .edit-post-visual-editor .card .more-link, .card .edit-post-visual-editor .more-link, .edit-post-visual-editor input[type="submit"] { display: inline-block; border: 1px solid transparent; text-transform: capitalize; background: #ff4a6b; padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
+.edit-post-visual-editor .btn, .edit-post-visual-editor .button, .edit-post-visual-editor .card .more-link, .card .edit-post-visual-editor .more-link, .edit-post-visual-editor input[type="submit"] { display: inline-block; border: 1px solid transparent; text-transform: capitalize; background: #cc4465; padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
 
-.edit-post-visual-editor .btn:active, .edit-post-visual-editor .btn:focus, .edit-post-visual-editor .button:active, .edit-post-visual-editor .card .more-link:active, .card .edit-post-visual-editor .more-link:active, .edit-post-visual-editor .button:focus, .edit-post-visual-editor .card .more-link:focus, .card .edit-post-visual-editor .more-link:focus, .edit-post-visual-editor input[type="submit"]:active, .edit-post-visual-editor input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(255, 74, 107, 0.5); box-shadow: 0 0 0 2px rgba(255, 74, 107, 0.5); }
+.edit-post-visual-editor .btn:active, .edit-post-visual-editor .btn:focus, .edit-post-visual-editor .button:active, .edit-post-visual-editor .card .more-link:active, .card .edit-post-visual-editor .more-link:active, .edit-post-visual-editor .button:focus, .edit-post-visual-editor .card .more-link:focus, .card .edit-post-visual-editor .more-link:focus, .edit-post-visual-editor input[type="submit"]:active, .edit-post-visual-editor input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(204, 68, 101, 0.5); box-shadow: 0 0 0 2px rgba(204, 68, 101, 0.5); }
 
-.edit-post-visual-editor .btn:hover, .edit-post-visual-editor .button:hover, .edit-post-visual-editor .card .more-link:hover, .card .edit-post-visual-editor .more-link:hover, .edit-post-visual-editor input[type="submit"]:hover { color: white; background: #d93f5b; }
+.edit-post-visual-editor .btn:hover, .edit-post-visual-editor .button:hover, .edit-post-visual-editor .card .more-link:hover, .card .edit-post-visual-editor .more-link:hover, .edit-post-visual-editor input[type="submit"]:hover { color: white; background: #ad3a56; }
 
-.edit-post-visual-editor .btn--o, .edit-post-visual-editor .button--o { border: 1px solid #ff4a6b; color: #ff4a6b; background: transparent; }
+.edit-post-visual-editor .btn--o, .edit-post-visual-editor .button--o { border: 1px solid #cc4465; color: #cc4465; background: transparent; }
 
-.edit-post-visual-editor .btn--o:hover, .edit-post-visual-editor .btn--o:focus, .edit-post-visual-editor .button--o:hover, .edit-post-visual-editor .button--o:focus { background: #ff4a6b; color: white; }
+.edit-post-visual-editor .btn--o:hover, .edit-post-visual-editor .btn--o:focus, .edit-post-visual-editor .button--o:hover, .edit-post-visual-editor .button--o:focus { background: #cc4465; color: white; }
 
 .edit-post-visual-editor ::-webkit-input-placeholder { color: inherit; opacity: .7; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
@@ -406,17 +406,17 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor .search-form { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
-.edit-post-visual-editor .search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #ff4a6b; border-radius: 3px; }
+.edit-post-visual-editor .search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #cc4465; border-radius: 3px; }
 
 .edit-post-visual-editor .input-prepend, .edit-post-visual-editor .input-append { -webkit-transition: all .5s; transition: all .5s; background: white; z-index: 2; color: #cacaca; -webkit-box-shadow: none; box-shadow: none; }
 
-.edit-post-visual-editor .input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #ff4a6b; border-left: 0; }
+.edit-post-visual-editor .input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #cc4465; border-left: 0; }
 
 .edit-post-visual-editor .input-prepend { border-radius: 3px 0 0 3px; margin-right: -2px; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; }
 
-.edit-post-visual-editor input:focus + .input-prepend { border-color: #ff4a6b; }
+.edit-post-visual-editor input:focus + .input-prepend { border-color: #cc4465; }
 
-.edit-post-visual-editor input:focus + .input-append { border-color: #ff4a6b; }
+.edit-post-visual-editor input:focus + .input-append { border-color: #cc4465; }
 
 .edit-post-visual-editor html { font-size: 100%; }
 
@@ -454,11 +454,11 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor h4, .edit-post-visual-editor .h4 { font-size: 17.6px; font-size: 1.1rem; }
 
-.edit-post-visual-editor a { color: #ff4a6b; text-decoration: none; }
+.edit-post-visual-editor a { color: #cc4465; text-decoration: none; }
 
-.edit-post-visual-editor ::-moz-selection { background: #ffa5b5; }
+.edit-post-visual-editor ::-moz-selection { background: #e6a2b2; }
 
-.edit-post-visual-editor ::selection { background: #ffa5b5; }
+.edit-post-visual-editor ::selection { background: #e6a2b2; }
 
 .edit-post-visual-editor .edit-link { font-size: 11.2px; font-size: 0.7rem; }
 

@@ -30,6 +30,10 @@ if ( get_theme_mod( 'app_menu', '' ) ) {
 }
 ?>
 <body <?php body_class($app_menu); ?>>
+<a class="skip-link screen-reader-text" href="#site-content">
+	<?php _e( 'Skip to content', 'ignition' ); ?>
+</a>
+
 <div class="site-container" id="site-container">
 
 	<div id="panel-left"></div>
@@ -46,12 +50,10 @@ if ( get_theme_mod( 'app_menu', '' ) ) {
 	</button>
 
 	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#site-content">
-			<?php _e( 'Skip to content', 'ignition' ); ?>
-		</a>
+
 
 		<?php include( locate_template( 'template-parts/site-top/site-top.php' ) ); ?>
 
-		<div id="content" class="site-content">
+		<div id="site-content" class="site-content">
 
 		

@@ -8,4 +8,8 @@
   background: $black;
   color: $grey;
   @include font-size(.7);
+
+  a{
+    color: inherit;
+  }
 }
