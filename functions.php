@@ -267,7 +267,7 @@ add_filter( 'excerpt_more', 'ignition_excerpt_more' );
  * @since Ignition 1.0
  */
 function ignition_javascript_detection() {
-	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+	echo "<script type='text/javascript'>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
 
 add_action( 'wp_head', 'ignition_javascript_detection', 0 );
@@ -368,6 +368,10 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
  */
 require get_parent_theme_file_path( '/inc/extras.php' );
 
+/**
+ * Add ACF Field Extras
+ */
+require get_parent_theme_file_path( '/inc/acf_extras.php' );
 
 /*
  * Require any functions.php for each post type

@@ -69,10 +69,11 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 				<?php } ?>
 
 			<?php } else {
-				global $saving_sections;
-				if ( ! $saving_sections ) {
-					the_content();
-				}
+				//global $saving_sections;
+//				if ( ! $saving_sections ) {
+//					the_content();
+//				}
+                the_content();
 			} ?>
 
 

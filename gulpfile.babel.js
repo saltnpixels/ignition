@@ -37,6 +37,11 @@ const gulp = require( 'gulp' ); // Gulp of-course.
 const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
 const minifycss = require( 'gulp-uglifycss' ); // Minifies CSS files.
 const autoprefixer = require( 'gulp-autoprefixer' ); // Autoprefixing magic.
+
+
+const postcssPresetEnv = require('postcss-preset-env');
+const postcss = require( 'gulp-postcss' ); // postCSS magic.
+
 const mmq = require( 'gulp-merge-media-queries' ); // Combine matching media queries into one.
 const rtlcss = require( 'gulp-rtlcss' ); // Generates RTL stylesheet.
 
@@ -112,11 +117,15 @@ const reload = done => {
  *    6. Minifies the CSS file and generates style.min.css
  *    7. Injects CSS or reloads the browser via browserSync
  */
+const processors = [
+	postcssPresetEnv
+];
+
 gulp.task( 'styles', () => {
 	return gulp
 		.src( config.styleSRC, { allowEmpty: true })
 		.pipe( plumber( errorHandler ) )
-		.pipe( sourcemaps.init() )
+		//.pipe( sourcemaps.init() )
 		.pipe(
 			sass({
 				errLogToConsole: config.errLogToConsole,
@@ -125,6 +134,7 @@ gulp.task( 'styles', () => {
 			})
 		)
 		.on( 'error', sass.logError )
+		.pipe(postcss(processors))
 		.pipe( sourcemaps.write({ includeContent: false }) )
 		.pipe( sourcemaps.init({ loadMaps: true }) )
 		.pipe( autoprefixer( config.BROWSERS_LIST ) )

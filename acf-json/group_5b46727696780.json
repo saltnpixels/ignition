@@ -16,7 +16,7 @@
                 "id": ""
             },
             "return_format": "array",
-            "preview_size": "post-thumbnail",
+            "preview_size": "header",
             "library": "all",
             "min_width": "",
             "min_height": "",
@@ -40,6 +40,25 @@
                 "id": ""
             },
             "message": "Show No Image",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5c4b66a65ae2c",
+            "label": "Change Default Header",
+            "name": "override_header",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Change Header?",
             "default_value": 0,
             "ui": 0,
             "ui_on_text": "",
@@ -70,5 +89,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1543863798
+    "modified": 1548559666
 }

@@ -9,7 +9,7 @@
 
 $id = get_the_ID();
 // check if the flexible content field has rows of data without acf functions
-if ( have_rows( 'header_layout', $id ) ):
+if ( have_rows( 'header_layout', $id ) && get_field('override_header') ):
 	while ( have_rows( 'header_layout', $id ) ): the_row();
 		$header = get_row_layout();
 		if ( file_exists( locate_template( 'template-parts/blocks/' . $header . '.php' ) ) ) {

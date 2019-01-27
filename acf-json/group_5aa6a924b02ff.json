@@ -23,10 +23,10 @@
                     "display": "row",
                     "sub_fields": [
                         {
-                            "key": "field_5b083c31d9115",
-                            "label": "Section Class",
-                            "name": "class",
-                            "type": "text",
+                            "key": "field_5c4cfce2ab9ec",
+                            "label": "Paragraph",
+                            "name": "",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -35,11 +35,8 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "placeholder": "(optional)",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
+                            "placement": "top",
+                            "endpoint": 0
                         },
                         {
                             "key": "field_5b083c40d9116",
@@ -59,6 +56,41 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5c4cfcfeab9ed",
+                            "label": "Advanced",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5b083c31d9115",
+                            "label": "Section Class",
+                            "name": "class",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "(optional)",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
                         }
                     ],
                     "min": "",
@@ -110,7 +142,7 @@
                             "label": "Paragraph Sections",
                             "name": "paragraphs",
                             "type": "repeater",
-                            "instructions": "",
+                            "instructions": "Add many paragraphs, with the ability to arrange them in columns or on a grid.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -125,10 +157,10 @@
                             "button_label": "Add Paragraph",
                             "sub_fields": [
                                 {
-                                    "key": "field_5b081c7dccb53",
-                                    "label": "Paragraph Class",
-                                    "name": "paragraph_class",
-                                    "type": "text",
+                                    "key": "field_5c4b6ac447d53",
+                                    "label": "Paragraph",
+                                    "name": "",
+                                    "type": "tab",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -137,11 +169,8 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
+                                    "placement": "left",
+                                    "endpoint": 0
                                 },
                                 {
                                     "key": "field_5b081c8accb54",
@@ -161,6 +190,41 @@
                                     "toolbar": "full",
                                     "media_upload": 1,
                                     "delay": 0
+                                },
+                                {
+                                    "key": "field_5c4b6a84397a4",
+                                    "label": "Advanced",
+                                    "name": "",
+                                    "type": "tab",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "placement": "left",
+                                    "endpoint": 0
+                                },
+                                {
+                                    "key": "field_5b081c7dccb53",
+                                    "label": "Paragraph Class",
+                                    "name": "paragraph_class",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "(optional)",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
                                 }
                             ]
                         },
@@ -282,6 +346,74 @@
                     "display": "row",
                     "sub_fields": [
                         {
+                            "key": "field_5c4cfa42e9083",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5c4cfb5561add",
+                            "label": "Instructions",
+                            "name": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "This section is more useful when the page is being used as an archive page. If this page is an archive page, it will show all the posts\/cards for this archive page.\r\nOtherwise it will show the main content|gutenberg editor (which is usually hidden when using sections).",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        },
+                        {
+                            "key": "field_5afb036bab73b",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "Heading",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5c4cfa66e9084",
+                            "label": "Advanced",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5b0471e53bd01",
                             "label": "Pagination",
                             "name": "pagination",
@@ -371,25 +503,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5afb036bab73b",
-                            "label": "Heading",
-                            "name": "heading",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
                         }
                     ],
                     "min": "",
@@ -401,6 +514,77 @@
                     "label": "Section Stitcher",
                     "display": "row",
                     "sub_fields": [
+                        {
+                            "key": "field_5c4cfd894d6a0",
+                            "label": "Pages",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5c4cfe85b6ad8",
+                            "label": "Instructions",
+                            "name": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Get pages with sections and stitch them together. This makes it easy to make sections once and reuse them over and over. Ex: make a page with a testimonial section and then just grab that page whenever you want to show the testimonials.",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        },
+                        {
+                            "key": "field_5ab1573158392",
+                            "label": "Choose Post\/Page",
+                            "name": "post_items",
+                            "type": "post_object",
+                            "instructions": "Choose pages to grab and get all of that pages sections.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "multiple": 1,
+                            "return_format": "id",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_5c4cfda74d6a1",
+                            "label": "Advanced",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
                         {
                             "key": "field_5ab1578658393",
                             "label": "Section Class",
@@ -419,29 +603,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5ab1573158392",
-                            "label": "Choose Post\/Page",
-                            "name": "post_items",
-                            "type": "post_object",
-                            "instructions": "Choose posts \/ pages to grab and get its sections.",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page",
-                                "post"
-                            ],
-                            "taxonomy": [],
-                            "allow_null": 0,
-                            "multiple": 1,
-                            "return_format": "id",
-                            "ui": 1
                         }
                     ],
                     "min": "",
@@ -487,7 +648,7 @@
                             "label": "Section Names",
                             "name": "section_names",
                             "type": "repeater",
-                            "instructions": "",
+                            "instructions": "Create a menu that scrolls to sections on this page",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -525,7 +686,7 @@
                                     "label": "Section ID",
                                     "name": "section_id",
                                     "type": "text",
-                                    "instructions": "The number next to the section is the ID you want to scroll to when this menu item is clicked.",
+                                    "instructions": "The number should match the section you want to scroll to.",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
@@ -568,5 +729,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1543863661
+    "modified": 1548552121
 }

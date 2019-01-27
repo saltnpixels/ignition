@@ -225,7 +225,7 @@
             },
             "button_label": "Choose Header Layout",
             "min": "",
-            "max": ""
+            "max": 1
         }
     ],
     "location": [
@@ -247,5 +247,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1543863679
+    "modified": 1548450564
 }
