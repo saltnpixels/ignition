@@ -45,8 +45,8 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 						if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
 							include( locate_template( 'template-parts/post/content.php' ) );
 						} else {
-							if ( get_post_format() ) {
-								include( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) );
+							if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
+								include(locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ));
 							} else {
 								include( locate_template( 'template-parts/' . get_post_type() . '/content.php' ) );
 							}
@@ -56,7 +56,7 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 					?>
 				</div>
 
-				<?php if ( get_sub_field( 'pagination' ) ) { ?>
+				<?php if ( get_sub_field( 'pagination' ) == 'yes' ) { ?>
 					<div class="card-pagination text-center">
 						<?php
 						the_posts_pagination( array(
