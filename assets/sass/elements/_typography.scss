@@ -12,9 +12,9 @@ input,
 select,
 textarea {
 	@include font-size(1); //16px usually is default
-	line-height: 1.5;
-	font-family: $font;
-	color: $color-main;
+	line-height: var(--line-height);
+	font-family: var(--font);
+	color: var(--main-text-color);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-smoothing: antialiased;
@@ -31,7 +31,7 @@ h4,
 h5,
 h6 {
 	clear: both;
-	font-family: $font-alt;
+	font-family: var(--font-alt);
 	margin: 0 0 .2em 0;
 }
 
@@ -48,12 +48,7 @@ p{
 	}
 }
 
-*:focus {
-	outline: none;
-}
-
 /*------- Quick text alignment classes --------*/
-
 .text-center {
 	text-align: center;
 }
@@ -76,7 +71,6 @@ p{
 		text-align: center;
 	}
 }
-
 
 /*--------------------------------------------------------------
 # Content Headings
@@ -106,7 +100,7 @@ h4, .h4 {
 --------------------------------------------------------------*/
 
 a {
-	color: $color-highlight;
+	color: var(--color-highlight);
 	text-decoration: none;
 }
 
@@ -115,7 +109,8 @@ a {
 # Selection Highlighting
 --------------------------------------------------------------*/
 ::selection {
-	background: tint($color-highlight, 50%);
+	background: var(--active-highlight-color);
+	color: white;
 }
 
 
@@ -141,7 +136,7 @@ blockquote {
 	overflow: hidden;
 	position: relative;
 	margin: 0 0 2em 0;
-	font-family: $font;
+	font-family: var(--font);
 	background: transparent;
 
 	p {
@@ -162,9 +157,9 @@ blockquote {
 	}
 }
 
-//person quoted
+
 cite, .wp-block-quote cite {
-	font-family: $font;
+	font-family: var(--font);
 	float: right;
 	margin-top: 0;
 	font-size: 14px;
@@ -195,9 +190,9 @@ q {
 pre {
 	background: #f7f9fa;
 	border: 1px solid #e6e8eb;
-	font-family: $font-pre;
+	font-family: var(--font-pre);
 	font-size: 14px;
-	line-height: $line-height-pre;
+	line-height: var(--line-height-pre);
 	margin-top: 20px;
 	margin-bottom: 20px;
 	overflow: auto;
@@ -209,6 +204,6 @@ code,
 kbd,
 tt,
 var {
-	font-family: $font-pre;
+	font-family: var(--font-pre);
 	font-size: 15px;
 }

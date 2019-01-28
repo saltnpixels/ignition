@@ -38,7 +38,7 @@ textarea {
   order: 1;
 
   &:focus {
-    border: 1px solid $color-highlight;
+    border: 1px solid var(--color-highlight);
   }
 }
 
@@ -63,7 +63,7 @@ button{
   display: inline-block;
   border: 1px solid transparent;
   text-transform: capitalize;
-  background: $color-highlight;
+  background: var(--color-highlight);
   padding: 5px 10px;
   color: white;
   border-radius: 3px;
@@ -72,22 +72,22 @@ button{
 
   &:active, &:focus {
     color: white;
-    box-shadow: 0 0 0 2px rgba($color-highlight, 0.5);
+    box-shadow: 0 0 0 2px var(--color-highlight-alpha);
   }
 
   &:hover {
     color: white;
-    background: shade($color-highlight, 15%);
+    background: var(--active-highlight-color);
   }
 }
 
 .btn--o, .button--o {
-  border: 1px solid $color-highlight;
-  color: $color-highlight;
+  border: 1px solid var(--color-highlight);
+  color: var(--color-highlight);
   background: transparent;
 
   &:hover, &:focus {
-    background: $color-highlight;
+    background: var(--color-highlight);
     color: white;
   }
 }
@@ -109,7 +109,7 @@ $placeholder_browsers:
   #{$placeholder} {
     color: inherit;
     opacity: .7;
-    font-family: $font;
+    font-family: var(--font);
   }
 }
 
@@ -124,7 +124,7 @@ $placeholder_browsers:
   .search-field {
     flex: 1 1 auto;
     padding: 3px 10px 3px 10px;
-    border: 1px solid $color-highlight;
+    border: 1px solid var(--color-highlight);
     border-radius: 3px;
   }
 }
@@ -138,7 +138,7 @@ $placeholder_browsers:
   transition: all .5s;
   background: white;
   z-index: 2;
-  color: $color-subtle;
+  color: var(--subtle-text-color);
   box-shadow: none;
 }
 
@@ -146,7 +146,7 @@ $placeholder_browsers:
   border-radius: 0 3px 3px 0;
   margin-left: -2px;
   order: 1;
-  border: 1px solid $color-highlight;
+  border: 1px solid var(--color-highlight);
   border-left: 0;
 }
 
@@ -157,11 +157,11 @@ $placeholder_browsers:
 }
 
 input:focus + .input-prepend {
-  border-color: $color-highlight;
+  border-color: var(--color-highlight);
 }
 
 input:focus + .input-append {
-  border-color: $color-highlight;
+  border-color: var(--color-highlight);
 }
 
 

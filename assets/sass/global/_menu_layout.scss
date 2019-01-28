@@ -85,7 +85,7 @@
 /*--------------------------------------------------------------
 # Horizontal Menus
 --------------------------------------------------------------*/
-@mixin horizontal-menu($breakpoint: $nav-breakpoint-collapse){
+@mixin horizontal-menu($breakpoint: $media-nav){
 
   @media(min-width: $breakpoint) {
     .menu,
@@ -100,7 +100,7 @@
       .top-level-item .menu-item-link{
         display: flex;
         height: 100%;
-        align-items: $desktop-menu-alignment;
+        align-items: var(--desktop-menu-alignment);
       }
 
       .top-level-item >.sub-menu, .top-level-item > .children {
@@ -198,7 +198,7 @@
 --------------------------------------------------------------*/
 /*------- Site-top --------*/
 .site-top {
-  z-index: $z-index-menu;
+  z-index: var(--z-index-menu);
   width: 100%;
   position: relative;
 
@@ -238,7 +238,7 @@
 
 
 //hide navigation on mobile if its inside site-top while it hasnt moved yet
-@media(max-width: $nav-breakpoint-collapse){
+@media(max-width: $media-nav){
   .site-navigation .site-navigation__nav-holder{
     display: none;
   }
@@ -277,7 +277,7 @@
 }
 
 //logo positions
-@media (min-width: $nav-breakpoint-collapse) {
+@media (min-width: $media-nav) {
 
   //layout positions
   .logo-left .site-logo {
@@ -331,15 +331,15 @@
 }
 
 .menu-open #panel-left{
-  flex-basis: $panel-left-width;
+  flex-basis: var(--panel-left-width);
   flex-shrink: 0;
   transform: translate(0,0);
 }
 
 //if left panel starts open, leave open until mobile, and hide button till mobile
-@media(min-width: $nav-breakpoint-collapse){
+@media(min-width: $media-nav){
   #panel-left.stay-open{
-    flex-basis: $panel-left-width;
+    flex-basis: var(--panel-left-width);
     flex-shrink: 0;
     transform: translate(0,0);
 
@@ -361,20 +361,20 @@
 
 #panel-left{
   .site-navigation__nav-holder{
-    min-width: $panel-left-width;
+    min-width: var(--panel-left-width);
     padding-top: 11vh;
     padding-bottom: $gap;
   }
 }
 
 /*------- Cool App like menu for mobile --------*/
-@media(max-width: $panel-left-absolute) {
+@media(max-width: $panel-left-absolute){
   .app-menu {
     #panel-left{
       transition: none;
       transform: translate(0,0);
       width: 100%;
-      z-index: $z-index-menu - 1;
+      z-index: calc(var(--z-index-menu) - 1);
 
       .menu-item-link{
         a{
@@ -445,7 +445,7 @@
 }
 
 //when there is only a logo, make it centered wether left or right or both buttons are showing
-@media(max-width: $nav-breakpoint-collapse){
+@media(max-width: $media-nav){
   .site-top .container, .site-top .container-fluid{
     padding: 0 52px;
   }

@@ -3,11 +3,10 @@ Mixins
 --------------------------------------------------------------*/
 /*------- Rem with px fallback --------*/
 @mixin font-size($sizeValue: 1) {
-  @if($sizeValue < 6){
+  @if ($sizeValue < 6) {
     font-size: ($sizeValue) * 16px;
     font-size: $sizeValue * 1rem;
-  }
-  @else {
+  } @else {
     font-size: ($sizeValue) * 1px;
     font-size: $sizeValue / 16 + 0rem;
   }
@@ -27,8 +26,7 @@ Mixins
 
 /*------- Retina --------*/
 @mixin retina {
-  @media
-  screen and (-webkit-min-device-pixel-ratio: 2),
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
     @content;
@@ -136,10 +134,10 @@ Mixins
   grid-gap: $grid-gap;
   justify-content: center;
 
-//if width and gap is size of screen.
-    @media (max-width: $min + $grid-gap*2) {
-      grid-template-columns: 1fr;
-    }
+  //if width and gap is size of screen.
+  @media (max-width: $min + $grid-gap*2) {
+    grid-template-columns: 1fr;
+  }
 
   //fallback for ie11
   @media all and (-ms-high-contrast: none) {
@@ -151,12 +149,12 @@ Mixins
       flex-shrink: 1;
       flex-basis: 0;
       min-width: calc(#{$min - $grid-gap});
-      margin: $grid-gap / 2 ;
+      margin: $grid-gap / 2;
       margin-top: 0;
       margin-bottom: $grid-gap;
     }
 
-    &.no-gutters{
+    &.no-gutters {
       margin-left: 0;
       margin-right: 0;
     }
@@ -165,7 +163,7 @@ Mixins
       margin: 0;
     }
 
-    .conainer &, .container-fluid &, .container-content &{
+    .conainer &, .container-fluid &, .container-content & {
       margin-left: -#{$gutters};
       margin-right: -#{$gutters};
 
@@ -178,7 +176,7 @@ Mixins
 }
 
 
-@mixin flex-card-grid($min: 350px, $grow: 1, $shrink: 1, $grid-gap: $gap){
+@mixin flex-card-grid($min: 350px, $grow: 1, $shrink: 1, $grid-gap: $gap) {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -186,14 +184,14 @@ Mixins
   margin-left: -#{$grid-gutter};
   margin-right: -#{$grid-gutter};
 
-   > *{
-     flex-grow: $grow;
-     flex-shrink: $shrink;
-     flex-basis: calc(#{$min - $grid-gap}); //using calc we can even allow % based widths
-     margin: 0 $grid-gutter $grid-gap $grid-gutter;
-   }
+  > * {
+    flex-grow: $grow;
+    flex-shrink: $shrink;
+    flex-basis: calc(#{$min - $grid-gap}); //using calc we can even allow % based widths
+    margin: 0 $grid-gutter $grid-gap $grid-gutter;
+  }
 
-  &.no-gutters{
+  &.no-gutters {
     margin-left: 0;
     margin-right: 0;
   }
@@ -202,11 +200,17 @@ Mixins
     margin: 0;
   }
 
-  @media all and (-ms-high-contrast: none) {
-    > *{
+  @media screen and (-ms-high-contrast:active), (-ms-high-contrast: none) {
+    > * {
       flex-basis: auto;
       min-width: calc(#{$min - $grid-gap}); //using calc we can even allow % based widths
     }
   }
 }
 
+
+/*------- Color Variables --------*/
+@mixin var($property, $varName) {
+  #{$property}: map-get($vars, $varName);
+  #{$property}: var(--#{$varName});
+}

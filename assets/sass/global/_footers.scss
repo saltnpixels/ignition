@@ -5,8 +5,8 @@
 .site-footer {
   padding-top: $gap;
   padding-bottom: 5px;
-  background: $black;
-  color: $grey;
+  background: var(--main-text-color);
+  color: var(--subtle-text-color);
   @include font-size(.7);
 
   a{

@@ -44,7 +44,7 @@ body .navigation-menu-icon {
 --------------------------------------------------------------*/
 
 .panel-right-toggle {
-  z-index: $z-index-top;
+  z-index: var(--z-index-top);
   position: absolute;
   right: 0;
   top: 0;
@@ -100,14 +100,14 @@ body .navigation-menu-icon {
 
 //open panel
 #panel-right.open:not(:empty) {
-  flex-basis: $panel-right-width;
+  flex-basis: var(--panel-right-width);
   flex-shrink: 0;
 }
 
 //if right panel starts open, leave open until mobile, and hide button till mobile
 @media(min-width: $panel-right-absolute){
   #panel-right.stay-open{
-    flex-basis: $panel-right-width;
+    flex-basis: var(--panel-right-width);
     flex-shrink: 0;
     transform: translate(0,0);
 
@@ -132,7 +132,7 @@ body .navigation-menu-icon {
     width: 0;
 
     &.open {
-      width: $panel-right-width;
+      width: var(--panel-right-width);
     }
   }
 }

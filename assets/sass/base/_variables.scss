@@ -1,29 +1,58 @@
 /*--------------------------------------------------------------
-# Site Wide Variables
+# CSS Variables.
 --------------------------------------------------------------*/
+:root {
+  //Fonts
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --line-height: 1.5;
+  --font-pre: 'Source Code Pro', monospace;
+  --line-height-pre: 22px;
 
-/*------- Fonts --------*/
-// - Change fonts as needed. you may of course need to add a link to your fonts for them to work in functions.php
-$font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$line-height: 1.5;
-$font-pre: 'Source Code Pro', monospace;
-$line-height-pre: 22px;
+  //Colors. Add colors here
+  --black: #191919;
+  --grey: #cacaca;
+  --pink: #cb4264;
+  --pink-alpha: rgba(#cb4264, .5);
+  --dark-pink: #cb1f4c;
+  --light-pink: #cb4e5a;
+
+  //Applied Colors. Change where colors are being used here. Add your own applied areas
+  --main-text-color: var(--black);
+  --subtle-text-color: var(--grey);
+
+  //links and form buttons. used in typography.scss and forms.scss
+  --color-highlight: var(--pink);
+  --color-highlight-alpha: var(--pink-alpha);
+  --active-highlight-color: var(--dark-pink);
+}
 
 
-/*------- Menu layout --------*/
-$nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. Also used by default for all horizontal menus. should match data-moveat in site-top.php or you will have a vertical menu that didnt move to left panel.
-$desktop-menu-alignment: center; //can be flex-end or flex-start or center for menu-items positioning on desktop
+/*--------------------------------------------------------------
+# Layout CSS Variables
+--------------------------------------------------------------*/
+:root{
+  /*------- Panels --------*/
+  --panel-left-width: 300px; //width of panel-left when open
+  --panel-right-width: 350px;
 
+  /*------- Menu Variables --------*/
+  --nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. Also used by default for all horizontal menus.
+  --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
-/*------- Panels --------*/
-$panel-left-width: 300px; //width of panel-left when open
-$panel-left-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
+  /*------- Z-index --------*/
+  --z-index-top: 99;
+  --z-index-overlay: 95;
+  --z-index-menu-button: 90;
+  --z-index-menu: 80;
+  --z-index-behind: -1;
 
-$panel-right-width: 350px;
-$panel-right-absolute: 1030px;
+}
 
-
+/*--------------------------------------------------------------
+# SASS Variables
+--------------------------------------------------------------*/
+//css vars cannot be used in media queries. Sass is still used for media query variables and the grid
 
 /*------- Grid and Layout --------*/
 $container: 1200px; //the max size of site content
@@ -32,8 +61,8 @@ $gutters: 15px;
 $gap: $gutters * 2;
 
 
-
-/*------- Media Query Sizes --------*/
+/*------- Media Query Sizes. --------*/
+$media-nav: 800px; //when main navigation should go mobile. Should match the css variable of the same name
 $media-small: 576px;
 $media-medium: 767px;
 $media-large: 1030px;
@@ -41,23 +70,6 @@ $media-container: $container;
 
 $collapse-on-small: true; //collapse grid and flex-grid and flex on small devices automatically. small-span can override
 
-
-/*------- Z-index --------*/
-$z-index-top: 99;
-$z-index-overlay: 95;
-$z-index-menu-button: 90;
-$z-index-menu: 80;
-$z-index-behind: -1;
-
-
-
-//Colors
-$black: #191919;
-$grey: #cacaca;
-
-
-
-//Applied Colors
-$color-main: $black;
-$color-highlight: #cc4465;
-$color-subtle: $grey;
+/*------- Panel Becomes Absolute  --------*/
+$panel-left-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
+$panel-right-absolute: 1030px;

@@ -7,7 +7,7 @@
     height: 100%;
     overflow: auto;
     overflow-x: hidden;
-    min-width: $panel-right-width;
+    min-width: var(--panel-right-width);
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     @extend .hide-scroll;
@@ -26,7 +26,7 @@
 }
 
 #secondary .sidebar-holder{
-  max-width: $panel-right-width;
+  max-width: var(--panel-right-width);
 }
 
 /*------- Sidebar on left/right ordering --------*/
