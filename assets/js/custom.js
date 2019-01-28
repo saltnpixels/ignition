@@ -143,6 +143,13 @@ jQuery(function ($) {
       var moveAt = item.getAttribute('data-moveat'),
           destination = document.querySelector(item.getAttribute('data-moveto')),
           source = item.getAttribute('data-movefrom');
+
+      if (moveAt.startsWith('--')) {
+        var cssVars = getComputedStyle(document.body); //get css variables
+
+        moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
+      }
+
       moveAt = moveAt ? moveAt : 1030;
 
       if (!destination) {

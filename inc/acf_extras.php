@@ -80,7 +80,7 @@ function save_sections( $post_id ) {
 				ob_start();
 				setup_postdata( $post );
 				//run through all sections
-				locate_template( 'template-parts/blocks/sections.php', true );
+				locate_template( 'template-parts/acf-blocks/sections.php', true );
 				$sections = ob_get_clean();
 				update_post_meta( $id, 'acf_all_sections', $sections );
 			}

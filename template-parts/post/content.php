@@ -18,11 +18,11 @@ $id        = get_the_ID();
 
 		<?php
 		//special header layouts can be used with acf, otherwise a fallback header is used.
-		//Soon custom header blocks for Gutenberg will be made and then header might go inside container content.
+		//Soon custom header acf-blocks for Gutenberg will be made and then header might go inside container content.
 		//if this is a sidebar template, js is used to pop out this header and put above the article at full width.
 		//this way its semantically placed inside properly, but moved out and looks nicely placed above the sidebar
 		if ( function_exists( 'have_rows' ) ) {
-			include( locate_template( 'template-parts/blocks/header_sections.php' ) );
+			include( locate_template( 'template-parts/acf-blocks/header_sections.php' ) );
 		}
 		?>
 
@@ -31,7 +31,7 @@ $id        = get_the_ID();
 
 			//include sections made with acf.
 			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ) {
-				locate_template( 'template-parts/blocks/sections.php', true );
+				locate_template( 'template-parts/acf-blocks/sections.php', true );
 			} else {
 				the_content();
 			}

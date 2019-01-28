@@ -57,7 +57,7 @@ if ( $page_archive_id ) {
 				setup_postdata( $post );
 			
 				if ( function_exists( 'have_rows' ) ) {
-					locate_template( 'template-parts/blocks/header_sections.php', true );
+					locate_template( 'template-parts/acf-blocks/header_sections.php', true );
 				} ?>
 
                 <div class="entry-content container-content">
@@ -65,7 +65,7 @@ if ( $page_archive_id ) {
 
 					//include sections made with acf.
 					if ( function_exists( 'have_rows' ) ) {
-						locate_template( 'template-parts/blocks/sections.php', true );
+						locate_template( 'template-parts/acf-blocks/sections.php', true );
 					}
 					?>
                 </div>

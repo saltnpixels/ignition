@@ -18,9 +18,9 @@ if ( ! function_exists( 'write_log' ) ) {
 				error_log( $log );
 			}
 
-			if($send_to_console){
-			    debug_to_console($log);
-            }
+			if ( $send_to_console ) {
+				debug_to_console( $log );
+			}
 		}
 	}
 }
@@ -41,12 +41,13 @@ if ( ! function_exists( 'debug_to_console' ) ) {
 	}
 }
 
-function output_log_to_footer(){
-    global $console_log;
-    echo $console_log;
+function output_log_to_footer() {
+	global $console_log;
+	echo $console_log;
 }
-add_action('wp_footer', 'output_log_to_footer');
-add_action('admin_footer', 'output_log_to_footer');
+
+add_action( 'wp_footer', 'output_log_to_footer' );
+add_action( 'admin_footer', 'output_log_to_footer' );
 
 
 /**
@@ -238,22 +239,27 @@ add_filter( 'login_headerurl', 'the_url' );
  * Disable admin bar for everyone but admins
  *
  */
-function disable_admin_bar() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		add_filter( 'show_admin_bar', '__return_false' );
+if ( ! function_exists( 'disable_admin_bar' ) ) {
+
+	function disable_admin_bar() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			add_filter( 'show_admin_bar', '__return_false' );
+		}
 	}
 }
-
 add_action( 'after_setup_theme', 'disable_admin_bar' );
 
 
 /**
  * Redirect back to homepage and not allow access to WP Admin. Except admins and ajax
  */
-function redirect_admin() {
-	if ( ! current_user_can( 'manage_options' ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-		wp_redirect( home_url() );
-		exit;
+if ( ! function_exists( 'redirect_admin' ) ) {
+
+	function redirect_admin() {
+		if ( ! current_user_can( 'manage_options' ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+			wp_redirect( home_url() );
+			exit;
+		}
 	}
 }
 

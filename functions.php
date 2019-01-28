@@ -80,15 +80,15 @@ function ignition_setup() {
 	 * See: https://codex.wordpress.org/Post_Formats
 	 */
 	/*
-		add_theme_support( 'post-formats', array(
-			'aside',
-			'image',
-			'video',
-			'quote',
-			'link',
-			'gallery',
-			'audio',
-		) );
+			add_theme_support( 'post-formats', array(
+				'aside',
+				'image',
+				'video',
+				'quote',
+				'link',
+				'gallery',
+				'audio',
+			) );
 	*/
 
 	// Add theme support for Custom Logo.
@@ -106,7 +106,7 @@ function ignition_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
 	  */
-	add_editor_style( array( 'editor-style.min.css', ignition_google_fonts_url() ) );
+	add_editor_style( array( 'editor-style.min.css', ign_google_fonts_url() ) );
 
 	$GLOBALS['content_width'] = 730;
 }
@@ -124,25 +124,27 @@ add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
 /**
  * Register custom google fonts.
  */
-function ignition_google_fonts_url() {
-	$fonts_url     = '';
-	$font_families = array();
+if ( ! function_exists( 'ign_google_fonts_url' ) ) {
+	function ign_google_fonts_url() {
+		$fonts_url     = '';
+		$font_families = array();
 
-	//add your fonts here into array
-	//when adding from google remove the + between words
-	//dont forget to add your fonts in sass under variables.scss
-	$font_families[] = 'Roboto:400,400i,700,700i';
-	$font_families[] = 'Roboto Slab:400,700';
-	$font_families[] = 'Source Code Pro';
+		//add your fonts here into array
+		//when adding from google remove the + between words
+		//dont forget to add your fonts in sass under variables.scss
+		$font_families[] = 'Roboto:400,400i,700,700i';
+		$font_families[] = 'Roboto Slab:400,700';
+		$font_families[] = 'Source Code Pro';
 
-	$query_args = array(
-		'family' => urlencode( implode( '|', $font_families ) ),
-		'subset' => urlencode( 'latin,latin-ext' ),
-	);
+		$query_args = array(
+			'family' => urlencode( implode( '|', $font_families ) ),
+			'subset' => urlencode( 'latin,latin-ext' ),
+		);
 
-	$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 
-	return esc_url_raw( $fonts_url );
+		return esc_url_raw( $fonts_url );
+	}
 }
 
 
@@ -175,64 +177,65 @@ add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 
-function ignition_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'ignition' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar.', 'ignition' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+if( ! function_exists('ign_widgets_init') ) {
+	function ign_widgets_init() {
+		register_sidebar( array(
+			'name'          => __( 'Sidebar', 'ignition' ),
+			'id'            => 'sidebar-1',
+			'description'   => __( 'Add widgets here to appear in your sidebar.', 'ignition' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
 
 
 //footer widgets and sections. up to 4
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer', 'ignition' ),
-		'id'            => 'sidebar-2',
-		'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer', 'ignition' ),
+			'id'            => 'sidebar-2',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
 
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer 2', 'ignition' ),
-		'id'            => 'sidebar-3',
-		'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer 2', 'ignition' ),
+			'id'            => 'sidebar-3',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
 
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer 3', 'ignition' ),
-		'id'            => 'sidebar-4',
-		'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer 3', 'ignition' ),
+			'id'            => 'sidebar-4',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer 4', 'ignition' ),
-		'id'            => 'sidebar-5',
-		'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer 4', 'ignition' ),
+			'id'            => 'sidebar-5',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
 
+	}
 }
-
-add_action( 'widgets_init', 'ignition_widgets_init' );
+add_action( 'widgets_init', 'ign_widgets_init' );
 
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
@@ -289,7 +292,7 @@ add_action( 'wp_head', 'ignition_pingback_header' );
  */
 function ignition_scripts() {
 	// Add google fonts
-	wp_enqueue_style( 'ignition-fonts', ignition_google_fonts_url(), array(), null );
+	wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), null );
 
 	// Theme stylesheet.
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', '1.0' );
@@ -299,7 +302,7 @@ function ignition_scripts() {
 
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );
-	wp_register_script( 'jquery-core', "https://code.jquery.com/jquery-3.1.1.min.js", array(), '3.1.1' );
+	wp_register_script( 'jquery-core', "https://code.jquery.com/jquery-3.3.1.min.js", array(), '3.3.1' );
 	wp_deregister_script( 'jquery-migrate' );
 	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.0.0.min.js", array(), '3.0.0' );
 

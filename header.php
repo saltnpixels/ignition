@@ -55,5 +55,3 @@ if ( get_theme_mod( 'app_menu', '' ) ) {
 		<?php include( locate_template( 'template-parts/site-top/site-top.php' ) ); ?>
 
 		<div id="site-content" class="site-content">
-
-		
