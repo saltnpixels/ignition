@@ -113,6 +113,9 @@ function ignition_setup() {
 
 add_action( 'after_setup_theme', 'ignition_setup' );
 
+/*
+ * Add Stylesheet for Gutenberg
+ */
 function ign_gutenberg_styles() {
 	// Load the theme styles within Gutenberg.
 	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
@@ -177,7 +180,7 @@ add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 
-if( ! function_exists('ign_widgets_init') ) {
+if ( ! function_exists( 'ign_widgets_init' ) ) {
 	function ign_widgets_init() {
 		register_sidebar( array(
 			'name'          => __( 'Sidebar', 'ignition' ),

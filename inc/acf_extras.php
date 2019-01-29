@@ -65,6 +65,26 @@ function acf_loop_field( $field ) {
 
 add_filter( 'acf/load_field/name=sections', 'acf_loop_field' );
 
+//Make sure the title remains as either the card list or the editor.
+function the_loop_layout_title( $title, $field, $layout, $i ) {
+	// remove layout title from text
+    global $post;
+    if( is_admin() && $layout['name'] == 'the_loop' ){
+	    $post_type = ign_is_page_archive_header( $post->ID, 'post_type' );
+	    if ( get_post_type() == 'page' && $post_type ) {
+		    $title = ucfirst( $post_type ) . ' Card List';
+	    } else {
+		    $title =  'Show Main Editor';
+	    }
+    }
+
+	// return
+	return $title;
+
+
+}
+
+add_filter('acf/fields/flexible_content/layout_title/name=sections', 'the_loop_layout_title', 10, 4);
 
 /**
  * @param $post_id
@@ -89,7 +109,6 @@ function save_sections( $post_id ) {
 }
 
 add_action( 'acf/save_post', 'save_sections', '99' );
-
 
 /**
  * Header styles for acf
@@ -122,36 +141,44 @@ function acf_js() {
 		if ( $screen->parent_base == 'edit' && $screen->post_type != 'acf-field-group' ) {
 			?>
             <script type="text/javascript">
-                acf.addAction('prepare', function () {
-                    let headerLayouts = acf.getPostbox("acf-group_5a79fa1baf007");
-                    let changeHeader = acf.getField('field_5c4b66a65ae2c');
+							let headerLayouts ='';
+							let changeHeader = '';
 
-                    //if header layouts group doesnt exist at all, dont show the change header field either
-                    if(! headerLayouts){
-                        changeHeader.hide();
-                        return;
-                    }
+							acf.addAction('prepare', function(){
+								headerLayouts = acf.getPostbox("acf-group_5a79fa1baf007");
+								changeHeader = acf.getField('field_5c4b66a65ae2c');
 
-                    //if change header is not checked, hide the header layout field
-                    if (!changeHeader.val()) {
-                        headerLayouts.hide();
-                    }
+								//if header layouts group doesnt exist at all, dont show the change header field either
+								if(! headerLayouts){
+									changeHeader.hide();
+									return;
+								}
 
-                    //when checked/unchecked show/hide header layout field. When showing, scroll up to it.
-                    changeHeader.$el.on('change', function () {
-                        if (changeHeader.val()) {
-                            headerLayouts.show();
-                            $('html,body').animate({scrollTop: 0}, 'slow');
-                            headerLayouts.$el.addClass('highlighted');
-                            setTimeout(function () {
-                                headerLayouts.$el.removeClass('highlighted');
-                            }, 2000);
-                        } else {
-                            headerLayouts.hide();
-                        }
-                    });
-                    // field.$el.addClass('my-class')
-                });
+								//if change header is not checked, hide the header layout field
+								if (!changeHeader.val()) {
+									headerLayouts.hide();
+								}
+
+								changeHeader.$el.on('change', show_hide_header);
+								document.querySelector('#page_template').addEventListener('change', ()=>{
+									setTimeout(show_hide_header, 500);
+								});
+							});
+
+							function show_hide_header() {
+								if (changeHeader.val()) {
+									headerLayouts.show();
+									$('html,body').animate({scrollTop: 0}, 'slow');
+									headerLayouts.$el.addClass('highlighted');
+									setTimeout(function () {
+										headerLayouts.$el.removeClass('highlighted');
+									}, 2000);
+								} else {
+									headerLayouts.hide();
+								}
+							}
+
+
 
 
             </script>
