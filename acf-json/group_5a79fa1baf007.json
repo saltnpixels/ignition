@@ -73,14 +73,14 @@
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
-                            "layout": "row",
+                            "layout": "block",
                             "button_label": "Add Item",
                             "sub_fields": [
                                 {
-                                    "key": "field_5afb26e688a8c",
-                                    "label": "Class",
-                                    "name": "class",
-                                    "type": "text",
+                                    "key": "field_5c50af09d2203",
+                                    "label": "Header Item Content",
+                                    "name": "",
+                                    "type": "tab",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -89,11 +89,8 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "default_value": "",
-                                    "placeholder": "(optional)",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
+                                    "placement": "left",
+                                    "endpoint": 0
                                 },
                                 {
                                     "key": "field_5afb04ab03173",
@@ -113,6 +110,41 @@
                                     "toolbar": "full",
                                     "media_upload": 1,
                                     "delay": 0
+                                },
+                                {
+                                    "key": "field_5c50aefed2202",
+                                    "label": "Advanced",
+                                    "name": "",
+                                    "type": "tab",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "placement": "left",
+                                    "endpoint": 0
+                                },
+                                {
+                                    "key": "field_5afb26e688a8c",
+                                    "label": "Class",
+                                    "name": "class",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "(optional)",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
                                 }
                             ]
                         },
@@ -147,6 +179,54 @@
                             },
                             "default_value": "",
                             "placeholder": "(optional)",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5c50acd40b48d",
+                            "label": "Width",
+                            "name": "container_class",
+                            "type": "select",
+                            "instructions": "Width of section",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "container": "Site Width",
+                                "container-fluid": "Full Width",
+                                "container-content": "Content Width",
+                                "no-container": "None"
+                            },
+                            "default_value": [
+                                "container"
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5c50ad5e0b48e",
+                            "label": "Grid Class",
+                            "name": "grid_class",
+                            "type": "text",
+                            "instructions": "This class will apply to the container holding all the paragraphs so they can be style onto a grid if wanted",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "card-grid",
+                            "placeholder": "card-grid | grid | flex-grid",
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
@@ -247,5 +327,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1548450564
+    "modified": 1548791813
 }

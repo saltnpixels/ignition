@@ -1,13 +1,71 @@
 <?php
 
 /**
- * Here you will find various hooks and filters and the ability to change how users can view stuff
+ * This file holds actions and filters for advanced functions, you probably dont need to change or touch.
+ * If you want to change the way a comment looks scroll to the bottom.
  */
+
+/*--------------------------------------------------------------
+# More Files and Scripts to load
+--------------------------------------------------------------*/
+
+/**
+ * Handles JavaScript detection.
+ * Adds a script that adds `js` class to the root `<html>` element when JavaScript is detected.
+ *
+ * @since Ignition 1.0
+ */
+function ignition_javascript_detection() {
+	echo "<script type='text/javascript'>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+}
+
+add_action( 'wp_head', 'ignition_javascript_detection', 0 );
+
+
+
+
+/*
+ * Require any functions.php for each post type.
+ * You can have a functions.php in each post type folder in template-parts.
+ */
+function ign_post_type_functions() {
+	$ign_post_types   = get_post_types( array( '_builtin' => false ) );
+	$ign_post_types[] = 'post';
+	$ign_post_types[] = 'page';
+
+
+	foreach ( $ign_post_types as $type ) {
+		$type = sanitize_key( $type );
+		if ( file_exists( locate_template( 'template-parts/' . $type . '/functions.php' ) ) ) {
+			include( locate_template( 'template-parts/' . $type . '/functions.php' ) );
+		}
+	}
+}
+
+add_action( 'init', 'ign_post_type_functions', 15 );
+
+
+/**
+ * Add a pingback url auto-discovery header for singularly identifiable articles.
+ */
+function ignition_pingback_header() {
+	if ( is_singular() && pings_open() ) {
+		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
+	}
+}
+
+add_action( 'wp_head', 'ignition_pingback_header' );
+
+
+
 /*--------------------------------------------------------------
 # Development Work
 --------------------------------------------------------------*/
 /**
- * Add to the wp log for development and debugging
+ * Add to the wp log for development and debugging. You can also send the log to the web console.
+ * To use, you must have the following defined in your wp_config file.
+ * define('WP_DEBUG', true);
+ * define('WP_DEBUG_LOG', true);
  */
 if ( ! function_exists( 'write_log' ) ) {
 	function write_log( $log, $send_to_console = false ) {
@@ -26,7 +84,8 @@ if ( ! function_exists( 'write_log' ) ) {
 }
 
 /**
- * Send debug code to the Javascript console when page is finished loading
+ * Send debug code to the Javascript console.
+ * Will only work if the page loads fully without an error that stops wp_footer from outputting.
  */
 $console_log = '';
 if ( ! function_exists( 'debug_to_console' ) ) {
@@ -41,6 +100,9 @@ if ( ! function_exists( 'debug_to_console' ) ) {
 	}
 }
 
+/*
+ * Output the error in the footer and send to console
+ */
 function output_log_to_footer() {
 	global $console_log;
 	echo $console_log;
@@ -66,6 +128,57 @@ function admin_bar_color_dev_site() {
 
 add_action( 'wp_head', 'admin_bar_color_dev_site' );
 add_action( 'admin_head', 'admin_bar_color_dev_site' );
+
+
+/*--------------------------------------------------------------
+# Post Extras
+--------------------------------------------------------------*/
+/**
+ * Replaces "[...]" (appended to automatically generated excerpts) with ... and
+ * a 'Continue reading' link.
+ *
+ * @since Ignition 1.0
+ *
+ * @return string 'Continue reading' link prepended with an ellipsis.
+ */
+function ignition_excerpt_more( $more ) {
+	if ( is_admin() ) {
+		return $more;
+	}
+
+	return '&hellip; ';
+}
+
+add_filter( 'excerpt_more', 'ignition_excerpt_more' );
+
+
+/*--------------------------------------------------------------
+# Google Font Loading
+--------------------------------------------------------------*/
+/**
+ * Add pre-connect for Google Fonts. This makes them load faster
+ *
+ * @since Ignition 1.0
+ *
+ * @param array $urls URLs to print for resource hints.
+ * @param string $relation_type The relation type the URLs are printed.
+ *
+ * @return array $urls           URLs to print for resource hints.
+ */
+function ignition_resource_hints( $urls, $relation_type ) {
+	if ( wp_style_is( 'ignition-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
+		$urls[] = array(
+			'href' => 'https://fonts.gstatic.com',
+			'crossorigin',
+		);
+	}
+
+	return $urls;
+}
+
+add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
+
+
 
 
 /*--------------------------------------------------------------
@@ -198,7 +311,11 @@ function ign_logo() {
 
 
 /**
- * Add logo to login page inline by using the message area Above
+ * @param $message
+ *
+ * @return string
+ *
+ * Add logo to login page inline by using the message area Above. That way it is inline svg
  */
 function the_login_logo( $message ) {
 	if ( empty( $message ) ) {
@@ -211,131 +328,16 @@ function the_login_logo( $message ) {
 add_filter( 'login_message', 'the_login_logo' );
 
 
-/**
- * Hide wordpress logo and make current logo centered on login page.
- */
-function my_login_styles() {
-	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/login-style.css' );
-}
-
-add_action( 'login_enqueue_scripts', 'my_login_styles' );
 
 
 /**
  * Login page logo points to home page instead of WordPress
  */
-function the_url() {
+function ign_login_url() {
 	return get_bloginfo( 'url' );
 }
 
-add_filter( 'login_headerurl', 'the_url' );
-
-
-/*--------------------------------------------------------------
-# ADMIN ACCESS AND ADMIN BAR VISIBILITY
---------------------------------------------------------------*/
-
-/**
- * Disable admin bar for everyone but admins
- *
- */
-if ( ! function_exists( 'disable_admin_bar' ) ) {
-
-	function disable_admin_bar() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			add_filter( 'show_admin_bar', '__return_false' );
-		}
-	}
-}
-add_action( 'after_setup_theme', 'disable_admin_bar' );
-
-
-/**
- * Redirect back to homepage and not allow access to WP Admin. Except admins and ajax
- */
-if ( ! function_exists( 'redirect_admin' ) ) {
-
-	function redirect_admin() {
-		if ( ! current_user_can( 'manage_options' ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-			wp_redirect( home_url() );
-			exit;
-		}
-	}
-}
-
-add_action( 'admin_init', 'redirect_admin' );
-
-
-/*--------------------------------------------------------------
-# Comment override walker
---------------------------------------------------------------*/
-
-/**
- * Ovveride comment section. Now you can change html and css how you want!
- * Taken from class-walker-comment.php html5 comment walker
- */
-
-//html5 comment
-function ignition_comments_callback( $comment, $args, $depth ) {
-
-	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
-	?>
-    <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>"
-	<?php comment_class( $args['has_children'] ? 'parent' : '', $comment ); ?>>
-    <article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
-        <footer class="comment-meta">
-            <div class="comment-author vcard">
-				<?php if ( 0 != $args['avatar_size'] ) {
-					echo get_avatar( $comment, $args['avatar_size'] );
-				} ?>
-            </div>
-            <!-- .comment-author -->
-
-            <div class="comment-name-date">
-				<?php printf( __( '%s <span class="says">says:</span>' ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) ); ?>
-
-                <div class="comment-metadata">
-                    <a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
-                        <time datetime="<?php comment_time( 'c' ); ?>">
-							<?php
-							/* translators: 1: comment date, 2: comment time */
-							printf( __( '%1$s at %2$s' ), get_comment_date( '', $comment ), get_comment_time() );
-							?>
-                        </time>
-                    </a>
-					<?php edit_comment_link( __( 'Edit' ), '<span class="edit-link">', '</span>' ); ?>
-                </div>
-                <!-- .comment-metadata -->
-            </div>
-
-			<?php if ( '0' == $comment->comment_approved ) : ?>
-                <p class="comment-awaiting-moderation">
-					<?php _e( 'Your comment is awaiting moderation.' ); ?>
-                </p>
-			<?php endif; ?>
-        </footer>
-        <!-- .comment-meta -->
-
-        <div class="comment-content">
-			<?php comment_text(); ?>
-        </div>
-        <!-- .comment-content -->
-
-		<?php
-		comment_reply_link( array_merge( $args, array(
-			'add_below' => 'div-comment',
-			'depth'     => $depth,
-			'max_depth' => $args['max_depth'],
-			'before'    => '<div class="reply">',
-			'after'     => '</div>'
-		) ) );
-		?>
-
-
-    </article>
-    <!-- .comment-body -->
-	<?php
-}
+add_filter( 'login_headerurl', 'ign_login_url' );
 
 
 /*--------------------------------------------------------------
@@ -433,20 +435,74 @@ function add_archive_edit_link( $admin_bar ) {
 	}
 }
 
+
 /*--------------------------------------------------------------
-# pre get posts
+# Comment override walker
 --------------------------------------------------------------*/
-function set_posts_per_page_for_post_types( $query ) {
-	if ( ! is_admin() && $query->is_main_query() ) {
 
-		//vanilla search with no post type uses search.php and only shows posts, and acts like index page
-		if ( $query->is_search() && ! $query->is_post_type_archive() ) {
-			$query->set( 'post_type', 'post' );
-			$query->is_home = true;
-		}
+/**
+ * Override comment section. Now you can change html and css how you want!
+ * Taken from class-walker-comment.php html5 comment walker
+ */
 
-	}
+//html5 comment
+function ignition_comments_callback( $comment, $args, $depth ) {
 
+	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
+	?>
+    <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>"
+	<?php comment_class( $args['has_children'] ? 'parent' : '', $comment ); ?>>
+    <article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
+        <footer class="comment-meta">
+            <div class="comment-author vcard">
+				<?php if ( 0 != $args['avatar_size'] ) {
+					echo get_avatar( $comment, $args['avatar_size'] );
+				} ?>
+            </div>
+            <!-- .comment-author -->
+
+            <div class="comment-name-date">
+				<?php printf( __( '%s <span class="says">says:</span>' ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) ); ?>
+
+                <div class="comment-metadata">
+                    <a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
+                        <time datetime="<?php comment_time( 'c' ); ?>">
+							<?php
+							/* translators: 1: comment date, 2: comment time */
+							printf( __( '%1$s at %2$s' ), get_comment_date( '', $comment ), get_comment_time() );
+							?>
+                        </time>
+                    </a>
+					<?php edit_comment_link( __( 'Edit' ), '<span class="edit-link">', '</span>' ); ?>
+                </div>
+                <!-- .comment-metadata -->
+            </div>
+
+			<?php if ( '0' == $comment->comment_approved ) : ?>
+                <p class="comment-awaiting-moderation">
+					<?php _e( 'Your comment is awaiting moderation.' ); ?>
+                </p>
+			<?php endif; ?>
+        </footer>
+        <!-- .comment-meta -->
+
+        <div class="comment-content">
+			<?php comment_text(); ?>
+        </div>
+        <!-- .comment-content -->
+
+		<?php
+		comment_reply_link( array_merge( $args, array(
+			'add_below' => 'div-comment',
+			'depth'     => $depth,
+			'max_depth' => $args['max_depth'],
+			'before'    => '<div class="reply">',
+			'after'     => '</div>'
+		) ) );
+		?>
+
+
+    </article>
+    <!-- .comment-body -->
+	<?php
 }
-
-add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );

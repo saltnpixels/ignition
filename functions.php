@@ -6,10 +6,14 @@
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  * @package Ignition
  * @since 1.0
+ *
+ * This is the first file you should edit when starting a new theme.
+ * Here you can edit the google fonts, the images sizes and other setup options for your theme.
  */
 
 /**
- * Ignition only works in WordPress 4.7 or later.
+ * Ignition only works in WordPress 4.7 or later. Here we check before allowing the theme to be used.
+ * There is nothing here for you to do.
  */
 if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
@@ -17,20 +21,64 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 	return;
 }
 
+
+/*--------------------------------------------------------------
+# Setup
+--------------------------------------------------------------*/
 /**
- * Sets up theme defaults and registers support for various WordPress features.
- *
+ * This sets up theme defaults and registers support for various WordPress features.
  * Runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
+ * Here is where you can start changing settings.
  */
 function ignition_setup() {
+
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/ignition
-	 * If you're building a theme based on Ignition, use a find and replace
+	 * If you're building a theme based on Ignition, and you downloaded this from github, use a find and replace
 	 * to change 'ignition' to the name of your theme in all the template files.
 	 */
 	load_theme_textdomain( 'ignition' );
+
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+    */
+	add_theme_support( 'post-thumbnails' );
+
+
+	/*
+	 * default image size for cards and thumbnails and header images
+	 */
+	set_post_thumbnail_size( 300, 300, true );
+	add_image_size( 'header_image', '2000', '600' );
+
+
+	/*
+	 * Add menus here
+	 */
+	register_nav_menus( array(
+		'top' => __( 'Top Menu', 'ignition' ),
+	) );
+
+	/*
+    * Enable support for Post Formats.
+    * Uncomment if you want to use this feauture
+    * See: https://codex.wordpress.org/Post_Formats
+    */
+
+	/*
+			add_theme_support( 'post-formats', array(
+				'aside',
+				'image',
+				'video',
+				'quote',
+				'link',
+				'gallery',
+				'audio',
+			) );
+	*/
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -47,23 +95,6 @@ function ignition_setup() {
 	add_theme_support( 'title-tag' );
 
 	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	add_theme_support( 'post-thumbnails' );
-
-
-	//default image size for cards
-	set_post_thumbnail_size( 300, 300, true );
-	add_image_size( 'header_image', '2000', '600' );
-
-	//menus
-	register_nav_menus( array(
-		'top' => __( 'Top Menu', 'ignition' ),
-	) );
-
-	/*
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
 	 */
@@ -74,22 +105,6 @@ function ignition_setup() {
 		'caption',
 	) );
 
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	/*
-			add_theme_support( 'post-formats', array(
-				'aside',
-				'image',
-				'video',
-				'quote',
-				'link',
-				'gallery',
-				'audio',
-			) );
-	*/
 
 	// Add theme support for Custom Logo.
 	add_theme_support( 'custom-logo', array(
@@ -113,27 +128,19 @@ function ignition_setup() {
 
 add_action( 'after_setup_theme', 'ignition_setup' );
 
-/*
- * Add Stylesheet for Gutenberg
- */
-function ign_gutenberg_styles() {
-	// Load the theme styles within Gutenberg.
-	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
-}
-
-add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
-
 
 /**
- * Register custom google fonts.
+ * Register custom google fonts. These are loaded along with scripts and styles.
+ * Change/Remove the fonts in the $font_families array below to load different ones
+ * Open the base/variables.scss to set the font, font-alt, and font-pre variables to these fonts.
  */
 if ( ! function_exists( 'ign_google_fonts_url' ) ) {
 	function ign_google_fonts_url() {
 		$fonts_url     = '';
 		$font_families = array();
 
-		//add your fonts here into array
-		//when adding from google remove the + between words
+		//add your fonts here into the array below
+		//when adding from google remove the + between words Ex: 'Source+Code' becomes 'Source Code'
 		//dont forget to add your fonts in sass under variables.scss
 		$font_families[] = 'Roboto:400,400i,700,700i';
 		$font_families[] = 'Roboto Slab:400,700';
@@ -152,30 +159,9 @@ if ( ! function_exists( 'ign_google_fonts_url' ) ) {
 
 
 /**
- * Add pre-connect for Google Fonts. This makes them load faster
- *
- * @since Ignition 1.0
- *
- * @param array $urls URLs to print for resource hints.
- * @param string $relation_type The relation type the URLs are printed.
- *
- * @return array $urls           URLs to print for resource hints.
- */
-function ignition_resource_hints( $urls, $relation_type ) {
-	if ( wp_style_is( 'ignition-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
-			'crossorigin',
-		);
-	}
-
-	return $urls;
-}
-
-add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
-
-/**
  * Register widget areas.
+ * Change/Remove widget areas here. By default the widget areas are the sidebar and the footer which has 4 widget areas being output in columns.
+ * See template-parts/footer/footer-widgets.php
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
@@ -240,68 +226,60 @@ if ( ! function_exists( 'ign_widgets_init' ) ) {
 }
 add_action( 'widgets_init', 'ign_widgets_init' );
 
+
+/*--------------------------------------------------------------
+# ADMIN ACCESS AND ADMIN BAR VISIBILITY
+--------------------------------------------------------------*/
+
 /**
- * Replaces "[...]" (appended to automatically generated excerpts) with ... and
- * a 'Continue reading' link.
- *
- * @since Ignition 1.0
- *
- * @return string 'Continue reading' link prepended with an ellipsis.
+ * Disable admin bar for everyone but administrators
+ * You can change this based on capabilities. By default manage_options is used to check the users role
  */
-function ignition_excerpt_more( $link ) {
-	if ( is_admin() ) {
-		return $link;
+define('IGN_WP_ADMIN_ACCESS_CAPABILITY', 'manage_options');
+
+if ( ! function_exists( 'disable_admin_bar' ) ) {
+
+	function disable_admin_bar() {
+		if ( ! current_user_can( IGN_WP_ADMIN_ACCESS_CAPABILITY ) ) {
+			add_filter( 'show_admin_bar', '__return_false' );
+		}
 	}
-
-	$link = sprintf( '<p class="link-more"><a href="%1$s" class="more-link">%2$s</a></p>',
-		esc_url( get_permalink( get_the_ID() ) ),
-		/* translators: %s: Name of current post */
-		sprintf( __( 'Read More<span class="screen-reader-text"> "%s"</span>', 'ignition' ), get_the_title( get_the_ID()
-		) )
-	);
-
-	return ' &hellip; ' . $link;
 }
-
-add_filter( 'excerpt_more', 'ignition_excerpt_more' );
+add_action( 'after_setup_theme', 'disable_admin_bar' );
 
 
 /**
- * Handles JavaScript detection.
- * Adds a script that adds `js` class to the root `<html>` element when JavaScript is detected.
- *
- * @since Ignition 1.0
+ * Redirect back to homepage and not allow access to WP Admin. Except admins and ajax
  */
-function ignition_javascript_detection() {
-	echo "<script type='text/javascript'>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
-}
+if ( ! function_exists( 'redirect_admin' ) ) {
 
-add_action( 'wp_head', 'ignition_javascript_detection', 0 );
-
-/**
- * Add a pingback url auto-discovery header for singularly identifiable articles.
- */
-function ignition_pingback_header() {
-	if ( is_singular() && pings_open() ) {
-		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
+	function redirect_admin() {
+		if ( ! current_user_can( IGN_WP_ADMIN_ACCESS_CAPABILITY ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+			wp_redirect( home_url() );
+			exit;
+		}
 	}
 }
 
-add_action( 'wp_head', 'ignition_pingback_header' );
+add_action( 'admin_init', 'redirect_admin' );
 
 
+/*--------------------------------------------------------------
+# Scripts and Styles
+--------------------------------------------------------------*/
 /**
- * Enqueue scripts and styles.
+ * Enqueue all scripts and styles.
+ * Add your own scripts and styles below.
  */
 function ignition_scripts() {
 	// Add google fonts
 	wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), null );
 
-	// Theme stylesheet.
+	// Theme stylesheet. Will get this stylesheet or a child themes stylesheet.
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', '1.0' );
 
-	//Sass compiles styles
-	wp_enqueue_style( 'sass-styles', get_theme_file_uri( '/main.css' ), '', '1.0' );
+	//Sass compiles styles. Will get child's theme version if found instead.
+	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', '1.0' );
 
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );
@@ -311,23 +289,23 @@ function ignition_scripts() {
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
-	wp_enqueue_script( 'ignition-custom', get_theme_file_uri( '/assets/js/custom.js' ), array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom-js', get_template_directory() . '/assets/js/custom.js', array( 'jquery' ),
 		'1.0', true );
 
 	//AJAX ready for .custom.js files
-	wp_localize_script( 'ignition-custom', 'frontEndAjax', array(
+	wp_localize_script( 'ignition-custom-js', 'frontEndAjax', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		'nonce'   => wp_create_nonce( 'ajax_nonce' ),
 	) );
 
-	wp_localize_script( 'ignition-custom', 'screenReaderText', array(
+	wp_localize_script( 'ignition-custom-js', 'screenReaderText', array(
 		'quote'    => ign_get_svg( array( 'icon' => 'quote-right' ) ),
 		'expand'   => __( 'Expand child menu', 'ignition' ),
 		'collapse' => __( 'Collapse child menu', 'ignition' )
 	) );
 
 	//Icons: add icons for use in custom js here
-	wp_localize_script( 'ignition-custom', 'icons', array(
+	wp_localize_script( 'ignition-custom-js', 'icons', array(
 		'angleRight' => ign_get_svg( array( 'icon' => 'angle-right' ) ),
 		'sidebar'    => ign_get_svg( array( 'icon' => 'sidebar' ) )
 	) );
@@ -349,8 +327,65 @@ function ignition_scripts() {
 add_action( 'wp_enqueue_scripts', 'ignition_scripts' );
 
 
+/*
+ * Add Stylesheet for Gutenberg
+ */
+function ign_gutenberg_styles() {
+	// Load the theme styles within Gutenberg.
+	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
+}
+
+add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
+
+
+/**
+ * Add login stylehseet
+ */
+function my_login_styles() {
+	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/login-style.css' );
+}
+
+add_action( 'login_enqueue_scripts', 'my_login_styles' );
+
+/*--------------------------------------------------------------
+# Pre Post Queries
+--------------------------------------------------------------*/
+/**
+ * @param $query
+ * Here you can change the default query for any WordPress page/post or archive
+ */
+function set_posts_per_page_for_post_types( $query ) {
+	if ( ! is_admin() && $query->is_main_query() ) {
+
+		//vanilla search with no post type uses search.php and only shows posts, and acts like index page
+		if ( $query->is_search() && ! $query->is_post_type_archive() ) {
+			$query->set( 'post_type', 'post' );
+			$query->is_home = true;
+		}
+
+	}
+
+}
+
+add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );
+
+
+
+
+
+/*--------------------------------------------------------------
+# Adding More PHP Files
+--------------------------------------------------------------*/
+/**
+ * ignition abilities and extra filter and functions
+ * you can edit the comment walker at the bottom of this file.
+ */
+require get_parent_theme_file_path( '/inc/extras.php' );
+
+
 /**
  * Custom template tags and functions for this theme.
+ * Useful in the content for showing post author and time and edit links.
  */
 require get_parent_theme_file_path( '/inc/template-tags.php' );
 
@@ -369,32 +404,9 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
-/**
- * ignition abilities and extras
- */
-require get_parent_theme_file_path( '/inc/extras.php' );
 
 /**
  * Add ACF Field Extras
  */
 require get_parent_theme_file_path( '/inc/acf_extras.php' );
 
-/*
- * Require any functions.php for each post type
- */
-function ign_post_type_functions() {
-	$ign_post_types   = get_post_types( array( '_builtin' => false ) );
-	$ign_post_types[] = 'post';
-	$ign_post_types[] = 'page';
-
-
-	//var_dump( $ign_post_types );
-	foreach ( $ign_post_types as $type ) {
-		$type = sanitize_key( $type );
-		if ( file_exists( locate_template( 'template-parts/' . $type . '/functions.php' ) ) ) {
-			include( locate_template( 'template-parts/' . $type . '/functions.php' ) );
-		}
-	}
-}
-
-add_action( 'init', 'ign_post_type_functions', 15 );
