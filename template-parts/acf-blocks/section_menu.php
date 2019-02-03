@@ -1,5 +1,5 @@
 <?php
-//Scrolls to each section
+//Scrolls to each section on the page
 
 if ( have_rows( 'section_names' ) ) {
 	?>

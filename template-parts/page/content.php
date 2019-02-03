@@ -27,22 +27,16 @@ $id        = get_the_ID();
 		//Soon custom header acf-blocks for Gutenberg will be made
 		//if this is a sidebar template, js is used to pop out this header and put above the article at full width.
 		//this way its semantically placed inside properly, but moved out and looks nicely placed above the sidebar
-		if ( function_exists( 'have_rows' ) ) {
-			locate_template( 'template-parts/acf-blocks/header_sections.php', true );
-		}
+		locate_template( 'template-parts/acf-blocks/header_sections.php', true );
+
 		?>
 
         <div class="entry-content container-content">
 
 			<?php
 
-			//include sections made with acf.
-			//include sections made with acf.
-			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ) {
-				locate_template( 'template-parts/acf-blocks/sections.php', true );
-			} else {
-				the_content();
-			}
+			//include sections made with acf or falls back on the_content.
+			locate_template( 'template-parts/acf-blocks/sections.php', true );
 
 
 			wp_link_pages( array(
@@ -55,14 +49,14 @@ $id        = get_the_ID();
         </div><!-- .entry-content -->
     </article><!-- #page-## -->
 
-	<section class="after-article container-content">
+    <section class="after-article container-content">
 		<?php
 		// If comments are open or we have at least one comment, load up the comment template.
 		if ( comments_open() || get_comments_number() ) :
 			comments_template();
 		endif;
 		?>
-	</section>
+    </section>
 
 
 	<?php ////////////////////////////////////////////// below is used if this is NOT a single page, but an archive or the blog ?>

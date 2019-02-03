@@ -1,0 +1,100 @@
+/*--------------------------------------------------------------
+# Panel right Layout. Touch only if you know what your doing!
+--------------------------------------------------------------*/
+//(panel left's layout stuff is lumped into menu_layout.scss)
+
+.panel-right-toggle {
+  z-index: var(--z-index-top);
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: 0;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  outline: none;
+  font-size: 22px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/*------- default if no icon is found with svg --------*/
+.sidebar-icon {
+  border: 2px solid white;
+  border-radius: 1px;
+  position: relative;
+  height: 1.3rem; //may have to play to get it matching font size
+  width: 22px;
+  display: block;
+
+  &:after {
+    content: '';
+    width: 30%;
+    background: white;
+    height: 100%;
+    position: absolute;
+    right: 0;
+  }
+}
+
+
+//hide button if sidebar empty. button must be after sidebar
+#panel-right:empty ~ .panel-right-toggle {
+  display: none;
+}
+
+
+//add room for panel-right button if the menu is up against edge of screen
+@media (max-width: $media-container + $gap){
+  #panel-right:not(:empty) ~ .site .site-top .container {
+    padding-right: 52px;
+  }
+}
+
+//if site nav is full width, add room for sidebar button always
+#panel-right:not(:empty) ~ .site .site-top .container-fluid {
+  padding-right: 52px;
+}
+
+//open panel
+#panel-right.open:not(:empty) {
+  flex-basis: var(--panel-right-width);
+  flex-shrink: 0;
+}
+
+//if right panel starts open, leave open until mobile, and hide button till mobile
+@media(min-width: $panel-right-absolute){
+  #panel-right.stay-open{
+    flex-basis: var(--panel-right-width);
+    flex-shrink: 0;
+    transform: translate(0,0);
+
+    & ~ .panel-right-toggle{
+      display: none;
+    }
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Panel Breakpoint to become absolute. no longer a flexed item
+--------------------------------------------------------------*/
+@media(max-width: $panel-right-absolute) {
+  #panel-right {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    padding-top: 50px;
+    z-index: 90;
+    width: 0;
+
+    &.open {
+      width: var(--panel-right-width);
+    }
+  }
+}
+
+

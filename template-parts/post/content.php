@@ -14,27 +14,22 @@ $id        = get_the_ID();
 ?>
 
 <?php if ( is_single() ) : ?>
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 		<?php
 		//special header layouts can be used with acf, otherwise a fallback header is used.
-		//Soon custom header acf-blocks for Gutenberg will be made and then header might go inside container content.
 		//if this is a sidebar template, js is used to pop out this header and put above the article at full width.
 		//this way its semantically placed inside properly, but moved out and looks nicely placed above the sidebar
-		if ( function_exists( 'have_rows' ) ) {
-			include( locate_template( 'template-parts/acf-blocks/header_sections.php' ) );
-		}
+		locate_template( 'template-parts/acf-blocks/header_sections.php', true );
+
 		?>
 
-		<div class="entry-content container-content">
+        <div class="entry-content container-content">
 			<?php
 
 			//include sections made with acf.
-			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ) {
-				locate_template( 'template-parts/acf-blocks/sections.php', true );
-			} else {
-				the_content();
-			}
+			locate_template( 'template-parts/acf-blocks/sections.php', true );
+
 
 			//not sure gutenberg eve has this anymore
 			wp_link_pages( array(
@@ -46,10 +41,10 @@ $id        = get_the_ID();
 
 			?>
 
-		</div><!-- .entry-content -->
-	</article><!-- #post-## -->
+        </div><!-- .entry-content -->
+    </article><!-- #post-## -->
 
-	<section class="after-article container-content">
+    <section class="after-article container-content">
 		<?php
 		the_post_navigation( array(
 			'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'ignition' ) . '</span><div class="nav-title"><span class="nav-title-icon-wrapper">' . ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span> <span>%title</span></div>',
@@ -61,7 +56,7 @@ $id        = get_the_ID();
 			comments_template();
 		endif;
 		?>
-	</section>
+    </section>
 
 
 <?php endif; ?>
@@ -72,33 +67,33 @@ $id        = get_the_ID();
 
 
 <?php if ( ! is_single() ): ?>
-	<article id="post-<?php the_ID(); ?>" <?php post_class( 'card' ); ?>>
-		<div class="header-image cover-image">
+    <article id="post-<?php the_ID(); ?>" <?php post_class( 'card' ); ?>>
+        <div class="header-image cover-image">
 			<?php
 			if ( has_post_thumbnail() ) {
 				the_post_thumbnail( 'post-thumbnail' );
 			}
 			?>
-		</div>
+        </div>
 
-		<header class="card-header">
-			<div class="header-content">
+        <header class="card-header">
+            <div class="header-content">
 				<?php echo ign_get_terms(); ?>
 				<?php the_title( '<h2 class="card-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
-			</div>
-		</header>
+            </div>
+        </header>
 
-		<div class="card-content">
+        <div class="card-content">
 			<?php
 			the_excerpt();
 			?>
-		</div><!-- .card-content -->
+        </div><!-- .card-content -->
 
-		<div class="card-meta">
+        <div class="card-meta">
 			<?php echo ign_posted_on(); ?>
 			<?php echo ign_comment_link(); ?>
-		</div>
-	</article><!-- #post-## -->
+        </div>
+    </article><!-- #post-## -->
 <?php endif; //end if not single ?>
 
 

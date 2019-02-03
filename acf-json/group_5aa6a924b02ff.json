@@ -1,6 +1,6 @@
 {
     "key": "group_5aa6a924b02ff",
-    "title": "Sections",
+    "title": "Page Sections",
     "fields": [
         {
             "key": "field_5aa800095d7bc",
@@ -15,6 +15,7 @@
                 "class": "",
                 "id": ""
             },
+            "admin_only": 0,
             "layouts": {
                 "5b083c29d9114": {
                     "key": "5b083c29d9114",
@@ -40,10 +41,10 @@
                         },
                         {
                             "key": "field_5b083c40d9116",
-                            "label": "paragraph",
+                            "label": "Paragraph",
                             "name": "paragraph",
                             "type": "wysiwyg",
-                            "instructions": "",
+                            "instructions": "Add a simple paragraph field.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -51,6 +52,7 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "",
                             "tabs": "all",
                             "toolbar": "full",
@@ -123,7 +125,7 @@
                             "label": "Heading",
                             "name": "heading",
                             "type": "text",
-                            "instructions": "",
+                            "instructions": "Add a heading above your paragraphs. In the advanced tab you can set a background image.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -131,6 +133,7 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "",
                             "placeholder": "",
                             "prepend": "",
@@ -147,9 +150,11 @@
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
-                                "class": "",
+                                "class": "grid-class",
                                 "id": ""
                             },
+                            "admin_only": 0,
+                            "ign_set_data": "",
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
@@ -169,7 +174,8 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "placement": "left",
+                                    "admin_only": 0,
+                                    "placement": "top",
                                     "endpoint": 0
                                 },
                                 {
@@ -204,7 +210,8 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "placement": "left",
+                                    "admin_only": 0,
+                                    "placement": "top",
                                     "endpoint": 0
                                 },
                                 {
@@ -220,11 +227,13 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "admin_only": 0,
                                     "default_value": "",
                                     "placeholder": "(optional)",
                                     "prepend": "",
                                     "append": "",
-                                    "maxlength": ""
+                                    "maxlength": "",
+                                    "ign_set_data": ".acf-row"
                                 }
                             ]
                         },
@@ -243,6 +252,30 @@
                             },
                             "placement": "top",
                             "endpoint": 0
+                        },
+                        {
+                            "key": "field_5b2fac15c13f7",
+                            "label": "Background",
+                            "name": "background_image",
+                            "type": "image",
+                            "instructions": "Add a background image if wanted",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "post-thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
                         },
                         {
                             "key": "field_5ab12942d7607",
@@ -276,11 +309,13 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "card-grid",
                             "placeholder": "card-grid | grid | flex-grid",
                             "prepend": "",
                             "append": "",
-                            "maxlength": ""
+                            "maxlength": "",
+                            "ign_set_data": ".grid-class"
                         },
                         {
                             "key": "field_5b081c33ccb51",
@@ -310,30 +345,6 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
-                        },
-                        {
-                            "key": "field_5b2fac15c13f7",
-                            "label": "Background",
-                            "name": "background_image",
-                            "type": "image",
-                            "instructions": "Add a background image if wanted",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "post-thumbnail",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
                         }
                     ],
                     "min": "",
@@ -417,7 +428,7 @@
                             "key": "field_5b0471e53bd01",
                             "label": "Pagination",
                             "name": "pagination",
-                            "type": "select",
+                            "type": "true_false",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -426,17 +437,12 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": {
-                                "yes": "Yes",
-                                "no": "No"
-                            },
-                            "default_value": [],
-                            "allow_null": 0,
-                            "multiple": 0,
+                            "admin_only": 0,
+                            "message": "Show pagination?",
+                            "default_value": 0,
                             "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         },
                         {
                             "key": "field_5afb0356ab73a",
@@ -515,28 +521,6 @@
                     "display": "row",
                     "sub_fields": [
                         {
-                            "key": "field_5ab1573158392",
-                            "label": "Choose Post\/Page",
-                            "name": "post_items",
-                            "type": "post_object",
-                            "instructions": "Choose pages to grab and get all of that pages sections.",
-                            "required": 1,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page"
-                            ],
-                            "taxonomy": "",
-                            "allow_null": 0,
-                            "multiple": 1,
-                            "return_format": "id",
-                            "ui": 1
-                        },
-                        {
                             "key": "field_5c4cfd894d6a0",
                             "label": "Pages",
                             "name": "",
@@ -553,21 +537,27 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5c4cfe85b6ad8",
-                            "label": "Instructions",
-                            "name": "",
-                            "type": "message",
-                            "instructions": "",
-                            "required": 0,
+                            "key": "field_5ab1573158392",
+                            "label": "Choose Post\/Page",
+                            "name": "post_items",
+                            "type": "post_object",
+                            "instructions": "Get pages with sections and stitch them together. This makes it easy to make sections once and reuse them over and over. Ex: make a page with a testimonial section and then just grab that page whenever you want to show the testimonials.",
+                            "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Get pages with sections and stitch them together. This makes it easy to make sections once and reuse them over and over. Ex: make a page with a testimonial section and then just grab that page whenever you want to show the testimonials.",
-                            "new_lines": "wpautop",
-                            "esc_html": 0
+                            "admin_only": 0,
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "multiple": 1,
+                            "return_format": "id",
+                            "ui": 1
                         },
                         {
                             "key": "field_5c4cfda74d6a1",
@@ -656,11 +646,12 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
                             "layout": "table",
-                            "button_label": "",
+                            "button_label": "Add Menu Item",
                             "sub_fields": [
                                 {
                                     "key": "field_5bbaa4ad5d159",
@@ -707,7 +698,7 @@
                     "max": ""
                 }
             },
-            "button_label": "Add Section",
+            "button_label": "Add Page Section",
             "min": "",
             "max": ""
         }
@@ -729,5 +720,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1548709963
+    "modified": 1549208777
 }

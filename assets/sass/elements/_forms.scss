@@ -8,7 +8,7 @@ label {
 }
 
 fieldset {
-  margin-bottom: $gap;
+  margin-bottom: var(--gap);
 }
 
 input[type="text"],

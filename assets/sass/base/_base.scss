@@ -1,3 +1,8 @@
+/*--------------------------------------------------------------
+# Adding the base styles necessary to run ignition
+--------------------------------------------------------------*/
+//You probably only have to touch variables.scss
+
 @import "mixins";
 
 @import "variables";
@@ -7,4 +12,10 @@
 @import "grid";
 
 @import "ie11";
+
+@import "menu_layout";
+
+@import "panel_right_layout";
+
+@import "sidebar_layout";
 

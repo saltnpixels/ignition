@@ -4,7 +4,7 @@ Lists
 
 ul,
 ol {
-	margin: 0 0 1.5em $gap;
+	margin: 0 0 1.5em var(--gap);
 	padding: 0;
 }
 
@@ -32,7 +32,7 @@ dd {
 
 //Gutenberg fix
 .entry-content > ul, .entry-content > ol{
-	padding-left: $gap;
+	padding-left: var(--gap);
 
 	li{
 		padding: 5px 0;

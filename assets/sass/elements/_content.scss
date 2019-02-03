@@ -1,25 +1,14 @@
 /*--------------------------------------------------------------
 # Articles
 --------------------------------------------------------------*/
+//here is where you can change the styles of your articles on single and archive views
+//for acf sections use sections.scss
 .single article{
 
   .entry-content{
-    margin-bottom: $gap;
+    margin-bottom: var(--gap);
   }
-
-  h2{
-    margin-top: 30px;
-    @include font-size(32);
-    margin-bottom: 0;
-  }
-
-  h3{
-    @include font-size(24);
-    margin: 0;
-  }
-
 }
-
 
 .after-article{
   clear: both;
@@ -27,9 +16,9 @@
 
 
 /*--------------------------------------------------------------
-# Cards on Archive pages
+# Default Cards on Archive pages
 --------------------------------------------------------------*/
-//to have this only affect post-type posts, change to .post.card
+//to have this only affect post-type posts, change to .post.card or override with new .post-type.card
 .card {
   box-shadow: 0 1px 12px rgba(black, .3);
   border-radius: 5px;
@@ -39,7 +28,7 @@
   flex-direction: column;
 
   > * {
-    padding: 0 $gutters;
+    padding: 0 var(--gutters);
   }
 
   /*------- Card Header --------*/
@@ -53,13 +42,14 @@
 
   .card-title {
     @include font-size(26);
-    margin-bottom: $gutters;
+    margin-bottom: var(--gutters);
   }
 
   a.term-link {
-    @include scss-font-lock(12px, 14px);
-    letter-spacing: 1px;
+    @include font-size(12);;
+    letter-spacing: .5px;
     text-transform: uppercase;
+    font-weight: bold;
   }
 
   .more-link {
@@ -68,17 +58,30 @@
 
   .card-content {
     flex: 1 0 auto;
+    @include font-size(16);
   }
 
-  time, time a {
-    @include scss-font-lock(12px, 14px);
+  .card-meta{
+    display: flex;
+    padding-bottom: 5px;
+  }
+
+  .posted-on{
+    margin-right: 10px;
   }
 
 }
 
-//hide the published date if there is a modified date
-.published.updated {
+
+/*--------------------------------------------------------------
+# Article Meta
+--------------------------------------------------------------*/
+.updated {
   display: none;
+}
+
+time, time a {
+  @include font-size(13);
 }
 
 
@@ -107,5 +110,5 @@
 }
 
 
-//ADD MORE CARDS FOR POST TYPES BELOW
+//ADD MORE CARDS AND STYLES FOR POST TYPES BELOW
 

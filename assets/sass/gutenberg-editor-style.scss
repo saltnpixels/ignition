@@ -16,7 +16,7 @@
   @import "elements/_forms";
 
   /*------- Typography --------*/
-  @import "elements/typography";
+  @import "global/typography";
 
   /*------- media --------*/
   @import "elements/media";
@@ -30,8 +30,10 @@
   /*------- Sections --------*/
   @import "elements/sections";
 
-  /*------- Gutenberg --------*/
-  @import "global/gutenberg";
+
+  p{
+    @include font-size(18);
+  }
 }
 
 //outside so it can apply to post types specifically

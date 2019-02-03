@@ -18,7 +18,7 @@
 @import "base/grid";
 
 /*------- Typography --------*/ 
-@import "elements/typography";
+@import "global/typography";
 
 /*------- Forms --------*/
 @import "elements/forms";
@@ -30,7 +30,7 @@
 @import "elements/media";
 
 /*------- Nav Menu  --------*/
-@import "global/menu_layout";
+@import "base/menu_layout";
  
 
 /*------- Global elements --------*/ 
@@ -47,3 +47,15 @@
 
 /*------- IE 11 --------*/
 @import "base/ie11";
+
+
+/*--------------------------------------------------------------
+# MCE Editor
+--------------------------------------------------------------*/
+.mce-content-body{
+  padding: 5px 30px;
+}
+
+.post-type-post{
+  @extend .container-content;
+}

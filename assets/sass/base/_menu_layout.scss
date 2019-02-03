@@ -24,7 +24,7 @@
 
       //added with hook. holds button and link, not submenu
       .menu-item-link{
-        padding: 5px $gutters;
+        padding: 5px 15px;
         display: flex;
         align-items: flex-start;
         transition: all .5s;
@@ -110,16 +110,16 @@
         overflow: visible;
         opacity: 0;
         visibility: hidden;
-        transition: all .5s;
+        transition: opacity .5s, visibility .5s;
         transition-delay: .2s;
         margin: 0;
         position: absolute;
         z-index: 10;
         top: 100%;
+        min-width: 200px;
         left: 50%;
-
-        width: 200px;
-        margin-left: -100px; //half of width, to center the submenu
+        right: 50%;
+        transform: translate(-50%, 0);
         border-radius: 0 0 3px 3px;
 
         a{
@@ -129,7 +129,7 @@
       }
 
       .sub-menu .menu-item-link{
-        padding: $gutters;
+        padding: 3px 15px;
       }
 
       //top level sub-menus opened
@@ -322,7 +322,7 @@
 
 
 /*--------------------------------------------------------------
-# Opening and Closing Mobile Menus
+# Opening and Closing Mobile Menus / Panel Left Layout
 --------------------------------------------------------------*/
 /*------- Panel menu --------*/
 #panel-left {
@@ -433,7 +433,7 @@
 }
 
 //if site top is in container, add room for button only when necessary
-@media (max-width: $container + $gap){
+@media (max-width: $media-container + $gap){
   #panel-left:not(:empty) ~ .site .site-top .container {
     padding-left: 52px;
   }
@@ -465,7 +465,7 @@
   top: 0;
   bottom: 0;
   margin: 0;
-  padding: 0 $gutters;
+  padding: 0 15px;
   outline: none;
   transition: all .5s;
   background: transparent;

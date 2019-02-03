@@ -22,7 +22,7 @@
 
 /*------- Items directly under header should have padding --------*/
 .entry-content > *:first-child {
-  padding-top: $gap;
+  padding-top: var(--gap);
 }
 
 /*------- When header has no min-height and text isnt on top of any image --------*/
@@ -35,6 +35,8 @@
   margin-bottom: $gap;
 
   .cover-image {
-    margin-bottom: $gap; //above title
+    margin-bottom: var(--gap); //above title
   }
 }
+
+//see media.scss for background image and cover image styles

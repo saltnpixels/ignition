@@ -11,8 +11,7 @@
 
 global $post;
 
-$old_post = $post;
-wp_reset_postdata();
+
 
 ?>
 <?php
@@ -31,12 +30,16 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 			<?php
 			$heading = get_sub_field( 'heading' );
 			if ( $heading ) {
-				?><h2 class="text-center"><?php echo $heading; ?></h2>
+				?><h2><?php echo $heading; ?></h2>
 				<?php
 			} ?>
 
 			<?php
-			if ( is_post_type_archive() || is_home() || is_search() || is_archive() ) { ?>
+			if ( is_post_type_archive() || is_home() || is_search() || is_archive() ) {
+				$old_post = $post;
+				wp_reset_postdata();
+			    ?>
+
 
 				<div class="loop-holder <?php echo esc_attr($loop_class); ?>">
 
@@ -66,13 +69,11 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 						) );
 						?>
 					</div>
-				<?php } ?>
+				<?php } //revert back to original post
+				$post = $old_post;
+				setup_postdata( $post );
+			} else {
 
-			<?php } else {
-				//global $saving_sections;
-//				if ( ! $saving_sections ) {
-//					the_content();
-//				}
                 the_content();
 			} ?>
 
@@ -81,8 +82,6 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 	</section>
 <?php
 
-//revert back to original post
-$post = $old_post;
-setup_postdata( $post );
+
 
 

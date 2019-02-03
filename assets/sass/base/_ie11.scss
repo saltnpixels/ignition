@@ -16,8 +16,8 @@
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: 0;
-      margin-right: $gutters;
-      margin-left: $gutters;
+      margin-right: var(--gutters);
+      margin-left: var(--gutters);
     }
 
     @for $i from 1 through 12 {
@@ -41,6 +41,7 @@
   //many rows has margin bottom and wraps
   .grid {
     flex-wrap: wrap;
+
     & > * {
       margin-bottom: $gap;
     }
@@ -49,10 +50,10 @@
   //pull out to match containers edge
   .container .flex, .container-fluid .flex,
   .container .flex-grid, .container-fluid .flex-grid,
-  .container-content .flex, .container-content .flex-grid,
+  .site-content .content-area .container-content .grid, .site-content .content-area .container-content .flex-grid,
   .container .grid, .container-fluid .grid, .container-content .grid {
-    margin-left: -#{$gutters};
-    margin-right: -#{$gutters};
+    margin-left: calc(-1 * var(--gutters));
+    margin-right: calc(-1 * var(--gutters));
 
     &.no-gutters {
       margin-left: 0;
@@ -116,13 +117,8 @@
   .layout-center-content > * {
     margin: 0; //ie11 freaks out if the inner div has a margin: auto;
   }
-
-  .container .grid, .container-fluid .grid, .container-content .grid {
-    margin-left: -#{$gutters};
-    margin-right: -#{$gutters};
-  }
-
 }
+
 
 /*--------------------------------------------------------------
 # Sticky Footer "Fix"

@@ -1,14 +1,14 @@
 /*--------------------------------------------------------------
 Mixins
 --------------------------------------------------------------*/
-/*------- Rem with px fallback --------*/
+/*------- font Size. Input value as number for pixels --------*/
 @mixin font-size($sizeValue: 1) {
-  @if ($sizeValue < 6) {
-    font-size: ($sizeValue) * 16px;
-    font-size: $sizeValue * 1rem;
+  @if ($sizeValue < 16) {
+    $size: 16px - $sizeValue;
+    font-size: calc(var(--font-size) - #{$size});
   } @else {
-    font-size: ($sizeValue) * 1px;
-    font-size: $sizeValue / 16 + 0rem;
+    $size: $sizeValue - 16px;
+    font-size: calc(var(--font-size) + #{$size});
   }
 }
 
@@ -164,8 +164,8 @@ Mixins
     }
 
     .conainer &, .container-fluid &, .container-content & {
-      margin-left: -#{$gutters};
-      margin-right: -#{$gutters};
+      margin-left: calc(-1 * var(--gap));
+      margin-right: calc(-1 * var(--gap));
 
       &.no-gutters {
         margin-left: 0;
@@ -206,11 +206,4 @@ Mixins
       min-width: calc(#{$min - $grid-gap}); //using calc we can even allow % based widths
     }
   }
-}
-
-
-/*------- Color Variables --------*/
-@mixin var($property, $varName) {
-  #{$property}: map-get($vars, $varName);
-  #{$property}: var(--#{$varName});
 }

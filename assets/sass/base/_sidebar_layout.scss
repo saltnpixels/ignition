@@ -1,9 +1,14 @@
 /*--------------------------------------------------------------
-# When sidebar is in panel right
+# Sidebar Layout
 --------------------------------------------------------------*/
+//If your looking to style the sidebar, go to sidebar.scss
+//this file is for layout only and usually does not need to be touched
+
+
+/*------- Sidebar in panel right layout --------*/
 #panel-right {
   .sidebar-holder { //the holder with data-moveto attr
-    padding-top: $gutters;
+    padding-top: 15px;
     height: 100%;
     overflow: auto;
     overflow-x: hidden;
@@ -20,7 +25,7 @@
 # Inline Sidebar #secondary
 --------------------------------------------------------------*/
 
-//hide secondary if empty
+//hide secondary if empty, like when the sidebar moves to the right panel
 #secondary:empty, .sidebar-holder:empty {
   display: none;
 }
@@ -55,10 +60,10 @@
 
 //fixing some padding issues between the inner container and the outter one
 .sidebar-template{
-  padding: 0 $gap; //in case theire is no .container on sidebar-template, there must be container-fluid or at least some padding.
+  padding: 0 $gap; //in case there is no .container on sidebar-template, there must be container-fluid or at least some padding.
 
   .flex{
-    margin: 0 -#{$gutters}; //even if .container is missing flex must be negative margined
+    margin: 0 calc(-1 * var(--gutters)); //even if .container is missing flex must be negative margined
   }
 
   .container-content{
@@ -77,6 +82,7 @@
 --------------------------------------------------------------*/
 //by adding class .header-above to .sidebar-template, you can pull the header out of the article and put it above everything, even the sidebar.
 //This is done with javascript. a class active is added when it has finished moving
+//when header-above is found we dont show the sidebar till header has been pulled out. this way it looks seamless and not jumpy.
 
 //when js pulls out header it also adds class active. until that class is added we dont show sidebar, otherwise it jumps strangely
 .js .sidebar-template.header-above:not(.active) {
@@ -123,11 +129,11 @@
 }
 
 .sidebar-holder .widget {
-  padding: $gap $gutters 0 $gutters;
+  padding: var(--gap) var(--gutters) var(--gutters) 0 var(--gutters);
 }
 
 .sidebar-holder .widget_nav_menu{
-  padding: $gap 0 $gap;
+  padding: var(--gap) 0 var(--gap);
 }
 
 

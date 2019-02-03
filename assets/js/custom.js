@@ -233,14 +233,14 @@ jQuery(function ($) {
       body = $('body');
 
   submenuButtons = function submenuButtons() {
-    // Add dropdown arrow toggle button to all submenus.
+    // Add dropdown arrow toggle button to all submenus. Only needed for pages because there is no walker
     var dropdownToggle = $('<button />', {
       'class': 'submenu-dropdown-toggle',
       'aria-expanded': false
     }).append(iconAngleRight).append($('<span />', {
       'class': 'screen-reader-text',
       text: screenReaderText.expand
-    })); //ADDING THE BUTTON TO PAGE SUBMENU ITEMS
+    })); //ADDING THE BUTTON TO PAGE SUBMENU ITEMS. Regular sub menu items have a walker that adds the button
     //I CANT FIND A PAGE WALKER HOOK TO DO IT
 
     menus.find('.page_item:not(.menu-item) a').wrap('<div class="menu-item-link" tabindex="0"></div>');
@@ -250,7 +250,7 @@ jQuery(function ($) {
     currentSubmenus.each(function () {
       if ($(this).css('display') === 'none' || $(this).parents('#panel-left, #panel-right').length) {
         //submenus are set to display none only in vertical menus which is what we want
-        //add toggled on to the li and the button
+        //if this menu is inside a vertical menu, add toggled on
         $(this).find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current-menu-parent button, .current_page_ancestor > button, .current_page_parent, .current-menu-item button').trigger('click');
       }
     }); //special after toggle event for menu dropdowns
@@ -267,8 +267,17 @@ jQuery(function ($) {
           //toggle the li. closest still best support with jquery
           $(dropdownButton).closest('li').toggleClass('toggled-on'); //toggle the sub menu
 
-          var submenus = $(dropdownButton).closest('li').find('> .children, > .sub-menu');
-          submenus.toggleClass('toggled-on').slideToggle();
+          var submenus = $(dropdownButton).closest('li').find('> .children, > .sub-menu'); //check if submenu is offscreen on desktop
+
+          fixOffScreenMenu(submenus);
+          submenus.toggleClass('toggled-on'); //desktop
+
+          if (submenus.hasClass('toggled-on')) {
+            submenus.slideDown();
+          } else {
+            submenus.slideUp();
+          }
+
           var screenReaderSpan = $(dropdownButton).find('.screen-reader-text');
           screenReaderSpan.text(screenReaderSpan.text() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand);
         });
@@ -392,7 +401,16 @@ jQuery(function ($) {
 
   $('#btnCloseUpdateBrowser').on('click', function () {
     $('#outdated').hide();
-  });
+  }); //move submenus if too close to edge on desktop
+
+  function fixOffScreenMenu(menu) {
+    var edge = menu[0].getBoundingClientRect().right;
+    var viewport = document.documentElement.clientWidth; //if the submenu is off the page, pull it back somewhat
+
+    if (edge > viewport) {
+      menu[0].style.left = '30px';
+    }
+  }
 });
 "use strict";
 

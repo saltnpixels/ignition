@@ -233,7 +233,7 @@ add_action( 'widgets_init', 'ign_widgets_init' );
 
 /**
  * Disable admin bar for everyone but administrators
- * You can change this based on capabilities. By default manage_options is used to check the users role
+ * You can change this based on capabilities. By default manage_options is used to check for Administrators
  */
 define('IGN_WP_ADMIN_ACCESS_CAPABILITY', 'manage_options');
 
@@ -278,7 +278,7 @@ function ignition_scripts() {
 	// Theme stylesheet. Will get this stylesheet or a child themes stylesheet.
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', '1.0' );
 
-	//Sass compiles styles. Will get child's theme version if found instead.
+	//Sass compiles styles. Will get child's theme version if found instead. Child theme should import with sass.
 	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', '1.0' );
 
 	//jQuery 3.0 replaces WP jquery
@@ -289,7 +289,7 @@ function ignition_scripts() {
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
-	wp_enqueue_script( 'ignition-custom-js', get_template_directory() . '/assets/js/custom.js', array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
 		'1.0', true );
 
 	//AJAX ready for .custom.js files
@@ -346,6 +346,8 @@ function my_login_styles() {
 }
 
 add_action( 'login_enqueue_scripts', 'my_login_styles' );
+
+
 
 /*--------------------------------------------------------------
 # Pre Post Queries
@@ -408,5 +410,5 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
 /**
  * Add ACF Field Extras
  */
-require get_parent_theme_file_path( '/inc/acf_extras.php' );
+require get_parent_theme_file_path( '/inc/acf_extras/acf_extras.php' );
 

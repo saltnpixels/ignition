@@ -180,17 +180,22 @@ function is_static_frontpage() {
  * This goes through filters of WP and returns an image with possible mutiple srcsets
  * acf image field must be set to array
  *
- * @param string $id
+ * @param int $post_id
  * @param string $size
  * @param string $attr
- * @param        $acf_image
+ * @param  mixed $acf_image
  *
  * @return string
  */
-function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $use_thumbnail_as_fallback = false ) {
+function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail', $attr = '', $use_thumbnail_as_fallback = false ) {
+
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
 
 	//if were trying to get the header image, and the user specified not to, then return none.
-	if ( $size == 'header_image' && get_field( 'no_image', $id ) ) {
+	if ( $size == 'header_image' && get_field( 'no_image', $post_id ) ) {
 		return '';
 	}
 
@@ -199,8 +204,8 @@ function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image( $image_id, $size, '', $attr );
 	} else {
-		if ( has_post_thumbnail( $id ) && $use_thumbnail_as_fallback ) {
-			$image = get_the_post_thumbnail( $id, $size, $attr );
+		if ( has_post_thumbnail( $post_id ) && $use_thumbnail_as_fallback ) {
+			$image = get_the_post_thumbnail( $post_id, $size, $attr );
 		}
 	}
 
@@ -211,13 +216,17 @@ function ign_get_the_image( $id = '', $size = '', $acf_image = '', $attr = '', $
  * Returns the image url for either the post thumbnail or a acf image field.
  * acf image field must be set to array
  *
- * @param string $id
+ * @param int $post_id
  * @param string $size
- * @param        $acf_image
+ * @param  mixed $acf_image
  *
  * @return string
  */
-function ign_get_the_image_url( $id = '', $size = '', $acf_image = '', $use_thumbnail_as_fallback = false ) {
+function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thumbnail_as_fallback = false ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
 
 	$image = '';
 
@@ -225,8 +234,8 @@ function ign_get_the_image_url( $id = '', $size = '', $acf_image = '', $use_thum
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image_url( $image_id, $size, '' );
 	} else {
-		if ( has_post_thumbnail( $id ) && $use_thumbnail_as_fallback ) {
-			$image = get_the_post_thumbnail_url( $id, $size );
+		if ( has_post_thumbnail( $post_id ) && $use_thumbnail_as_fallback ) {
+			$image = get_the_post_thumbnail_url( $post_id, $size );
 		}
 	}
 
@@ -234,16 +243,33 @@ function ign_get_the_image_url( $id = '', $size = '', $acf_image = '', $use_thum
 }
 
 
-function ign_get_the_header_image( $id, $kind = 'url', $attr = '' ) {
-	if ( get_field( 'no_image', $id ) ) {
+/**
+ * @param int $post_id
+ * @param string $kind
+ * @param string $attr
+ *
+ * @return string
+ *
+ * Returns the header image field as a url, unless $return_type is set to anything else. then it returns the actual image element
+ * if no image is found it will return the featured image
+ * if no image is set then nothing is returned.
+ *
+ */
+function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	if ( get_field( 'no_image', $post_id ) ) {
 		return '';
 	}
 
-	$image = get_field( 'header_image' );
-	if ( $kind == 'url' ) {
-		return ign_get_the_image_url( $id, 'header_image', $image, true );
+	$image = get_field( 'header_image', $post_id );
+	if ( $return_type == 'url' ) {
+		return ign_get_image_url( $post_id, 'header_image', $image, true );
 	} else {
-		return ign_get_the_image( $id, 'header_image', $image, $attr, true );
+		return ign_get_image( $post_id, 'header_image', $image, $attr, true );
 	}
 }
 

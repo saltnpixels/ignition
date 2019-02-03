@@ -30,8 +30,9 @@ get_header();
  */
 global $post;
 $page_archive_id = ign_get_archive_page();
-$has_sidebar     = false;
 
+//set if there is a sidebar, add the proper divs
+$has_sidebar     = false;
 if ( $page_archive_id ) {
 	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-left' ) !== false ) {
 		echo '<div class="container sidebar-template">';
@@ -55,18 +56,16 @@ if ( $page_archive_id ) {
 
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
-			
-				if ( function_exists( 'have_rows' ) ) {
-					locate_template( 'template-parts/acf-blocks/header_sections.php', true );
-				} ?>
+
+				locate_template( 'template-parts/acf-blocks/header_sections.php', true );
+				?>
 
                 <div class="entry-content container-content">
 					<?php
 
-					//include sections made with acf.
-					if ( function_exists( 'have_rows' ) ) {
-						locate_template( 'template-parts/acf-blocks/sections.php', true );
-					}
+					//include sections made with acf or falls back on the_content.
+					locate_template( 'template-parts/acf-blocks/sections.php', true );
+
 					?>
                 </div>
 				<?php wp_reset_postdata(); ?>
@@ -77,16 +76,16 @@ if ( $page_archive_id ) {
 				?>
 
                 <header class="page-header layout-center-content text-center">
-                
+
 
                     <div class="header-content container-fluid">
                         <h1>
-						<?php
-                        if (is_home()){
-                            echo __('Blog', 'ignition');
-                        }else{
-	                        echo get_the_archive_title();
-                        } ?>
+							<?php
+							if ( is_home() ) {
+								echo __( 'Blog', 'ignition' );
+							} else {
+								echo get_the_archive_title();
+							} ?>
                         </h1>
 
                     </div>
@@ -98,7 +97,7 @@ if ( $page_archive_id ) {
 						//default to one section fo cards
 						while ( have_posts() ) : the_post();
 
-						//if folder of post type doesn't exist, use basic post content.
+							//if folder of post type doesn't exist, use basic post content.
 							if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
 								include( locate_template( 'template-parts/post/content.php' ) );
 							} else {
@@ -114,15 +113,15 @@ if ( $page_archive_id ) {
                     </section><!-- .entry-content -->
 
 
-				<div class="container card-pagination text-center">
-					<?php
-					the_posts_pagination( array(
-						'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cmlaw' ) . '</span>',
-						'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'cmlaw' ) . '</span>' . ign_get_svg( array( 'icon' => 'angle-right' ) ),
-						'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cmlaw' ) . ' </span>',
-					) );
-					?>
-                </div>
+                    <div class="container card-pagination text-center">
+						<?php
+						the_posts_pagination( array(
+							'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cmlaw' ) . '</span>',
+							'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'cmlaw' ) . '</span>' . ign_get_svg( array( 'icon' => 'angle-right' ) ),
+							'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cmlaw' ) . ' </span>',
+						) );
+						?>
+                    </div>
 
 
                 </div>

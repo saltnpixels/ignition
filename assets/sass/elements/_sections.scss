@@ -1,9 +1,9 @@
 /*--------------------------------------------------------------
-# Sections
+# ACF Sections Styling
 --------------------------------------------------------------*/
 section {
-	padding-top: $gap;
-	padding-bottom: $gap;
+	padding-top: var(--gap);
+	padding-bottom: var(--gap);
 
 	section {
 		padding-top: 0;

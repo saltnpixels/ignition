@@ -39,7 +39,7 @@ html * {
 }
 
 /*--------------------------------------------------------------
-# Panels
+# Panel Setup
 --------------------------------------------------------------*/
 .site-container {
   display: flex;
@@ -108,7 +108,7 @@ svg {
   height: auto;
 }
 
-path {
+path, g {
   fill: currentColor;
 }
 
@@ -152,7 +152,7 @@ img {
 }
 
 /*--------------------------------------------------------------
-# Utilities
+# Utility Classes
 --------------------------------------------------------------*/
 .hidden, .hide {
   display: none;
@@ -170,13 +170,12 @@ img {
 }
 
 
-
 #page .m0 {
   margin-bottom: 0;
 }
 
 #page .m1 {
-  margin-bottom: $gap;
+  margin-bottom: var(--gap);
 }
 
 //hide moveto events until they are in position, easily overridable

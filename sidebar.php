@@ -1,7 +1,7 @@
 <?php
 /**
  * The sidebar containing the main widget areas
- * with ACF you can switch to using the pull-in sidebar.
+ * the data-moveat will move the entire sidebar-holder into the right panel at 1200 pixels
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *

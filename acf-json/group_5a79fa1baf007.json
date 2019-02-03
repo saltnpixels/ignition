@@ -1,20 +1,21 @@
 {
     "key": "group_5a79fa1baf007",
-    "title": "Header Sections",
+    "title": "Header Section",
     "fields": [
         {
             "key": "field_5a79fa4f9ce3d",
-            "label": "Header Sections",
+            "label": "Header Section",
             "name": "header_layout",
             "type": "flexible_content",
-            "instructions": "Choose a header layout type",
+            "instructions": "Choose one header layout type",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "header_layouts",
+                "class": "acf-flex",
                 "id": ""
             },
+            "admin_only": 0,
             "layouts": {
                 "5a79fc6f9ce3f": {
                     "key": "5a79fc6f9ce3f",
@@ -43,7 +44,7 @@
                             "label": "Heading",
                             "name": "heading",
                             "type": "text",
-                            "instructions": "",
+                            "instructions": "Add a heading to go above all the text. The heading and the text will go on top of a background image or color.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -51,34 +52,36 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "",
-                            "placeholder": "defaults to the title if left empty",
+                            "placeholder": "",
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
                         },
                         {
                             "key": "field_5afb049703172",
-                            "label": "Header Items",
+                            "label": "Header Paragraphs",
                             "name": "header_items",
                             "type": "repeater",
-                            "instructions": "",
+                            "instructions": "Add some paragraphs. They can show up in columns.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
-                                "class": "",
+                                "class": "header-items",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
                             "layout": "block",
-                            "button_label": "Add Item",
+                            "button_label": "Add Paragraph",
                             "sub_fields": [
                                 {
                                     "key": "field_5c50af09d2203",
-                                    "label": "Header Item Content",
+                                    "label": "Header Content",
                                     "name": "",
                                     "type": "tab",
                                     "instructions": "",
@@ -89,7 +92,8 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "placement": "left",
+                                    "admin_only": 0,
+                                    "placement": "top",
                                     "endpoint": 0
                                 },
                                 {
@@ -124,7 +128,8 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "placement": "left",
+                                    "admin_only": 0,
+                                    "placement": "top",
                                     "endpoint": 0
                                 },
                                 {
@@ -140,11 +145,13 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "admin_only": 0,
                                     "default_value": "",
                                     "placeholder": "(optional)",
                                     "prepend": "",
                                     "append": "",
-                                    "maxlength": ""
+                                    "maxlength": "",
+                                    "ign_set_data": ".acf-row"
                                 }
                             ]
                         },
@@ -225,11 +232,13 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "card-grid",
                             "placeholder": "card-grid | grid | flex-grid",
                             "prepend": "",
                             "append": "",
-                            "maxlength": ""
+                            "maxlength": "",
+                            "ign_set_data": ".header-items"
                         }
                     ],
                     "min": "",
@@ -242,11 +251,28 @@
                     "display": "row",
                     "sub_fields": [
                         {
+                            "key": "field_5c548b978d450",
+                            "label": "Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "admin_only": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a79fdab9ce45",
                             "label": "Heading",
                             "name": "heading",
                             "type": "text",
-                            "instructions": "Add title to be used in header. Leave blank to use title of page.",
+                            "instructions": "Add title to be used in header.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -254,6 +280,7 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "",
                             "placeholder": "title",
                             "prepend": "",
@@ -262,7 +289,7 @@
                         },
                         {
                             "key": "field_5a79fded9ce48",
-                            "label": "header text",
+                            "label": "Header Text",
                             "name": "header_text",
                             "type": "wysiwyg",
                             "instructions": "Add text to add to header",
@@ -273,11 +300,29 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "admin_only": 0,
                             "default_value": "",
                             "tabs": "all",
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5c548ba98d451",
+                            "label": "Advanced",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "admin_only": 0,
+                            "placement": "top",
+                            "endpoint": 0
                         },
                         {
                             "key": "field_5b0d76bcc905b",
@@ -327,5 +372,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1548791813
+    "modified": 1549170668
 }

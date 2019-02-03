@@ -16,6 +16,7 @@
 				while ( have_rows( 'sections', $connector_id ) ): the_row();
 					$section = get_row_layout();
 					$section_hash ++;
+					$id = $connector_id; //need this id otherwise id will get the page id not the connector id
 					if ( file_exists( locate_template( 'template-parts/acf-blocks/' . $section . '.php' ) ) ) {
 						include( locate_template( 'template-parts/acf-blocks/' . $section . '.php' ) );
 					}

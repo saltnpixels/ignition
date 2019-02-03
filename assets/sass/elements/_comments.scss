@@ -4,19 +4,14 @@
 
 //if comments is inside container-content because of a sidebar, make sure #comments is full width
 .container-content #comments{
-  margin-left: -#{$gutters};
-  margin-right: -#{$gutters};
+  margin-left: calc(-1 * var(--gutters));
+  margin-right: calc(-1 * var(--gutters));
 }
-
-#comments{
-
-}
-
 
 .comments-holder{
   max-width: 730px;
   margin: auto;
-  padding: $gutters;
+  padding: var(--gutters);
 }
 
 .comment-list {
