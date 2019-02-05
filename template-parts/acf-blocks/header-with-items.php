@@ -23,7 +23,7 @@ $bg_image = ign_get_header_image( get_the_ID() );
 			if ( ! $heading ) {
 				the_title( '<h1 class="entry-title">', '</h1>' );
 			} else {
-				echo '<h1>' . $heading . '</h1>';
+				echo '<h1 class="entry-title">' . $heading . '</h1>';
 			}
 			?>
         </div>

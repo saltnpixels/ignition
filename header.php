@@ -45,7 +45,7 @@ if ( get_theme_mod( 'app_menu', '' ) ) {
 		$menu_icon = ' navigation-menu-icon--alt';
 	} ?>
 
-	<button aria-label="Toggle Left Panel" class="panel-left-toggle hidden" data-toggle="menu-open" data-target="body">
+	<button aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
 		<span class="navigation-menu-icon <?php echo $menu_icon; ?>"></span>
 	</button>
 

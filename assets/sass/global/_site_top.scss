@@ -20,6 +20,7 @@ body {
 # Site Top
 --------------------------------------------------------------*/
 .site-top {
+  position: relative; //change to fixed or absolute if wanted.
   background: var(--site-top);
 }
 

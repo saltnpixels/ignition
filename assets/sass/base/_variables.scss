@@ -14,9 +14,9 @@
   //Colors. Add colors here
   --black: #191919;
   --grey: #cacaca;
-  --pink: #f75980;
-  --pink-alpha: rgba(#cb4264, .5);
-  --dark-pink: #6f3644;
+  --pink: #f75959;
+  --pink-darkened: #cd5757;
+  --pink-alpha: rgba(247, 89, 89, 0.5);
 
   //Applied Colors. Add your own applied areas
   --body-bg: white;
@@ -25,9 +25,10 @@
   --site-top: var(--pink);
 
   //links and form buttons. used in typography.scss and forms.scss
-  --color-highlight: var(--pink);
-  --color-highlight-alpha: var(--pink-alpha);
-  --active-highlight-color: var(--dark-pink);
+  --highlight: var(--pink);
+  --highlight-alpha: var(--pink-alpha);
+  --highlight-darkened: var(--pink-darkened);
+
 }
 
 

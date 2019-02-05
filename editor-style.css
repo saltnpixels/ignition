@@ -17,7 +17,7 @@ Mixins
 /*--------------------------------------------------------------
 # CSS Variables. Change these to match your theme
 --------------------------------------------------------------*/
-:root { --font-size: 1rem; --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --line-height: 1.5; --font-pre: 'Source Code Pro', monospace; --line-height-pre: 22px; --black: #191919; --grey: #cacaca; --pink: #f75980; --pink-alpha: rgba(#cb4264, .5); --dark-pink: #6f3644; --body-bg: white; --main-text-color: var(--black); --subtle-text-color: var(--grey); --site-top: var(--pink); --color-highlight: var(--pink); --color-highlight-alpha: var(--pink-alpha); --active-highlight-color: var(--dark-pink); }
+:root { --font-size: 1rem; --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --line-height: 1.5; --font-pre: 'Source Code Pro', monospace; --line-height-pre: 22px; --black: #191919; --grey: #cacaca; --pink: #f75959; --pink-darkened: #cd5757; --pink-alpha: rgba(247, 89, 89, 0.5); --body-bg: white; --main-text-color: var(--black); --subtle-text-color: var(--grey); --site-top: var(--pink); --highlight: var(--pink); --highlight-alpha: var(--pink-alpha); --highlight-darkened: var(--pink-darkened); }
 
 /*--------------------------------------------------------------
 # Layout CSS Variables. Probably don't need to touch.
@@ -607,13 +607,13 @@ h4, .h4 { font-size: calc(1rem + 3px); font-size: calc(var(--font-size) + 3px); 
 /*--------------------------------------------------------------
 # Basic Links
 --------------------------------------------------------------*/
-a { color: #f75980; color: var(--color-highlight); text-decoration: none; }
+a { color: #f75959; color: var(--highlight); text-decoration: none; }
 
 /*--------------------------------------------------------------
 # Selection Highlighting
 --------------------------------------------------------------*/
-::-moz-selection { background: #6f3644; background: var(--active-highlight-color); color: white; }
-::selection { background: #6f3644; background: var(--active-highlight-color); color: white; }
+::-moz-selection { background: #f75959; background: var(--highlight); color: white; }
+::selection { background: #f75959; background: var(--highlight); color: white; }
 
 /*--------------------------------------------------------------
 # WP Edit Post Link
@@ -658,9 +658,9 @@ label { display: block; font-weight: 800; }
 
 fieldset { margin-bottom: 30px; margin-bottom: var(--gap); }
 
-input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"], input[type="file"], textarea { border: 1px solid grey; background: transparent; color: grey; width: 100%; min-width: 0; -webkit-transition: all .5s; transition: all .5s; padding: 3px 5px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; }
+input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"], input[type="file"], textarea { border: 1px solid grey; background: transparent; color: grey; width: 100%; min-width: 0; -webkit-transition: all .5s; transition: all .5s; padding: 3px 5px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; display: block; }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="range"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="time"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="color"]:focus, input[type="file"]:focus, textarea:focus { border: 1px solid #f75980; border: 1px solid var(--color-highlight); }
+input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="range"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="time"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="color"]:focus, input[type="file"]:focus, textarea:focus { border: 1px solid #f75959; border: 1px solid var(--highlight); }
 
 select { width: 100%; }
 
@@ -671,15 +671,15 @@ input[type="radio"], input[type="checkbox"] { margin-right: 0.5em; }
 --------------------------------------------------------------*/
 button { display: inline-block; cursor: pointer; }
 
-.btn, .button, .card .more-link, input[type="submit"] { display: inline-block; border: 1px solid transparent; text-transform: capitalize; background: #f75980; background: var(--color-highlight); padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
+.btn, .button, .card .more-link, input[type="submit"] { border: 1px solid transparent; display: inline-block; text-transform: capitalize; background: #f75959; background: var(--highlight); padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
 
-.btn:active, .btn:focus, .button:active, .card .more-link:active, .button:focus, .card .more-link:focus, input[type="submit"]:active, input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(#cb4264, .5); box-shadow: 0 0 0 2px rgba(#cb4264, .5); -webkit-box-shadow: 0 0 0 2px var(--color-highlight-alpha); box-shadow: 0 0 0 2px var(--color-highlight-alpha); }
+.btn:active, .btn:focus, .button:active, .card .more-link:active, .button:focus, .card .more-link:focus, input[type="submit"]:active, input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(247, 89, 89, 0.5); box-shadow: 0 0 0 2px rgba(247, 89, 89, 0.5); -webkit-box-shadow: 0 0 0 2px var(--highlight-alpha); box-shadow: 0 0 0 2px var(--highlight-alpha); }
 
-.btn:hover, .button:hover, .card .more-link:hover, input[type="submit"]:hover { color: white; background: #6f3644; background: var(--active-highlight-color); }
+.btn:hover, .button:hover, .card .more-link:hover, input[type="submit"]:hover { color: white; background: #cd5757; background: var(--highlight-darkened); }
 
-.btn--o, .button--o { border: 1px solid #f75980; border: 1px solid var(--color-highlight); color: #f75980; color: var(--color-highlight); background: transparent; }
+.btn--o, .button--o { border: 1px solid #f75959; border: 1px solid var(--highlight); color: #f75959; color: var(--highlight); background: transparent; }
 
-.btn--o:hover, .btn--o:focus, .button--o:hover, .button--o:focus { background: #f75980; background: var(--color-highlight); color: white; }
+.btn--o:hover, .btn--o:focus, .button--o:hover, .button--o:focus { background: #f75959; background: var(--highlight); color: white; }
 
 /*--------------------------------------------------------------
 # Input Placeholders
@@ -699,19 +699,19 @@ button { display: inline-block; cursor: pointer; }
 --------------------------------------------------------------*/
 .search-form { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
-.search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #f75980; border: 1px solid var(--color-highlight); border-radius: 3px; }
+.search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #f75959; border: 1px solid var(--highlight); border-radius: 3px; }
 
 /*------- input appends and prepends for icons --------*/
 /* when adding a button near an input you can make it a prepend or append all prepends and appends go AFTER the input. Never before or :focus wont affect the prepend. */
 .input-prepend, .input-append { -webkit-transition: all .5s; transition: all .5s; background: white; z-index: 2; color: #cacaca; color: var(--subtle-text-color); -webkit-box-shadow: none; box-shadow: none; }
 
-.input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #f75980; border: 1px solid var(--color-highlight); border-left: 0; }
+.input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #f75959; border: 1px solid var(--highlight); border-left: 0; }
 
 .input-prepend { border-radius: 3px 0 0 3px; margin-right: -2px; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; }
 
-input:focus + .input-prepend { border-color: #f75980; border-color: var(--color-highlight); }
+input:focus + .input-prepend { border-color: #f75959; border-color: var(--highlight); }
 
-input:focus + .input-append { border-color: #f75980; border-color: var(--color-highlight); }
+input:focus + .input-append { border-color: #f75959; border-color: var(--highlight); }
 
 /*------- Content --------*/
 /*--------------------------------------------------------------
@@ -911,7 +911,7 @@ figure { margin: 0; margin-bottom: 30px; }
 # Site-top Layout
 --------------------------------------------------------------*/
 /*------- Site-top --------*/
-.site-top { z-index: 80; z-index: var(--z-index-menu); width: 100%; position: relative; }
+.site-top { z-index: 80; z-index: var(--z-index-menu); width: 100%; position: relative; left: 0; top: 0; }
 
 .site-top .site-top-container { height: 100%; }
 

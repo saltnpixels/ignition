@@ -230,4 +230,8 @@ jQuery( function( $ ) {
 	moveItems();
 
 	document.documentElement.classList.remove('dom-loading');
+
+
+	let EventsFinished = new Event( 'afterIgnEvents' );
+	document.dispatchEvent(EventsFinished);
 });

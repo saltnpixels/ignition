@@ -17,7 +17,7 @@ Mixins
 /*--------------------------------------------------------------
 # CSS Variables. Change these to match your theme
 --------------------------------------------------------------*/
-:root { --font-size: 1rem; --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --line-height: 1.5; --font-pre: 'Source Code Pro', monospace; --line-height-pre: 22px; --black: #191919; --grey: #cacaca; --pink: #f75980; --pink-alpha: rgba(#cb4264, .5); --dark-pink: #6f3644; --body-bg: white; --main-text-color: var(--black); --subtle-text-color: var(--grey); --site-top: var(--pink); --color-highlight: var(--pink); --color-highlight-alpha: var(--pink-alpha); --active-highlight-color: var(--dark-pink); }
+:root { --font-size: 1rem; --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --line-height: 1.5; --font-pre: 'Source Code Pro', monospace; --line-height-pre: 22px; --black: #191919; --grey: #cacaca; --pink: #f75959; --pink-darkened: #cd5757; --pink-alpha: rgba(247, 89, 89, 0.5); --body-bg: white; --main-text-color: var(--black); --subtle-text-color: var(--grey); --site-top: var(--pink); --highlight: var(--pink); --highlight-alpha: var(--pink-alpha); --highlight-darkened: var(--pink-darkened); }
 
 /*--------------------------------------------------------------
 # Layout CSS Variables. Probably don't need to touch.
@@ -391,9 +391,9 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor fieldset { margin-bottom: 30px; margin-bottom: var(--gap); }
 
-.edit-post-visual-editor input[type="text"], .edit-post-visual-editor input[type="email"], .edit-post-visual-editor input[type="url"], .edit-post-visual-editor input[type="password"], .edit-post-visual-editor input[type="search"], .edit-post-visual-editor input[type="number"], .edit-post-visual-editor input[type="tel"], .edit-post-visual-editor input[type="range"], .edit-post-visual-editor input[type="date"], .edit-post-visual-editor input[type="month"], .edit-post-visual-editor input[type="week"], .edit-post-visual-editor input[type="time"], .edit-post-visual-editor input[type="datetime"], .edit-post-visual-editor input[type="datetime-local"], .edit-post-visual-editor input[type="color"], .edit-post-visual-editor input[type="file"], .edit-post-visual-editor textarea { border: 1px solid grey; background: transparent; color: grey; width: 100%; min-width: 0; -webkit-transition: all .5s; transition: all .5s; padding: 3px 5px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; }
+.edit-post-visual-editor input[type="text"], .edit-post-visual-editor input[type="email"], .edit-post-visual-editor input[type="url"], .edit-post-visual-editor input[type="password"], .edit-post-visual-editor input[type="search"], .edit-post-visual-editor input[type="number"], .edit-post-visual-editor input[type="tel"], .edit-post-visual-editor input[type="range"], .edit-post-visual-editor input[type="date"], .edit-post-visual-editor input[type="month"], .edit-post-visual-editor input[type="week"], .edit-post-visual-editor input[type="time"], .edit-post-visual-editor input[type="datetime"], .edit-post-visual-editor input[type="datetime-local"], .edit-post-visual-editor input[type="color"], .edit-post-visual-editor input[type="file"], .edit-post-visual-editor textarea { border: 1px solid grey; background: transparent; color: grey; width: 100%; min-width: 0; -webkit-transition: all .5s; transition: all .5s; padding: 3px 5px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; display: block; }
 
-.edit-post-visual-editor input[type="text"]:focus, .edit-post-visual-editor input[type="email"]:focus, .edit-post-visual-editor input[type="url"]:focus, .edit-post-visual-editor input[type="password"]:focus, .edit-post-visual-editor input[type="search"]:focus, .edit-post-visual-editor input[type="number"]:focus, .edit-post-visual-editor input[type="tel"]:focus, .edit-post-visual-editor input[type="range"]:focus, .edit-post-visual-editor input[type="date"]:focus, .edit-post-visual-editor input[type="month"]:focus, .edit-post-visual-editor input[type="week"]:focus, .edit-post-visual-editor input[type="time"]:focus, .edit-post-visual-editor input[type="datetime"]:focus, .edit-post-visual-editor input[type="datetime-local"]:focus, .edit-post-visual-editor input[type="color"]:focus, .edit-post-visual-editor input[type="file"]:focus, .edit-post-visual-editor textarea:focus { border: 1px solid #f75980; border: 1px solid var(--color-highlight); }
+.edit-post-visual-editor input[type="text"]:focus, .edit-post-visual-editor input[type="email"]:focus, .edit-post-visual-editor input[type="url"]:focus, .edit-post-visual-editor input[type="password"]:focus, .edit-post-visual-editor input[type="search"]:focus, .edit-post-visual-editor input[type="number"]:focus, .edit-post-visual-editor input[type="tel"]:focus, .edit-post-visual-editor input[type="range"]:focus, .edit-post-visual-editor input[type="date"]:focus, .edit-post-visual-editor input[type="month"]:focus, .edit-post-visual-editor input[type="week"]:focus, .edit-post-visual-editor input[type="time"]:focus, .edit-post-visual-editor input[type="datetime"]:focus, .edit-post-visual-editor input[type="datetime-local"]:focus, .edit-post-visual-editor input[type="color"]:focus, .edit-post-visual-editor input[type="file"]:focus, .edit-post-visual-editor textarea:focus { border: 1px solid #f75959; border: 1px solid var(--highlight); }
 
 .edit-post-visual-editor select { width: 100%; }
 
@@ -401,15 +401,15 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor button { display: inline-block; cursor: pointer; }
 
-.edit-post-visual-editor .btn, .edit-post-visual-editor .button, .edit-post-visual-editor .card .more-link, .card .edit-post-visual-editor .more-link, .edit-post-visual-editor input[type="submit"] { display: inline-block; border: 1px solid transparent; text-transform: capitalize; background: #f75980; background: var(--color-highlight); padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
+.edit-post-visual-editor .btn, .edit-post-visual-editor .button, .edit-post-visual-editor .card .more-link, .card .edit-post-visual-editor .more-link, .edit-post-visual-editor input[type="submit"] { border: 1px solid transparent; display: inline-block; text-transform: capitalize; background: #f75959; background: var(--highlight); padding: 5px 10px; color: white; border-radius: 3px; -webkit-transition: all .5s; transition: all .5s; cursor: pointer; }
 
-.edit-post-visual-editor .btn:active, .edit-post-visual-editor .btn:focus, .edit-post-visual-editor .button:active, .edit-post-visual-editor .card .more-link:active, .card .edit-post-visual-editor .more-link:active, .edit-post-visual-editor .button:focus, .edit-post-visual-editor .card .more-link:focus, .card .edit-post-visual-editor .more-link:focus, .edit-post-visual-editor input[type="submit"]:active, .edit-post-visual-editor input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(#cb4264, .5); box-shadow: 0 0 0 2px rgba(#cb4264, .5); -webkit-box-shadow: 0 0 0 2px var(--color-highlight-alpha); box-shadow: 0 0 0 2px var(--color-highlight-alpha); }
+.edit-post-visual-editor .btn:active, .edit-post-visual-editor .btn:focus, .edit-post-visual-editor .button:active, .edit-post-visual-editor .card .more-link:active, .card .edit-post-visual-editor .more-link:active, .edit-post-visual-editor .button:focus, .edit-post-visual-editor .card .more-link:focus, .card .edit-post-visual-editor .more-link:focus, .edit-post-visual-editor input[type="submit"]:active, .edit-post-visual-editor input[type="submit"]:focus { color: white; -webkit-box-shadow: 0 0 0 2px rgba(247, 89, 89, 0.5); box-shadow: 0 0 0 2px rgba(247, 89, 89, 0.5); -webkit-box-shadow: 0 0 0 2px var(--highlight-alpha); box-shadow: 0 0 0 2px var(--highlight-alpha); }
 
-.edit-post-visual-editor .btn:hover, .edit-post-visual-editor .button:hover, .edit-post-visual-editor .card .more-link:hover, .card .edit-post-visual-editor .more-link:hover, .edit-post-visual-editor input[type="submit"]:hover { color: white; background: #6f3644; background: var(--active-highlight-color); }
+.edit-post-visual-editor .btn:hover, .edit-post-visual-editor .button:hover, .edit-post-visual-editor .card .more-link:hover, .card .edit-post-visual-editor .more-link:hover, .edit-post-visual-editor input[type="submit"]:hover { color: white; background: #cd5757; background: var(--highlight-darkened); }
 
-.edit-post-visual-editor .btn--o, .edit-post-visual-editor .button--o { border: 1px solid #f75980; border: 1px solid var(--color-highlight); color: #f75980; color: var(--color-highlight); background: transparent; }
+.edit-post-visual-editor .btn--o, .edit-post-visual-editor .button--o { border: 1px solid #f75959; border: 1px solid var(--highlight); color: #f75959; color: var(--highlight); background: transparent; }
 
-.edit-post-visual-editor .btn--o:hover, .edit-post-visual-editor .btn--o:focus, .edit-post-visual-editor .button--o:hover, .edit-post-visual-editor .button--o:focus { background: #f75980; background: var(--color-highlight); color: white; }
+.edit-post-visual-editor .btn--o:hover, .edit-post-visual-editor .btn--o:focus, .edit-post-visual-editor .button--o:hover, .edit-post-visual-editor .button--o:focus { background: #f75959; background: var(--highlight); color: white; }
 
 .edit-post-visual-editor ::-webkit-input-placeholder { color: inherit; opacity: .7; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; font-family: var(--font); }
 
@@ -423,17 +423,17 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor .search-form { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
-.edit-post-visual-editor .search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #f75980; border: 1px solid var(--color-highlight); border-radius: 3px; }
+.edit-post-visual-editor .search-form .search-field { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 3px 10px 3px 10px; border: 1px solid #f75959; border: 1px solid var(--highlight); border-radius: 3px; }
 
 .edit-post-visual-editor .input-prepend, .edit-post-visual-editor .input-append { -webkit-transition: all .5s; transition: all .5s; background: white; z-index: 2; color: #cacaca; color: var(--subtle-text-color); -webkit-box-shadow: none; box-shadow: none; }
 
-.edit-post-visual-editor .input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #f75980; border: 1px solid var(--color-highlight); border-left: 0; }
+.edit-post-visual-editor .input-append { border-radius: 0 3px 3px 0; margin-left: -2px; -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; border: 1px solid #f75959; border: 1px solid var(--highlight); border-left: 0; }
 
 .edit-post-visual-editor .input-prepend { border-radius: 3px 0 0 3px; margin-right: -2px; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; }
 
-.edit-post-visual-editor input:focus + .input-prepend { border-color: #f75980; border-color: var(--color-highlight); }
+.edit-post-visual-editor input:focus + .input-prepend { border-color: #f75959; border-color: var(--highlight); }
 
-.edit-post-visual-editor input:focus + .input-append { border-color: #f75980; border-color: var(--color-highlight); }
+.edit-post-visual-editor input:focus + .input-append { border-color: #f75959; border-color: var(--highlight); }
 
 .edit-post-visual-editor html { font-size: 100%; }
 
@@ -469,11 +469,11 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor h4, .edit-post-visual-editor .h4 { font-size: calc(1rem + 3px); font-size: calc(var(--font-size) + 3px); margin-top: 30px; line-height: 1.5; }
 
-.edit-post-visual-editor a { color: #f75980; color: var(--color-highlight); text-decoration: none; }
+.edit-post-visual-editor a { color: #f75959; color: var(--highlight); text-decoration: none; }
 
-.edit-post-visual-editor ::-moz-selection { background: #6f3644; background: var(--active-highlight-color); color: white; }
+.edit-post-visual-editor ::-moz-selection { background: #f75959; background: var(--highlight); color: white; }
 
-.edit-post-visual-editor ::selection { background: #6f3644; background: var(--active-highlight-color); color: white; }
+.edit-post-visual-editor ::selection { background: #f75959; background: var(--highlight); color: white; }
 
 .edit-post-visual-editor .edit-link { font-size: calc(1rem - 15.3px); font-size: calc(var(--font-size) - 15.3px); }
 

@@ -36,9 +36,10 @@ textarea {
   transition: all .5s;
   padding: 3px 5px;
   order: 1;
+  display: block;
 
   &:focus {
-    border: 1px solid var(--color-highlight);
+    border: 1px solid var(--highlight);
   }
 }
 
@@ -60,10 +61,10 @@ button{
 }
 
 .btn, .button, input[type="submit"] {
-  display: inline-block;
   border: 1px solid transparent;
+  display: inline-block;
   text-transform: capitalize;
-  background: var(--color-highlight);
+  background: var(--highlight);
   padding: 5px 10px;
   color: white;
   border-radius: 3px;
@@ -72,22 +73,22 @@ button{
 
   &:active, &:focus {
     color: white;
-    box-shadow: 0 0 0 2px var(--color-highlight-alpha);
+    box-shadow: 0 0 0 2px var(--highlight-alpha);
   }
 
   &:hover {
     color: white;
-    background: var(--active-highlight-color);
+    background: var(--highlight-darkened);
   }
 }
 
 .btn--o, .button--o {
-  border: 1px solid var(--color-highlight);
-  color: var(--color-highlight);
+  border: 1px solid var(--highlight);
+  color: var(--highlight);
   background: transparent;
 
   &:hover, &:focus {
-    background: var(--color-highlight);
+    background: var(--highlight);
     color: white;
   }
 }
@@ -124,7 +125,7 @@ $placeholder_browsers:
   .search-field {
     flex: 1 1 auto;
     padding: 3px 10px 3px 10px;
-    border: 1px solid var(--color-highlight);
+    border: 1px solid var(--highlight);
     border-radius: 3px;
   }
 }
@@ -146,7 +147,7 @@ $placeholder_browsers:
   border-radius: 0 3px 3px 0;
   margin-left: -2px;
   order: 1;
-  border: 1px solid var(--color-highlight);
+  border: 1px solid var(--highlight);
   border-left: 0;
 }
 
@@ -157,11 +158,11 @@ $placeholder_browsers:
 }
 
 input:focus + .input-prepend {
-  border-color: var(--color-highlight);
+  border-color: var(--highlight);
 }
 
 input:focus + .input-append {
-  border-color: var(--color-highlight);
+  border-color: var(--highlight);
 }
 
 

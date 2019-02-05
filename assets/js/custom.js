@@ -193,6 +193,8 @@ jQuery(function ($) {
   window.addEventListener('resize', throttle(moveItems, 250));
   moveItems();
   document.documentElement.classList.remove('dom-loading');
+  var EventsFinished = new Event('afterIgnEvents');
+  document.dispatchEvent(EventsFinished);
 });
 "use strict";
 

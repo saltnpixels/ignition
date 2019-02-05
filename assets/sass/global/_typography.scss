@@ -106,7 +106,7 @@ h4, .h4 {
 --------------------------------------------------------------*/
 
 a {
-	color: var(--color-highlight);
+	color: var(--highlight);
 	text-decoration: none;
 }
 
@@ -115,7 +115,7 @@ a {
 # Selection Highlighting
 --------------------------------------------------------------*/
 ::selection {
-	background: var(--active-highlight-color);
+	background: var(--highlight);
 	color: white;
 }
 
