@@ -96,6 +96,10 @@ time, time a {
     color: white;
     margin: 0 3px;
     padding: 3px 8px;
+    
+    *{
+      pointer-events: none;
+    }
   }
 
   .page-numbers.current{

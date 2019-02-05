@@ -469,7 +469,7 @@ div .edit-post-visual-editor .flex > .span-12, div .edit-post-visual-editor .fle
 
 .edit-post-visual-editor h4, .edit-post-visual-editor .h4 { font-size: calc(1rem + 3px); font-size: calc(var(--font-size) + 3px); margin-top: 30px; line-height: 1.5; }
 
-.edit-post-visual-editor a { color: #f75959; color: var(--highlight); text-decoration: none; }
+.edit-post-visual-editor a { color: #f75959; color: var(--highlight); text-decoration: none; cursor: pointer; }
 
 .edit-post-visual-editor ::-moz-selection { background: #f75959; background: var(--highlight); color: white; }
 
@@ -650,6 +650,8 @@ time, time a { font-size: calc(1rem - 3px); font-size: calc(var(--font-size) - 3
 .pagination { text-align: center; padding: 30px 0; }
 
 .pagination .page-numbers { background: #ff4a6b; color: white; margin: 0 3px; padding: 3px 8px; }
+
+.pagination .page-numbers * { pointer-events: none; }
 
 .pagination .page-numbers.current { background: grey; }
 

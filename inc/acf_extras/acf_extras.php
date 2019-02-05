@@ -189,7 +189,7 @@ function acf_js() {
 
                 function changeIgnClasses(acfInput) {
                     //to do anything there must be a value set
-                    if (acfInput.value) {
+
                         let dataValue = acfInput.getAttribute('data-ign-class');
 
                         //find the data attribute as a selector
@@ -202,16 +202,22 @@ function acf_js() {
                         //remove previous values if any
                         if (acfInput.getAttribute('data-last-value')) {
                             let lastValues = acfInput.getAttribute('data-last-value').split(' ');
+                            lastValues = lastValues.filter(Boolean); //remove any empty strings
                             acfSelector.classList.remove(...lastValues);
                         }
 
-
                         //set class on the queried selector if there is a value
+                    if(acfInput.value !== ' ' && acfInput.value){
+                        console.log(acfInput);
+
                         let classes = acfInput.value.split(" "); //if there is more than one class
+                        classes = classes.filter(Boolean);
                         acfSelector.classList.add(...classes);
                         acfInput.setAttribute('data-last-value', acfInput.value);
-
                     }
+
+
+
 
                 }
 
