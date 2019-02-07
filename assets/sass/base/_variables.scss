@@ -38,7 +38,7 @@
 :root{
 
   /*------- Menu Variables --------*/
-  --nav-breakpoint-collapse: 800px; //when main menu in site-top goes vertical. Also used by default for all horizontal menus.
+  --nav-move: 800px; //when main menu in site-top should move into panel left. Used by data-moveat event
   --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
   /*------- Layout --------*/
@@ -92,3 +92,4 @@ $collapse-on-small: true; //collapse grid and flex-grid and flex on small device
 /*------- Panel Becomes Absolute Query  --------*/
 $panel-left-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
 $panel-right-absolute: 1030px;
+

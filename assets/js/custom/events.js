@@ -9,75 +9,70 @@
  *
  */
 let scrollMagicController = '';
-jQuery( function( $ ) {
-	if ( 'undefined' != typeof ScrollMagic ) {
+jQuery(function ($) {
+	if ('undefined' != typeof ScrollMagic) {
 
 		//fixed at top items can ruin layout.
 		//surround with a div thats same height and is part of layout
-		const fixedItems = $( '[data-scrollanimation="fixed-at-top"]' );
-		fixedItems.wrap( `<div class="fixed-holder" style="height: ${fixedItems.css( 'height' )};"></div>` );
-
+		const fixedItems = $('[data-scrollanimation="fixed-at-top"]');
+		fixedItems.wrap(`<div class="fixed-holder" style="height: ${fixedItems.css('height')};"></div>`);
 
 		scrollMagicController = new ScrollMagic.Controller();
 
 		//for simple animations
-		$( '[data-scrollanimation]' ).each( function() {
+		$('[data-scrollanimation]').each(function () {
 
 			//class to animate in
-			let $this = $( this );
+			let $this = $(this);
 
-
-			let $class = $this.data( 'scrollanimation' ),
+			let $class = $this.data('scrollanimation'),
 				$triggerElem = $this;
 
-
-			let $offset = $this.data( 'scrolloffset' );
-			if ( null == $offset ) {
+			let $offset = $this.data('scrolloffset');
+			if (null == $offset) {
 				$offset = 0;
 			}
 
-			let $triggerHook = $this.data( 'scrollhook' );
-			if ( null == $triggerHook ) {
+			let $triggerHook = $this.data('scrollhook');
+			if (null == $triggerHook) {
 				$triggerHook = 'onEnter';
 			}
 
-			if ( -1 !== $class.indexOf( 'fixed-at-top' ) ) {
+			if (-1 !== $class.indexOf('fixed-at-top')) {
 				$triggerHook = 'onLeave';
 				$triggerElem = $this.parent();
 			}
 
 			//scrolling animations will go haywire if the item moves vertically. the scroll will change where it starts and ends continuously!
-			if ( -1 !== $class.indexOf( 'Up' ) || -1 !== $class.indexOf( 'Down' ) ) {
+			if (-1 !== $class.indexOf('Up') || -1 !== $class.indexOf('Down')) {
 
 				//get parent element and make that the trigger, but use an offset from that
 				$triggerElem = $this.parent();
-				$offset = ( $this.offset().top - $triggerElem.offset().top ) + $offset;
+				$offset = ($this.offset().top - $triggerElem.offset().top) + $offset;
 			}
 
-
-			let $duration = $this.data( 'scrollduration' );
-			if ( null == $duration ) {
+			let $duration = $this.data('scrollduration');
+			if (null == $duration) {
 				$duration = 0;
 			}
 
-			if ( null != $this.data( 'scrolltrigger' ) ) {
-				$triggerElem = $( $this.data( 'scrolltrigger' ) );
+			if (null != $this.data('scrolltrigger')) {
+				$triggerElem = $($this.data('scrolltrigger'));
 			}
-
 
 			//make triggerElement a dom node
 			$triggerElem = $triggerElem[0];
 
 			//add a tween if found
-			let $tween = $this.data( 'scrollscrub' );
+			let $tween = $this.data('scrollscrub');
 			let scene = '';
-			if ( null != $tween ) {
+			if (null != $tween) {
 
-				if ( ! $duration ) {
+				if (!$duration) {
 					$duration = 100;
 				}
 
-				let tween = TweenMax.to( $this[0], .65, {
+				let tween = TweenMax.to($this[0], .65, {
 					className: '+=' + $class
 				});
 
@@ -88,7 +83,7 @@ jQuery( function( $ ) {
 					triggerHook: $triggerHook,
 					duration: $duration
 
-				}).setTween( tween ).addTo( scrollMagicController )
+				}).setTween(tween).addTo(scrollMagicController)
 
 				// .addIndicators()
 				;
@@ -100,68 +95,67 @@ jQuery( function( $ ) {
 					triggerHook: $triggerHook,
 					duration: $duration
 
-				}).setClassToggle( this, $class ).addTo( scrollMagicController )
+				}).setClassToggle(this, $class).addTo(scrollMagicController)
 
 				//.addIndicators()
 				;
 			}
 
-
 		});
 
-
 		//good for knowing when its been loaded
-		$( 'body' ).addClass( 'scrollmagic-loaded' );
+		$('body').addClass('scrollmagic-loaded');
 
 	} //end scrollanimation
 
-
 	//TOGGLE BUTTONS
 	//adding new custom event for after the element is toggled
-	let ToggleEvent = new Event( 'afterToggle' );
+	let ToggleEvent = new Event('afterToggle');
 
 	//add aria to buttons currently on page
-	let buttons = document.querySelectorAll( '[data-toggle]' );
-	buttons.forEach( button => {
-		button.setAttribute( 'role', 'switch' );
-		button.setAttribute( 'aria-checked', button.classList.contains( 'toggled-on' ) ? 'true' : 'false' );
+	let buttons = document.querySelectorAll('[data-toggle]');
+	buttons.forEach(button => {
+		button.setAttribute('role', 'switch');
+		button.setAttribute('aria-checked', button.classList.contains('toggled-on') ? 'true' : 'false');
 
 	});
 
 	//toggling the buttons with delegation click
-	document.body.addEventListener( 'click', e => {
+	document.body.addEventListener('click', e => {
 
-		let item = e.target.closest( '[data-toggle]' );
+		let item = e.target.closest('[data-toggle]');
 
-
-		if ( item ) {
+		if (item) {
 			e.preventDefault();
 			e.stopPropagation();
 
-			item.classList.toggle( 'toggled-on' );
-			item.setAttribute( 'aria-expanded', item.classList.contains( 'toggled-on' ) ? 'true' : 'false' );
+			item.classList.toggle('toggled-on');
+			item.setAttribute('aria-expanded', item.classList.contains('toggled-on') ? 'true' : 'false');
 
-			let $class = item.getAttribute( 'data-toggle' ),
-				$target = document.querySelectorAll( item.getAttribute( 'data-target' ) );
+			let $class = item.getAttribute('data-toggle'),
+				$target = document.querySelectorAll(item.getAttribute('data-target'));
 
-			if ( $class ) {
-				if ( $target.length ) {
-					$target.forEach( targetItem => {
-						targetItem.classList.toggle( $class );
-
+			if ($class) {
+				if ($target.length) {
+					$target.forEach(targetItem => {
+						targetItem.classList.toggle($class);
 					});
 				} else {
-					item.classList.toggle( $class );
+					item.classList.toggle($class);
+				}
+			} else {
+				if ($target.length) {
+					$target.forEach(targetItem => {
+						targetItem.classList.toggle('toggled-on');
+					});
 				}
 			}
 
 			//trigger optional afterToggle event
-			item.dispatchEvent( ToggleEvent );
-
+			item.dispatchEvent(ToggleEvent);
 
 		}
 	});
-
 
 	//MOVING ITEMS
 	//on Window resize we can move items to and from divs with data-moveto="the destination"
@@ -169,69 +163,68 @@ jQuery( function( $ ) {
 	//the whole div, including the data att moveto moves back and forth
 	let movedId = 0;
 
-	function moveItems() {
+	function moveItems () {
 
 		let windowWidth = window.innerWidth;
-		let $moveItems = document.querySelectorAll( '[data-moveto]' );
+		let $moveItems = document.querySelectorAll('[data-moveto]');
 
-		$moveItems.forEach( item => {
-			let moveAt = item.getAttribute( 'data-moveat' ),
-				destination = document.querySelector( item.getAttribute( 'data-moveto' ) ),
-				source = item.getAttribute( 'data-movefrom' );
+		$moveItems.forEach(item => {
+			let moveAt = item.getAttribute('data-moveat'),
+				destination = document.querySelector(item.getAttribute('data-moveto')),
+				source = item.getAttribute('data-movefrom');
 
-			if(moveAt.startsWith('--')){
+			if (moveAt.startsWith('--')) {
 				let cssVars = getComputedStyle(document.body); //get css variables
-				moveAt = parseInt( cssVars.getPropertyValue(moveAt), 10);
+				moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
 			}
 			moveAt = moveAt ? moveAt : 1030;
 
-			if ( ! destination ) {
+			if (!destination) {
 				return;
 			}
 
 			//if no data movefrom is found add one to parent so we can move items back in. now they go back and forth
-			if ( ! source ) {
+			if (!source) {
 				let sourceElem = item.parentElement.id;
 
 				//if parent has no id attr, add one with a number so its unique
-				if ( ! sourceElem ) {
-					item.parentElement.setAttribute( 'id', 'move-' + movedId );
+				if (!sourceElem) {
+					item.parentElement.setAttribute('id', 'move-' + movedId);
 					movedId++;
 					sourceElem = item.parentElement.id;
 				}
 
-				item.setAttribute( 'data-movefrom', '#' + sourceElem );
+				item.setAttribute('data-movefrom', '#' + sourceElem);
 			}
 
-			source = document.querySelector( item.getAttribute( 'data-movefrom' ) );
+			source = document.querySelector(item.getAttribute('data-movefrom'));
 
 			//if the screen is smaller than moveAt (1030), move to destination
-			if ( windowWidth < moveAt ) {
-				if ( item.hasAttribute( 'data-moveto-pos' ) ) {
-					destination.insertBefore( item, destination.children[item.getAttribute( 'data-moveto-pos' )]);
+			if (windowWidth < moveAt) {
+				if (item.hasAttribute('data-moveto-pos')) {
+					destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
 				} else {
-					destination.appendChild( item );
+					destination.appendChild(item);
 				}
 			} else {
-				if ( item.hasAttribute( 'data-movefrom-pos' ) ) {
-					source.insertBefore( item, source.children[item.getAttribute( 'data-movefrom-pos' )]);
+				if (item.hasAttribute('data-movefrom-pos')) {
+					source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
 				} else {
-					source.appendChild( item );
+					source.appendChild(item);
 				}
 			}
 
 			//show it
-			item.classList.add( 'visible' );
+			item.classList.add('visible');
 		});
 	}
 
-	window.addEventListener( 'resize', throttle( moveItems, 250 ) );
+	window.addEventListener('resize', throttle(moveItems, 250));
 
 	moveItems();
 
 	document.documentElement.classList.remove('dom-loading');
 
-
-	let EventsFinished = new Event( 'afterIgnEvents' );
+	let EventsFinished = new Event('afterIgnEvents');
 	document.dispatchEvent(EventsFinished);
 });

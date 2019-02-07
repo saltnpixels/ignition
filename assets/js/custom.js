@@ -124,6 +124,12 @@ jQuery(function ($) {
         } else {
           item.classList.toggle($class);
         }
+      } else {
+        if ($target.length) {
+          $target.forEach(function (targetItem) {
+            targetItem.classList.toggle('toggled-on');
+          });
+        }
       } //trigger optional afterToggle event
 
 

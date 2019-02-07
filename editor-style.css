@@ -22,7 +22,7 @@ Mixins
 /*--------------------------------------------------------------
 # Layout CSS Variables. Probably don't need to touch.
 --------------------------------------------------------------*/
-:root { /*------- Menu Variables --------*/ --nav-breakpoint-collapse: 800px; --desktop-menu-alignment: center; /*------- Layout --------*/ --container: 1200px; --container-content: 700px; --container-padding: 30px; --gutters: 15px; --gap: 30px; /*------- Panels --------*/ --panel-left-width: 300px; --panel-right-width: 350px; /*------- Z-index --------*/ --z-index-top: 99; --z-index-overlay: 95; --z-index-menu-button: 90; --z-index-menu: 80; --z-index-behind: -1; }
+:root { /*------- Menu Variables --------*/ --nav-move: 800px; --desktop-menu-alignment: center; /*------- Layout --------*/ --container: 1200px; --container-content: 700px; --container-padding: 30px; --gutters: 15px; --gap: 30px; /*------- Panels --------*/ --panel-left-width: 300px; --panel-right-width: 350px; /*------- Z-index --------*/ --z-index-top: 99; --z-index-overlay: 95; --z-index-menu-button: 90; --z-index-menu: 80; --z-index-behind: -1; }
 
 /*--------------------------------------------------------------
 # Wide Screen Variables
@@ -598,11 +598,11 @@ h1, .h1 { /* Add variables to a map */ /* Control unit of passed variables */ /*
 
 @media (min-width: 1001px) { h1, .h1 { font-size: 70px; } }
 
-h2, .h2 { font-size: calc(1rem + 19px); font-size: calc(var(--font-size) + 19px); margin-top: 42px; line-height: 1.3; }
+h2, .h2 { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 19px); font-size: calc(var(--font-size) + 19px); margin-top: 42px; line-height: 1.3; }
 
-h3, .h3 { font-size: calc(1rem + 12px); font-size: calc(var(--font-size) + 12px); margin-top: 40px; line-height: 1.4; }
+h3, .h3 { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 12px); font-size: calc(var(--font-size) + 12px); margin-top: 40px; line-height: 1.4; }
 
-h4, .h4 { font-size: calc(1rem + 3px); font-size: calc(var(--font-size) + 3px); margin-top: 30px; line-height: 1.5; }
+h4, .h4 { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 3px); font-size: calc(var(--font-size) + 3px); margin-top: 30px; line-height: 1.5; }
 
 /*--------------------------------------------------------------
 # Basic Links
@@ -618,7 +618,7 @@ a { color: #f75959; color: var(--highlight); text-decoration: none; cursor: poin
 /*--------------------------------------------------------------
 # WP Edit Post Link
 --------------------------------------------------------------*/
-.edit-link { font-size: calc(1rem - 15.3px); font-size: calc(var(--font-size) - 15.3px); }
+.edit-link { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem - 15.3px); font-size: calc(var(--font-size) - 15.3px); }
 
 /*--------------------------------------------------------------
 # quotes
@@ -631,15 +631,15 @@ blockquote p { padding-left: 40px; }
 
 blockquote p:last-of-type { margin: 0; }
 
-blockquote:before { content: open-quote; font-size: calc(1rem + 14px); font-size: calc(var(--font-size) + 14px); position: absolute; top: 0; line-height: 1; }
+blockquote:before { content: open-quote; font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 14px); font-size: calc(var(--font-size) + 14px); position: absolute; top: 0; line-height: 1; }
 
 cite, .wp-block-quote cite { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; font-family: var(--font); float: right; margin-top: 0; font-size: 14px; }
 
 cite:before, .wp-block-quote cite:before { content: '\2014'; margin-right: 1em; }
 
-.wp-block-quote.is-large:before { font-size: calc(1rem + 24px); font-size: calc(var(--font-size) + 24px); }
+.wp-block-quote.is-large:before { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 24px); font-size: calc(var(--font-size) + 24px); }
 
-.wp-block-quote.is-large p { font-size: calc(1rem + 4px); font-size: calc(var(--font-size) + 4px); }
+.wp-block-quote.is-large p { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 4px); font-size: calc(var(--font-size) + 4px); }
 
 q { quotes: "“" "”" "‘" "’"; }
 
@@ -732,11 +732,11 @@ input:focus + .input-append { border-color: #f75959; border-color: var(--highlig
 
 .card .cover-image img { height: 250px; }
 
-.card .card-title { font-size: calc(1rem + 10px); font-size: calc(var(--font-size) + 10px); margin-bottom: 15px; margin-bottom: var(--gutters); }
+.card .card-title { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 10px); font-size: calc(var(--font-size) + 10px); margin-bottom: 15px; margin-bottom: var(--gutters); }
 
-.card a.term-link { font-size: calc(1rem - 4px); font-size: calc(var(--font-size) - 4px); letter-spacing: .5px; text-transform: uppercase; font-weight: bold; }
+.card a.term-link { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem - 4px); font-size: calc(var(--font-size) - 4px); letter-spacing: .5px; text-transform: uppercase; font-weight: bold; }
 
-.card .card-content { -webkit-box-flex: 1; -ms-flex: 1 0 auto; flex: 1 0 auto; font-size: calc(1rem + 0px); font-size: calc(var(--font-size) + 0px); }
+.card .card-content { -webkit-box-flex: 1; -ms-flex: 1 0 auto; flex: 1 0 auto; font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem + 0px); font-size: calc(var(--font-size) + 0px); }
 
 .card .card-meta { display: -webkit-box; display: -ms-flexbox; display: flex; padding-bottom: 5px; }
 
@@ -747,7 +747,7 @@ input:focus + .input-append { border-color: #f75959; border-color: var(--highlig
 --------------------------------------------------------------*/
 .updated { display: none; }
 
-time, time a { font-size: calc(1rem - 3px); font-size: calc(var(--font-size) - 3px); }
+time, time a { font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem - 3px); font-size: calc(var(--font-size) - 3px); }
 
 /*--------------------------------------------------------------
 # Default Card Pagination
@@ -786,7 +786,7 @@ time, time a { font-size: calc(1rem - 3px); font-size: calc(var(--font-size) - 3
 --------------------------------------------------------------*/
 article img { display: block; }
 
-figure { margin-bottom: 1em; max-width: 100%; font-size: calc(1rem - 3px); font-size: calc(var(--font-size) - 3px); }
+figure { margin-bottom: 1em; max-width: 100%; font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem - 3px); font-size: calc(var(--font-size) - 3px); }
 
 .card-grid figure, .card-grid-full figure { text-align: center; margin: 0; }
 
@@ -845,7 +845,7 @@ figure { margin: 0; margin-bottom: 30px; }
 
 .gallery .blocks-gallery-item, #page .wp-block-gallery .blocks-gallery-item { width: 100% !important; margin: 0; }
 
-.gallery figcaption, #page .wp-block-gallery figcaption { text-align: center; position: relative; background: transparent; padding: 0; font-size: calc(1rem - 2px); font-size: calc(var(--font-size) - 2px); color: #6c7781; }
+.gallery figcaption, #page .wp-block-gallery figcaption { text-align: center; position: relative; background: transparent; padding: 0; font-size: 1rem; font-size: var(--font-size); font-size: calc(1rem - 2px); font-size: calc(var(--font-size) - 2px); color: #6c7781; }
 
 .caption-first .gallery-item .gallery-icon { -webkit-box-ordinal-group: 3; -ms-flex-order: 2; order: 2; }
 

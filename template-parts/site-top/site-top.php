@@ -15,7 +15,7 @@ if ( get_theme_mod( 'site_top_use_customizer', 'yes' ) == 'yes' ):
 		<div class="site-navigation horizontal-menu flex">
 			<?php echo ign_logo(); ?>
 
-			<div class="site-navigation__nav-holder" data-moveto="#panel-left" data-moveat="--nav-breakpoint-collapse" data-moveto-pos="0">
+			<div class="site-navigation__nav-holder" data-moveto="#panel-left" data-moveat="--nav-move" data-moveto-pos="0">
 				<nav class="site-navigation__nav" role="navigation"
 				     aria-label="<?php _e( 'Top Menu', 'ignition' ); ?>">
 					<?php wp_nav_menu( array(

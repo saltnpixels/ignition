@@ -29,7 +29,7 @@
 
 /* default to 4 */
 .grid tr, .flex-grid tr{
-    grid-column: span 4;
+    grid-column: span 6;
 }
 
 /* needs this for some reason */

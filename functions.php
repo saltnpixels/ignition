@@ -296,6 +296,7 @@ function ignition_scripts() {
 	wp_localize_script( 'ignition-custom-js', 'frontEndAjax', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		'nonce'   => wp_create_nonce( 'ajax_nonce' ),
+		'url' => home_url(),
 	) );
 
 	wp_localize_script( 'ignition-custom-js', 'screenReaderText', array(
