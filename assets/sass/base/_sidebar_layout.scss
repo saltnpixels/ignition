@@ -104,6 +104,10 @@
 --------------------------------------------------------------*/
 .widget {
 
+  h2{
+    margin-top: 0;
+  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -129,7 +133,7 @@
 }
 
 .sidebar-holder .widget {
-  padding: var(--gap) var(--gutters) var(--gutters) 0 var(--gutters);
+  padding: var(--gutters);
 }
 
 .sidebar-holder .widget_nav_menu{

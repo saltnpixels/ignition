@@ -214,10 +214,11 @@ div .flex>.span-12,div .flex-grid>.span-12{-webkit-box-flex:0;-ms-flex-positive:
 .sidebar-template .entry-header,.sidebar-template .page-header{margin:0 -30px}
 .js .sidebar-template.header-above:not(.active) #secondary{display:none}
 .js .sidebar-template.header-above.container:not(.active),.js .sidebar-template.header-above.container-fluid:not(.active){max-width:100%;padding:0}
+.widget h2{margin-top:0}
 .widget ul{list-style:none;padding:0;margin:0}
 .widget li{position:relative;margin:0;color:inherit;-webkit-transition:all .5s;transition:all .5s;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .widget li a{text-decoration:none;outline:0;padding:5px 0;color:inherit;cursor:pointer}
-.sidebar-holder .widget{padding:30px 15px 15px 0 15px;padding:var(--gap) var(--gutters) var(--gutters) 0 var(--gutters)}
+.sidebar-holder .widget{padding:15px;padding:var(--gutters)}
 .sidebar-holder .widget_nav_menu{padding:30px 0 30px;padding:var(--gap) 0 var(--gap)}
 html{font-size:100%}
 body,button,input,select,textarea{font-size:1rem;font-size:var(--font-size);line-height:1.5;line-height:var(--line-height);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-family:var(--font);color:#191919;color:var(--main-text-color);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}
