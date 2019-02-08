@@ -9,8 +9,8 @@
  * @version 1.0
  *
  * We have two types of views here.
- * full page views and archive views for when the page is being queried.
- * also testing is_single and is_post_type_archive cause some plugins apparently have post types that use page.php
+ * full page views for pages.
+ *
  */
 
 $post_type = get_post_type();
@@ -19,7 +19,6 @@ $id        = get_the_ID();
 ?>
 
 
-<?php if ( is_page() || is_single() || is_post_type_archive() ) : ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 		<?php
@@ -48,46 +47,12 @@ $id        = get_the_ID();
 			?>
         </div><!-- .entry-content -->
     </article><!-- #page-## -->
-
+<?php if ( comments_open() || get_comments_number() ) :?>
     <section class="after-article container-content">
 		<?php
 		// If comments are open or we have at least one comment, load up the comment template.
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
+		comments_template();
 		?>
     </section>
 
-
-	<?php ////////////////////////////////////////////// below is used if this is NOT a single page, but an archive or the blog ?>
-
-
-<?php else: ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class( 'card' ); ?>>
-        <div class="header-image cover-image">
-			<?php
-			if ( has_post_thumbnail() ) {
-				the_post_thumbnail( 'post-thumbnail', array( 'class' => 'header-image' ) );
-			}
-			?>
-        </div>
-
-        <header class="card-header">
-            <div class="header-content">
-				<?php echo ign_get_terms(); ?>
-				<?php the_title( '<h2 class="card-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
-            </div>
-        </header>
-
-        <div class="card-content">
-			<?php
-			the_excerpt();
-			?>
-        </div><!-- .entry-content -->
-
-        <div class="card-meta">
-			<?php echo ign_posted_on(); ?>
-			<?php echo ign_comment_link(); ?>
-        </div>
-    </article><!-- #post-## -->
-<?php endif; //end if not single ?>
+<?php endif;  ?>

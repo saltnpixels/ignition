@@ -32,7 +32,7 @@ global $post;
 $page_archive_id = ign_get_archive_page();
 
 //set if there is a sidebar, add the proper divs
-$has_sidebar     = false;
+$has_sidebar = false;
 if ( $page_archive_id ) {
 	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-left' ) !== false ) {
 		echo '<div class="container sidebar-template">';
@@ -97,8 +97,13 @@ if ( $page_archive_id ) {
 						//default to one section fo cards
 						while ( have_posts() ) : the_post();
 
+							//if get post type is a page get the card content for pages, a special file when showing many pages as an archive
+							if ( get_post_type() == 'page' ) {
+								include( locate_template( 'template-parts/page/card-content.php' ) );
+							}
+
 							//if folder of post type doesn't exist, use basic post content.
-							if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
+							elseif ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
 								include( locate_template( 'template-parts/post/content.php' ) );
 							} else {
 								if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
