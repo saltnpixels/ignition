@@ -26,7 +26,7 @@ Here are just soem of the features found in ignition.
 - svg icons that can easily be viewed and changed
 
 ## Learn More
-[Visit the documentation](https://ignition.press/documentation) to learn how to use the starter theme. It's quite simple and reading the documentation should take less than 25 minutes.
+[Visit the documentation](https://ignition.press/documentation/getting-started/) to learn how to use the starter theme. It's quite simple and reading the documentation should take less than 25 minutes.
 So download ignition and give it a try!
 
 ### Is it Ignition or ignition without a capital?
