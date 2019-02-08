@@ -25,7 +25,7 @@
     "gulp-imagemin": "^5.0.3",
     "gulp-line-ending-corrector": "^1.0.1",
     "gulp-merge-media-queries": "^0.2.1",
-    "gulp-notify": "^3.0.0",
+    "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.0",
     "gulp-remember": "^1.0.1",
     "gulp-rename": "^1.2.0",

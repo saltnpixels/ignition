@@ -125,7 +125,7 @@ gulp.task( 'styles', () => {
 	return gulp
 		.src( config.styleSRC, { allowEmpty: true })
 		.pipe( plumber( errorHandler ) )
-		//.pipe( sourcemaps.init() )
+		.pipe( sourcemaps.init() )
 		.pipe(
 			sass({
 				errLogToConsole: config.errLogToConsole,
@@ -135,10 +135,10 @@ gulp.task( 'styles', () => {
 		)
 		.on( 'error', sass.logError )
 		.pipe(postcss(processors))
-		.pipe( sourcemaps.write({ includeContent: false }) )
-		.pipe( sourcemaps.init({ loadMaps: true }) )
 		.pipe( autoprefixer( config.BROWSERS_LIST ) )
-		.pipe( sourcemaps.write( './' ) )
+		.pipe( sourcemaps.write({ includeContent: false, sourceRoot: './assets/sass' }) )
+		//.pipe( sourcemaps.init({ loadMaps: true }) )
+		//.pipe( sourcemaps.write( './' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe( gulp.dest( config.styleDestination ) )
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.

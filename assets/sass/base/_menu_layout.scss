@@ -400,6 +400,15 @@
       box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
       overflow: hidden;
     }
+
+    #panel-left{
+      height: 100vh;
+      overflow: auto;
+    }
+
+    &.admin-bar #panel-left{
+      height: calc(100vh - 46px);
+    }
   }
 
 }

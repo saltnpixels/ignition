@@ -102,7 +102,6 @@ swapImgToSvg('.custom-logo-link img');
     });
 
 
-
 //todo remove?
     // Whether a header image is available.
     function hasHeaderImage() {
