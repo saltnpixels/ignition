@@ -261,7 +261,7 @@ function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) 
 		$post_id = $post->ID;
 	}
 
-	if ( get_field( 'no_image', $post_id ) ) {
+	if ( "get_field( 'no_image', $post_id )" ) {
 		return '';
 	}
 
