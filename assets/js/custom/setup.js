@@ -10,6 +10,13 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 	};
 }
 
+function wrap(el, wrapper) {
+	el.parentNode.insertBefore(wrapper, el);
+	wrapper.appendChild(el);
+	return wrapper;
+}
+
+
 let debounce = function (func, wait, immediate) {
 	var timeout;
 	return function () {

@@ -8,105 +8,89 @@
  * data-scrollscrub = tweens between two classes. tween expects a duration, else duration will be 100
  *
  */
+
 let scrollMagicController = '';
-jQuery(function ($) {
-	if ('undefined' != typeof ScrollMagic) {
+function runScrollerAttributes (element) {
+	//this function can be run on an alement even after load and they will be added to scrollMagicController
+	//scrollmagic must be loaded
+	if ('undefined' != typeof ScrollMagic && element.hasAttribute('data-scrollanimation')) {
 
-		//fixed at top items can ruin layout.
-		//surround with a div thats same height and is part of layout
-		const fixedItems = $('[data-scrollanimation="fixed-at-top"]');
-		fixedItems.wrap(`<div class="fixed-holder" style="height: ${fixedItems.css('height')};"></div>`);
+		//scroll animation attributes
+		let animationClass = element.dataset.scrollanimation,
+			triggerHook = element.dataset.scrollhook || 'center',
+			offset = element.dataset.offset || 0,
+			triggerElement = element.dataset.scrolltrigger || element,
+			duration = element.dataset.duration || 0,
+			tween = element.dataset.scrollscrub,
+			scene = '';
 
-		scrollMagicController = new ScrollMagic.Controller();
+		//if animation has word up or down, its probably an animation that moves it up or down,
+		//so make sure trigger element
+		if (-1 !== animationClass.toLowerCase().indexOf('up') || -1 !== animationClass.toLowerCase().indexOf('down')) {
+			//get parent element and make that the trigger, but use an offset from current element
+			if (triggerElement === element) {
+				triggerElement = element.parentElement;
+			}
+			offset = (element.offsetTop - triggerElement.offsetTop) + offset;
+		}
 
-		//for simple animations
-		$('[data-scrollanimation]').each(function () {
+		//if fixed at top, wrap in div
+		if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
+			let wrappedElement = wrap(element, document.createElement('div'));
+			wrappedElement.classList.add('fixed-holder');
+			wrappedElement.style.height = element.offsetHeight;
+			triggerHook = 'onLeave';
+			triggerElement = element.parentElement;
+		}
 
-			//class to animate in
-			let $this = $(this);
-
-			let $class = $this.data('scrollanimation'),
-				$triggerElem = $this;
-
-			let $offset = $this.data('scrolloffset');
-			if (null == $offset) {
-				$offset = 0;
+		//if scrollscrub exists used tweenmax
+		if(tween !== null){
+			if (! duration) {
+				duration = 100;
 			}
 
-			let $triggerHook = $this.data('scrollhook');
-			if (null == $triggerHook) {
-				$triggerHook = 'onEnter';
-			}
+			tween = TweenMax.to(element, .65, {
+				className: '+=' + animationClass
+			});
 
-			if (-1 !== $class.indexOf('fixed-at-top')) {
-				$triggerHook = 'onLeave';
-				$triggerElem = $this.parent();
-			}
+			//finally output the scene
+			scene = new ScrollMagic.Scene({
+				triggerElement: triggerElement,
+				offset: offset,
+				triggerHook: triggerHook,
+				duration: duration
 
-			//scrolling animations will go haywire if the item moves vertically. the scroll will change where it starts and ends continuously!
-			if (-1 !== $class.indexOf('Up') || -1 !== $class.indexOf('Down')) {
+			}).setTween(tween).addTo(scrollMagicController)
+			// .addIndicators()
+			;
+		}else{
+			scene = new ScrollMagic.Scene({
+				triggerElement: triggerElement,
+				offset: offset,
+				triggerHook: triggerHook,
+				duration: duration
 
-				//get parent element and make that the trigger, but use an offset from that
-				$triggerElem = $this.parent();
-				$offset = ($this.offset().top - $triggerElem.offset().top) + $offset;
-			}
-
-			let $duration = $this.data('scrollduration');
-			if (null == $duration) {
-				$duration = 0;
-			}
-
-			if (null != $this.data('scrolltrigger')) {
-				$triggerElem = $($this.data('scrolltrigger'));
-			}
-
-			//make triggerElement a dom node
-			$triggerElem = $triggerElem[0];
-
-			//add a tween if found
-			let $tween = $this.data('scrollscrub');
-			let scene = '';
-			if (null != $tween) {
-
-				if (!$duration) {
-					$duration = 100;
-				}
-
-				let tween = TweenMax.to($this[0], .65, {
-					className: '+=' + $class
-				});
-
-				//finally output the scene
-				scene = new ScrollMagic.Scene({
-					triggerElement: $triggerElem,
-					offset: $offset,
-					triggerHook: $triggerHook,
-					duration: $duration
-
-				}).setTween(tween).addTo(scrollMagicController)
-
-				// .addIndicators()
-				;
-			} else {
-
-				scene = new ScrollMagic.Scene({
-					triggerElement: $triggerElem,
-					offset: $offset,
-					triggerHook: $triggerHook,
-					duration: $duration
-
-				}).setClassToggle(this, $class).addTo(scrollMagicController)
-
-				//.addIndicators()
-				;
-			}
-
-		});
+			}).setClassToggle(element, animationClass).addTo(scrollMagicController)
+			//.addIndicators()
+			;
+		}
 
 		//good for knowing when its been loaded
-		$('body').addClass('scrollmagic-loaded');
+		document.body.classList.add('scrollmagic-loaded');
 
-	} //end scrollanimation
+	}
+}
+
+
+
+//LOAD IGNITION EVENTS
+document.addEventListener('DOMContentLoaded', function () {
+
+	scrollMagicController = new ScrollMagic.Controller();
+	document.querySelectorAll('[data-scrollanimation]').forEach( (element) => {
+		runScrollerAttributes(element);
+	});
+
 
 	//TOGGLE BUTTONS
 	//adding new custom event for after the element is toggled
@@ -173,11 +157,13 @@ jQuery(function ($) {
 				destination = document.querySelector(item.getAttribute('data-moveto')),
 				source = item.getAttribute('data-movefrom');
 
+			moveAt = moveAt ? moveAt : 1030;
+
 			if (moveAt.startsWith('--')) {
 				let cssVars = getComputedStyle(document.body); //get css variables
 				moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
 			}
-			moveAt = moveAt ? moveAt : 1030;
+
 
 			if (!destination) {
 				return;
@@ -224,7 +210,6 @@ jQuery(function ($) {
 	moveItems();
 
 	document.documentElement.classList.remove('dom-loading');
-
-	let EventsFinished = new Event('afterIgnEvents');
-	document.dispatchEvent(EventsFinished);
+	let EventFinished = new Event('afterIgnEvents');
+	document.dispatchEvent(EventFinished);
 });
