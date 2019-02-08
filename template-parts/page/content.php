@@ -10,7 +10,7 @@
  *
  * We have two types of views here.
  * full page views and archive views for when the page is being queried.
- * $use_single can be set to true to get a single page even when not on single, like when getting a page for an archive.
+ * also testing is_single and is_post_type_archive cause some plugins apparently have post types that use page.php
  */
 
 $post_type = get_post_type();
@@ -19,7 +19,7 @@ $id        = get_the_ID();
 ?>
 
 
-<?php if ( is_page() ) : ?>
+<?php if ( is_page() || is_single() || is_post_type_archive() ) : ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 		<?php
@@ -62,7 +62,7 @@ $id        = get_the_ID();
 	<?php ////////////////////////////////////////////// below is used if this is NOT a single page, but an archive or the blog ?>
 
 
-<?php elseif ( ! is_page() ): ?>
+<?php else: ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class( 'card' ); ?>>
         <div class="header-image cover-image">
 			<?php
