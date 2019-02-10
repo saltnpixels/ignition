@@ -16,7 +16,7 @@
                 "id": ""
             },
             "admin_only": 0,
-            "message": "Show Main Editor?",
+            "message": "Show Main Editor? (To View on Front End you will need to add the main editor to the sections below)",
             "default_value": 0,
             "ui": 0,
             "ign_set_data": "#postdivrich",
@@ -742,5 +742,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1549809005
+    "modified": 1549813921
 }
