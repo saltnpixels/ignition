@@ -21,7 +21,7 @@ acf.addAction('prepare', function () {
 
     if (showMainEditor.length) {
         if(document.querySelector('.block-editor__container') !== null){
-            showMainEditor.hide();
+            showMainEditor.hide(); //hide if block editor is showing
         }
 
         showMainEditor[0].addEventListener('change', highlight_section);
