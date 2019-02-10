@@ -36,7 +36,8 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 
 			<?php
 			if ( is_post_type_archive() || is_home() || is_search() || is_archive() ) {
-				$old_post = $post;
+				$old_post = $post; //store current pages ID
+				the_content(); // output any text wanted before hand
 				wp_reset_postdata();
 			    ?>
 
@@ -73,7 +74,6 @@ $loop_class = ( $loop_class == '' ) ? 'card-grid' : $loop_class;
 				$post = $old_post;
 				setup_postdata( $post );
 			} else {
-
                 the_content();
 			} ?>
 

@@ -58,9 +58,11 @@
                 "class": "",
                 "id": ""
             },
+            "admin_only": 0,
             "message": "Change Header?",
             "default_value": 0,
             "ui": 0,
+            "ign_set_data": "#acf-group_5a79fa1baf007",
             "ui_on_text": "",
             "ui_off_text": ""
         }
@@ -89,5 +91,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1548559666
+    "modified": 1549765413
 }

@@ -53,9 +53,9 @@
 # MCE Editor
 --------------------------------------------------------------*/
 .mce-content-body{
-  padding: 5px 30px;
+  padding: 5px 30px !important;
 }
 
-.post-type-post{
+.post-type-post, .post-type-page{
   @extend .container-content;
 }

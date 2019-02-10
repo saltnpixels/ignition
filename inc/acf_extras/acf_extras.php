@@ -54,7 +54,7 @@ function acf_loop_field( $field ) {
 			if ( is_admin() && get_post_type() == 'page' && $post_type ) {
 				$field['layouts']['5afb034fab739']['label'] = ucfirst( $post_type ) . ' Card List';
 			} else {
-				$field['layouts']['5afb034fab739']['label'] = ucfirst( $post_type ) . 'Show Main Editor';
+				$field['layouts']['5afb034fab739']['label'] = ucfirst( $post_type ) . 'Main Editor';
 			}
 		}
 
@@ -74,7 +74,7 @@ function the_loop_layout_title( $title, $field, $layout, $i ) {
 		if ( get_post_type() == 'page' && $post_type ) {
 			$title = ucfirst( $post_type ) . ' Card List';
 		} else {
-			$title = 'Show Main Editor';
+			$title = 'Main Editor';
 		}
 	}
 
@@ -114,121 +114,19 @@ add_action( 'acf/save_post', 'save_sections', '99' );
 //add styles for acf back end
 function my_acf_admin_enqueue_scripts() {
 	wp_enqueue_style( 'ign_acf_styles', get_template_directory_uri() . '/inc/acf_extras/acf_styles.css' );
-}
 
-add_action( 'acf/input/admin_enqueue_scripts', 'my_acf_admin_enqueue_scripts' );
-
-
-/*
- * Javascript for ACF
- * Hiding/Showing the header layout field if "change header checkbox" field is selected.
- * Allow adding classes that affect the actual fields layout on back end so it matches front end.
- */
-function acf_js() {
+	//js should only happen on edit screens
 	if ( is_admin() ) {
 		$screen = get_current_screen();
-
-		//if this is the edit page screen
-		if ( $screen->parent_base == 'edit' && $screen->post_type != 'acf-field-group' ) {
-			?>
-            <script type="text/javascript">
-                let headerLayouts = '';
-                let changeHeader = '';
-
-                acf.addAction('prepare', function () {
-                    headerLayouts = acf.getPostbox("acf-group_5a79fa1baf007");
-                    changeHeader = acf.getField('field_5c4b66a65ae2c');
-
-                    //if header layouts group doesnt exist at all, dont show the change header field either
-                    if (!headerLayouts) {
-                        changeHeader.hide();
-                        return;
-                    }
-
-                    //if change header is not checked, hide the header layout field
-                    if (!changeHeader.val()) {
-                        headerLayouts.hide();
-                    }
-
-                    changeHeader.$el.on('change', show_hide_header);
-                    document.querySelector('#page_template').addEventListener('change', () => {
-                        setTimeout(show_hide_header, 500);
-                    });
-                });
-
-                function show_hide_header() {
-                    if (changeHeader.val()) {
-                        headerLayouts.show();
-                        $('html,body').animate({scrollTop: 0}, 'slow');
-                        headerLayouts.$el.addClass('highlighted');
-                        setTimeout(function () {
-                            headerLayouts.$el.removeClass('highlighted');
-                        }, 2000);
-                    } else {
-                        headerLayouts.hide();
-                    }
-                }
-
-
-                //allow special data-ign-class to change dynamically
-                document.addEventListener("DOMContentLoaded", function () {
-                    //get the data attribute
-                    let igndataattributes = document.querySelectorAll('[data-ign-class]');
-                    igndataattributes.forEach(acfinput => {
-                        changeIgnClasses(acfinput);
-                    });
-                });
-
-                //anytime this input changes, change the class
-                document.addEventListener("change", function (event) {
-
-                    if (event.target.matches('[data-ign-class]')) {
-                        changeIgnClasses(event.target);
-                    }
-                });
-
-                function changeIgnClasses(acfInput) {
-                    //to do anything there must be a value set
-
-                        let dataValue = acfInput.getAttribute('data-ign-class');
-
-                        //find the data attribute as a selector
-                        //first go up only to the nearest set of fields. if nothing is found query all the way up.
-                        let acfSelector = acfInput.closest(".acf-fields").querySelector(dataValue);
-                        if (acfSelector == null) {
-                            acfSelector = acfInput.closest(dataValue);
-                        }
-
-                        //remove previous values if any
-                        if (acfInput.getAttribute('data-last-value')) {
-                            let lastValues = acfInput.getAttribute('data-last-value').split(' ');
-                            lastValues = lastValues.filter(Boolean); //remove any empty strings
-                            acfSelector.classList.remove(...lastValues);
-                        }
-
-                        //set class on the queried selector if there is a value
-                    if(acfInput.value !== ' ' && acfInput.value){
-                        console.log(acfInput);
-
-                        let classes = acfInput.value.split(" "); //if there is more than one class
-                        classes = classes.filter(Boolean);
-                        acfSelector.classList.add(...classes);
-                        acfInput.setAttribute('data-last-value', acfInput.value);
-                    }
-
-
-
-
-                }
-
-            </script>
-			<?php
+		if ( $screen->post_type != 'acf-field-group' ) {
+			wp_enqueue_script('ign_acf_scripts', get_template_directory_uri() . '/inc/acf_extras/acf_scripts.js');
 		}
 	}
 
+
 }
 
-add_action( 'acf/input/admin_footer', 'acf_js' );
+add_action( 'acf/input/admin_enqueue_scripts', 'my_acf_admin_enqueue_scripts', 99 );
 
 
 //add new field Admin only. wont show field unless your an admin
@@ -279,8 +177,14 @@ function ign_data_field_settings( $field ) {
 }
 
 add_action( 'acf/render_field_settings/type=text', 'ign_data_field_settings' );
+add_action( 'acf/render_field_settings/type=true_false', 'ign_data_field_settings' );
 
 
+/**
+ * @param $field
+ * adds a data attribute to the text input
+ * then with js we give that value as a class to another element based on selector chosen
+ */
 function ign_show_data_field( $field ) {
 
 	if ( ! empty( $field['ign_set_data'] ) ) {
@@ -288,8 +192,9 @@ function ign_show_data_field( $field ) {
 		echo '
             <script>
             {
-           //get the ign data class attribute and set it to the input field
+           //get the ign data attribute and set it to the input field
          let acfinput = document.querySelector("#' . $field['id'] . '");
+         //set the attribute value to the selector chosen
           acfinput.setAttribute("data-ign-class", "' . $field['ign_set_data'] . '");
           
          }
@@ -299,3 +204,4 @@ function ign_show_data_field( $field ) {
 }
 
 add_filter( 'acf/render_field', 'ign_show_data_field', 11, 1 );
+

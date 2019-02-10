@@ -3,6 +3,27 @@
     "title": "Page Sections",
     "fields": [
         {
+            "key": "field_5c5f7e2dcf40f",
+            "label": "Show Main Editor",
+            "name": "show_main_editor",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "Show Main Editor?",
+            "default_value": 0,
+            "ui": 0,
+            "ign_set_data": "#postdivrich",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5aa800095d7bc",
             "label": "Sections",
             "name": "sections",
@@ -385,7 +406,8 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "This section is more useful when the page is being used as an archive page. If this page is an archive page, it will show all the posts\/cards for this archive page.\r\nOtherwise it will show the main content|gutenberg editor (which is usually hidden when using sections).",
+                            "admin_only": 0,
+                            "message": "This section will show the main editor's content at this position on the page. \r\nIf this page is an archive page, it will show all the posts\/cards for this archive page.",
                             "new_lines": "wpautop",
                             "esc_html": 0
                         },
@@ -512,7 +534,7 @@
                         }
                     ],
                     "min": "",
-                    "max": ""
+                    "max": "1"
                 },
                 "5ab1571b58391": {
                     "key": "5ab1571b58391",
@@ -720,5 +742,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1549208777
+    "modified": 1549809005
 }

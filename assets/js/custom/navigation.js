@@ -158,12 +158,13 @@ jQuery(function ($) {
 
     });
 
+
     //move logo in middle of menu on desktop if logo is middle position
     if ($('.logo-in-middle').length) {
         let navigationLi = $('.site-navigation__nav-holder .menu li');
         let middle = Math.floor($(navigationLi).length / 2) - 1;
 
-        //add logo tot he middle when page loads
+        //add logo to the middle when page loads
         $('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'));
         $('.site-logo').clone().appendTo('.li-logo-holder');
     }

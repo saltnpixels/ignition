@@ -1,12 +1,61 @@
-/*header section */
-#acf-group_5a79fa1baf007 {
-    display: none;
-    transition: box-shadow .5s;
+/* fix indicator on header box when before editor */
+#acf-group_5a79fa1baf007{
+    margin-top: 45px;
 }
 
-.highlighted {
-    box-shadow: 0 0 3px 1px yellow;
+.acf-postbox .toggle-indicator:before{
+    content: "\f142";
+    display: inline-block;
+    font: normal 20px/1 dashicons;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
 }
+
+.acf-postbox.closed .toggle-indicator:before{
+ content: "\f140"
+}
+
+/*header section */
+.highlight{
+    animation-name: highlight;
+    animation-fill-mode: both;
+    animation-duration: 2s;
+}
+
+@keyframes highlight {
+    0%{
+        box-shadow: none;
+    }
+
+    50%{
+        box-shadow: 0 0 3px 1px yellow;
+    }
+
+    100%{
+        box-shadow: none;
+    }
+}
+
+
+/*hide main post editor, and header layouts if unchecked set*/
+#postdivrich.unchecked, #acf-group_5a79fa1baf007.unchecked{
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
 
 /* grid ability on back end of acf */
 

@@ -387,7 +387,7 @@ jQuery(function ($) {
 
   if ($('.logo-in-middle').length) {
     var navigationLi = $('.site-navigation__nav-holder .menu li');
-    var middle = Math.floor($(navigationLi).length / 2) - 1; //add logo tot he middle when page loads
+    var middle = Math.floor($(navigationLi).length / 2) - 1; //add logo to the middle when page loads
 
     $('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'));
     $('.site-logo').clone().appendTo('.li-logo-holder');
@@ -574,7 +574,7 @@ jQuery(function ($) {
 
     if ($('.sidebar-template').hasClass('header-above')) {
       //move header out of article so its above sidebar and article and add class active which shows sidebar once header is moved
-      $siteContent.prepend($('article .entry-header, .archive .entry-header, .page-header'));
+      $siteContent.prepend($('article .entry-header, .archive .entry-header, .page-header, .blog .entry-header'));
       $('.sidebar-template').addClass('active');
     }
   }
