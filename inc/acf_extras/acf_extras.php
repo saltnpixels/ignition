@@ -13,7 +13,7 @@ function plugin_init() {
 
 	if ( ! function_exists( 'get_field' ) ) {
 		function get_field( $field = '', $id = 0 ) {
-			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
+			return get_post_meta($id, $field, true);
 		}
 	}
 

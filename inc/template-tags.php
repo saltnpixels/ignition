@@ -189,6 +189,7 @@ function is_static_frontpage() {
  */
 function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail', $attr = '', $use_thumbnail_as_fallback = false ) {
 
+
 	if ( ! $post_id ) {
 		global $post;
 		$post_id = $post->ID;
@@ -256,6 +257,7 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
  *
  */
 function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) {
+
 	if ( ! $post_id ) {
 		global $post;
 		$post_id = $post->ID;
