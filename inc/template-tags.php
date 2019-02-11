@@ -263,15 +263,24 @@ function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) 
 		$post_id = $post->ID;
 	}
 
-	if ( get_field( 'no_image', $post_id ) ) {
-		return '';
+
+	if ( function_exists( 'get_field' ) ) {
+
+		if ( get_field( 'no_image', $post_id ) ) {
+			return '';
+		}
+
+		$image = get_field( 'header_image', $post_id );
+	}else{
+		$image = '';
 	}
 
-	$image = get_field( 'header_image', $post_id );
+
 	if ( $return_type == 'url' ) {
-		return ign_get_image_url( $post_id, 'header_image', $image, true );
+		return ign_get_image_url( $image, $post_id, 'header_image', true );
 	} else {
-		return ign_get_image( $post_id, 'header_image', $image, $attr, true );
+		return ign_get_image( $image, $post_id, 'header_image', $attr, true );
 	}
 }
+
 
