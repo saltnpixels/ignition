@@ -38,6 +38,14 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
   @include font-size(12);
 }
 
+.field_description_above .gfield_description{
+  @include font-size(18);
+}
+
+.gfield_required{
+  color: red;
+}
+
 /*--------------------------------------------------------------
 # Gform Fields
 --------------------------------------------------------------*/
@@ -46,7 +54,7 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
   margin: 0;
   padding: 0;
   @extend .grid;
-  grid-gap: $gutters;
+  grid-gap: $gap;
 }
 
 //Every gfield has margin bottom and gutters on both sides
@@ -68,6 +76,10 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
   }
 }
 
+
+.hidden_label .gfield_label{
+  @extend .screen-reader-text;
+}
 /*--------------------------------------------------------------
 # Checkbox and Radios
 --------------------------------------------------------------*/
@@ -75,13 +87,25 @@ $form-gutters: 10px; //the padding between inputs if two are on one line or betw
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-top: 5px;
 }
 
 .gfield_radio li, .gfield_checkbox li {
   display: flex;
   align-items: center;
   padding: 0;
+
+  label{
+    font-weight: normal;
+    @include font-size(16);
+  }
+  input:checked + label{
+    font-weight: bold;
+  }
+
 }
+
+
 
 /*--------------------------------------------------------------
 # Time input
