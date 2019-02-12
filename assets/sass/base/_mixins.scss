@@ -3,10 +3,10 @@ Mixins
 --------------------------------------------------------------*/
 /*------- font Size. Input value as number for pixels --------*/
 @mixin font-size($sizeValue: 16) {
-  @if($sizeValue = 16){
+  @if($sizeValue == 16){
     font-size: var(--font-size);
   }
-  @if ($sizeValue < 16) {
+  @else if ($sizeValue < 16) {
     $size: 16px - $sizeValue;
     font-size: calc(var(--font-size) - #{$size});
   } @else {
