@@ -22,8 +22,6 @@ function ignition_javascript_detection() {
 add_action( 'wp_head', 'ignition_javascript_detection', 0 );
 
 
-
-
 /*
  * Require any functions.php for each post type.
  * You can have a functions.php in each post type folder in template-parts.
@@ -55,7 +53,6 @@ function ignition_pingback_header() {
 }
 
 add_action( 'wp_head', 'ignition_pingback_header' );
-
 
 
 /*--------------------------------------------------------------
@@ -179,8 +176,6 @@ function ignition_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
 
 
-
-
 /*--------------------------------------------------------------
 # Menu Work
 --------------------------------------------------------------*/
@@ -273,27 +268,20 @@ add_filter( 'get_custom_logo', 'ignition_output_inline_svg' );
 
 
 /**
- * ignition_logo function.
+ * @return string
  *
- * @access public
- *
- * @param bool if $return_image_url instead if this is true
- *
- * @return String for logo with h1 or p based on page.
  */
 function ign_logo() {
 
 	if ( has_custom_logo() ) {
 		$logo = get_custom_logo();
 	} else { //no theme mod found. Get site title instead.
-		$no_image = true;
-		$logo     = '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '
+		$logo = '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '
 		</a>';
 
 	}//theme mod
 
-	//now if we have a custom logo, we output logo_output or both on customizer page or url for login page
-	//if we are in the customizer preview get both and hide/show based on js
+	//if we are in the customizer preview get both image and site title and hide/show based on js
 	if ( is_customize_preview() ) {
 		return '<div class="site-logo"><h1 class="site-title">' . $logo . '<a class="site-name" href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '
 				</a>' . '</h1></div>';
@@ -306,7 +294,6 @@ function ign_logo() {
 	} else {
 		return '<div class="site-logo"><p class="site-title">' . $logo . '</p></div>';
 	}
-
 }
 
 
@@ -326,8 +313,6 @@ function the_login_logo( $message ) {
 }
 
 add_filter( 'login_message', 'the_login_logo' );
-
-
 
 
 /**

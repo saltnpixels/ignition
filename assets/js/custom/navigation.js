@@ -169,9 +169,6 @@ jQuery(function ($) {
         $('.site-logo').clone().appendTo('.li-logo-holder');
     }
 
-    $('#btnCloseUpdateBrowser').on('click', () => {
-        $('#outdated').hide();
-    });
 
 
     //move submenus if too close to edge on desktop

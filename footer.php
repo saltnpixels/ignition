@@ -39,7 +39,7 @@ hidden"><?php echo ign_get_svg( array( "icon" => "sidebar" ) ); ?></button>
     <p><?php _e( 'Update your browser to view this website correctly.', 'ignition' ); ?> <a id="btnUpdateBrowser"
                                                                                             href="http://outdatedbrowser.com/"><?php _e( 'Update
 			my browser now', 'ignition' ); ?></a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+    <p class="last"><a data-toggle="hidden" data-target="#outdated" href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 
 </body>

@@ -94,7 +94,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	//TOGGLE BUTTONS
 	//adding new custom event for after the element is toggled
-	let ToggleEvent = new Event('afterToggle');
+	let toggleEvent = null;
+	if ( isIE11 ) {
+		toggleEvent = document.createEvent( 'Event' );
+
+		// Define that the event name is 'build'.
+		toggleEvent.initEvent( 'afterToggle', true, true );
+
+	} else {
+		toggleEvent = new Event( 'afterToggle' );
+	}
 
 	//add aria to buttons currently on page
 	let buttons = document.querySelectorAll('[data-toggle]');
@@ -136,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			//trigger optional afterToggle event
-			item.dispatchEvent(ToggleEvent);
+			item.dispatchEvent(toggleEvent);
 
 		}
 	});
@@ -210,6 +219,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	moveItems();
 
 	document.documentElement.classList.remove('dom-loading');
-	let EventFinished = new Event('afterIgnEvents');
-	document.dispatchEvent(EventFinished);
+
+	let EventFinished = null;
+	if ( isIE11 ) {
+		EventFinished = document.createEvent( 'Event' );
+
+		// Define that the event name is 'build'.
+		EventFinished.initEvent( 'afterIgnEvents', true, true );
+
+	} else {
+		EventFinished = new Event( 'afterIgnEvents' );
+	}
+	document.dispatchEvent( EventFinished );
 });

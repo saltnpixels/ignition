@@ -10,6 +10,35 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 	};
 }
 
+if (!String.prototype.startsWith) {
+	String.prototype.startsWith = function(searchString, position) {
+		position = position || 0;
+		return this.indexOf(searchString, position) === position;
+	};
+}
+
+if (!Element.prototype.matches) {
+	Element.prototype.matches = Element.prototype.msMatchesSelector ||
+		Element.prototype.webkitMatchesSelector;
+}
+
+if (!Element.prototype.closest) {
+	Element.prototype.closest = function(s) {
+		var el = this;
+
+		do {
+			if (el.matches(s)) return el;
+			el = el.parentElement || el.parentNode;
+		} while (el !== null && el.nodeType === 1);
+		return null;
+	};
+}
+
+let  isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+
+
+
+//wrap function
 function wrap(el, wrapper) {
 	el.parentNode.insertBefore(wrapper, el);
 	wrapper.appendChild(el);
