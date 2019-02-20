@@ -41,7 +41,7 @@
 @import "elements/animations";
 
 
-/*------- Sections --------*/ 
+/*------- Sections --------*/
 @import "elements/sections";
 
 
@@ -56,6 +56,6 @@
   padding: 5px 30px !important;
 }
 
-.post-type-post, .post-type-page{
+.mce-content-body{
   @extend .container-content;
 }

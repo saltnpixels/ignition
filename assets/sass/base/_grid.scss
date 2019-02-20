@@ -89,8 +89,10 @@
   @include flex-card-grid(); //almost the same except cards on lowest row will not be same size if there isnt an even amount
 }
 
-.large-gap{
-  grid-gap: calc(var(--gap) * 2);
+@media(min-width: $media-medium){
+  div .large-gap{
+    grid-gap: calc(var(--gap) * 2);
+  }
 }
 
 /*--------------------------------------------------------------
@@ -113,7 +115,7 @@
 //fix the gap when it gets too small
 //even if everything collpases, the browser expects 12 gaps of 30 pixels of room to exist. and adding container gutters brings us to 420. below this the grid won fit unless we lower the gap.
 @media(max-width: 420px){
-  .grid{
+  div .grid{
     grid-gap: 30px 20px;
   }
 }

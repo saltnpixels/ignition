@@ -273,13 +273,13 @@ add_action( 'admin_init', 'redirect_admin' );
  */
 function ignition_scripts() {
 	// Add google fonts
-	wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), null );
+	wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), wp_get_theme()->get( 'Version' ) );
 
 	// Theme stylesheet. Will get this stylesheet or a child themes stylesheet.
-	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', '1.0' );
+	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', wp_get_theme()->get( 'Version' ) );
 
 	//Sass compiles styles. Will get child's theme version if found instead. Child theme should import with sass.
-	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', '1.0' );
+	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', wp_get_theme()->get( 'Version' ) );
 
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );

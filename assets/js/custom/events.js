@@ -44,7 +44,7 @@ function runScrollerAttributes (element) {
 		}
 
 		//if scrollscrub exists used tweenmax
-		if(tween !== null){
+		if(tween !== undefined){
 			if (! duration) {
 				duration = 100;
 			}
@@ -119,8 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		let item = e.target.closest('[data-toggle]');
 
 		if (item) {
-			e.preventDefault();
-			e.stopPropagation();
+
+			let $doDefault = item.getAttribute( 'data-default' );
+
+			if ( null === $doDefault ) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
 
 			item.classList.toggle('toggled-on');
 			item.setAttribute('aria-expanded', item.classList.contains('toggled-on') ? 'true' : 'false');
