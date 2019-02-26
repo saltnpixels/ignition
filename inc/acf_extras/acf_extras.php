@@ -90,6 +90,7 @@ add_filter( 'acf/fields/flexible_content/layout_title/name=sections', 'the_loop_
  * @param $post_id
  * Save the sections altogether just in case a new theme is used and the pages need to be exported. Also lets SEO work and searching works
  */
+$saving_sections = false;
 function save_sections( $post_id ) {
 //must be saving a post. not any options
 	global $post;
@@ -99,10 +100,13 @@ function save_sections( $post_id ) {
 			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ) {
 				ob_start();
 				setup_postdata( $post );
-				//run through all sections
+				global $saving_sections;
+				$saving_sections = true;
+				//run through all sections and make sure to not save any edit link links
 				locate_template( 'template-parts/acf-blocks/sections.php', true );
 				$sections = ob_get_clean();
 				update_post_meta( $id, 'acf_all_sections', $sections );
+				$saving_sections = false;
 			}
 		}
 	}

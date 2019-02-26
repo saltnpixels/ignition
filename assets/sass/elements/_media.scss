@@ -20,6 +20,10 @@
     position: relative;
   }
 
+  .background-image ~ *{
+    z-index: 10;
+  }
+
 }
 
 

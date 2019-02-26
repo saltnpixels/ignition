@@ -179,8 +179,8 @@ img {
 }
 
 //hide moveto events until they are in position, easily overridable
-.events-loading [data-moveto]{
-  display: none;
+.js.dom-loading [data-moveto]{
+  //display: none;
 }
 
 

@@ -45,7 +45,7 @@ function runScrollerAttributes(element) {
     } //if scrollscrub exists used tweenmax
 
 
-    if (tween !== null) {
+    if (tween !== undefined) {
       if (!duration) {
         duration = 100;
       }
@@ -84,7 +84,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }); //TOGGLE BUTTONS
   //adding new custom event for after the element is toggled
 
-  var ToggleEvent = new Event('afterToggle'); //add aria to buttons currently on page
+  var toggleEvent = null;
+
+  if (isIE11) {
+    toggleEvent = document.createEvent('Event'); // Define that the event name is 'build'.
+
+    toggleEvent.initEvent('afterToggle', true, true);
+  } else {
+    toggleEvent = new Event('afterToggle');
+  } //add aria to buttons currently on page
+
 
   var buttons = document.querySelectorAll('[data-toggle]');
   buttons.forEach(function (button) {
@@ -96,8 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var item = e.target.closest('[data-toggle]');
 
     if (item) {
-      e.preventDefault();
-      e.stopPropagation();
+      var $doDefault = item.getAttribute('data-default');
+
+      if (null === $doDefault) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
       item.classList.toggle('toggled-on');
       item.setAttribute('aria-expanded', item.classList.contains('toggled-on') ? 'true' : 'false');
       var $class = item.getAttribute('data-toggle'),
@@ -120,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } //trigger optional afterToggle event
 
 
-      item.dispatchEvent(ToggleEvent);
+      item.dispatchEvent(toggleEvent);
     }
   }); //MOVING ITEMS
   //on Window resize we can move items to and from divs with data-moveto="the destination"
@@ -185,7 +199,16 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', throttle(moveItems, 250));
   moveItems();
   document.documentElement.classList.remove('dom-loading');
-  var EventFinished = new Event('afterIgnEvents');
+  var EventFinished = null;
+
+  if (isIE11) {
+    EventFinished = document.createEvent('Event'); // Define that the event name is 'build'.
+
+    EventFinished.initEvent('afterIgnEvents', true, true);
+  } else {
+    EventFinished = new Event('afterIgnEvents');
+  }
+
   document.dispatchEvent(EventFinished);
 });
 "use strict";
@@ -391,11 +414,8 @@ jQuery(function ($) {
 
     $('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'));
     $('.site-logo').clone().appendTo('.li-logo-holder');
-  }
+  } //move submenus if too close to edge on desktop
 
-  $('#btnCloseUpdateBrowser').on('click', function () {
-    $('#outdated').hide();
-  }); //move submenus if too close to edge on desktop
 
   function fixOffScreenMenu(menu) {
     var edge = menu[0].getBoundingClientRect().right;
@@ -486,6 +506,32 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
     }
   };
 }
+
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function (searchString, position) {
+    position = position || 0;
+    return this.indexOf(searchString, position) === position;
+  };
+}
+
+if (!Element.prototype.matches) {
+  Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
+
+if (!Element.prototype.closest) {
+  Element.prototype.closest = function (s) {
+    var el = this;
+
+    do {
+      if (el.matches(s)) return el;
+      el = el.parentElement || el.parentNode;
+    } while (el !== null && el.nodeType === 1);
+
+    return null;
+  };
+}
+
+var isIE11 = !!window.MSInputMethodContext && !!document.documentMode; //wrap function
 
 function wrap(el, wrapper) {
   el.parentNode.insertBefore(wrapper, el);
