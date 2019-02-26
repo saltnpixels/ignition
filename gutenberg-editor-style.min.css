@@ -128,7 +128,7 @@ div .edit-post-visual-editor .flex>.span-12,div .edit-post-visual-editor .flex-g
 .edit-post-visual-editor code,.edit-post-visual-editor kbd,.edit-post-visual-editor tt,.edit-post-visual-editor var{font-family:'Source Code Pro',monospace;font-family:var(--font-pre);font-size:15px}
 .edit-post-visual-editor .background-image{position:absolute;top:0;left:0;height:100%;width:100%;display:block}
 .edit-post-visual-editor .background-image img{-o-object-fit:cover;object-fit:cover;height:100%;width:100%;position:relative}
-.edit-post-visual-editor .background-image .background-image ~ *{z-index:10}
+.edit-post-visual-editor .background-image ~ *{z-index:10}
 .edit-post-visual-editor .cover-image{width:100%;display:block}
 .edit-post-visual-editor .cover-image img{-o-object-fit:cover;object-fit:cover;left:0;right:0;height:100%;width:100%}
 .edit-post-visual-editor .cover-image,.edit-post-visual-editor .background-image{background-size:cover;background-repeat:no-repeat;background-position:center}
