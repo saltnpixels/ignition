@@ -33,7 +33,7 @@ get_header(); ?>
             </header>
 
 
-	        <div class="container">
+	        <div class="container search-items">
 		        <section class="card-grid">
 			        <?php
 			        //default to one section fo cards
