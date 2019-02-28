@@ -414,7 +414,7 @@ function add_archive_edit_link( $admin_bar ) {
 	if ( ! is_admin() && is_post_type_archive() && $archive_id ) {
 		$admin_bar->add_menu( array(
 			'id'    => 'archive-link',
-			'title' => __( 'Edit ' . get_post_type_object( get_post_type() )->labels->name, 'ignition' ),
+			'title' => sprintf( __( 'Edit %s Page', 'ignition' ), get_post_type_object( get_post_type() )->labels->name ),
 			'href'  => get_edit_post_link( $archive_id ),
 		) );
 	}

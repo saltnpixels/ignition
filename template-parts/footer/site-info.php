@@ -10,5 +10,5 @@
 ?>
 <div class="site-info gutters text-center">
     <a target="_blank" href="<?php echo esc_url('https://ignition.press/'); ?>"><?php printf( __(
-			'© %s Created with Ignition. Proudly powered by %s', 'ignition' ), date('Y'), 'WordPress' ); ?></a>
+			'© %s Created by %s with Ignition. Proudly powered by %s', 'ignition' ), date('Y'), 'Eric', 'WordPress' ); ?></a>
 </div><!-- .site-info -->
