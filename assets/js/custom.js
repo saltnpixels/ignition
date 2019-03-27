@@ -39,7 +39,7 @@ function runScrollerAttributes(element) {
     if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
       var wrappedElement = wrap(element, document.createElement('div'));
       wrappedElement.classList.add('fixed-holder');
-      wrappedElement.style.height = element.offsetHeight;
+      wrappedElement.style.height = element.offsetHeight + 'px';
       triggerHook = 'onLeave';
       triggerElement = element.parentElement;
     } //if scrollscrub exists used tweenmax
