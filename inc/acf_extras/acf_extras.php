@@ -13,7 +13,7 @@ function plugin_init() {
 
 	if ( ! function_exists( 'get_field' ) ) {
 		function get_field( $field = '', $id = 0 ) {
-			return get_post_meta($id, $field, true);
+			return get_post_meta( $id, $field, true );
 		}
 	}
 
@@ -123,7 +123,7 @@ function my_acf_admin_enqueue_scripts() {
 	if ( is_admin() ) {
 		$screen = get_current_screen();
 		if ( $screen->post_type != 'acf-field-group' ) {
-			wp_enqueue_script('ign_acf_scripts', get_template_directory_uri() . '/inc/acf_extras/acf_scripts.js');
+			wp_enqueue_script( 'ign_acf_scripts', get_template_directory_uri() . '/inc/acf_extras/acf_scripts.js' );
 		}
 	}
 
@@ -174,7 +174,7 @@ function ign_data_field_settings( $field ) {
 		'instructions' => 'The value of this custom field will now be added a class to the matching closest selector. Use .acf-row to affect this fields container.',
 		'name'         => 'ign_set_data',
 		'type'         => 'text',
-		'placeholder' => '.acf-row',
+		'placeholder'  => '.acf-row',
 		'ui'           => 99
 	), true );
 
@@ -209,3 +209,26 @@ function ign_show_data_field( $field ) {
 
 add_filter( 'acf/render_field', 'ign_show_data_field', 11, 1 );
 
+
+//change title of sections flexible field
+function ign_section_titles( $title, $field, $layout, $i ) {
+	//if sub field for layout title exists use it instead.
+	$layout_title = get_sub_field( 'section_title' ); //get section title field if exists
+	if ( ! $layout_title ) {
+		$layout_title = get_sub_field( 'title' ); //try to find a title field
+	}
+	if ( ! $layout_title ) {
+		$layout_title = get_sub_field( 'heading' ); //try to find a title field
+	}
+
+	if ( $layout_title ) {
+		$title = '<strong>' . $layout_title . '</strong> - ' . $title;
+	}
+
+	// return
+	return $title;
+
+}
+
+// name
+add_filter( 'acf/fields/flexible_content/layout_title/name=sections', 'ign_section_titles', 10, 4 );

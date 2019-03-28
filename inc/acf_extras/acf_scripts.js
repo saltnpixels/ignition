@@ -1,11 +1,16 @@
 let headerLayouts = '';
 let changeHeader = '';
 let showMainEditor = '';
-
+let sectionLayouts = '';
 //hook into prepare to load after acf loads fields
 acf.addAction('prepare', function () {
 
-    //move header layout above editor
+	//auto collapse all sections
+	sectionLayouts = acf.getPostbox('acf-group_5aa6a924b02ff').$el;
+	sectionLayouts.find('.values .layout').addClass('-collapsed');
+
+
+	//move header layout above editor
     headerLayouts = acf.getPostbox('acf-group_5a79fa1baf007').$el;
     let mainEditor = document.querySelector('#postdivrich');
 
