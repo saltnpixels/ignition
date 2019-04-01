@@ -9,6 +9,11 @@
  *
  */
 
+//test if this is a touchscreen
+if (!("ontouchstart" in document.documentElement)) {
+	document.documentElement.className += " no-touch";
+}
+
 let scrollMagicController = '';
 function runScrollerAttributes (element) {
 	//this function can be run on an alement even after load and they will be added to scrollMagicController

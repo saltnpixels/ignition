@@ -60,7 +60,7 @@
 
 .alignwide {
   width: 100%;
-  max-width: var(--container);
+  max-width: calc( var(--container) - (var(--container-padding)* 2));
   margin-left: auto;
   margin-right: auto;
 }
