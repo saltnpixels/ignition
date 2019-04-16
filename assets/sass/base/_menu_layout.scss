@@ -519,7 +519,7 @@
 }
 
 //opened-state for x version. Becomes X
-.panel-left-toggle.toggled-on .navigation-menu-icon:not(.navigation-menu-icon--alt) {
+.panel-left-toggle.toggled-on .navigation-menu-icon.icon-regular{
   &:before {
     transform: rotate(45deg);
     top: 45%;
@@ -531,7 +531,7 @@
 }
 
 //menu icon alt version. 3 bars
-.navigation-menu-icon--alt {
+.navigation-menu-icon--alt, .navigation-menu-icon--bars {
   border-top: 3px solid white;
   margin-top: 6px;
 
@@ -547,5 +547,9 @@
   &:after {
     top: 9px;
   }
+}
+
+.navigation-menu-icon--bars:before {
+  width: 100%;
 }
 

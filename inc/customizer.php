@@ -139,17 +139,19 @@ function ignition_customize_register( $wp_customize )
 
     $wp_customize->add_setting( 'menu_icon',
         array(
-            'default' => 'regular',
+            'default' => 'icon-regular',
         ) );
 
     $wp_customize->add_control( 'menu_icon',
         array(
             'label' => __( 'Menu Icon' ),
             'section' => 'theme_options',
+            'description' => __('Choose a menu icon to use. All are made of pure css.'),
             'type' => 'select',
             'choices' => array(
-                'regular' => '= to x',
-                'menu' => 'menu'
+                'icon-regular' => '= to x',
+                'navigation-menu-icon--alt' => 'menu icon',
+	            'navigation-menu-icon--bars' => 'menu icon bars'
             )
         ) );
 

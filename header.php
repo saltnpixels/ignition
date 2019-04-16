@@ -40,10 +40,9 @@ if ( get_theme_mod( 'app_menu', '' ) ) {
 	<div id="panel-right"></div>
 
 	<?php
-	$menu_icon = '';
-	if ( get_theme_mod( 'menu_icon', 'regular' ) == 'menu' ) {
-		$menu_icon = ' navigation-menu-icon--alt';
-	} ?>
+	$menu_icon = get_theme_mod( 'menu_icon', 'icon-regular' );
+
+	?>
 
 	<button aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
 		<span class="navigation-menu-icon <?php echo $menu_icon; ?>"></span>

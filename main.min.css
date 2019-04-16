@@ -185,12 +185,13 @@ div .flex>.span-12,div .flex-grid>.span-12{-webkit-box-flex:0;-ms-flex-positive:
 .navigation-menu-icon{position:relative;display:block;height:25px;width:25px;border-radius:.5px}
 .navigation-menu-icon:before,.navigation-menu-icon:after{content:'';position:absolute;left:0;top:30%;height:3px;width:100%;background:white;-webkit-transition:all .5s;transition:all .5s;outline:0;border-radius:inherit}
 .navigation-menu-icon:after{bottom:30%;top:auto}
-.panel-left-toggle.toggled-on .navigation-menu-icon:not(.navigation-menu-icon--alt):before{-webkit-transform:rotate(45deg);transform:rotate(45deg);top:45%}
-.panel-left-toggle.toggled-on .navigation-menu-icon:not(.navigation-menu-icon--alt):after{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);bottom:42%}
-.navigation-menu-icon--alt{border-top:3px solid white;margin-top:6px}
-.navigation-menu-icon--alt:before,.navigation-menu-icon--alt:after{height:3px}
-.navigation-menu-icon--alt:before{top:3px;width:75%}
-.navigation-menu-icon--alt:after{top:9px}
+.panel-left-toggle.toggled-on .navigation-menu-icon.icon-regular:before{-webkit-transform:rotate(45deg);transform:rotate(45deg);top:45%}
+.panel-left-toggle.toggled-on .navigation-menu-icon.icon-regular:after{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);bottom:42%}
+.navigation-menu-icon--alt,.navigation-menu-icon--bars{border-top:3px solid white;margin-top:6px}
+.navigation-menu-icon--alt:before,.navigation-menu-icon--alt:after,.navigation-menu-icon--bars:before,.navigation-menu-icon--bars:after{height:3px}
+.navigation-menu-icon--alt:before,.navigation-menu-icon--bars:before{top:3px;width:75%}
+.navigation-menu-icon--alt:after,.navigation-menu-icon--bars:after{top:9px}
+.navigation-menu-icon--bars:before{width:100%}
 .panel-right-toggle{z-index:99;z-index:var(--z-index-top);position:absolute;right:0;top:0;line-height:0;border:0;padding:0 15px;cursor:pointer;outline:0;font-size:22px}
 .panel-right-toggle:focus{outline:0}
 .sidebar-icon{border:2px solid white;border-radius:1px;position:relative;height:1.3rem;width:22px;display:block}
