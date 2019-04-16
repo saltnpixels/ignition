@@ -12,6 +12,8 @@
 //test if this is a touchscreen
 if (!("ontouchstart" in document.documentElement)) {
 	document.documentElement.className += " no-touch";
+}else{
+	document.documentElement.className += " touch-device";
 }
 
 let scrollMagicController = '';

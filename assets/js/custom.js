@@ -10,6 +10,13 @@
  * data-scrollscrub = tweens between two classes. tween expects a duration, else duration will be 100
  *
  */
+//test if this is a touchscreen
+if (!("ontouchstart" in document.documentElement)) {
+  document.documentElement.className += " no-touch";
+} else {
+  document.documentElement.className += " touch-device";
+}
+
 var scrollMagicController = '';
 
 function runScrollerAttributes(element) {

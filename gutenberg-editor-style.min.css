@@ -6,7 +6,7 @@
 .edit-post-visual-editor .container-content>*:not(.alignwide):not(.alignfull):not(.ful-width){max-width:700px !important;max-width:var(--container-content) !important;margin-right:auto;margin-left:auto}
 .edit-post-visual-editor .container-content>.full-width,.edit-post-visual-editor .container-content>.alignfull{width:auto;margin-left:calc(-1 * 30px);margin-left:calc(-1 * var(--container-padding));margin-right:calc(-1 * 30px);margin-right:calc(-1 * var(--container-padding))}
 .edit-post-visual-editor .no-gutters{padding-left:0;padding-right:0}
-.edit-post-visual-editor .alignwide{width:100%;max-width:1200px;max-width:var(--container);margin-left:auto;margin-right:auto}
+.edit-post-visual-editor .alignwide{width:100%;max-width:calc(1200px - (30px* 2));max-width:calc(var(--container) - (var(--container-padding)* 2));margin-left:auto;margin-right:auto}
 .edit-post-visual-editor .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));grid-gap:30px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .edit-post-visual-editor .card-grid-fill{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));grid-gap:30px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .edit-post-visual-editor .flex-card-grid{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;margin-left:-15px;margin-right:-15px}

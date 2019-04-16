@@ -216,6 +216,7 @@ div .grid {
 }
 
 //pull out to match containers edge
+//todo change to half of container-padding
 .container .flex, .container-fluid .flex,
 .container .flex-grid, .container-fluid .flex-grid,
 .site-content .content-area .container-content .flex, .site-content .content-area .container-content .flex-grid {
