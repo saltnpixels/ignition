@@ -203,7 +203,6 @@ input:focus+.input-append{border-color:#f75959;border-color:var(--highlight)}
 .card .card-content{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;font-size:1rem;font-size:var(--font-size)}
 .card .card-meta{display:-webkit-box;display:-ms-flexbox;display:flex;padding-bottom:5px}
 .card .posted-on{margin-right:10px}
-.updated{display:none}
 time,time a{font-size:calc(1rem - 3px);font-size:calc(var(--font-size) - 3px)}
 .pagination{text-align:center;padding:30px 0}
 .pagination .page-numbers{background:#ff4a6b;color:white;margin:0 3px;padding:3px 8px}

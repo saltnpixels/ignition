@@ -15,7 +15,7 @@
  * @version 1.0
  *
  *
- * If using a page to represent this archive, an archive page will be found and its section will be output instead of
+ * If using an actual page to represent this archive, an archive page will be found and its ACF sections will be output instead of
  * the loop.
  */
 
@@ -25,13 +25,18 @@ get_header();
 
 <?php
 /*
- * You can use the WP Customizer to choose a page to show its sections for an archive page
- * If you do that then a page will be queried instead of the info below
- */
+ * With ignition You can use the WP Customizer to choose a page to show its sections for an archive page
+ * This way clients can control the archive page instead of needing you to make changes via php.
+ * If a page is used then a page will be queried here instead of the archive loop being used. (you can still output the loop as one of the sections using ACF)
+ *
+ * For a regular index without a page used the loop will simply be output down below after "else:"
+*/
+
+//checking to see if a page has been set to be used with this post type archive
 global $post;
 $page_archive_id = ign_get_archive_page();
 
-//set if there is a sidebar, add the proper divs
+//set if there is a sidebar on the page used, add the proper divs
 $has_sidebar = false;
 if ( $page_archive_id ) {
 	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-left' ) !== false ) {
@@ -68,10 +73,14 @@ if ( $page_archive_id ) {
 
 					?>
                 </div>
-				<?php wp_reset_postdata(); ?>
+				<?php wp_reset_postdata();
+				//END PAGE ARCHIVE
+				?>
 
-			<?php
-			//basic archive
+
+
+            <?php
+			//BASIC INDEX WHEN NO PAGE USED (DEFAULT)
 			else:
 				?>
 
@@ -92,7 +101,7 @@ if ( $page_archive_id ) {
                 </header>
 
                 <div class="container">
-                    <section class="card-grid">
+                    <section class="archive-cards card-grid">
 						<?php
 						//default to one section fo cards
 						while ( have_posts() ) : the_post();

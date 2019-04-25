@@ -244,3 +244,43 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 	document.dispatchEvent( EventFinished );
 });
+
+
+
+
+//Add inline retina image if found and on retina device. To use add data-high-res to an inline element with a background-image
+if( isHighDensity() ) {
+
+	let retinaImage = document.querySelectorAll('[data-high-res]');
+	retinaImage.forEach(item => {
+		let image2x = '';
+		//if a high res is provided use that, else use background image but add 2x at end.
+		if(item.dataset.highRes){
+			image2x = item.dataset.highRes;
+		}else{
+			//get url for original image
+			let image = item.style.backgroundImage.slice(4, -1).replace(/"/g, "");
+			//add @2x to it if image exists.
+			image2x = image.replace(/(\.[^.]+$)/, '@2x$1');
+		}
+
+		if(fileExists(image2x)){
+			item.style.backgroundImage = 'url("' + image2x + '")';
+		}
+
+	});
+}
+
+//check if device is retina
+function isHighDensity(){
+	return ((window.matchMedia && (window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches)));
+}
+
+//check if file exists on server before using
+function fileExists(image_url){
+	let http = new XMLHttpRequest();
+	http.open('HEAD', image_url, true);
+	http.send();
+	return http.status != 404;
+}
+

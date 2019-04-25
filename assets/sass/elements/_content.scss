@@ -19,6 +19,7 @@
 # Default Cards on Archive pages
 --------------------------------------------------------------*/
 //to have this only affect post-type posts, change to .post.card or override with new .post-type.card
+//or remove this completely to design your own cards
 .card {
   box-shadow: 0 1px 12px rgba(black, .3);
   border-radius: 5px;
@@ -70,16 +71,12 @@
     margin-right: 10px;
   }
 
-}
+}//end cards styling
 
 
 /*--------------------------------------------------------------
 # Article Meta
 --------------------------------------------------------------*/
-.updated {
-  display: none;
-}
-
 time, time a {
   @include font-size(13);
 }

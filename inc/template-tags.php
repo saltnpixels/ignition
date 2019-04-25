@@ -24,6 +24,7 @@ if ( ! function_exists( 'ign_posted_by' ) ) {
 }
 
 
+
 /**
  * Post the time
  */
@@ -32,9 +33,9 @@ if ( ! function_exists( 'ign_posted_by' ) ) {
  * Prints HTML with meta information for the current post-date/time.
  */
 if ( ! function_exists( 'ign_posted_on' ) ) {
-	function ign_posted_on() {
+	function ign_posted_on($date_format = '') {
 		// post published and modified dates
-		echo '<div class="posted-on">' . ign_time_link() . '</div>';
+		echo '<div class="posted-on">' . ign_time_link($date_format) . '</div>';
 	}
 }
 
@@ -44,25 +45,25 @@ if ( ! function_exists( 'ign_posted_on' ) ) {
  */
 if ( ! function_exists( 'ign_time_link' ) ) {
 
-	function ign_time_link() {
+	function ign_time_link($date_format) {
 		$time_string = '<time class="published" datetime="%1$s">%2$s</time>';
 
 		//if when post was made does not equal the modified date
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated screen-reader-text" datetime="%3$s">%4$s</time>';
 		}
 
 		$time_string = sprintf( $time_string,
 			get_the_date( DATE_W3C ),
-			get_the_date(),
+			get_the_date($date_format),
 			get_the_modified_date( DATE_W3C ),
-			get_the_modified_date()
+			get_the_modified_date($date_format)
 		);
 
 		// Wrap the time string in a link, and preface it with 'Posted on'.
 		return sprintf(
 		/* translators: %s: post date */
-			__( '<span class="screen-reader-text">Posted on</span> %s', 'ignition' ),
+			__( '<span class="screen-reader-text">Posted on</span> %s', 'ganton' ),
 			'<a class="entry-date" href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 	}
