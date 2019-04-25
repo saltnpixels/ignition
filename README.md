@@ -29,6 +29,9 @@ Here are just soem of the features found in ignition.
 [Visit the documentation](https://ignition.press/documentation/getting-started/) to learn how to use the starter theme. It's quite simple and reading the documentation should take less than 25 minutes.
 So download ignition and give it a try!
 
+## View ChangeLog
+[View the changelog](https://github.com/saltnpixels/ignition/blob/master/changelog.md) For helpful info.
+
 ### Is it Ignition or ignition without a capital?
 I dunno. Who cares!? Why do people ask these questions!? Just download it and see how easy your theming will become!!
 
