@@ -123,7 +123,7 @@ function my_acf_admin_enqueue_scripts() {
 	if ( is_admin() ) {
 		$screen = get_current_screen();
 		if ( $screen->post_type != 'acf-field-group' ) {
-			wp_enqueue_script( 'ign_acf_scripts', get_template_directory_uri() . '/inc/acf_extras/acf_scripts.js' );
+			wp_enqueue_script( 'ign_acf_scripts', get_template_directory_uri() . '/inc/acf_extras/acf_scripts.js', '', wp_get_theme()->get( 'Version' ) );
 		}
 	}
 
