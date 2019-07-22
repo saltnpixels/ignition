@@ -15,6 +15,18 @@
   padding: 0 var(--container-padding);
 }
 
+.container-left, .container-right {
+  width: 100%;
+  max-width: calc(var(--container) + ((100% - var(--container)) / 2));
+  margin: 0 auto 0 0;
+  padding: 0 var(--container-padding) 0 0;
+}
+
+.container-right {
+  margin: 0 0 0 auto;
+  padding: 0 0 0 var(--container-padding);
+}
+
 .container-fluid {
   width: 100%;
   margin: auto;
@@ -27,12 +39,12 @@
 - Container-Content is meant to hold an article's content after the header.
 - It's for actual words and makes sure the line is not too long
 - It cleverly allows for items inside to go full width and "break out" with alignwide and alignfull
-- The container itself has no max-width, instead its items within. So make sure you dont use grid with container-content on same div.
+- The container itself has no max-width, instead its items within.
 - Any items inside with full-width or .alignfull will NOT have a max-width and will fill page
 - Dont surround container-content with a container or full items wont be full width!
 */
 .container-content {
-  padding: 0 var(--container-padding);
+  padding: 0 var(--container-padding); //still has padding.
 
   > *:not( .alignwide ):not( .alignfull ):not(.ful-width) {
     max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
@@ -49,18 +61,19 @@
 }
 
 
-.no-gutters{
+.no-gutters {
   padding-left: 0;
   padding-right: 0;
+  grid-gap: 0;
 }
 
 /*--------------------------------------------------------------
-# WP Align Wide has a max width.
+# WP Align Wide Matches the size of a container
 --------------------------------------------------------------*/
 
 .alignwide {
   width: 100%;
-  max-width: calc( var(--container) - (var(--container-padding)* 2));
+  max-width: calc(var(--container) - (var(--container-padding) * 2));
   margin-left: auto;
   margin-right: auto;
 }
@@ -82,18 +95,13 @@
 }
 
 .card-grid-fill {
-  @include card-grid(350px, 1fr, $gap, auto-fill); //only stretches items if theres no room for another item on row
+  @include card-grid(auto-fill); //only stretches items if theres no room for another item on row
 }
 
 .flex-card-grid {
   @include flex-card-grid(); //almost the same except cards on lowest row will not be same size if there isnt an even amount
 }
 
-@media(min-width: $media-medium){
-  div .large-gap{
-    grid-gap: calc(var(--gap) * 2);
-  }
-}
 
 /*--------------------------------------------------------------
 # 12 Column CSS Grids
@@ -102,9 +110,9 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(1px, 1fr));
-  grid-gap: var(--gap);
+  grid-gap: var(--grid-gap);
 
-  //span on individuals overrides span-all
+  //span on individuals overrides span-all, thats why there is div & .span-#i...
   @for $i from 1 through 12 {
     div & .span-#{$i}, &.span-all-#{$i} > * {
       grid-column: span #{$i};
@@ -113,57 +121,53 @@
 }
 
 //fix the gap when it gets too small
-//even if everything collpases, the browser expects 12 gaps of 30 pixels of room to exist. and adding container gutters brings us to 420. below this the grid won fit unless we lower the gap.
-@media(max-width: 420px){
-  div .grid{
-    grid-gap: 30px 20px;
+//even if everything collpases, the browser expects 12 gaps of 30 pixels of room to exist + container gutters brings us to 420. below this the grid won fit unless we lower the gap.
+@media(max-width: 420px) {
+  div .grid {
+    grid-gap: var(--grid-gap) 20px;
   }
 }
 
-div .no-gutters{
-  grid-gap: 0;
-}
 
 .span-full {
   grid-column: 1 / -1;
   flex-basis: 100%;
 }
 
-div .grid {
-  //large and below size on items
-  @media(max-width: $media-large) {
-    @for $i from 1 through 12 {
-      div & > .large-span-#{$i}, &.large-span-all-#{$i} > * {
-        grid-column: span #{$i};
-      }
-    }
-  }
 
-  //medium and below size on items
-  @media(max-width: $media-medium) {
-    @for $i from 1 through 12 {
-      div & > .medium-span-#{$i}, &.medium-span-all-#{$i} > * {
-        grid-column: span #{$i};
-      }
-    }
-  }
+/*------- Overriding spans at media sizes --------*/
+$media-list: map-sort-by-values($media-list, true); //reorder largest first so smaller has specificity
 
-  //small and below size on items. a bit stronger specificity
-  @media(max-width: $media-small) {
+.grid {
 
-    //only small-span can override this. has extra specificity
-    @if ($collapse-on-small == true) {
-      div.site & > * {
-        grid-column: 1 / -1;
+  @each $name, $media in $media-list {
+    @if $name != 'small' {
+      @media(max-width: $media) {
+        @for $i from 1 through 12 {
+          div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
+            grid-column: span #{$i};
+          }
+        }
       }
     }
 
-    @for $i from 1 through 12 {
-      div & > .small-span-#{$i}, div &.small-span-all-#{$i} > * {
-        grid-column: span #{$i};
+    @if $name == 'small' {
+      @media(max-width: $media) {
+        //only small-span can override this. has extra specificity
+        @if ($collapse-on-small == true) {
+          div.site & > * {
+            grid-column: 1 / -1;
+          }
+        }
+
+        @for $i from 1 through 12 {
+          div & > .small-span-#{$i}, div &.small-span-all-#{$i} > * {
+            grid-column: span #{$i};
+          }
+        }
+
       }
     }
-
   }
 
 }
@@ -174,124 +178,97 @@ div .grid {
 
 .flex, .flex-grid {
   display: flex;
+  --flex-gap: calc(var(--grid-gap) / 2);
+
+  margin-left: calc(-1 * var(--flex-gap));
+  margin-right: calc(-1 * var(--flex-gap));
 
   //gutters via margins. the flex-basis makes sure it can be sized right
   & > * {
-    margin-right: var(--gutters);
-    margin-left: var(--gutters);
+    margin-right: var(--flex-gap);
+    margin-left: var(--flex-gap);
     flex: 1;
   }
 
-  &.large-gap > *{
-    margin-right: calc(var(--gutters) * 2);
-    margin-left: calc(var(--gutters) * 2);
-  }
 
   @for $i from 1 through 12 {
     div & .span-#{$i}, &.span-all-#{$i} > * {
       $width: 100% / (12/$i);
-      flex-basis: calc(#{$width} - var(--gap));
+      flex-basis: calc(#{$width} - var(--grid-gap)); //magic. flex-basis is width minus gap on both sized
     }
 
-    div & > .span-#{$i}{
+    div & > .span-#{$i} { //once it has a set size it cannot grow or shrink
       flex-grow: 0;
       flex-shrink: 0;
     }
   }
 
-}
-
-.flex.no-gutters, .flex-grid.no-gutters {
-  & > * {
-    margin: 0;
-  }
-}
-
-//many rows has margin bottom and wraps
-.flex-grid {
-  flex-wrap: wrap;
-  & > * {
-    margin-bottom: var(--gap);
-  }
-}
-
-//pull out to match containers edge
-//todo change to half of container-padding
-.container .flex, .container-fluid .flex,
-.container .flex-grid, .container-fluid .flex-grid,
-.site-content .content-area .container-content .flex, .site-content .content-area .container-content .flex-grid {
-  margin-left: calc(-1 * var(--gutters));
-  margin-right: calc(-1 * var(--gutters));
-
-  &.no-gutters {
+  .no-gutters {
     margin-left: 0;
     margin-right: 0;
-  }
 
-  &.large-gap{
-    --large-gap: calc(var(--gutters) * 2);
-    margin-left: calc(-1 * var(--large-gap));
-    margin-right: calc(-1 * var(--large-gap));
+    & > * {
+      margin: 0;
+      --grid-gap: 0px; //fix the flex-basis sizing easily
+    }
   }
-
 }
 
+//flex-grid has many rows so it has margin bottom and wraps
+.flex-grid {
+  flex-wrap: wrap;
 
-
-
-div .flex-grid, div .flex {
-
-  //large and below size on items
-  @media(max-width: $media-large) {
-    @for $i from 1 through 12 {
-      div & > .large-span-#{$i}, &.large-span-all-#{$i} > * {
-        $width: 100% / (12/$i);
-        flex-basis: calc(#{$width} - var(--gap));
-      }
-      div & > .large-span-#{$i}{
-        flex-grow: 0;
-        flex-shrink: 0;
-      }
-    }
+  & > * {
+    margin-bottom: var(--grid-gap);
   }
+}
 
-  //medium and below size on items
-  @media(max-width: $media-medium) {
-    @for $i from 1 through 12 {
-      div & > .medium-span-#{$i}, &.medium-span-all-#{$i} > * {
-        $width: 100% / (12/$i);
-        flex-basis: calc(#{$width} - var(--gap));
-      }
+/*------- Span sizes for flexbox grids --------*/
+.flex-grid, .flex {
 
-      div & > .medium-span-#{$i}{
-        flex-grow: 0;
-        flex-shrink: 0;
-      }
-    }
-  }
+  @each $name, $media in $media-list {
+    @if $name != 'small' {
+      @media(max-width: $media) {
+        @for $i from 1 through 12 {
+          div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
+            $width: 100% / (12/$i);
+            flex-basis: calc(#{$width} - var(--grid-gap));
+          }
 
-  //small and below size on items
-  @media(max-width: $media-small) {
+          //no growing or shrinking
+          div & > .#{$name}-span-#{$i} {
+            flex-grow: 0;
+            flex-shrink: 0;
+          }
 
-    //no need to add class if set to collapse on small is always true. overrides any spans
-    @if ($collapse-on-small == true) {
-      flex-wrap: wrap;
-      div.site & > * {
-        flex-basis: calc(100% - var(--gap));
+        }
       }
     }
 
-    @for $i from 1 through 12 {
-      div & > .small-span-#{$i}, &.small-span-all-#{$i} > * {
-        $width: 100% / (12/$i);
-        flex-basis: calc(#{$width} - var(--gap));
-      }
+    @if $name == 'small' {
+      @media(max-width: $media) {
+        //only small-span can override this. has extra specificity
+        @if ($collapse-on-small == true) {
+          flex-wrap: wrap;
+          div.site & > * {
+            flex-basis: calc(100% - var(--grid-gap));
+          }
+        }
+        @for $i from 1 through 12 {
+          div & > .#{$name}-span-#{$i}, div &.#{$name}-span-all-#{$i} > * {
+            $width: 100% / (12/$i);
+            flex-basis: calc(#{$width} - var(--grid-gap));
+          }
 
-      div & > .small-span-#{$i}{
-        flex-grow: 0;
-        flex-shrink: 0;
+          //no growing or shrinking
+          div & > .#{$name}-span-#{$i} {
+            flex-grow: 0;
+            flex-shrink: 0;
+          }
+        }
       }
     }
+
   }
 
 }
@@ -329,18 +306,21 @@ div .flex-grid, div .flex {
 
 
 /*------- Grid of cards. requires grid class --------*/
-.layout-cards-7{
+.layout-cards-7 {
   //small cards
-  > *{
+  > * {
     grid-column: span 4;
-    .hide-on-small-card{
+
+    .hide-on-small-card {
       display: none;
     }
   }
+
   //large cards
-  > *:nth-child(7n - 3), > *:nth-child(7n - 6){
+  > *:nth-child(7n - 3), > *:nth-child(7n - 6) {
     grid-column: span 8;
-    .hide-on-small-card{
+
+    .hide-on-small-card {
       display: block;
     }
   }
@@ -348,17 +328,20 @@ div .flex-grid, div .flex {
 
 //ie11 flex the cards
 @media all and (-ms-high-contrast: none) {
-  .layout-cards-7{
+  .layout-cards-7 {
     //small cards
-    > *{
-      width: calc(33.333% -  var(--gap));
-      .hide-on-small-card{
+    > * {
+      width: calc(33.333% - var(--gap));
+
+      .hide-on-small-card {
         display: none;
       }
     }
-    > *:nth-child(7n - 3), > *:nth-child(7n - 6){
+
+    > *:nth-child(7n - 3), > *:nth-child(7n - 6) {
       width: calc(66.66666% - var(--gap));
-      .hide-on-small-card{
+
+      .hide-on-small-card {
         display: block;
       }
     }

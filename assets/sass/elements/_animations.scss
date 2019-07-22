@@ -8,6 +8,10 @@
   transform: translate(0);
 }
 
+[data-slide]{
+  overflow: hidden;
+}
+
 /*------- infinite animation --------*/
 .infinite{
   animation-iteration-count: infinite;

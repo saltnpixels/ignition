@@ -100,16 +100,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	//TOGGLE BUTTONS
+	//trigger optional afterToggle event
 	//adding new custom event for after the element is toggled
 	let toggleEvent = null;
-	if ( isIE11 ) {
-		toggleEvent = document.createEvent( 'Event' );
+	if (isIE11) {
+		toggleEvent = document.createEvent('Event');
 
 		// Define that the event name is 'build'.
-		toggleEvent.initEvent( 'afterToggle', true, true );
+		toggleEvent.initEvent('afterToggle', true, true);
 
 	} else {
-		toggleEvent = new Event( 'afterToggle' );
+		toggleEvent = new Event('afterToggle', {bubbles: true});
 	}
 
 	//add aria to buttons currently on page
@@ -127,40 +128,103 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		if (item) {
 
-			let $doDefault = item.getAttribute( 'data-default' );
+			let $doDefault = item.getAttribute('data-default');
 
-			if ( null === $doDefault ) {
+			if (null === $doDefault) {
 				e.preventDefault();
 				e.stopPropagation();
 			}
 
-			item.classList.toggle('toggled-on');
-			item.setAttribute('aria-expanded', item.classList.contains('toggled-on') ? 'true' : 'false');
+			//if data-radio is found, only one can be selected at a time. untoggle any other item with same radio value
+			let radioSelector = item.getAttribute('data-radio');
+			if (radioSelector !== null) {
+				let radioSelectors = document.querySelectorAll(`[data-radio="${radioSelector}"`);
 
-			let $class = item.getAttribute('data-toggle'),
-				$target = document.querySelectorAll(item.getAttribute('data-target'));
-
-			if ($class) {
-				if ($target.length) {
-					$target.forEach(targetItem => {
-						targetItem.classList.toggle($class);
-					});
-				} else {
-					item.classList.toggle($class);
-				}
-			} else {
-				if ($target.length) {
-					$target.forEach(targetItem => {
-						targetItem.classList.toggle('toggled-on');
-					});
-				}
+				radioSelectors.forEach(radioItem => {
+					if (radioItem !== item && radioItem.classList.contains('toggled-on')) {
+						toggleItem(radioItem); //toggle all other radio items off
+					}
+				});
 			}
 
-			//trigger optional afterToggle event
-			item.dispatchEvent(toggleEvent);
+			//toggle clicked item, and pass if it can be unclicked
+			if (radioSelector !== null) {
+				toggleItem(item, true); //the item cannot be unclicked
+			} else {
+				toggleItem(item);
+			}
 
-		}
+		} //end if item found
 	});
+
+	//toggle an item and add class toggled-on and any other classes needed.
+	function toggleItem (item, unclickable = false) {
+
+		//toggle item
+		if (unclickable) {
+			item.classList.add('toggled-on');
+		} else {
+			item.classList.toggle('toggled-on');
+		}
+
+		//is item toggled? used for the rest of this function
+		let isToggled = item.classList.contains('toggled-on');
+
+		item.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
+
+		let $class = item.getAttribute('data-toggle'),
+			$target = document.querySelectorAll(item.getAttribute('data-target'));
+
+		if ($class === null || !$class) {
+			$class = 'toggled-on';
+		}
+		//if a special class is wanted to be toggled & data-target exists, add that class to the targeted item
+		if ($target.length) {
+			$target.forEach(targetItem => {
+				if (isToggled) {
+					targetItem.classList.add($class);
+				} else {
+					targetItem.classList.remove($class);
+				}
+
+				//allow event to happen after click for the targeted item
+				targetItem.dispatchEvent(toggleEvent);
+			});
+		} else {
+			if($class !== 'toggled-on'){ //add class to clicked item if its not set to be toggled-on
+				if (isToggled) {
+					item.classList.toggle($class);
+				} else {
+					item.classList.remove($class);
+				}
+			}
+		}
+
+		//trigger optional afterToggle event. continue the click event for customized stuff
+		item.dispatchEvent(toggleEvent);
+
+	}
+
+//added data slide ability
+//if the data-targeted item has data-slide it will slide open
+	document.body.addEventListener('afterToggle', e => {
+		if (e.target.dataset.slide !== undefined) {
+			let item = e.target;
+
+			let slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide);
+
+			//if set to visible, slide down
+			if (item.style.display === 'none' || item.offsetHeight === 0) {
+				TweenMax.set(item, {display: 'block', height: 'auto'});
+				TweenMax.from(item, slideTime, {height: 0});
+			} else {
+				TweenMax.to(item, slideTime, {height: 0, display: 'none'});
+			}
+		}
+
+	});
+
+
 
 	//MOVING ITEMS
 	//on Window resize we can move items to and from divs with data-moveto="the destination"
@@ -227,11 +291,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	window.addEventListener('resize', throttle(moveItems, 250));
-
 	moveItems();
 
 	document.documentElement.classList.remove('dom-loading');
 
+
+
+
+
+
+
+	//add finished loading ignition events
 	let EventFinished = null;
 	if ( isIE11 ) {
 		EventFinished = document.createEvent( 'Event' );

@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
     runScrollerAttributes(element);
   }); //TOGGLE BUTTONS
+  //trigger optional afterToggle event
   //adding new custom event for after the element is toggled
 
   var toggleEvent = null;
@@ -98,7 +99,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toggleEvent.initEvent('afterToggle', true, true);
   } else {
-    toggleEvent = new Event('afterToggle');
+    toggleEvent = new Event('afterToggle', {
+      bubbles: true
+    });
   } //add aria to buttons currently on page
 
 
@@ -117,31 +120,98 @@ document.addEventListener('DOMContentLoaded', function () {
       if (null === $doDefault) {
         e.preventDefault();
         e.stopPropagation();
-      }
+      } //if data-radio is found, only one can be selected at a time. untoggle any other item with same radio value
 
-      item.classList.toggle('toggled-on');
-      item.setAttribute('aria-expanded', item.classList.contains('toggled-on') ? 'true' : 'false');
-      var $class = item.getAttribute('data-toggle'),
-          $target = document.querySelectorAll(item.getAttribute('data-target'));
 
-      if ($class) {
-        if ($target.length) {
-          $target.forEach(function (targetItem) {
-            targetItem.classList.toggle($class);
-          });
-        } else {
-          item.classList.toggle($class);
-        }
+      var radioSelector = item.getAttribute('data-radio');
+
+      if (radioSelector !== null) {
+        var radioSelectors = document.querySelectorAll("[data-radio=\"".concat(radioSelector, "\""));
+        radioSelectors.forEach(function (radioItem) {
+          if (radioItem !== item && radioItem.classList.contains('toggled-on')) {
+            toggleItem(radioItem); //toggle all other radio items off
+          }
+        });
+      } //toggle clicked item, and pass if it can be unclicked
+
+
+      if (radioSelector !== null) {
+        toggleItem(item, true); //the item cannot be unclicked
       } else {
-        if ($target.length) {
-          $target.forEach(function (targetItem) {
-            targetItem.classList.toggle('toggled-on');
-          });
+        toggleItem(item);
+      }
+    } //end if item found
+
+  }); //toggle an item and add class toggled-on and any other classes needed.
+
+  function toggleItem(item) {
+    var unclickable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    //toggle item
+    if (unclickable) {
+      item.classList.add('toggled-on');
+    } else {
+      item.classList.toggle('toggled-on');
+    } //is item toggled? used for the rest of this function
+
+
+    var isToggled = item.classList.contains('toggled-on');
+    item.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
+    var $class = item.getAttribute('data-toggle'),
+        $target = document.querySelectorAll(item.getAttribute('data-target'));
+
+    if ($class === null || !$class) {
+      $class = 'toggled-on';
+    } //if a special class is wanted to be toggled & data-target exists, add that class to the targeted item
+
+
+    if ($target.length) {
+      $target.forEach(function (targetItem) {
+        if (isToggled) {
+          targetItem.classList.add($class);
+        } else {
+          targetItem.classList.remove($class);
+        } //allow event to happen after click for the targeted item
+
+
+        targetItem.dispatchEvent(toggleEvent);
+      });
+    } else {
+      if ($class !== 'toggled-on') {
+        //add class to clicked item if its not set to be toggled-on
+        if (isToggled) {
+          item.classList.toggle($class);
+        } else {
+          item.classList.remove($class);
         }
-      } //trigger optional afterToggle event
+      }
+    } //trigger optional afterToggle event. continue the click event for customized stuff
 
 
-      item.dispatchEvent(toggleEvent);
+    item.dispatchEvent(toggleEvent);
+  } //added data slide ability
+  //if the data-targeted item has data-slide it will slide open
+
+
+  document.body.addEventListener('afterToggle', function (e) {
+    if (e.target.dataset.slide !== undefined) {
+      var item = e.target;
+      var slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide); //if set to visible, slide down
+
+      if (item.style.display === 'none' || item.offsetHeight === 0) {
+        TweenMax.set(item, {
+          display: 'block',
+          height: 'auto'
+        });
+        TweenMax.from(item, slideTime, {
+          height: 0
+        });
+      } else {
+        TweenMax.to(item, slideTime, {
+          height: 0,
+          display: 'none'
+        });
+      }
     }
   }); //MOVING ITEMS
   //on Window resize we can move items to and from divs with data-moveto="the destination"
@@ -205,7 +275,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   window.addEventListener('resize', throttle(moveItems, 250));
   moveItems();
-  document.documentElement.classList.remove('dom-loading');
+  document.documentElement.classList.remove('dom-loading'); //add finished loading ignition events
+
   var EventFinished = null;
 
   if (isIE11) {
@@ -228,7 +299,7 @@ if (isHighDensity()) {
       image2x = item.dataset.highRes;
     } else {
       //get url for original image
-      var image = item.style.backgroundImage.slice(4, -1).replace(/"/g, ""); //add 2x to it if image exists.
+      var image = item.style.backgroundImage.slice(4, -1).replace(/"/g, ""); //add @2x to it if image exists.
 
       image2x = image.replace(/(\.[^.]+$)/, '@2x$1');
     }
@@ -237,11 +308,13 @@ if (isHighDensity()) {
       item.style.backgroundImage = 'url("' + image2x + '")';
     }
   });
-}
+} //check if device is retina
+
 
 function isHighDensity() {
   return window.matchMedia && window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches;
-}
+} //check if file exists on server before using
+
 
 function fileExists(image_url) {
   var http = new XMLHttpRequest();
@@ -528,123 +601,6 @@ jQuery(function ($) {
   $('iframe[src*="youtube.com"], iframe[data-src*="youtube.com"]').each(function () {
     $(this).wrap('<div class="videowrapper"></div>');
   });
-});
-"use strict";
-
-//Set up some global stuff
-//foreach on ie11. babel doesnt seem to fix so this works
-if ('NodeList' in window && !NodeList.prototype.forEach) {
-  console.info('polyfill for IE11');
-
-  NodeList.prototype.forEach = function (callback, thisArg) {
-    thisArg = thisArg || window;
-
-    for (var i = 0; i < this.length; i++) {
-      callback.call(thisArg, this[i], i, this);
-    }
-  };
-}
-
-if (!String.prototype.startsWith) {
-  String.prototype.startsWith = function (searchString, position) {
-    position = position || 0;
-    return this.indexOf(searchString, position) === position;
-  };
-}
-
-if (!Element.prototype.matches) {
-  Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-}
-
-if (!Element.prototype.closest) {
-  Element.prototype.closest = function (s) {
-    var el = this;
-
-    do {
-      if (el.matches(s)) return el;
-      el = el.parentElement || el.parentNode;
-    } while (el !== null && el.nodeType === 1);
-
-    return null;
-  };
-}
-
-var isIE11 = !!window.MSInputMethodContext && !!document.documentMode; //wrap function
-
-function wrap(el, wrapper) {
-  el.parentNode.insertBefore(wrapper, el);
-  wrapper.appendChild(el);
-  return wrapper;
-}
-
-var debounce = function debounce(func, wait, immediate) {
-  var timeout;
-  return function () {
-    var context = this,
-        args = arguments;
-
-    var later = function later() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-};
-
-function throttle(fn, threshhold, scope) {
-  threshhold || (threshhold = 250);
-  var last, deferTimer;
-  return function () {
-    var context = scope || this;
-    var now = +new Date(),
-        args = arguments;
-
-    if (last && now < last + threshhold) {
-      // hold on to it
-      clearTimeout(deferTimer);
-      deferTimer = setTimeout(function () {
-        last = now;
-        fn.apply(context, args);
-      }, threshhold);
-    } else {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
-} //create menu and sidebar button sizing
-//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under panels.
-//this makes sure the buttons are centered, but still  on top of site-top
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  var $siteTopHeight = document.querySelector('.site-top').clientHeight;
-  var menuButtons = ''; //if the menu button is outside site-top. get both buttons for centering both.
-
-  if (!document.querySelector('.app-menu')) {
-    menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
-  } else {
-    //otherwise the menu button does not need to be centered because its part of the app menu and moves.
-    menuButtons = document.querySelectorAll('.panel-right-toggle');
-    document.querySelector('.panel-left-toggle').classList.remove('hidden');
-  }
-
-  menuButtons.forEach(function (button) {
-    button.style.height = $siteTopHeight + 'px';
-    button.classList.remove('hidden'); //now they can be seen after height is set. But sidebar still might not show if there is no sidebar. css does that
-  });
-  window.addEventListener('resize', throttle(resizeMenuButtons, 500));
-
-  function resizeMenuButtons() {
-    $siteTopHeight = document.querySelector('.site-top').clientHeight;
-    menuButtons.forEach(function (button) {
-      //console.log(button);
-      button.style.height = $siteTopHeight + 'px';
-    });
-  }
 });
 "use strict";
 

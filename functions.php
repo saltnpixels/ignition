@@ -121,7 +121,8 @@ function ignition_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
 	  */
-	add_editor_style( array( 'editor-style.min.css', ign_google_fonts_url() ) );
+	add_editor_style( array( get_template_directory_uri() . '/editor-style.min.css?' . wp_get_theme()->get( 'Version' ), ign_google_fonts_url() ) );
+
 
 	$GLOBALS['content_width'] = 730;
 }
@@ -288,9 +289,13 @@ function ignition_scripts() {
 	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.0.0.min.js", array(), '3.0.0' );
 
 
+	//adds polyfills for ie11 and sets a few things up
+	wp_enqueue_script( 'ignition-setup-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
+		wp_get_theme()->get( 'Version' ), true );
+
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
 	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
-		'1.0', true );
+		wp_get_theme()->get( 'Version' ), true );
 
 	//AJAX ready for .custom.js files
 	wp_localize_script( 'ignition-custom-js', 'frontEndAjax', array(
