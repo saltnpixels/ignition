@@ -62,14 +62,14 @@ if ( $page_archive_id ) {
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
 
-				locate_template( 'template-parts/acf-blocks/header_sections.php', true );
+				include( locate_template( 'template-parts/acf-blocks/header_sections.php' ) );
 				?>
 
                 <div class="entry-content container-content">
 					<?php
 
 					//include sections made with acf or falls back on the_content.
-					locate_template( 'template-parts/acf-blocks/sections.php', true );
+					include( locate_template( 'template-parts/acf-blocks/sections.php' ) );
 
 					?>
                 </div>
@@ -78,8 +78,7 @@ if ( $page_archive_id ) {
 				?>
 
 
-
-            <?php
+			<?php
 			//BASIC INDEX WHEN NO PAGE USED (DEFAULT)
 			else:
 				?>
@@ -109,10 +108,8 @@ if ( $page_archive_id ) {
 							//if get post type is a page get the card content for pages, a special file when showing many pages as an archive
 							if ( get_post_type() == 'page' ) {
 								include( locate_template( 'template-parts/page/card-content.php' ) );
-							}
-
-							//if folder of post type doesn't exist, use basic post content.
-							elseif ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
+							} //if folder of post type doesn't exist, use basic post content.
+                            elseif ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
 								include( locate_template( 'template-parts/post/content.php' ) );
 							} else {
 								if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
