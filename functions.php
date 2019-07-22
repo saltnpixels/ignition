@@ -290,7 +290,7 @@ function ignition_scripts() {
 
 
 	//adds polyfills for ie11 and sets a few things up
-	wp_enqueue_script( 'ignition-setup-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
+	wp_enqueue_script( 'ignition-setup-js', get_template_directory_uri() . '/assets/js/setup.js', array( 'jquery' ),
 		wp_get_theme()->get( 'Version' ), true );
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
