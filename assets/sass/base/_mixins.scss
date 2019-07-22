@@ -3,16 +3,7 @@ Mixins
 --------------------------------------------------------------*/
 /*------- font Size. Input value as number for pixels --------*/
 @mixin font-size($sizeValue: 16) {
-  @if($sizeValue == 16){
-    font-size: var(--font-size);
-  }
-  @else if ($sizeValue < 16) {
-    $size: 16px - $sizeValue;
-    font-size: calc(var(--font-size) - #{$size});
-  } @else {
-    $size: $sizeValue - 16px;
-    font-size: calc(var(--font-size) + #{$size});
-  }
+  font-size: $sizeValue*.1 * 1rem;
 }
 
 /*------- Clearfix --------*/
@@ -129,15 +120,70 @@ Mixins
 
 }
 
+/*------- Sort Map by values --------*/
+@function map-sort-by-values($map, $reverse: false) {
+  // Transform map to zipped list
+  $keys: ();
+  $values: ();
+
+  @each $key, $val in $map {
+    $keys: append($keys, $key);
+    $values: append($values, $val);
+  }
+
+  $list: zip($keys, $values); //will become one list 'container', $media-container...
+
+  $sortedMap: ();
+  @while length($list) > 0 {
+
+    // Find largest pair. compare all pairs and save the smallest one each time. (or largest if wanted...)
+    //then we save that pair to a new map and remove it from old list. go over list again and again...
+    $smallestPair: nth($list, 1);
+    @each $pair in $list {
+      $value: nth($pair, 2); //for each pair get the value
+      $smallestValue: nth($smallestPair, 2); //last small pair saved
+
+      @if $reverse{
+        @if $value > $smallestValue { //change to largest or smallest > <
+          $smallestPair: $pair; //set current pair as smallest
+        }
+      }
+      @else{
+        @if $value < $smallestValue { //change to largest or smallest > <
+          $smallestPair: $pair; //set current pair as smallest
+        }
+      }
+
+    }
+
+    // Add smallest pair to sorted map
+    $key: nth($smallestPair, 1);
+    $value: nth($smallestPair, 2);
+    $sortedMap: map-merge($sortedMap, ($key: $value));
+
+    // Remove from list smallest pair
+    $smallestPairIndex: index($list, $smallestPair);
+    $newList: ();
+    @for $i from 1 through length($list) {
+      @if $i != $smallestPairIndex {
+        $newList: append($newList, nth($list, $i), "space");
+      }
+    }
+    $list: $newList;
+  }
+
+  @return $sortedMap;
+}
+
 /*------- Grid --------*/
 //perfect grid of responsive items, no media query required!
-@mixin card-grid($min: 350px, $max: 1fr, $grid-gap: $gap, $auto-type: auto-fit) {
+@mixin card-grid($auto-type: auto-fit, $min: 350px, $grid-gap: 30px, $max: 1fr) {
   display: grid;
   grid-template-columns: repeat(#{$auto-type}, minmax($min, $max));
   grid-gap: $grid-gap;
-  justify-content: center;
 
-  //if width and gap is size of screen.
+
+  //if width + gap is bigger than size of screen it will break the grid even when there is one column.
   @media (max-width: $min + $grid-gap*2) {
     grid-template-columns: 1fr;
   }
@@ -145,7 +191,6 @@ Mixins
   //fallback for ie11
   @media all and (-ms-high-contrast: none) {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     & > * {
       flex-grow: 1;
@@ -179,7 +224,7 @@ Mixins
 }
 
 
-@mixin flex-card-grid($min: 350px, $grow: 1, $shrink: 1, $grid-gap: $gap) {
+@mixin flex-card-grid($min: 350px, $grow: 1, $shrink: 1, $grid-gap: 30px) {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

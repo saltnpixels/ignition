@@ -59,7 +59,7 @@
 
   .card-content {
     flex: 1 0 auto;
-    @include font-size(16);
+    font-size: 1.6rem;
   }
 
   .card-meta{
@@ -78,7 +78,7 @@
 # Article Meta
 --------------------------------------------------------------*/
 time, time a {
-  @include font-size(13);
+ font-size: 1.3rem;
 }
 
 

@@ -3,7 +3,6 @@
 --------------------------------------------------------------*/
 :root {
   //Fonts. change to the fonts you want. Defaults to OS Fonts
-  --font-size: 1rem; //16px
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   --line-height: 1.5;
@@ -35,19 +34,21 @@
 /*--------------------------------------------------------------
 # Layout CSS Variables. Probably don't need to touch.
 --------------------------------------------------------------*/
-:root{
+:root {
 
   /*------- Menu Variables --------*/
   --nav-move: 800px; //when main menu in site-top should move into panel left. Used by data-moveat event
   --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
   /*------- Layout --------*/
-  --container: 1200px; //holds site in a centered container
+  --container: 1200px; //holds site in a centered container of this size
   --container-content: 700px; //holds article text for nice reading
-  --container-padding: 30px; //used on containers
+  --container-padding: 30px; //used on left and right side of containers
 
   --gutters: 15px; //common padding size, used on flexbox and modules
-  --gap: 30px; //common gap size used on grids and margin bottoms. Usually double the gutter
+  --gap: 30px; //common gap size used for margins and grids
+  --grid-gap: 30px; //same as gap but can be changes in instances where the grid needs a smaller gap. used with .grid or .flex-grid
+
 
 
   /*------- Panels --------*/
@@ -65,10 +66,10 @@
 /*--------------------------------------------------------------
 # Wide Screen Variables
 --------------------------------------------------------------*/
-@media(min-width: 1400px ){
-  :root{
+@media(min-width: 1400px) {
+  :root {
     //Large wide screens can have bigger text and a wider container
-    --font-size: 1.125rem;
+    font-size: calc(62.5% + 2.5px); //16 becomes 20. goes up around 4. not perfectly but not bad
     --container: 1400px;
     --container-content: 800px;
   }
@@ -78,18 +79,29 @@
 # SASS Variables
 --------------------------------------------------------------*/
 //css vars cannot be used in media queries. Sass is still used for media query variables
+//Add your own query variables below
 
-/*------- Media Query Sizes. --------*/
-$media-nav: 800px; //when main navigation should go mobile.
-
+/*------- Media Query Sizes. Add your own --------*/
+$media-nav: 800px; //when navigations should go mobile.
 $media-small: 576px;
-$media-medium: 767px;
+$media-medium: 768px;
 $media-large: 1030px;
 $media-container: 1200px; //match the container css variable
-$gap: 30px; //used in some queries
+
+
+$gap: 30px; //still used in some queries and instances
 $collapse-on-small: true; //collapse grid and flex-grid and flex on small devices automatically. small-span can override
 
 /*------- Panel Becomes Absolute Query  --------*/
 $panel-left-absolute: 500px; //when panel-left should become absolute instead of pushing main content over
 $panel-right-absolute: 1030px;
+
+
+/*------- Add your own breakpoints to the grid --------*/
+//When using the grid you have the ability to makes spans at that breakpoint.
+//ie: medium-span-4 will span 4 at the $media-medium size
+//add your own to the list below to have your own span classes available!
+//you will need a name to use in the class and the media variable
+$media-list: ('container': $media-container,  'medium': $media-medium, 'small': $media-small, 'large': $media-large);
+
 
