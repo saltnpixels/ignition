@@ -14,6 +14,10 @@ body {
 
   color: white;
   max-width: 350px;
+
+  svg, path, g{
+    fill: currentColor; //uses color above
+  }
 }
 
 /*--------------------------------------------------------------

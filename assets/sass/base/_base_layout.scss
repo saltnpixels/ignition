@@ -89,28 +89,12 @@ html * {
   overflow: hidden;
 }
 
-/*--------------------------------------------------------------
-# Icons
---------------------------------------------------------------*/
-.icon {
-  display: inline-block;
-  stroke-width: 0;
-  stroke: currentColor;
-  height: 1em;
-  vertical-align: middle;
-  width: 1em;
-  position: relative;
-}
 
 svg {
-  fill: currentColor;
   width: 100%;
   height: auto;
 }
 
-path, g {
-  fill: currentColor;
-}
 
 /*--------------------------------------------------------------
 # Accessibility
@@ -146,6 +130,7 @@ path, g {
   z-index: 100000; /* Above WP toolbar. */
 }
 
+/*------- responsive images --------*/
 img {
   max-width: 100%;
   height: auto;
@@ -170,19 +155,12 @@ img {
 }
 
 
-#page .m0 {
-  margin-bottom: 0;
+//fix data-toggle in ie11 on svg items
+@media screen and (-ms-high-contrast:active), (-ms-high-contrast: none) {
+  [data-toggle] svg{
+    pointer-events: none;
+  }
 }
-
-#page .m1 {
-  margin-bottom: var(--gap);
-}
-
-//hide moveto events until they are in position, easily overridable
-.js.dom-loading [data-moveto]{
-  //display: none;
-}
-
 
   
 

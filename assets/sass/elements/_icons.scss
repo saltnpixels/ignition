@@ -1,4 +1,22 @@
 /*--------------------------------------------------------------
+# Icons
+--------------------------------------------------------------*/
+.icon {
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  height: 1em;
+  vertical-align: middle;
+  width: 1em;
+  position: relative;
+
+  svg, path, g{
+    fill: currentColor;
+  }
+}
+
+
+/*--------------------------------------------------------------
 # Icon Tweaks
 --------------------------------------------------------------*/
 .icon-angle-right{

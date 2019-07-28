@@ -27,7 +27,7 @@ $id        = get_the_ID();
 
     <header class="card-header">
         <div class="header-content">
-			<?php echo ign_get_terms(); ?>
+			<?php echo ign_get_term_links(); ?>
 			<?php the_title( '<h2 class="card-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
         </div>
     </header>
