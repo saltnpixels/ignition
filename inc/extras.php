@@ -134,9 +134,9 @@ add_action( 'admin_head', 'admin_bar_color_dev_site' );
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
  * a 'Continue reading' link.
  *
+ * @return string 'Continue reading' link prepended with an ellipsis.
  * @since Ignition 1.0
  *
- * @return string 'Continue reading' link prepended with an ellipsis.
  */
 function ignition_excerpt_more( $more ) {
 	if ( is_admin() ) {
@@ -155,12 +155,12 @@ add_filter( 'excerpt_more', 'ignition_excerpt_more' );
 /**
  * Add pre-connect for Google Fonts. This makes them load faster
  *
- * @since Ignition 1.0
- *
  * @param array $urls URLs to print for resource hints.
  * @param string $relation_type The relation type the URLs are printed.
  *
  * @return array $urls           URLs to print for resource hints.
+ * @since Ignition 1.0
+ *
  */
 function ignition_resource_hints( $urls, $relation_type ) {
 	if ( wp_style_is( 'ignition-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
@@ -182,7 +182,7 @@ add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
 //hooks found here:
 //https://developer.wordpress.org/reference/classes/walker_nav_menu/
 //Add top-level-item to top level menu items for easier styling.
-function ign_nav_menu_css_class( $classes, $item, $args ) {
+function ign_nav_menu_css_class( $classes, $item, $depth ) {
 
 	if ( $item->menu_item_parent == 0 ) { //Count top level menu items
 		$classes[] = 'top-level-item';
@@ -193,12 +193,14 @@ function ign_nav_menu_css_class( $classes, $item, $args ) {
 
 add_filter( 'nav_menu_css_class', 'ign_nav_menu_css_class', 10, 3 );
 
-//add buttons for dropdowns when there is a sub-menu. surround anchor and button
+//add buttons for dropdowns when there is a sub-menu.
+// surround anchor ( and buttons if there is one)
 function ign_menu( $item, $args ) {
 	$classes = $args->classes;
 
+
 	if ( in_array( 'menu-item-has-children', (array) $classes ) ) {
-		$item .= '<button tabindex="-1" data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg( array( "icon" => "angle-right" ) ) . '
+		$item .= '<button tabindex="-1" data-toggle  data-target="#menu-item-' . $args->ID . '" aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg( array( "icon" => "angle-right" ) ) . '
                     <span class="screen-reader-text">' . __( 'Expand child menu', 'ignition' ) . '</span></button>';
 	}
 
@@ -206,6 +208,45 @@ function ign_menu( $item, $args ) {
 }
 
 add_filter( 'walker_nav_menu_start_el', 'ign_menu', 10, 99 );
+
+
+/*------- Menu Fallback --------*/
+/**
+ * Menu fallback. Link to the menu editor if that is useful.
+ *
+ * @param array $args from wp_nav_menu
+ * @return string
+ *
+ */
+function link_to_menu_editor( $args ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return '';
+	}
+
+	// see wp-includes/nav-menu-template.php for available arguments
+	$link = $args['link_before'] . '<a href="' . admin_url( 'nav-menus.php' ) . '">' . $args['before'] . 'Add a menu' . $args['after'] . '</a>'
+	        . $args['link_after'];
+
+	// We have a list, then output the link in an li
+	if ( false !== stripos( $args['items_wrap'], '<ul' )
+	     or false !== stripos( $args['items_wrap'], '<ol' )
+	) {
+		$link = "<li class='menu-item top-level-item'><div class='menu-item-link'>$link</div></li>";
+	}
+
+	// expects  'items_wrap'  => '<ul id="%1$s" class="%2$s">%3$s</ul>'
+	$output = sprintf( $args['items_wrap'], $args['menu_id'], $args['menu_class'], $link );
+	//add container
+	if ( ! empty ( $args['container'] ) ) {
+		$output = "<" . $args['container'] . "class='" . $args['container_class'] . "' id='" . $args['container_id'] . "'>" . $output . "</" . $args['container'] . ">";
+	}
+
+	if ( $args['echo'] ) {
+		echo $output;
+	}
+
+	return $output;
+}
 
 /*--------------------------------------------------------------
 # Logo stuff
@@ -435,46 +476,46 @@ function ignition_comments_callback( $comment, $args, $depth ) {
 
 	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 	?>
-    <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>"
+	<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>"
 	<?php comment_class( $args['has_children'] ? 'parent' : '', $comment ); ?>>
-    <article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
-        <footer class="comment-meta">
-            <div class="comment-author vcard">
+	<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
+		<footer class="comment-meta">
+			<div class="comment-author vcard">
 				<?php if ( 0 != $args['avatar_size'] ) {
 					echo get_avatar( $comment, $args['avatar_size'] );
 				} ?>
-            </div>
-            <!-- .comment-author -->
+			</div>
+			<!-- .comment-author -->
 
-            <div class="comment-name-date">
+			<div class="comment-name-date">
 				<?php printf( __( '%s <span class="says">says:</span>' ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) ); ?>
 
-                <div class="comment-metadata">
-                    <a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
-                        <time datetime="<?php comment_time( 'c' ); ?>">
+				<div class="comment-metadata">
+					<a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
+						<time datetime="<?php comment_time( 'c' ); ?>">
 							<?php
 							/* translators: 1: comment date, 2: comment time */
 							printf( __( '%1$s at %2$s' ), get_comment_date( '', $comment ), get_comment_time() );
 							?>
-                        </time>
-                    </a>
+						</time>
+					</a>
 					<?php edit_comment_link( __( 'Edit' ), '<span class="edit-link">', '</span>' ); ?>
-                </div>
-                <!-- .comment-metadata -->
-            </div>
+				</div>
+				<!-- .comment-metadata -->
+			</div>
 
 			<?php if ( '0' == $comment->comment_approved ) : ?>
-                <p class="comment-awaiting-moderation">
+				<p class="comment-awaiting-moderation">
 					<?php _e( 'Your comment is awaiting moderation.' ); ?>
-                </p>
+				</p>
 			<?php endif; ?>
-        </footer>
-        <!-- .comment-meta -->
+		</footer>
+		<!-- .comment-meta -->
 
-        <div class="comment-content">
+		<div class="comment-content">
 			<?php comment_text(); ?>
-        </div>
-        <!-- .comment-content -->
+		</div>
+		<!-- .comment-content -->
 
 		<?php
 		comment_reply_link( array_merge( $args, array(
@@ -487,7 +528,7 @@ function ignition_comments_callback( $comment, $args, $depth ) {
 		?>
 
 
-    </article>
-    <!-- .comment-body -->
+	</article>
+	<!-- .comment-body -->
 	<?php
 }

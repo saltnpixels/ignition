@@ -79,7 +79,7 @@
         checkUseElems = function () {
             var base;
             var bcr;
-            var fallback = ""; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
+            var fallback = ""; // optional fallback URL in case no core path to SVG file was given and no symbol definition was found.
             var hash;
             var href;
             var i;

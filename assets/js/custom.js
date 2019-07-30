@@ -1,23 +1,27 @@
 "use strict";
 
-/**
- * element can have these data attributes:
- * data-scrollanimation = a class to add to this element on scroll
- * data-scrollhook = onEnter, onLeave, defualt is center
- * data-scrolloffset = offset from scene start
- * data-scrolltrigger = the element that triggers the scene to start
- * data-scrollduration = how long it should last. if not set, 0  is used and that means it doesnt reset until you scroll up.
- * data-scrollscrub = tweens between two classes. tween expects a duration, else duration will be 100
- *
- */
-//test if this is a touchscreen
+/*--------------------------------------------------------------
+# Adding some global events users can use via data attributes
+--------------------------------------------------------------*/
+//test if this is a touchscreen add class
 if (!("ontouchstart" in document.documentElement)) {
-  document.documentElement.className += " no-touch";
+  document.documentElement.className += " no-touch-device";
 } else {
   document.documentElement.className += " touch-device";
 }
 
-var scrollMagicController = '';
+var scrollMagicController = ''; //setup scroller function
+
+/**
+ * element can have these data attributes:
+ * data-scrollanimation = a class to add to this element on scroll
+ * data-scrolltrigger = the element that triggers the scene to start
+ * data-scrollhook = onEnter, onLeave, default is center
+ * data-scrolloffset = offset from scrollhook on trigger element
+ * data-scrollduration = how long it should last. if not set, 0  is used and that means it doesnt reset until you scroll up.
+ * data-scrollscrub = tweens between two classes as you scroll. tween expects a duration, else duration will be 100
+ *
+ */
 
 function runScrollerAttributes(element) {
   //this function can be run on an alement even after load and they will be added to scrollMagicController
@@ -81,6 +85,53 @@ function runScrollerAttributes(element) {
 
     document.body.classList.add('scrollmagic-loaded');
   }
+}
+/**
+ * Slide any element global function
+ * @param item
+ * @param slideTime
+ * @param direction
+ */
+
+
+function ign_slide_element(item) {
+  var slideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : .5;
+  var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'toggle';
+
+  if (direction === 'open') {
+    TweenMax.set(item, {
+      display: 'block',
+      height: 'auto'
+    });
+    TweenMax.from(item, slideTime, {
+      height: 0,
+      display: 'none'
+    });
+  } else if (direction === 'close') {
+    TweenMax.to(item, slideTime, {
+      height: 0,
+      display: 'none'
+    });
+  } else {
+    if (item.offsetHeight === 0 || item.style.display == 'none') {
+      //open
+      TweenMax.set(item, {
+        display: 'block',
+        height: 'auto'
+      }); //set it quickly to show if its not already
+
+      TweenMax.from(item, slideTime, {
+        height: 0,
+        display: 'none'
+      }); //go from 0 height
+    } else {
+      //close
+      TweenMax.to(item, slideTime, {
+        height: 'auto',
+        display: 'block'
+      });
+    }
+  }
 } //LOAD IGNITION EVENTS
 
 
@@ -101,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     toggleEvent = new Event('afterToggle', {
       bubbles: true
-    });
+    }); //bubble allows for delegation on body
   } //add aria to buttons currently on page
 
 
@@ -115,54 +166,67 @@ document.addEventListener('DOMContentLoaded', function () {
     var item = e.target.closest('[data-toggle]');
 
     if (item) {
-      var $doDefault = item.getAttribute('data-default');
+      var $doDefault = item.getAttribute('data-default'); //normally we prevent default unless someone add data-default
 
       if (null === $doDefault) {
         e.preventDefault();
         e.stopPropagation();
-      } //if data-radio is found, only one can be selected at a time. untoggle any other item with same radio value
+      } //if data-radio is found, only one can be selected at a time.
+      // untoggle any other item with same radio value
+      //radio items cannot be untoggled until another item is clicked
+      //if item has data-switch it can only be turned on or off but not both by this button
 
 
       var radioSelector = item.getAttribute('data-radio');
+      var switchItem = item.getAttribute('data-switch');
 
       if (radioSelector !== null) {
         var radioSelectors = document.querySelectorAll("[data-radio=\"".concat(radioSelector, "\""));
         radioSelectors.forEach(function (radioItem) {
           if (radioItem !== item && radioItem.classList.contains('toggled-on')) {
-            toggleItem(radioItem); //toggle all other radio items off
+            toggleItem(radioItem); //toggle all other radio items off when this one is being turned on
           }
         });
-      } //toggle clicked item, and pass if it can be unclicked
+      } //finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 
 
       if (radioSelector !== null) {
-        toggleItem(item, true); //the item cannot be unclicked
+        toggleItem(item, 'on'); //the item cannot be unclicked
+      } else if (switchItem !== null) {
+        if (switchItem === 'on') {
+          toggleItem(item, 'on');
+        } else {
+          toggleItem(item, 'off');
+        }
       } else {
-        toggleItem(item);
+        toggleItem(item); //normal regular toggle
       }
     } //end if item found
 
   }); //toggle an item and add class toggled-on and any other classes needed.
 
   function toggleItem(item) {
-    var unclickable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var forcedState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'none';
 
     //toggle item
-    if (unclickable) {
-      item.classList.add('toggled-on');
+    if (forcedState === 'on') {
+      item.classList.add('toggled-on'); //radio or data-switch of on will always toggle-on
+    } else if (forcedState === 'off') {
+      item.classList.remove('toggled-on'); //data-switch of off will always toggle off
     } else {
-      item.classList.toggle('toggled-on');
-    } //is item toggled? used for the rest of this function
+      item.classList.toggle('toggled-on'); //basic data toggle item
+    } //is item toggled? used for the rest of this function to toggle another target if needed.
 
 
     var isToggled = item.classList.contains('toggled-on');
-    item.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
+    item.setAttribute('aria-expanded', isToggled ? 'true' : 'false'); //get class to add to this item or another
+
     var $class = item.getAttribute('data-toggle'),
         $target = document.querySelectorAll(item.getAttribute('data-target'));
 
     if ($class === null || !$class) {
-      $class = 'toggled-on';
-    } //if a special class is wanted to be toggled & data-target exists, add that class to the targeted item
+      $class = 'toggled-on'; //default class added is toggled-on
+    } //special class added to another item
 
 
     if ($target.length) {
@@ -171,12 +235,24 @@ document.addEventListener('DOMContentLoaded', function () {
           targetItem.classList.add($class);
         } else {
           targetItem.classList.remove($class);
+        } //data slide open or closed
+
+
+        if (targetItem.dataset.slide !== undefined) {
+          var slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide);
+
+          if (isToggled) {
+            ign_slide_element(targetItem, slideTime, 'open');
+          } else {
+            ign_slide_element(targetItem, slideTime, 'close');
+          }
         } //allow event to happen after click for the targeted item
 
 
         targetItem.dispatchEvent(toggleEvent);
       });
     } else {
+      //applies class to the clicked item, there is no target
       if ($class !== 'toggled-on') {
         //add class to clicked item if its not set to be toggled-on
         if (isToggled) {
@@ -189,34 +265,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     item.dispatchEvent(toggleEvent);
-  } //added data slide ability
-  //if the data-targeted item has data-slide it will slide open
-
-
-  document.body.addEventListener('afterToggle', function (e) {
-    if (e.target.dataset.slide !== undefined) {
-      var item = e.target;
-      var slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide); //if set to visible, slide down
-
-      if (item.style.display === 'none' || item.offsetHeight === 0) {
-        TweenMax.set(item, {
-          display: 'block',
-          height: 'auto'
-        });
-        TweenMax.from(item, slideTime, {
-          height: 0
-        });
-      } else {
-        TweenMax.to(item, slideTime, {
-          height: 0,
-          display: 'none'
-        });
-      }
-    }
-  }); //MOVING ITEMS
+  } //MOVING ITEMS
   //on Window resize we can move items to and from divs with data-moveto="the destination"
   //it will move there when the site reaches smaller than a size defaulted to 1030 or sett hat with data-moveat
   //the whole div, including the data att moveto moves back and forth
+
 
   var movedId = 0;
 
@@ -338,7 +391,7 @@ jQuery(function ($) {
 "use strict";
 
 //This file takes care of menus and navigation at the top
-var iconAngleRight = '<span class=\'arrow\'></span>'; //if using wordpress, icons may have already been localized. use those. otherwise add it
+var iconAngleRight = '<span class="arrow"></span>'; //if using wordpress, icons may have already been localized. use those. otherwise add it
 
 if (typeof icons !== 'undefined' && typeof icons.angleRight !== 'undefined') {
   iconAngleRight = icons.angleRight;
@@ -351,143 +404,91 @@ if (screenReaderText == '') {
   screenReaderText.expand = 'Expand child menu';
 }
 
-var submenuButtons = ''; //after page loads run
+var submenuButtons = '';
+/*------- move submenus if too close to edge on desktop --------*/
+
+function fixOffScreenMenu(menu) {
+  //make item visible so we can get left edge
+  menu.style.display = 'block';
+  menu.style.opacity = '0';
+  var rightEdge = menu.getBoundingClientRect().right;
+  var leftEdge = menu.getBoundingClientRect().right; //set menu back
+
+  menu.style.display = '';
+  menu.style.opacity = '';
+  var viewport = document.documentElement.clientWidth; //if the submenu is off the page, pull it back somewhat
+
+  if (rightEdge > viewport) {
+    menu.style.left = '40px';
+  }
+
+  if (leftEdge < 0) {
+    menu.style.left = '60%';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  /*------- slide sub menus open and closed when a dropdown button is clicked --------*/
+  document.body.addEventListener('afterToggle', function (evt) {
+    //for every dropdown menu button, when clicked toggle the li parent and open the sub-menu with slide
+    if (evt.target.closest('.submenu-dropdown-toggle')) {
+      var menuItem = evt.target.closest('li');
+      var isToggled = evt.target.classList.contains('toggled-on') ? 'open' : 'close';
+      var subMenu = menuItem.querySelector('.sub-menu');
+
+      if (isToggled === 'open') {
+        fixOffScreenMenu(subMenu);
+      }
+
+      ign_slide_element(subMenu, .5, isToggled);
+    }
+  });
+  /*------- Tabbing through the menu --------*/
+
+  var menuItems = document.querySelectorAll('.menu-item-link a');
+  var lastTabbedItem = '';
+  menuItems.forEach(function (menuItemLink) {
+    //focus
+    menuItemLink.addEventListener('focus', function (e) {
+      menuItemLink.parentElement.classList.add('focus'); //add focus to .menu-item-link
+      //if this element has a dropdown near it, toggle it now
+
+      if (menuItemLink.nextElementSibling !== null) {
+        menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
+      } //if there is an item focused before
+
+
+      if (lastTabbedItem) {
+        //check if last item had a sub menu and we are not inside it now
+        if (lastTabbedItem.nextElementSibling !== null && !lastTabbedItem.closest('li').contains(menuItemLink)) {
+          lastTabbedItem.nextElementSibling.click();
+        }
+      }
+    }); //blur
+
+    menuItemLink.addEventListener('blur', function (e) {
+      //blur current tabbed item, but dont close it if its a sub-menu
+      menuItemLink.parentElement.classList.remove('focus');
+      lastTabbedItem = menuItemLink;
+      var subMenu = menuItemLink.closest('.sub-menu'); //if we blurred an item in a sub-menu
+
+      if (subMenu !== null) {
+        console.log('blurred item inside sub-menu');
+        var menuItem = menuItemLink.closest('.menu-item'); //if its the last item in the submenu and it does not have a sub-menu itself
+
+        if (menuItem.nextElementSibling == null && menuItem.querySelector('.sub-menu') == null) {
+          menuItem.parentElement.closest('.menu-item').querySelector('.submenu-dropdown-toggle').click();
+        }
+      }
+    });
+  });
+}); //fix wp_page_menu to be like wp_nav_menu
 
 jQuery(function ($) {
   var navigation = $('.site-top'),
-      menus = $('.menu'),
       menuToggle = $('.panel-left-toggle'),
       page = $('#page'),
-      body = $('body');
-
-  submenuButtons = function submenuButtons() {
-    // Add dropdown arrow toggle button to all submenus. Only needed for pages because there is no walker
-    var dropdownToggle = $('<button />', {
-      'class': 'submenu-dropdown-toggle',
-      'aria-expanded': false
-    }).append(iconAngleRight).append($('<span />', {
-      'class': 'screen-reader-text',
-      text: screenReaderText.expand
-    })); //ADDING THE BUTTON TO PAGE SUBMENU ITEMS. Regular sub menu items have a walker that adds the button
-    //I CANT FIND A PAGE WALKER HOOK TO DO IT
-
-    menus.find('.page_item:not(.menu-item) a').wrap('<div class="menu-item-link" tabindex="0"></div>');
-    menus.find('.page_item_has_children .menu-item-link a').after(dropdownToggle); // Set the active submenu to be toggled on on mobile or not horizontal menus
-
-    var currentSubmenus = menus.find('.current-menu-item > .sub-menu, .current_page_item > .sub-menu, .current_page_ancestor > .sub-menu, .current-menu-ancestor > .sub-menu');
-    currentSubmenus.each(function () {
-      if ($(this).css('display') === 'none' || $(this).parents('#panel-left, #panel-right').length) {
-        //submenus are set to display none only in vertical menus which is what we want
-        //if this menu is inside a vertical menu, add toggled on
-        $(this).find('.current-menu-ancestor > .menu-item-link button, .current-menu-parent, .current-menu-parent button, .current_page_ancestor > button, .current_page_parent, .current-menu-item button').trigger('click');
-      }
-    }); //special after toggle event for menu dropdowns
-
-    var dropdownButtons = document.querySelectorAll('.submenu-dropdown-toggle');
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      var _loop = function _loop() {
-        var dropdownButton = _step.value;
-        dropdownButton.addEventListener('afterToggle', function (e) {
-          //toggle the li. closest still best support with jquery
-          $(dropdownButton).closest('li').toggleClass('toggled-on'); //toggle the sub menu
-
-          var submenus = $(dropdownButton).closest('li').find('> .children, > .sub-menu'); //check if submenu is offscreen on desktop
-
-          fixOffScreenMenu(submenus);
-          submenus.toggleClass('toggled-on'); //desktop
-
-          if (submenus.hasClass('toggled-on')) {
-            submenus.slideDown();
-          } else {
-            submenus.slideUp();
-          }
-
-          var screenReaderSpan = $(dropdownButton).find('.screen-reader-text');
-          screenReaderSpan.text(screenReaderSpan.text() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand);
-        });
-      };
-
-      for (var _iterator = dropdownButtons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        _loop();
-      } //allow for tabbing the anchors and setting focus on the menu item link. focus-within might be able to replace
-
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
-    var menuItems = document.querySelectorAll('.menu-item-link a');
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-      var _loop2 = function _loop2() {
-        var menuItemLink = _step2.value;
-        menuItemLink.addEventListener('focus', function (e) {
-          //if(e.code == '9' && menuItemLink)
-          console.log(document.activeElement);
-          menuItemLink.parentElement.classList.add('focus'); //add focus to menu-item-link for styling
-          //if this element has a dropdown near it, toggle it now
-
-          if (menuItemLink.nextElementSibling !== null) {
-            menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
-          }
-        });
-        menuItemLink.addEventListener('blur', function (e) {
-          menuItemLink.parentElement.classList.remove('focus');
-          var subMenu = menuItemLink.closest('.sub-menu'); //if it is inside a submenu
-
-          if (subMenu !== null) {
-            var subMenuParent = menuItemLink.closest('.sub-menu').closest('li.menu-item');
-            var parentMenu = menuItemLink.closest('li.menu-item'); //if it is the last element in the sub-menu and it has no children, close the sub-menu
-
-            if (parentMenu.nextElementSibling == null && menuItemLink.nextElementSibling == null) {
-              //close parent li
-              subMenuParent.querySelector('.submenu-dropdown-toggle').click(); //if parent li is the last of its sub-menu close that one
-
-              if (subMenuParent.nextElementSibling == null) {
-                subMenuParent.parentElement.closest('li.menu-item').querySelector('.submenu-dropdown-toggle').click();
-              }
-            }
-          }
-        });
-      };
-
-      for (var _iterator2 = menuItems[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        _loop2();
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
-    }
-  };
-
-  submenuButtons(); //NAVIGATION TOGGLE
+      body = $('body'); //NAVIGATION TOGGLE
 
   if (!menuToggle.length) {
     return;
@@ -525,16 +526,6 @@ jQuery(function ($) {
 
     $('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'));
     $('.site-logo').clone().appendTo('.li-logo-holder');
-  } //move submenus if too close to edge on desktop
-
-
-  function fixOffScreenMenu(menu) {
-    var edge = menu[0].getBoundingClientRect().right;
-    var viewport = document.documentElement.clientWidth; //if the submenu is off the page, pull it back somewhat
-
-    if (edge > viewport) {
-      menu[0].style.left = '30px';
-    }
   }
 });
 "use strict";

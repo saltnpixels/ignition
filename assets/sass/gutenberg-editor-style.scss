@@ -2,15 +2,15 @@
 # gutenberg Editor Styling
 --------------------------------------------------------------*/
 /*------- Mixins --------*/
-@import "base/mixins";
+@import "core/mixins";
 /*------- variables --------*/
-@import "base/variables";
+@import "core/variables";
 
 
 .edit-post-visual-editor {
 
   /*------- CSS Grid --------*/
-  @import "base/grid";
+  @import "core/grid-layout";
 
   /*------- Forms --------*/
   @import "elements/_forms";

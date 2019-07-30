@@ -1,22 +1,26 @@
-/**
- * element can have these data attributes:
- * data-scrollanimation = a class to add to this element on scroll
- * data-scrollhook = onEnter, onLeave, defualt is center
- * data-scrolloffset = offset from scene start
- * data-scrolltrigger = the element that triggers the scene to start
- * data-scrollduration = how long it should last. if not set, 0  is used and that means it doesnt reset until you scroll up.
- * data-scrollscrub = tweens between two classes. tween expects a duration, else duration will be 100
- *
- */
+/*--------------------------------------------------------------
+# Adding some global events users can use via data attributes
+--------------------------------------------------------------*/
 
-//test if this is a touchscreen
+//test if this is a touchscreen add class
 if (!("ontouchstart" in document.documentElement)) {
-	document.documentElement.className += " no-touch";
+	document.documentElement.className += " no-touch-device";
 }else{
 	document.documentElement.className += " touch-device";
 }
 
 let scrollMagicController = '';
+//setup scroller function
+/**
+ * element can have these data attributes:
+ * data-scrollanimation = a class to add to this element on scroll
+ * data-scrolltrigger = the element that triggers the scene to start
+ * data-scrollhook = onEnter, onLeave, default is center
+ * data-scrolloffset = offset from scrollhook on trigger element
+ * data-scrollduration = how long it should last. if not set, 0  is used and that means it doesnt reset until you scroll up.
+ * data-scrollscrub = tweens between two classes as you scroll. tween expects a duration, else duration will be 100
+ *
+ */
 function runScrollerAttributes (element) {
 	//this function can be run on an alement even after load and they will be added to scrollMagicController
 	//scrollmagic must be loaded
@@ -88,6 +92,38 @@ function runScrollerAttributes (element) {
 	}
 }
 
+/**
+ * Slide any element global function
+ * @param item
+ * @param slideTime
+ * @param direction
+ */
+function ign_slide_element(item, slideTime = .5, direction = 'toggle'){
+
+		if(direction === 'open'){
+			TweenMax.set(item, {display: 'block', height: 'auto'});
+			TweenMax.from(item, slideTime, {height: 0, display: 'none'});
+		}
+
+		else if(direction === 'close'){
+			TweenMax.to(item, slideTime, {height: 0, display: 'none'});
+		}
+
+		else{
+
+			if (item.offsetHeight === 0 || item.style.display == 'none') {
+				//open
+				TweenMax.set(item, {display: 'block', height: 'auto'}); //set it quickly to show if its not already
+				TweenMax.from(item, slideTime, {height: 0, display: 'none'}); //go from 0 height
+			} else {
+				//close
+				TweenMax.to(item, slideTime, {height: 'auto', display: 'block'});
+			}
+		}
+
+
+}
+
 
 
 //LOAD IGNITION EVENTS
@@ -110,8 +146,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		toggleEvent.initEvent('afterToggle', true, true);
 
 	} else {
-		toggleEvent = new Event('afterToggle', {bubbles: true});
+		toggleEvent = new Event('afterToggle', {bubbles: true}); //bubble allows for delegation on body
 	}
+
+
 
 	//add aria to buttons currently on page
 	let buttons = document.querySelectorAll('[data-toggle]');
@@ -121,6 +159,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	});
 
+
+
 	//toggling the buttons with delegation click
 	document.body.addEventListener('click', e => {
 
@@ -129,56 +169,74 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (item) {
 
 			let $doDefault = item.getAttribute('data-default');
-
+			//normally we prevent default unless someone add data-default
 			if (null === $doDefault) {
 				e.preventDefault();
 				e.stopPropagation();
 			}
 
-			//if data-radio is found, only one can be selected at a time. untoggle any other item with same radio value
+			//if data-radio is found, only one can be selected at a time.
+			// untoggle any other item with same radio value
+			//radio items cannot be untoggled until another item is clicked
+
+			//if item has data-switch it can only be turned on or off but not both by this button
 			let radioSelector = item.getAttribute('data-radio');
+			let switchItem = item.getAttribute('data-switch');
 			if (radioSelector !== null) {
 				let radioSelectors = document.querySelectorAll(`[data-radio="${radioSelector}"`);
 
 				radioSelectors.forEach(radioItem => {
 					if (radioItem !== item && radioItem.classList.contains('toggled-on')) {
-						toggleItem(radioItem); //toggle all other radio items off
+						toggleItem(radioItem); //toggle all other radio items off when this one is being turned on
 					}
 				});
 			}
 
-			//toggle clicked item, and pass if it can be unclicked
+			//finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 			if (radioSelector !== null) {
-				toggleItem(item, true); //the item cannot be unclicked
-			} else {
-				toggleItem(item);
+				toggleItem(item, 'on'); //the item cannot be unclicked
+			}
+			else if(switchItem !== null){
+				if(switchItem === 'on'){
+					toggleItem(item, 'on');
+				}
+				else{
+					toggleItem(item, 'off');
+				}
+			}
+			else {
+				toggleItem(item); //normal regular toggle
 			}
 
 		} //end if item found
 	});
 
 	//toggle an item and add class toggled-on and any other classes needed.
-	function toggleItem (item, unclickable = false) {
+	function toggleItem (item, forcedState = 'none') {
 
 		//toggle item
-		if (unclickable) {
-			item.classList.add('toggled-on');
-		} else {
-			item.classList.toggle('toggled-on');
+		if (forcedState === 'on') {
+			item.classList.add('toggled-on'); //radio or data-switch of on will always toggle-on
+		}
+		else if(forcedState === 'off'){
+			item.classList.remove('toggled-on'); //data-switch of off will always toggle off
+		} else{
+			item.classList.toggle('toggled-on'); //basic data toggle item
 		}
 
-		//is item toggled? used for the rest of this function
+		//is item toggled? used for the rest of this function to toggle another target if needed.
 		let isToggled = item.classList.contains('toggled-on');
 
 		item.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
 
+		//get class to add to this item or another
 		let $class = item.getAttribute('data-toggle'),
 			$target = document.querySelectorAll(item.getAttribute('data-target'));
 
 		if ($class === null || !$class) {
-			$class = 'toggled-on';
+			$class = 'toggled-on'; //default class added is toggled-on
 		}
-		//if a special class is wanted to be toggled & data-target exists, add that class to the targeted item
+		//special class added to another item
 		if ($target.length) {
 			$target.forEach(targetItem => {
 				if (isToggled) {
@@ -187,10 +245,20 @@ document.addEventListener('DOMContentLoaded', function () {
 					targetItem.classList.remove($class);
 				}
 
+				//data slide open or closed
+				if(targetItem.dataset.slide !== undefined){
+					let slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide);
+					if(isToggled){
+						ign_slide_element(targetItem, slideTime, 'open');
+					}else{
+						ign_slide_element(targetItem, slideTime, 'close');
+					}
+				}
+
 				//allow event to happen after click for the targeted item
 				targetItem.dispatchEvent(toggleEvent);
 			});
-		} else {
+		} else { //applies class to the clicked item, there is no target
 			if($class !== 'toggled-on'){ //add class to clicked item if its not set to be toggled-on
 				if (isToggled) {
 					item.classList.toggle($class);
@@ -204,25 +272,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		item.dispatchEvent(toggleEvent);
 
 	}
-
-//added data slide ability
-//if the data-targeted item has data-slide it will slide open
-	document.body.addEventListener('afterToggle', e => {
-		if (e.target.dataset.slide !== undefined) {
-			let item = e.target;
-
-			let slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide);
-
-			//if set to visible, slide down
-			if (item.style.display === 'none' || item.offsetHeight === 0) {
-				TweenMax.set(item, {display: 'block', height: 'auto'});
-				TweenMax.from(item, slideTime, {height: 0});
-			} else {
-				TweenMax.to(item, slideTime, {height: 0, display: 'none'});
-			}
-		}
-
-	});
 
 
 

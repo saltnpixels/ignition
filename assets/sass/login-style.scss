@@ -1,6 +1,12 @@
-body {
+
+html{
+ font-size: 62.5%;
+}
+
+body, input {
   display: flex;
   align-items: center;
+  font-size: 1.6rem;
 }
 
 body #login{
@@ -42,4 +48,8 @@ path{
 
 .site-title a{
   text-decoration: none;
+}
+
+*::placeholder{
+  font-size: inherit;
 }

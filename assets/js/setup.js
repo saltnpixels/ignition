@@ -39,7 +39,10 @@ let  isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
 
 //wrap function
-function wrap(el, wrapper) {
+function wrap(el, wrapper = '') {
+	if(!wrapper){
+		wrapper = document.createElement('div');
+	}
 	el.parentNode.insertBefore(wrapper, el);
 	wrapper.appendChild(el);
 	return wrapper;

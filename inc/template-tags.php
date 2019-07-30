@@ -1,6 +1,8 @@
 <?php
 /**
  * Custom template tags for ignition
+ * Most expect you to be in the loop
+ * ign_get_terms does not need to be in loop
  *
  * @package Ignition
  * @since 1.0
@@ -24,7 +26,6 @@ if ( ! function_exists( 'ign_posted_by' ) ) {
 }
 
 
-
 /**
  * Post the time
  */
@@ -33,9 +34,9 @@ if ( ! function_exists( 'ign_posted_by' ) ) {
  * Prints HTML with meta information for the current post-date/time.
  */
 if ( ! function_exists( 'ign_posted_on' ) ) {
-	function ign_posted_on($date_format = '') {
+	function ign_posted_on( $date_format = '' ) {
 		// post published and modified dates
-		echo '<div class="posted-on">' . ign_time_link($date_format) . '</div>';
+		echo '<div class="posted-on">' . ign_time_link( $date_format ) . '</div>';
 	}
 }
 
@@ -45,7 +46,7 @@ if ( ! function_exists( 'ign_posted_on' ) ) {
  */
 if ( ! function_exists( 'ign_time_link' ) ) {
 
-	function ign_time_link($date_format) {
+	function ign_time_link( $date_format ) {
 		$time_string = '<time class="published" datetime="%1$s">%2$s</time>';
 
 		//if when post was made does not equal the modified date
@@ -55,9 +56,9 @@ if ( ! function_exists( 'ign_time_link' ) ) {
 
 		$time_string = sprintf( $time_string,
 			get_the_date( DATE_W3C ),
-			get_the_date($date_format),
+			get_the_date( $date_format ),
 			get_the_modified_date( DATE_W3C ),
-			get_the_modified_date($date_format)
+			get_the_modified_date( $date_format )
 		);
 
 		// Wrap the time string in a link, and preface it with 'Posted on'.
@@ -77,17 +78,20 @@ if ( ! function_exists( 'ign_time_link' ) ) {
  * @return string|void
  * Get all or one term for a taxonomy for a post
  */
-if ( ! function_exists( 'ign_get_terms' ) ) {
+if ( ! function_exists( 'ign_get_term_links' ) ) {
 
-	function ign_get_terms( $taxonomy = 'category', $get_all = false ) {
+	function ign_get_term_links( $taxonomy = 'category', $get_all = false, $id = 0 ) {
 
-		$terms = get_the_terms( get_the_ID(), $taxonomy );
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+
+		$terms = get_the_terms( $id, $taxonomy );
 
 		if ( $terms && ! is_wp_error( $terms ) ) :
 			//get first term found
 			if ( ! $get_all ) {
-				$term = array_pop( $terms );
-
+				$term              = $terms[0];
 				$term_links_output = '<a class="term-link ' . $taxonomy . '" href="' . get_term_link( $term->term_id, $taxonomy ) . '">' . $term->name . '</a>';
 			} //else get all terms with a comma
 			else {
@@ -95,13 +99,39 @@ if ( ! function_exists( 'ign_get_terms' ) ) {
 				foreach ( $terms as $term ) {
 					$term_links[] = '<a class="term-link ' . $taxonomy . '" href="' . get_term_link( $term->term_id, $taxonomy ) . '">' . $term->name . '</a>';
 				}
+				//add comma after each one
 				$term_links_output = join( '<span class="delim">' . __( ', ', 'ignition' ) . '</span>', $term_links );
 			}
 
 			return $term_links_output;
 		endif;
 
-		return;
+		return '';
+	}
+}
+
+
+/**
+ * @param string $taxonomy
+ *
+ * @return string|void
+ * Get all term objects for a post
+ * fast way to grab and run a foreach loop
+ */
+if ( ! function_exists( 'ign_get_terms' ) ) {
+
+	function ign_get_terms( $taxonomy = 'category', $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+
+		$terms = get_the_terms( $id, $taxonomy );
+
+		if ( $terms && ! is_wp_error( $terms ) ) :
+			return $terms;
+		endif;
+
+		return array();
 	}
 }
 
@@ -169,7 +199,7 @@ function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
 }
 
 /**
- * Checks to see if we're on the static homepage or not.
+ * Checks to see if we're on the static front homepage or not.
  */
 function is_static_frontpage() {
 	return ( is_front_page() && ! is_home() );
@@ -272,7 +302,7 @@ function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) 
 		}
 
 		$image = get_field( 'header_image', $post_id );
-	}else{
+	} else {
 		$image = '';
 	}
 

@@ -21,7 +21,8 @@ if ( get_theme_mod( 'site_top_use_customizer', 'yes' ) == 'yes' ):
 					<?php wp_nav_menu( array(
 						'theme_location' => 'top',
 						'menu_id' => 'top-menu',
-						'container' => ''
+						'container' => '',
+						'fallback_cb' => 'link_to_menu_editor'
 					) ); ?>
 				</nav>
 			</div>

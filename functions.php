@@ -133,7 +133,7 @@ add_action( 'after_setup_theme', 'ignition_setup' );
 /**
  * Register custom google fonts. These are loaded along with scripts and styles.
  * Change/Remove the fonts in the $font_families array below to load different ones
- * Open the base/variables.scss to set the font, font-alt, and font-pre variables to these fonts.
+ * Open the core/variables.scss to set the font, font-alt, and font-pre variables to these fonts.
  */
 if ( ! function_exists( 'ign_google_fonts_url' ) ) {
 	function ign_google_fonts_url() {

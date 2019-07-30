@@ -34,6 +34,7 @@ function ignition_include_svg_icons() {
 	}
 }
 add_action( 'wp_footer', 'ignition_include_svg_icons', 9999 );
+add_action( 'admin_footer', 'ignition_include_svg_icons', 9999 );
 
 /**
  * Return SVG markup.

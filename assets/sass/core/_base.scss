@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-# Adding the base styles necessary to run ignition
+# Adding the core styles necessary to run ignition
 --------------------------------------------------------------*/
 //You probably only have to touch variables.scss
 
@@ -7,15 +7,15 @@
 
 @import "variables";
 
-@import "base_layout";
+@import "base-layout";
 
-@import "grid";
+@import "grid-layout";
 
 @import "ie11";
 
-@import "menu_layout";
+@import "menu-layout";
 
-@import "panel_right_layout";
+@import "panel-right-layout";
 
-@import "sidebar_layout";
+@import "sidebar-layout";
 

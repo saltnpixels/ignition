@@ -1,0 +1,560 @@
+/*--------------------------------------------------------------
+# All Menus
+--------------------------------------------------------------*/
+.menu,
+.menu > ul {
+	padding: 0;
+	list-style: none;
+	margin: 0;
+}
+
+/*--------------------------------------------------------------
+# Vertical Menus
+--------------------------------------------------------------*/
+@mixin vertical-menu() {
+	//when there is a menu its ul.menu and when its defaulting to pages its .menu ul...annoying
+	.menu,
+	.menu > ul {
+		display: flex;
+		flex-direction: column;
+
+		li {
+			position: relative;
+			margin: 0;
+
+			//added with hook or js if its a wp_page_menu. holds button and link, not submenu
+			.menu-item-link {
+				padding: 5px 15px;
+				display: flex;
+				align-items: flex-start;
+				transition: all .5s;
+
+				a {
+					padding: 0;
+				}
+			}
+
+			a {
+				text-decoration: none;
+				outline: none;
+				color: inherit;
+				cursor: pointer;
+				display: block;
+				flex-grow: 1;
+				flex-shrink: 0;
+			}
+
+			//icon for submenu
+			.submenu-dropdown-toggle {
+				padding-left: 10px;
+				padding-right: 0;
+				display: inline-block;
+				color: inherit;
+				flex-basis: 35px;
+				text-align: right;
+			}
+
+		}
+
+
+		.sub-menu, .children {
+			list-style: none;
+			margin: 0;
+			display: none; //opens with jquery
+			transition: none;
+			overflow: hidden;
+			width: 100%;
+			padding: 0;
+
+			//inner items move over a bit
+			.menu-item-link {
+				padding-left: $gap;
+			}
+		}
+
+	}
+
+}
+
+//current menu items or parents have their sub menu opened by default when vertical
+#panel-left, #panel-right {
+	.current-menu-item .sub-menu, .current-menu-parent .sub-menu {
+		display: block;
+	}
+}
+
+
+/*--------------------------------------------------------------
+# Horizontal Menus
+--------------------------------------------------------------*/
+@mixin horizontal-menu($breakpoint: $media-nav) {
+
+	@media(min-width: $breakpoint) {
+		.menu,
+		.menu > ul {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: stretch;
+			flex-direction: row;
+			height: 100%;
+
+
+			//make top level items flexed so they can be positioned at top or bottom
+			.top-level-item .menu-item-link {
+				display: flex;
+				height: 100%;
+				align-items: var(--desktop-menu-alignment);
+			}
+
+			//top level sub menus dont drop down they appear.
+			.top-level-item > .sub-menu, .top-level-item > .children {
+				display: block !important; //make sure jquery slideToggle doesnt affect here
+				height: auto !important;
+				opacity: 0;
+				visibility: hidden;
+
+				transition: opacity .5s, visibility .5s;
+				transition-delay: .2s;
+				margin: 0;
+				position: absolute;
+				z-index: 10;
+				top: 100%;
+				min-width: 200px;
+				left: 50%;
+				right: 50%;
+				transform: translate(-50%, 0);
+				border-radius: 0 0 3px 3px;
+
+				a {
+					flex-shrink: 1;
+				}
+
+			}
+
+			.sub-menu .menu-item-link {
+				padding: 3px 15px;
+			}
+
+			//top level sub-menus opened
+			.top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu {
+				opacity: 1;
+				visibility: visible;
+				transition-delay: 0s;
+			}
+
+			//lower sub-menus
+			.sub-menu .sub-menu {
+				display: none;
+				position: relative;
+				padding: 0;
+				transition: none;
+
+				a {
+					padding-left: 10px;
+				}
+			}
+
+		}
+	}
+
+	@media(max-width: $breakpoint) {
+		@include vertical-menu();
+	}
+
+}
+
+/*------- Apply the menus --------*/
+@include vertical-menu();
+
+.horizontal-menu {
+	@include horizontal-menu();
+}
+
+
+/*--------------------------------------------------------------
+# Sub-Menu Buttons
+--------------------------------------------------------------*/
+.submenu-dropdown-toggle .icon {
+	transition: transform .4s;
+}
+
+.submenu-dropdown-toggle,
+.submenu-dropdown-toggle:focus {
+	background: none;
+	border: none;
+	margin: 0;
+	display: inline;
+	outline: none;
+	cursor: pointer;
+	min-width: 1.5em;
+	text-align: left;
+	font-size: inherit;
+	color: inherit;
+
+	&.toggled-on .icon {
+		transform: rotate(90deg);
+	}
+}
+
+/*--------------------------------------------------------------
+# Site-top Layout
+--------------------------------------------------------------*/
+/*------- Site-top --------*/
+.site-top {
+	z-index: var(--z-index-menu);
+	width: 100%;
+	position: relative;
+	left: 0;
+	top: 0;
+
+	.site-top-container {
+		height: 100%;
+	}
+}
+
+/*------- Navigation --------*/
+.site-navigation {
+	flex-wrap: wrap;
+	position: relative;
+	justify-content: center;
+	height: 100%;
+
+
+	.site-navigation__nav-holder {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.site-logo {
+		padding: 3px 0;
+
+		a + a {
+			display: none;
+		}
+
+		a {
+			transition: all .5s;
+		}
+
+		h1, p {
+			font-size: inherit;
+		}
+	}
+}
+
+
+//hide navigation on mobile if its inside site-top while it hasnt moved yet
+@media(max-width: $media-nav) {
+	.site-navigation .site-navigation__nav-holder {
+		display: none;
+	}
+
+}
+
+
+/*--------------------------------------------------------------
+# Site Logo
+--------------------------------------------------------------*/
+.site-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+
+	a {
+		color: inherit
+	}
+}
+
+.site-logo h1,
+.site-logo p {
+	margin: 0;
+}
+
+.site-logo__link, .site-title a, .custom-logo-link {
+	display: flex;
+	text-decoration: none;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		display: block;
+	}
+}
+
+//logo positions
+@media (min-width: $media-nav) {
+
+	//layout positions
+	.logo-left .site-logo {
+		justify-content: left;
+	}
+
+	.logo-right .site-logo, .logo-center-under .site-logo {
+		order: 2;
+	}
+
+	.logo-center .site-navigation, .logo-center-under .site-navigation {
+		flex-direction: column;
+		align-items: center;
+
+	}
+
+	.no-logo .site-logo {
+		display: none;
+	}
+
+	.logo-in-middle > .site-logo, .logo-in-middle > .container .logo-in-middle {
+		display: none;
+	}
+
+	.logo-in-middle .site-navigation__nav-holder {
+		justify-content: center;
+	}
+
+	.logo-in-middle .site-navigation > .site-logo {
+		display: none;
+	}
+
+	.logo-right .site-navigation__nav-holder {
+		justify-content: flex-start;
+	}
+
+}
+
+#panel-left .site-navigation__nav-holder .site-logo {
+	display: none;
+}
+
+
+/*--------------------------------------------------------------
+# Opening and Closing Mobile Menus / Panel Left Layout
+--------------------------------------------------------------*/
+/*------- Panel menu --------*/
+#panel-left {
+	@extend .hide-scroll;
+	overflow: auto;
+}
+
+.menu-open #panel-left {
+	flex-basis: var(--panel-left-width);
+	flex-shrink: 0;
+	transform: translate(0, 0);
+}
+
+//if left panel starts open, leave open until mobile, and hide button till mobile
+@media(min-width: $media-nav) {
+	#panel-left.stay-open {
+		flex-basis: var(--panel-left-width);
+		flex-shrink: 0;
+		transform: translate(0, 0);
+
+		& ~ .panel-left-toggle, & ~ .site .panel-left-toggle {
+			display: none;
+		}
+	}
+}
+
+//panel becomes absolute
+@media(max-width: $panel-left-absolute) {
+	#panel-left {
+		position: absolute;
+		height: 100%;
+		left: 0;
+		transform: translate(-100%, 0);
+	}
+}
+
+#panel-left {
+	.site-navigation__nav-holder {
+		min-width: var(--panel-left-width);
+		padding-top: 11vh;
+		padding-bottom: $gap;
+	}
+}
+
+/*------- Cool App like menu for mobile --------*/
+@media(max-width: $panel-left-absolute) {
+	.app-menu {
+		#panel-left {
+			transition: none;
+			transform: translate(0, 0);
+			width: 100%;
+			z-index: calc(var(--z-index-menu) - 1);
+
+			.menu-item-link {
+				a {
+					max-width: 40vw;
+				}
+			}
+		}
+
+		#page {
+			background: inherit;
+			transition: transform .5s;
+		}
+
+	}
+
+	.app-menu.menu-open {
+
+		#page {
+			border-radius: 5px;
+			transform: translate(50vw, -2vh) scale(.75);
+			box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
+			overflow: hidden;
+		}
+
+		#panel-left {
+			height: 100vh;
+			overflow: auto;
+		}
+
+		&.admin-bar #panel-left {
+			height: calc(100vh - 46px);
+		}
+	}
+
+}
+
+//lock body needed to make it look right and no scrolling around
+.menu-lock {
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+
+	.site-container {
+		height: 100%;
+	}
+}
+
+//ios must have position relative on body for lock to work
+@supports (-webkit-overflow-scrolling: touch) {
+	/* CSS specific to iOS devices */
+	.menu-lock {
+		position: fixed; // todo check on ios that it works
+	}
+}
+
+
+/*--------------------------------------------------------------
+# Menu Button
+--------------------------------------------------------------*/
+
+//hide menu button unless there is something inside the left panel
+#panel-left:empty ~ .panel-left-toggle, #panel-left:empty ~ #page .panel-left-toggle {
+	display: none;
+}
+
+//if site top is in container, add room for button only when necessary
+@media (max-width: $media-container + $gap) {
+	#panel-left:not(:empty) ~ .site .site-top .container {
+		padding-left: 52px;
+	}
+}
+
+//if site nav is full width, add room for sidebar button always, if its visible
+#panel-left:not(:empty) ~ .site .site-top .container-fluid {
+	padding-left: 52px;
+}
+
+//when there is only a logo, make it centered wether left or right or both buttons are showing
+@media(max-width: $media-nav) {
+	.site-top .container, .site-top .container-fluid {
+		padding: 0 52px;
+	}
+}
+
+
+//actual button
+.panel-left-toggle {
+	position: absolute;
+	border: none;
+	box-shadow: none;
+	z-index: 99;
+	cursor: pointer;
+	will-change: transform;
+	line-height: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0 15px;
+	outline: none;
+	transition: all .5s;
+	background: transparent;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.site-top .panel-left-toggle {
+	height: 100%;
+}
+
+//= to x version
+.navigation-menu-icon {
+	position: relative;
+	display: block;
+	height: 25px;
+	width: 25px;
+	border-radius: .5px;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 30%;
+		height: 3px;
+		width: 100%;
+		background: white;
+		transition: all .5s;
+		outline: none;
+		border-radius: inherit;
+	}
+
+	&:after {
+		bottom: 30%;
+		top: auto;
+	}
+}
+
+//opened-state for x version. Becomes X
+.panel-left-toggle.toggled-on .navigation-menu-icon.icon-regular {
+	&:before {
+		transform: rotate(45deg);
+		top: 45%;
+	}
+
+	&:after {
+		transform: rotate(-45deg);
+		bottom: 42%;
+	}
+}
+
+//menu icon alt version. 3 bars
+.navigation-menu-icon--alt, .navigation-menu-icon--bars {
+	border-top: 3px solid white;
+	margin-top: 6px;
+
+	&:before,
+	&:after {
+		height: 3px;
+	}
+
+	&:before {
+		top: 3px;
+		width: 75%;
+	}
+
+	&:after {
+		top: 9px;
+	}
+}
+
+.navigation-menu-icon--bars:before {
+	width: 100%;
+}
+

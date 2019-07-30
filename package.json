@@ -20,6 +20,7 @@
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.0.2",
+    "gulp-cli": "^2.2.0",
     "gulp-concat": "^2.5.2",
     "gulp-filter": "^5.1.0",
     "gulp-imagemin": "^5.0.3",

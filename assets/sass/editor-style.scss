@@ -3,19 +3,19 @@
 --------------------------------------------------------------*/
 
 /*------- Mixins --------*/ 
-@import "base/mixins";
+@import "core/mixins";
 
 /*------- variables --------*/ 
-@import "base/variables";
+@import "core/variables";
 
 /*------- Normalize --------*/
 @import "libs/normalize"; //includes outdated browser notice
 
 /*------- Base Layout --------*/
-@import "base/base_layout";
+@import "core/base-layout";
 
 /*------- CSS Grid --------*/
-@import "base/grid";
+@import "core/grid-layout";
 
 /*------- Typography --------*/ 
 @import "global/typography";
@@ -30,7 +30,7 @@
 @import "elements/media";
 
 /*------- Nav Menu  --------*/
-@import "base/menu_layout";
+@import "core/menu-layout";
  
 
 /*------- Global elements --------*/ 
@@ -46,7 +46,7 @@
 
 
 /*------- IE 11 --------*/
-@import "base/ie11";
+@import "core/ie11";
 
 
 /*--------------------------------------------------------------

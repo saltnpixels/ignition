@@ -156,6 +156,8 @@ div .edit-post-visual-editor .flex>.span-12,div .edit-post-visual-editor .flex-g
 .edit-post-visual-editor .gallery figcaption,.edit-post-visual-editor #page .wp-block-gallery figcaption{text-align:center;position:relative;background:transparent;padding:0;font-size:1.4rem;color:#6c7781}
 .edit-post-visual-editor .caption-first .gallery-item .gallery-icon{-webkit-box-ordinal-group:3;-ms-flex-order:2;order:2}
 .edit-post-visual-editor .caption-first .gallery-item figcaption{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}
+.edit-post-visual-editor .icon{display:inline-block;stroke-width:0;stroke:currentColor;height:1em;vertical-align:middle;width:1em;position:relative;fill:currentColor}
+.edit-post-visual-editor .icon svg,.edit-post-visual-editor .icon path,.edit-post-visual-editor .icon g{fill:currentColor}
 .edit-post-visual-editor .icon-angle-right{top:-1px}
 .edit-post-visual-editor .icon-arrow-right{top:-2px}
 .edit-post-visual-editor [data-scrollanimation],.edit-post-visual-editor .animated,.edit-post-visual-editor [data-toggle]{-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:1s;animation-duration:1s;-webkit-transform:translate(0);transform:translate(0)}
