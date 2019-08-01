@@ -1,21 +1,6 @@
-//This file takes care of menus and navigation at the top
-let iconAngleRight = '<span class="arrow"></span>';
-
-//if using wordpress, icons may have already been localized. use those. otherwise add it
-if (typeof icons !== 'undefined' && typeof icons.angleRight !== 'undefined') {
-	iconAngleRight = icons.angleRight;
-}
-
-let screenReaderText = typeof screenReaderText == 'undefined' ? {} : screenReaderText;
-if (screenReaderText == '') {
-	screenReaderText.collapse = 'Collapse child menu';
-	screenReaderText.expand = 'Expand child menu';
-}
-
-let submenuButtons = '';
 
 /*------- move submenus if too close to edge on desktop --------*/
-function fixOffScreenMenu(menu) {
+function fixOffScreenMenu (menu) {
 
 	//make item visible so we can get left edge
 	menu.style.display = 'block';
@@ -38,10 +23,10 @@ function fixOffScreenMenu(menu) {
 	}
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
 
 	/*------- slide sub menus open and closed when a dropdown button is clicked --------*/
+
 	document.body.addEventListener('afterToggle', evt => {
 		//for every dropdown menu button, when clicked toggle the li parent and open the sub-menu with slide
 		if (evt.target.closest('.submenu-dropdown-toggle')) {
@@ -52,105 +37,128 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			if (isToggled === 'open') {
 				fixOffScreenMenu(subMenu);
+				//add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
+				evt.target.closest('li').classList.add('toggled-on');
+			} else {
+				evt.target.closest('li').classList.remove('toggled-on');
 			}
 
 			ign_slide_element(subMenu, .5, isToggled);
 		}
 	});
 
+	/*------- Tabbing through the menu for ADA compliance --------*/
 
-	/*------- Tabbing through the menu --------*/
-
-	let menuItems = document.querySelectorAll('.menu-item-link a');
 	let lastTabbedItem = '';
-	menuItems.forEach(menuItemLink => {
 
-		//focus
-		menuItemLink.addEventListener('focus', e => {
-			menuItemLink.parentElement.classList.add('focus'); //add focus to .menu-item-link
-			//if this element has a dropdown near it, toggle it now
-			if (menuItemLink.nextElementSibling !== null) {
-				menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
-			}
+	//focus
+	document.body.addEventListener('focusin', e => {
+		console.log(e.target);
+		if (e.target.closest('.menu-item-link a')) {
+			let menuItemLink = e.target.closest('.menu-item-link a');
 
-			//if there is an item focused before
-			if (lastTabbedItem) {
-				//check if last item had a sub menu and we are not inside it now
-				if (lastTabbedItem.nextElementSibling !== null && !lastTabbedItem.closest('li').contains(menuItemLink)) {
-					lastTabbedItem.nextElementSibling.click();
+			window.addEventListener('keyup', function (e) {
+				let code = (e.keyCode ? e.keyCode : e.which);
+				//tab or shift tab
+				if (code === 9 || code === 16) {
+					menuItemLink.parentElement.classList.add('focus'); //add focus to .menu-item-link
+					//if this element has a dropdown near it, toggle it now
+					if (menuItemLink.nextElementSibling !== null && !menuItemLink.closest('li').classList.contains('toggled-on')) {
+						menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
+					}
+
+					//if there is an item focused before
+					if (lastTabbedItem) {
+						//check if last item had a sub menu and we are not inside it now
+						if (lastTabbedItem.nextElementSibling !== null && !lastTabbedItem.closest('li').contains(menuItemLink)) {
+							lastTabbedItem.nextElementSibling.click();
+						}
+					}
+
 				}
 
-			}
-
-		});
-
-		//blur
-		menuItemLink.addEventListener('blur', e => {
-			//blur current tabbed item, but dont close it if its a sub-menu
-			menuItemLink.parentElement.classList.remove('focus');
-			lastTabbedItem = menuItemLink;
-			const subMenu = menuItemLink.closest('.sub-menu');
-
-
-			//if we blurred an item in a sub-menu
-			if (subMenu !== null) {
-				console.log('blurred item inside sub-menu');
-				const menuItem = menuItemLink.closest('.menu-item');
-				//if its the last item in the submenu and it does not have a sub-menu itself
-				if (menuItem.nextElementSibling == null && menuItem.querySelector('.sub-menu') == null) {
-					menuItem.parentElement.closest('.menu-item').querySelector('.submenu-dropdown-toggle').click();
-				}
-			}
-
-
-		});
-
+			}, {once: true});
+		}
 	});
 
-});
+//blur
+	document.body.addEventListener('focusout', e => {
 
-//fix wp_page_menu to be like wp_nav_menu
-jQuery(function ($) {
+		if (e.target.closest('.menu-item-link a')) {
+			let menuItemLink = e.target.closest('.menu-item-link a');
+			window.addEventListener('keyup', function (e) {
+				let code = (e.keyCode ? e.keyCode : e.which);
+				console.log(code);
+				if (code === 9 || code === 16) {
+					//blur current tabbed item, but dont close it if its a sub-menu
+					menuItemLink.parentElement.classList.remove('focus');
+					lastTabbedItem = menuItemLink;
+					const subMenu = menuItemLink.closest('.sub-menu');
 
-	const navigation = $('.site-top'),
-		menuToggle = $('.panel-left-toggle'),
-		page = $('#page'),
-		body = $('body');
+					//if we blurred an item in a sub-menu
+					if (subMenu !== null) {
+						console.log('blurred item inside sub-menu');
+						const menuItem = menuItemLink.closest('.menu-item');
+						//if its the last item in the submenu and it does not have a sub-menu itself
+						if (menuItem.nextElementSibling == null && menuItem.querySelector('.sub-menu') == null) {
+							menuItem.parentElement.closest('.menu-item').querySelector('.submenu-dropdown-toggle').click();
+						}
+					}
 
-	//NAVIGATION TOGGLE
-	if (!menuToggle.length) {
-		return;
+
+				}
+			}, {once: true});
+
+		}
+	});
+
+
+	//app-menu ability for the top menu
+	let body = document.body;
+	let menuToggle = document.querySelector('.panel-left-toggle');
+	let topNav = document.querySelector('.site-top');
+	let page = document.querySelector('#page');
+
+	//first move the button into site-top if app-menu is being used cause we dont need it on the outside
+	if (body.classList.contains('app-menu')) {
+		topNav.append(menuToggle);
 	}
 
-	//move button into site-top if app-menu type so the button shrinks too
-	if (body.hasClass('app-menu')) {
-		navigation.append(menuToggle);
+
+	function closeAppMenu(e){
+		e.preventDefault();
+		menuToggle.click();
 	}
 
-	menuToggle[0].addEventListener('afterToggle', e => {
-		//if button is set to open
-		if (menuToggle.hasClass('toggled-on')) {
 
-			//if its an app-menu, add the menu-lock onto body
-			if (body.hasClass('app-menu')) {
-				body.addClass('menu-lock');
+	//when button is opened we will lock the body so there is no scrolling and then open the page
+	menuToggle.addEventListener('afterToggle', e => {
+		//if button has been toggled on
+		if (menuToggle.classList.contains('toggled-on')) {
+
+			//if its an app-menu, add the body-lock onto body
+			if (body.classList.contains('app-menu')) {
+				body.classList.add('body-lock');
 			}
 
 			//clicking anywhere outside the menu will close it
-			$('.site-content').one('click.Menu', function () {
-				e.preventDefault();
-				menuToggle.trigger('click'); //recursively calls click and closes
-			});
+			document.querySelector('.site-content').addEventListener('click', closeAppMenu, {once: true});
+
 		} else {
 
-			$('.site-content').off('click.Menu');
+			document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
 
-			page.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-				body.removeClass('menu-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-			});
+			page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+				body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+			}, {once: true});
 		}
 
 	});
+
+}); //end ready
+
+
+jQuery(function ($) {
 
 	//move logo in middle of menu on desktop if logo is middle position
 	if ($('.logo-in-middle').length) {

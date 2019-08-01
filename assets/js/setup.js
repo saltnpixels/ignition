@@ -1,4 +1,16 @@
 //Set up some global stuff
+
+/*------- Test if touch enabled device --------*/
+if (!("ontouchstart" in document.documentElement)) {
+	document.documentElement.className += " no-touch-device";
+}else{
+	document.documentElement.className += " touch-device";
+}
+
+/*------- ie11 polyfills --------*/
+let  isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+
+
 //foreach on ie11. babel doesnt seem to fix so this works
 if ('NodeList' in window && !NodeList.prototype.forEach) {
 	console.info('polyfill for IE11');
@@ -34,9 +46,9 @@ if (!Element.prototype.closest) {
 	};
 }
 
-let  isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
 
+/*------- Core Functions --------*/
 
 //wrap function
 function wrap(el, wrapper = '') {
@@ -48,7 +60,8 @@ function wrap(el, wrapper = '') {
 	return wrapper;
 }
 
-
+//debounce to slow down an event that users window size or the like
+//debounce will wait till the window is resized and then run
 let debounce = function (func, wait, immediate) {
 	var timeout;
 	return function () {
@@ -64,6 +77,7 @@ let debounce = function (func, wait, immediate) {
 	};
 };
 
+//throttle will run every few milliseconds as opposed to every millisecond
 function throttle (fn, threshhold, scope) {
 	threshhold || (threshhold = 250);
 	var last,
@@ -88,9 +102,14 @@ function throttle (fn, threshhold, scope) {
 }
 
 //create menu and sidebar button sizing
-//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under panels.
-//this makes sure the buttons are centered, but still  on top of site-top
+//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under opened panels.
+//this makes sure the buttons are centered, but still  on top of site-top and the menu the pops open
 document.addEventListener('DOMContentLoaded', function () {
+
+
+
+
+	placeMenuButtons();
 	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
 	let menuButtons = '';
 
@@ -101,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	else {
 		//otherwise the menu button does not need to be centered because its part of the app menu and moves.
 		menuButtons = document.querySelectorAll('.panel-right-toggle');
-		document.querySelector('.panel-left-toggle').classList.remove('hidden');
 	}
 
 	menuButtons.forEach(button => {
@@ -113,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function resizeMenuButtons () {
 		$siteTopHeight = document.querySelector('.site-top').clientHeight;
-
 		menuButtons.forEach(button => {
 			//console.log(button);
 			button.style.height = $siteTopHeight + 'px';

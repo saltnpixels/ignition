@@ -1,13 +1,6 @@
 /*--------------------------------------------------------------
-# Adding some global events users can use via data attributes
+# Adding some global events and functions users can use via data attributes
 --------------------------------------------------------------*/
-
-//test if this is a touchscreen add class
-if (!("ontouchstart" in document.documentElement)) {
-	document.documentElement.className += " no-touch-device";
-}else{
-	document.documentElement.className += " touch-device";
-}
 
 let scrollMagicController = '';
 //setup scroller function
@@ -111,31 +104,63 @@ function ign_slide_element(item, slideTime = .5, direction = 'toggle'){
 
 		else{
 
-			if (item.offsetHeight === 0 || item.style.display == 'none') {
+			if (item.offsetHeight === 0 || item.style.display === 'none') {
 				//open
 				TweenMax.set(item, {display: 'block', height: 'auto'}); //set it quickly to show if its not already
 				TweenMax.from(item, slideTime, {height: 0, display: 'none'}); //go from 0 height
 			} else {
 				//close
-				TweenMax.to(item, slideTime, {height: 'auto', display: 'block'});
+				TweenMax.to(item, slideTime, {height: 0, display: 'none', overflow: 'hidden'});
 			}
 		}
 
+}
 
+/**
+ * resize menu buttons on load. also runs on resize.
+ */
+
+let menuButtons = '';
+
+//if the menu button is outside site-top. get both buttons for centering both.
+if (!document.querySelector('.app-menu')) {
+	menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
+}
+else {
+	//otherwise the menu button does not need to be centered because its part of the app menu and moves.
+	menuButtons = document.querySelectorAll('.panel-right-toggle');
 }
 
 
+function placeMenuButtons(){
+	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
+	let adminbar = document.querySelector('#wpadminbar');
+	let adminbarHeight = 0;
 
-//LOAD IGNITION EVENTS
+	if(adminbar !== null){
+		adminbarHeight = adminbar.clientHeight;
+	}
+
+	menuButtons.forEach(button => {
+		button.style.height = $siteTopHeight + 'px';
+	});
+}
+
+/*--------------------------------------------------------------
+# IGN Events
+--------------------------------------------------------------*/
+
 document.addEventListener('DOMContentLoaded', function () {
 
+	/*------- Scroll Magic Events  --------*/
 	scrollMagicController = new ScrollMagic.Controller();
 	document.querySelectorAll('[data-scrollanimation]').forEach( (element) => {
 		runScrollerAttributes(element);
 	});
 
 
-	//TOGGLE BUTTONS
+	/*------- Toggle Buttons --------*/
+
 	//trigger optional afterToggle event
 	//adding new custom event for after the element is toggled
 	let toggleEvent = null;
@@ -148,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	} else {
 		toggleEvent = new Event('afterToggle', {bubbles: true}); //bubble allows for delegation on body
 	}
-
 
 
 	//add aria to buttons currently on page
@@ -178,10 +202,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			//if data-radio is found, only one can be selected at a time.
 			// untoggle any other item with same radio value
 			//radio items cannot be untoggled until another item is clicked
-
-			//if item has data-switch it can only be turned on or off but not both by this button
 			let radioSelector = item.getAttribute('data-radio');
-			let switchItem = item.getAttribute('data-switch');
+
+
 			if (radioSelector !== null) {
 				let radioSelectors = document.querySelectorAll(`[data-radio="${radioSelector}"`);
 
@@ -191,6 +214,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 				});
 			}
+
+			//if item has data-switch it can only be turned on or off but not both by this button
+			let switchItem = item.getAttribute('data-switch');
 
 			//finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 			if (radioSelector !== null) {
@@ -211,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		} //end if item found
 	});
 
-	//toggle an item and add class toggled-on and any other classes needed.
+	//actual toggle of an item and add class toggled-on and any other classes needed. Also do a slide if necessary
 	function toggleItem (item, forcedState = 'none') {
 
 		//toggle item
@@ -245,9 +271,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					targetItem.classList.remove($class);
 				}
 
+				$target.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
+
 				//data slide open or closed
 				if(targetItem.dataset.slide !== undefined){
-					let slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide);
+					let slideTime = item.dataset.slide ? parseInt(item.dataset.slide) : .5;
 					if(isToggled){
 						ign_slide_element(targetItem, slideTime, 'open');
 					}else{
@@ -275,13 +303,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-	//MOVING ITEMS
+	/*------- Moving items --------*/
 	//on Window resize we can move items to and from divs with data-moveto="the destination"
 	//it will move there when the site reaches smaller than a size defaulted to 1030 or sett hat with data-moveat
 	//the whole div, including the data att moveto moves back and forth
 	let movedId = 0;
 
 	function moveItems () {
+
 
 		let windowWidth = window.innerWidth;
 		let $moveItems = document.querySelectorAll('[data-moveto]');
@@ -337,6 +366,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			//show it
 			item.classList.add('visible');
 		});
+
+		placeMenuButtons(); //running the moving of buttons here. nothing to do with moving items.
 	}
 
 	window.addEventListener('resize', throttle(moveItems, 250));

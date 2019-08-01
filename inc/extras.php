@@ -200,7 +200,7 @@ function ign_menu( $item, $args ) {
 
 
 	if ( in_array( 'menu-item-has-children', (array) $classes ) ) {
-		$item .= '<button tabindex="-1" data-toggle  data-target="#menu-item-' . $args->ID . '" aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg( array( "icon" => "angle-right" ) ) . '
+		$item .= '<button tabindex="-1" aria-haspopup="true" data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg( array( "icon" => "angle-right" ) ) . '
                     <span class="screen-reader-text">' . __( 'Expand child menu', 'ignition' ) . '</span></button>';
 	}
 

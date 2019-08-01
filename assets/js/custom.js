@@ -1,15 +1,8 @@
 "use strict";
 
 /*--------------------------------------------------------------
-# Adding some global events users can use via data attributes
+# Adding some global events and functions users can use via data attributes
 --------------------------------------------------------------*/
-//test if this is a touchscreen add class
-if (!("ontouchstart" in document.documentElement)) {
-  document.documentElement.className += " no-touch-device";
-} else {
-  document.documentElement.className += " touch-device";
-}
-
 var scrollMagicController = ''; //setup scroller function
 
 /**
@@ -113,7 +106,7 @@ function ign_slide_element(item) {
       display: 'none'
     });
   } else {
-    if (item.offsetHeight === 0 || item.style.display == 'none') {
+    if (item.offsetHeight === 0 || item.style.display === 'none') {
       //open
       TweenMax.set(item, {
         display: 'block',
@@ -127,19 +120,52 @@ function ign_slide_element(item) {
     } else {
       //close
       TweenMax.to(item, slideTime, {
-        height: 'auto',
-        display: 'block'
+        height: 0,
+        display: 'none',
+        overflow: 'hidden'
       });
     }
   }
-} //LOAD IGNITION EVENTS
+}
+/**
+ * resize menu buttons on load. also runs on resize.
+ */
+
+
+var menuButtons = ''; //if the menu button is outside site-top. get both buttons for centering both.
+
+if (!document.querySelector('.app-menu')) {
+  menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
+} else {
+  //otherwise the menu button does not need to be centered because its part of the app menu and moves.
+  menuButtons = document.querySelectorAll('.panel-right-toggle');
+}
+
+function placeMenuButtons() {
+  var $siteTopHeight = document.querySelector('.site-top').clientHeight;
+  var adminbar = document.querySelector('#wpadminbar');
+  var adminbarHeight = 0;
+
+  if (adminbar !== null) {
+    adminbarHeight = adminbar.clientHeight;
+  }
+
+  menuButtons.forEach(function (button) {
+    button.style.height = $siteTopHeight + 'px';
+  });
+}
+/*--------------------------------------------------------------
+# IGN Events
+--------------------------------------------------------------*/
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  /*------- Scroll Magic Events  --------*/
   scrollMagicController = new ScrollMagic.Controller();
   document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
     runScrollerAttributes(element);
-  }); //TOGGLE BUTTONS
+  });
+  /*------- Toggle Buttons --------*/
   //trigger optional afterToggle event
   //adding new custom event for after the element is toggled
 
@@ -174,11 +200,9 @@ document.addEventListener('DOMContentLoaded', function () {
       } //if data-radio is found, only one can be selected at a time.
       // untoggle any other item with same radio value
       //radio items cannot be untoggled until another item is clicked
-      //if item has data-switch it can only be turned on or off but not both by this button
 
 
       var radioSelector = item.getAttribute('data-radio');
-      var switchItem = item.getAttribute('data-switch');
 
       if (radioSelector !== null) {
         var radioSelectors = document.querySelectorAll("[data-radio=\"".concat(radioSelector, "\""));
@@ -187,8 +211,10 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleItem(radioItem); //toggle all other radio items off when this one is being turned on
           }
         });
-      } //finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
+      } //if item has data-switch it can only be turned on or off but not both by this button
 
+
+      var switchItem = item.getAttribute('data-switch'); //finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 
       if (radioSelector !== null) {
         toggleItem(item, 'on'); //the item cannot be unclicked
@@ -203,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     } //end if item found
 
-  }); //toggle an item and add class toggled-on and any other classes needed.
+  }); //actual toggle of an item and add class toggled-on and any other classes needed. Also do a slide if necessary
 
   function toggleItem(item) {
     var forcedState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'none';
@@ -235,11 +261,12 @@ document.addEventListener('DOMContentLoaded', function () {
           targetItem.classList.add($class);
         } else {
           targetItem.classList.remove($class);
-        } //data slide open or closed
+        }
 
+        $target.setAttribute('aria-expanded', isToggled ? 'true' : 'false'); //data slide open or closed
 
         if (targetItem.dataset.slide !== undefined) {
-          var slideTime = item.dataset.slide === '' ? .5 : parseInt(item.dataset.slide);
+          var slideTime = item.dataset.slide ? parseInt(item.dataset.slide) : .5;
 
           if (isToggled) {
             ign_slide_element(targetItem, slideTime, 'open');
@@ -265,7 +292,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     item.dispatchEvent(toggleEvent);
-  } //MOVING ITEMS
+  }
+  /*------- Moving items --------*/
   //on Window resize we can move items to and from divs with data-moveto="the destination"
   //it will move there when the site reaches smaller than a size defaulted to 1030 or sett hat with data-moveat
   //the whole div, including the data att moveto moves back and forth
@@ -324,6 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       item.classList.add('visible');
     });
+    placeMenuButtons(); //running the moving of buttons here. nothing to do with moving items.
   }
 
   window.addEventListener('resize', throttle(moveItems, 250));
@@ -390,23 +419,7 @@ jQuery(function ($) {
 });
 "use strict";
 
-//This file takes care of menus and navigation at the top
-var iconAngleRight = '<span class="arrow"></span>'; //if using wordpress, icons may have already been localized. use those. otherwise add it
-
-if (typeof icons !== 'undefined' && typeof icons.angleRight !== 'undefined') {
-  iconAngleRight = icons.angleRight;
-}
-
-var screenReaderText = typeof screenReaderText == 'undefined' ? {} : screenReaderText;
-
-if (screenReaderText == '') {
-  screenReaderText.collapse = 'Collapse child menu';
-  screenReaderText.expand = 'Expand child menu';
-}
-
-var submenuButtons = '';
 /*------- move submenus if too close to edge on desktop --------*/
-
 function fixOffScreenMenu(menu) {
   //make item visible so we can get left edge
   menu.style.display = 'block';
@@ -437,89 +450,118 @@ document.addEventListener('DOMContentLoaded', function () {
       var subMenu = menuItem.querySelector('.sub-menu');
 
       if (isToggled === 'open') {
-        fixOffScreenMenu(subMenu);
+        fixOffScreenMenu(subMenu); //add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
+
+        evt.target.closest('li').classList.add('toggled-on');
+      } else {
+        evt.target.closest('li').classList.remove('toggled-on');
       }
 
       ign_slide_element(subMenu, .5, isToggled);
     }
   });
-  /*------- Tabbing through the menu --------*/
+  /*------- Tabbing through the menu for ADA compliance --------*/
 
-  var menuItems = document.querySelectorAll('.menu-item-link a');
-  var lastTabbedItem = '';
-  menuItems.forEach(function (menuItemLink) {
-    //focus
-    menuItemLink.addEventListener('focus', function (e) {
-      menuItemLink.parentElement.classList.add('focus'); //add focus to .menu-item-link
-      //if this element has a dropdown near it, toggle it now
+  var lastTabbedItem = ''; //focus
 
-      if (menuItemLink.nextElementSibling !== null) {
-        menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
-      } //if there is an item focused before
+  document.body.addEventListener('focusin', function (e) {
+    console.log(e.target);
+
+    if (e.target.closest('.menu-item-link a')) {
+      var menuItemLink = e.target.closest('.menu-item-link a');
+      window.addEventListener('keyup', function (e) {
+        var code = e.keyCode ? e.keyCode : e.which; //tab or shift tab
+
+        if (code === 9 || code === 16) {
+          menuItemLink.parentElement.classList.add('focus'); //add focus to .menu-item-link
+          //if this element has a dropdown near it, toggle it now
+
+          if (menuItemLink.nextElementSibling !== null && !menuItemLink.closest('li').classList.contains('toggled-on')) {
+            menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
+          } //if there is an item focused before
 
 
-      if (lastTabbedItem) {
-        //check if last item had a sub menu and we are not inside it now
-        if (lastTabbedItem.nextElementSibling !== null && !lastTabbedItem.closest('li').contains(menuItemLink)) {
-          lastTabbedItem.nextElementSibling.click();
+          if (lastTabbedItem) {
+            //check if last item had a sub menu and we are not inside it now
+            if (lastTabbedItem.nextElementSibling !== null && !lastTabbedItem.closest('li').contains(menuItemLink)) {
+              lastTabbedItem.nextElementSibling.click();
+            }
+          }
         }
-      }
-    }); //blur
+      }, {
+        once: true
+      });
+    }
+  }); //blur
 
-    menuItemLink.addEventListener('blur', function (e) {
-      //blur current tabbed item, but dont close it if its a sub-menu
-      menuItemLink.parentElement.classList.remove('focus');
-      lastTabbedItem = menuItemLink;
-      var subMenu = menuItemLink.closest('.sub-menu'); //if we blurred an item in a sub-menu
+  document.body.addEventListener('focusout', function (e) {
+    if (e.target.closest('.menu-item-link a')) {
+      var menuItemLink = e.target.closest('.menu-item-link a');
+      window.addEventListener('keyup', function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        console.log(code);
 
-      if (subMenu !== null) {
-        console.log('blurred item inside sub-menu');
-        var menuItem = menuItemLink.closest('.menu-item'); //if its the last item in the submenu and it does not have a sub-menu itself
+        if (code === 9 || code === 16) {
+          //blur current tabbed item, but dont close it if its a sub-menu
+          menuItemLink.parentElement.classList.remove('focus');
+          lastTabbedItem = menuItemLink;
+          var subMenu = menuItemLink.closest('.sub-menu'); //if we blurred an item in a sub-menu
 
-        if (menuItem.nextElementSibling == null && menuItem.querySelector('.sub-menu') == null) {
-          menuItem.parentElement.closest('.menu-item').querySelector('.submenu-dropdown-toggle').click();
+          if (subMenu !== null) {
+            console.log('blurred item inside sub-menu');
+            var menuItem = menuItemLink.closest('.menu-item'); //if its the last item in the submenu and it does not have a sub-menu itself
+
+            if (menuItem.nextElementSibling == null && menuItem.querySelector('.sub-menu') == null) {
+              menuItem.parentElement.closest('.menu-item').querySelector('.submenu-dropdown-toggle').click();
+            }
+          }
         }
-      }
-    });
-  });
-}); //fix wp_page_menu to be like wp_nav_menu
+      }, {
+        once: true
+      });
+    }
+  }); //app-menu ability for the top menu
 
-jQuery(function ($) {
-  var navigation = $('.site-top'),
-      menuToggle = $('.panel-left-toggle'),
-      page = $('#page'),
-      body = $('body'); //NAVIGATION TOGGLE
+  var body = document.body;
+  var menuToggle = document.querySelector('.panel-left-toggle');
+  var topNav = document.querySelector('.site-top');
+  var page = document.querySelector('#page'); //first move the button into site-top if app-menu is being used cause we dont need it on the outside
 
-  if (!menuToggle.length) {
-    return;
-  } //move button into site-top if app-menu type so the button shrinks too
-
-
-  if (body.hasClass('app-menu')) {
-    navigation.append(menuToggle);
+  if (body.classList.contains('app-menu')) {
+    topNav.append(menuToggle);
   }
 
-  menuToggle[0].addEventListener('afterToggle', function (e) {
-    //if button is set to open
-    if (menuToggle.hasClass('toggled-on')) {
-      //if its an app-menu, add the menu-lock onto body
-      if (body.hasClass('app-menu')) {
-        body.addClass('menu-lock');
+  function closeAppMenu(e) {
+    e.preventDefault();
+    menuToggle.click();
+  } //when button is opened we will lock the body so there is no scrolling and then open the page
+
+
+  menuToggle.addEventListener('afterToggle', function (e) {
+    //if button has been toggled on
+    if (menuToggle.classList.contains('toggled-on')) {
+      //if its an app-menu, add the body-lock onto body
+      if (body.classList.contains('app-menu')) {
+        body.classList.add('body-lock');
       } //clicking anywhere outside the menu will close it
 
 
-      $('.site-content').one('click.Menu', function () {
-        e.preventDefault();
-        menuToggle.trigger('click'); //recursively calls click and closes
+      document.querySelector('.site-content').addEventListener('click', closeAppMenu, {
+        once: true
       });
     } else {
-      $('.site-content').off('click.Menu');
-      page.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-        body.removeClass('menu-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+      document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
+      page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+        body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+      }, {
+        once: true
       });
     }
-  }); //move logo in middle of menu on desktop if logo is middle position
+  });
+}); //end ready
 
+jQuery(function ($) {
+  //move logo in middle of menu on desktop if logo is middle position
   if ($('.logo-in-middle').length) {
     var navigationLi = $('.site-navigation__nav-holder .menu li');
     var middle = Math.floor($(navigationLi).length / 2) - 1; //add logo to the middle when page loads
