@@ -220,16 +220,24 @@ function is_static_frontpage() {
  */
 function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail', $attr = '', $use_thumbnail_as_fallback = false ) {
 
-
 	if ( ! $post_id ) {
 		global $post;
 		$post_id = $post->ID;
 	}
 
-	//if were trying to get the header image, and the user specified not to, then return none.
-	if ( $size == 'header_image' && get_field( 'no_image', $post_id ) ) {
-		return '';
+	if(is_tax()){
+		$post_id = 'term_' . get_queried_object()->term_id;
 	}
+
+	//if were passed a string we first need to get the image from the field
+	if(is_string($acf_image)){
+		if(get_row_index()){
+			$acf_image = get_sub_field($acf_image, $post_id);
+		}else{
+			$acf_image = get_field($acf_image, $post_id);
+		}
+	}
+
 
 	$image = '';
 	if ( $acf_image ) {
@@ -260,6 +268,19 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
 		$post_id = $post->ID;
 	}
 
+	if(is_tax()){
+		$post_id = 'term_' . get_queried_object()->term_id;
+	}
+
+	//if were passed a string we first need to get the image from the field
+	if(is_string($acf_image)){
+		if(get_row_index()){
+			$acf_image = get_sub_field($acf_image, $post_id);
+		}else{
+			$acf_image = get_field($acf_image, $post_id);
+		}
+	}
+
 	$image = '';
 
 	if ( $acf_image ) {
@@ -282,12 +303,13 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
  *
  * @return string
  *
- * Returns the header image field as a url, unless $return_type is set to anything else. then it returns the actual image element
+ * Returns the header image field for a post as a url, unless $return_type is set to anything else. then it returns the actual image element
  * if no image is found it will return the featured image
- * if no image is set then nothing is returned.
+ * if no image is set, then nothing is returned.
  *
  */
 function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) {
+
 
 	if ( ! $post_id ) {
 		global $post;

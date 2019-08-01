@@ -13,7 +13,7 @@ $heading    = get_sub_field( 'heading' );
 
 <section id="section-<?php echo $section_hash; ?>"
          class="alignfull <?php echo get_row_layout(); ?> <?php echo esc_attr( $class ); ?>"
-	<?php if ( $image ) { ?> style="background-image: url('<?php echo ign_get_image_url( $image, $id, 'full' );
+	<?php if ( $image ) { ?> style="background-image: url('<?php echo ign_get_image_url( 'background_image', $id, 'full' );
 	?>');" <?php } ?>>
     <div class="<?php echo $container; ?>">
 		<?php
