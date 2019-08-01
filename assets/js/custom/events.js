@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					targetItem.classList.remove($class);
 				}
 
-				$target.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
+				targetItem.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
 
 				//data slide open or closed
 				if(targetItem.dataset.slide !== undefined){

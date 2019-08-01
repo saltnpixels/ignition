@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let topNav = document.querySelector('.site-top');
 	let page = document.querySelector('#page');
 
-	//first move the button into site-top if app-menu is being used cause we dont need it on the outside
+	//first move the button into site-top if app-menu is being used cause we dont want it on the outside
 	if (body.classList.contains('app-menu')) {
 		topNav.append(menuToggle);
 	}
@@ -135,11 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	menuToggle.addEventListener('afterToggle', e => {
 		//if button has been toggled on
 		if (menuToggle.classList.contains('toggled-on')) {
-
-			//if its an app-menu, add the body-lock onto body
-			if (body.classList.contains('app-menu')) {
 				body.classList.add('body-lock');
-			}
 
 			//clicking anywhere outside the menu will close it
 			document.querySelector('.site-content').addEventListener('click', closeAppMenu, {once: true});
@@ -148,9 +144,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
 
-			page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-				body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-			}, {once: true});
+			if (body.classList.contains('app-menu')) {
+				page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+					body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+				}, {once: true});
+			}else{
+				body.classList.remove('body-lock');
+			}
 		}
 
 	});

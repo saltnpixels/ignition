@@ -76,7 +76,8 @@
 
 }
 
-//current menu items or parents have their sub menu opened by default when vertical
+//current menu items or parents have a sub menu.  open by default when vertical
+//todo test that this works
 #panel-left, #panel-right {
 	.current-menu-item .sub-menu, .current-menu-parent .sub-menu {
 		display: block;
@@ -108,10 +109,11 @@
 
 			//top level sub menus dont drop down they appear.
 			.top-level-item > .sub-menu, .top-level-item > .children {
-				display: block !important;
-				height: auto !important;
-				opacity: 0;
-				visibility: hidden;
+				//the following makes sub menus fade in rather than sliding open
+				//display: block !important;
+				//height: auto !important;
+				//opacity: 0;
+				//visibility: hidden;
 
 				transition: opacity .5s, visibility .5s;
 				margin: 0;
@@ -401,6 +403,7 @@
 			transform: translate(50vw, -2vh) scale(.75);
 			box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
 			overflow: hidden;
+			height: 100vh;
 		}
 
 		#panel-left {
@@ -416,7 +419,7 @@
 }
 
 //lock body needed to make it look right and no scrolling around
-.body-lock {
+.body-lock{
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;

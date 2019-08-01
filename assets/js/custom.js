@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
           targetItem.classList.remove($class);
         }
 
-        $target.setAttribute('aria-expanded', isToggled ? 'true' : 'false'); //data slide open or closed
+        targetItem.setAttribute('aria-expanded', isToggled ? 'true' : 'false'); //data slide open or closed
 
         if (targetItem.dataset.slide !== undefined) {
           var slideTime = item.dataset.slide ? parseInt(item.dataset.slide) : .5;
@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var body = document.body;
   var menuToggle = document.querySelector('.panel-left-toggle');
   var topNav = document.querySelector('.site-top');
-  var page = document.querySelector('#page'); //first move the button into site-top if app-menu is being used cause we dont need it on the outside
+  var page = document.querySelector('#page'); //first move the button into site-top if app-menu is being used cause we dont want it on the outside
 
   if (body.classList.contains('app-menu')) {
     topNav.append(menuToggle);
@@ -540,22 +540,23 @@ document.addEventListener('DOMContentLoaded', function () {
   menuToggle.addEventListener('afterToggle', function (e) {
     //if button has been toggled on
     if (menuToggle.classList.contains('toggled-on')) {
-      //if its an app-menu, add the body-lock onto body
-      if (body.classList.contains('app-menu')) {
-        body.classList.add('body-lock');
-      } //clicking anywhere outside the menu will close it
-
+      body.classList.add('body-lock'); //clicking anywhere outside the menu will close it
 
       document.querySelector('.site-content').addEventListener('click', closeAppMenu, {
         once: true
       });
     } else {
       document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
-      page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-        body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-      }, {
-        once: true
-      });
+
+      if (body.classList.contains('app-menu')) {
+        page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+          body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+        }, {
+          once: true
+        });
+      } else {
+        body.classList.remove('body-lock');
+      }
     }
   });
 }); //end ready
