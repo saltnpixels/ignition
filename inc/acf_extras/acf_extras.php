@@ -3,7 +3,8 @@
 /*--------------------------------------------------------------
 # ACF functions if not installed. Just some text
 --------------------------------------------------------------*/
-function plugin_init() {
+
+if ( ! is_admin() ) {
 
 	if ( ! function_exists( 'the_row' ) ) {
 		function the_row() {
@@ -14,6 +15,12 @@ function plugin_init() {
 	if ( ! function_exists( 'get_field' ) ) {
 		function get_field( $field = '', $id = 0 ) {
 			return get_post_meta( $id, $field, true );
+		}
+	}
+
+	if ( ! function_exists( 'get_row_index' ) ) {
+		function get_row_index() {
+			return 0;
 		}
 	}
 
@@ -36,7 +43,6 @@ function plugin_init() {
 	}
 }
 
-add_action( 'plugins_loaded', 'plugin_init' );
 
 /**
  * @param $field
