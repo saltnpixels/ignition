@@ -3,6 +3,7 @@
 --------------------------------------------------------------*/
 
 let scrollMagicController = '';
+
 //setup scroller function
 /**
  * element can have these data attributes:
@@ -14,7 +15,7 @@ let scrollMagicController = '';
  * data-scrollscrub = tweens between two classes as you scroll. tween expects a duration, else duration will be 100
  *
  */
-function runScrollerAttributes (element) {
+function runScrollerAttributes(element) {
 	//this function can be run on an alement even after load and they will be added to scrollMagicController
 	//scrollmagic must be loaded
 	if ('undefined' != typeof ScrollMagic && element.hasAttribute('data-scrollanimation')) {
@@ -48,8 +49,8 @@ function runScrollerAttributes (element) {
 		}
 
 		//if scrollscrub exists used tweenmax
-		if(tween !== undefined){
-			if (! duration) {
+		if (tween !== undefined) {
+			if (!duration) {
 				duration = 100;
 			}
 
@@ -67,7 +68,7 @@ function runScrollerAttributes (element) {
 			}).setTween(tween).addTo(scrollMagicController)
 			// .addIndicators()
 			;
-		}else{
+		} else {
 			scene = new ScrollMagic.Scene({
 				triggerElement: triggerElement,
 				offset: offset,
@@ -91,28 +92,24 @@ function runScrollerAttributes (element) {
  * @param slideTime
  * @param direction
  */
-function ign_slide_element(item, slideTime = .5, direction = 'toggle'){
+function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
 
-		if(direction === 'open'){
-			TweenMax.set(item, {display: 'block', height: 'auto'});
-			TweenMax.from(item, slideTime, {height: 0, display: 'none'});
+	if (direction === 'open') {
+		TweenMax.set(item, {display: 'block', height: 'auto'});
+		TweenMax.from(item, slideTime, {height: 0, display: 'none'});
+	} else if (direction === 'close') {
+		TweenMax.to(item, slideTime, {height: 0, display: 'none'});
+	} else {
+
+		if (item.offsetHeight === 0 || item.style.display === 'none') {
+			//open
+			TweenMax.set(item, {display: 'block', height: 'auto'}); //set it quickly to show if its not already
+			TweenMax.from(item, slideTime, {height: 0, display: 'none'}); //go from 0 height
+		} else {
+			//close
+			TweenMax.to(item, slideTime, {height: 0, display: 'none', overflow: 'hidden'});
 		}
-
-		else if(direction === 'close'){
-			TweenMax.to(item, slideTime, {height: 0, display: 'none'});
-		}
-
-		else{
-
-			if (item.offsetHeight === 0 || item.style.display === 'none') {
-				//open
-				TweenMax.set(item, {display: 'block', height: 'auto'}); //set it quickly to show if its not already
-				TweenMax.from(item, slideTime, {height: 0, display: 'none'}); //go from 0 height
-			} else {
-				//close
-				TweenMax.to(item, slideTime, {height: 0, display: 'none', overflow: 'hidden'});
-			}
-		}
+	}
 
 }
 
@@ -125,19 +122,18 @@ let menuButtons = '';
 //if the menu button is outside site-top. get both buttons for centering both.
 if (!document.querySelector('.app-menu')) {
 	menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
-}
-else {
+} else {
 	//otherwise the menu button does not need to be centered because its part of the app menu and moves.
 	menuButtons = document.querySelectorAll('.panel-right-toggle');
 }
 
 
-function placeMenuButtons(){
+function placeMenuButtons() {
 	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
 	let adminbar = document.querySelector('#wpadminbar');
 	let adminbarHeight = 0;
 
-	if(adminbar !== null){
+	if (adminbar !== null) {
 		adminbarHeight = adminbar.clientHeight;
 	}
 
@@ -154,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	/*------- Scroll Magic Events  --------*/
 	scrollMagicController = new ScrollMagic.Controller();
-	document.querySelectorAll('[data-scrollanimation]').forEach( (element) => {
+	document.querySelectorAll('[data-scrollanimation]').forEach((element) => {
 		runScrollerAttributes(element);
 	});
 
@@ -182,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		button.setAttribute('aria-checked', button.classList.contains('toggled-on') ? 'true' : 'false');
 
 	});
-
 
 
 	//toggling the buttons with delegation click
@@ -221,16 +216,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			//finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 			if (radioSelector !== null) {
 				toggleItem(item, 'on'); //the item cannot be unclicked
-			}
-			else if(switchItem !== null){
-				if(switchItem === 'on'){
+			} else if (switchItem !== null) {
+				if (switchItem === 'on') {
 					toggleItem(item, 'on');
-				}
-				else{
+				} else {
 					toggleItem(item, 'off');
 				}
-			}
-			else {
+			} else {
 				toggleItem(item); //normal regular toggle
 			}
 
@@ -238,15 +230,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	//actual toggle of an item and add class toggled-on and any other classes needed. Also do a slide if necessary
-	function toggleItem (item, forcedState = 'none') {
+	function toggleItem(item, forcedState = 'none') {
 
 		//toggle item
 		if (forcedState === 'on') {
 			item.classList.add('toggled-on'); //radio or data-switch of on will always toggle-on
-		}
-		else if(forcedState === 'off'){
+		} else if (forcedState === 'off') {
 			item.classList.remove('toggled-on'); //data-switch of off will always toggle off
-		} else{
+		} else {
 			item.classList.toggle('toggled-on'); //basic data toggle item
 		}
 
@@ -274,11 +265,11 @@ document.addEventListener('DOMContentLoaded', function () {
 				targetItem.setAttribute('aria-expanded', isToggled ? 'true' : 'false');
 
 				//data slide open or closed
-				if(targetItem.dataset.slide !== undefined){
+				if (targetItem.dataset.slide !== undefined) {
 					let slideTime = item.dataset.slide ? parseInt(item.dataset.slide) : .5;
-					if(isToggled){
+					if (isToggled) {
 						ign_slide_element(targetItem, slideTime, 'open');
-					}else{
+					} else {
 						ign_slide_element(targetItem, slideTime, 'close');
 					}
 				}
@@ -287,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				targetItem.dispatchEvent(toggleEvent);
 			});
 		} else { //applies class to the clicked item, there is no target
-			if($class !== 'toggled-on'){ //add class to clicked item if its not set to be toggled-on
+			if ($class !== 'toggled-on') { //add class to clicked item if its not set to be toggled-on
 				if (isToggled) {
 					item.classList.toggle($class);
 				} else {
@@ -302,14 +293,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 
-
 	/*------- Moving items --------*/
 	//on Window resize we can move items to and from divs with data-moveto="the destination"
 	//it will move there when the site reaches smaller than a size defaulted to 1030 or sett hat with data-moveat
 	//the whole div, including the data att moveto moves back and forth
 	let movedId = 0;
 
-	function moveItems () {
+	function moveItems() {
 
 
 		let windowWidth = window.innerWidth;
@@ -323,8 +313,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			moveAt = moveAt ? moveAt : 1030;
 
 			if (moveAt.startsWith('--')) {
-				let cssVars = getComputedStyle(document.body); //get css variables
-				moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
+				if (isIE11) {
+					moveAt = 1030;
+				} else {
+					let cssVars = getComputedStyle(document.body); //get css variables
+					moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
+				}
 			}
 
 
@@ -350,16 +344,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			//if the screen is smaller than moveAt (1030), move to destination
 			if (windowWidth < moveAt) {
-				if (item.hasAttribute('data-moveto-pos')) {
-					destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
-				} else {
-					destination.appendChild(item);
+				//no need to move if its already there...
+				if (!destination.contains(item)) {
+					if (item.hasAttribute('data-moveto-pos')) {
+						destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
+					} else {
+						destination.appendChild(item);
+					}
 				}
 			} else {
-				if (item.hasAttribute('data-movefrom-pos')) {
-					source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
-				} else {
-					source.appendChild(item);
+				if (!source.contains(item)) {
+					if (item.hasAttribute('data-movefrom-pos')) {
+						source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
+					} else {
+						source.appendChild(item);
+					}
 				}
 			}
 
@@ -376,45 +375,38 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.documentElement.classList.remove('dom-loading');
 
 
-
-
-
-
-
 	//add finished loading ignition events
 	let EventFinished = null;
-	if ( isIE11 ) {
-		EventFinished = document.createEvent( 'Event' );
+	if (isIE11) {
+		EventFinished = document.createEvent('Event');
 
 		// Define that the event name is 'build'.
-		EventFinished.initEvent( 'afterIgnEvents', true, true );
+		EventFinished.initEvent('afterIgnEvents', true, true);
 
 	} else {
-		EventFinished = new Event( 'afterIgnEvents' );
+		EventFinished = new Event('afterIgnEvents');
 	}
-	document.dispatchEvent( EventFinished );
+	document.dispatchEvent(EventFinished);
 });
 
 
-
-
 //Add inline retina image if found and on retina device. To use add data-high-res to an inline element with a background-image
-if( isHighDensity() ) {
+if (isHighDensity()) {
 
 	let retinaImage = document.querySelectorAll('[data-high-res]');
 	retinaImage.forEach(item => {
 		let image2x = '';
 		//if a high res is provided use that, else use background image but add 2x at end.
-		if(item.dataset.highRes){
+		if (item.dataset.highRes) {
 			image2x = item.dataset.highRes;
-		}else{
+		} else {
 			//get url for original image
 			let image = item.style.backgroundImage.slice(4, -1).replace(/"/g, "");
 			//add @2x to it if image exists.
 			image2x = image.replace(/(\.[^.]+$)/, '@2x$1');
 		}
 
-		if(fileExists(image2x)){
+		if (fileExists(image2x)) {
 			item.style.backgroundImage = 'url("' + image2x + '")';
 		}
 
@@ -422,12 +414,12 @@ if( isHighDensity() ) {
 }
 
 //check if device is retina
-function isHighDensity(){
+function isHighDensity() {
 	return ((window.matchMedia && (window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches)));
 }
 
 //check if file exists on server before using
-function fileExists(image_url){
+function fileExists(image_url) {
 	let http = new XMLHttpRequest();
 	http.open('HEAD', image_url, true);
 	http.send();

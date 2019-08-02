@@ -311,9 +311,13 @@ document.addEventListener('DOMContentLoaded', function () {
       moveAt = moveAt ? moveAt : 1030;
 
       if (moveAt.startsWith('--')) {
-        var cssVars = getComputedStyle(document.body); //get css variables
+        if (isIE11) {
+          moveAt = 1030;
+        } else {
+          var cssVars = getComputedStyle(document.body); //get css variables
 
-        moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
+          moveAt = parseInt(cssVars.getPropertyValue(moveAt), 10);
+        }
       }
 
       if (!destination) {
@@ -336,16 +340,21 @@ document.addEventListener('DOMContentLoaded', function () {
       source = document.querySelector(item.getAttribute('data-movefrom')); //if the screen is smaller than moveAt (1030), move to destination
 
       if (windowWidth < moveAt) {
-        if (item.hasAttribute('data-moveto-pos')) {
-          destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
-        } else {
-          destination.appendChild(item);
+        //no need to move if its already there...
+        if (!destination.contains(item)) {
+          if (item.hasAttribute('data-moveto-pos')) {
+            destination.insertBefore(item, destination.children[item.getAttribute('data-moveto-pos')]);
+          } else {
+            destination.appendChild(item);
+          }
         }
       } else {
-        if (item.hasAttribute('data-movefrom-pos')) {
-          source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
-        } else {
-          source.appendChild(item);
+        if (!source.contains(item)) {
+          if (item.hasAttribute('data-movefrom-pos')) {
+            source.insertBefore(item, source.children[item.getAttribute('data-movefrom-pos')]);
+          } else {
+            source.appendChild(item);
+          }
         }
       } //show it
 

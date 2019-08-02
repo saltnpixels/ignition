@@ -35,6 +35,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-sort": "^2.0.0",
     "gulp-sourcemaps": "^2.6.2",
+    "gulp-touch-fd": "github:funkedigital/gulp-touch-fd",
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.6",
     "gulp-wp-pot": "^2.0.7",
