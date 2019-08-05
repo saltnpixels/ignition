@@ -443,12 +443,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var _iconsvg$classList;
 
     icon.classList.remove('svg-icon');
+    var iconClass = icon.classList.value;
     var iconsvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
     (_iconsvg$classList = iconsvg.classList).add.apply(_iconsvg$classList, ['icon'].concat(_toConsumableArray(icon.classList)));
 
     iconsvg.setAttribute('role', 'img');
-    iconsvg.innerHTML = "<use href=\"#icon-home\" xlink:href=\"#icon-home\"></use>";
+    iconsvg.innerHTML = "<use href=\"#".concat(iconClass, "\" xlink:href=\"#").concat(iconClass, "\"></use>");
     icon.parentNode.replaceChild(iconsvg, icon);
   });
 });
