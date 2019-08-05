@@ -22,7 +22,7 @@
 			position: relative;
 			margin: 0;
 
-			//added with hook or js if its a wp_page_menu. holds button and link, not submenu
+			//added with hook. holds anchor and submenu button is applicable
 			.menu-item-link {
 				padding: 5px 15px;
 				display: flex;
@@ -60,7 +60,7 @@
 		.sub-menu, .children {
 			list-style: none;
 			margin: 0;
-			display: none; //opens with jquery
+			display: none; //opens with tweenmax
 			transition: none;
 			overflow: hidden;
 			width: 100%;
@@ -68,7 +68,7 @@
 
 			//inner items move over a bit
 			.menu-item-link {
-				padding-left: $gap;
+				padding-left: 30px;
 			}
 		}
 
@@ -76,13 +76,7 @@
 
 }
 
-//current menu items or parents have a sub menu.  open by default when vertical
-//todo test that this works
-#panel-left, #panel-right {
-	.current-menu-item .sub-menu, .current-menu-parent .sub-menu {
-		display: block;
-	}
-}
+
 
 
 /*--------------------------------------------------------------
@@ -137,10 +131,12 @@
 			}
 
 			//top level sub-menus opened
-			.top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu {
+			.top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu{
 				opacity: 1;
 				visibility: visible;
 			}
+
+
 
 			//lower sub-menus
 			.sub-menu .sub-menu {

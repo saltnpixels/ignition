@@ -80,7 +80,7 @@ function runScrollerAttributes(element) {
   }
 }
 /**
- * Slide any element global function
+ * Slide any element global function.
  * @param item
  * @param slideTime
  * @param direction
@@ -132,14 +132,7 @@ function ign_slide_element(item) {
  */
 
 
-var menuButtons = ''; //if the menu button is outside site-top. get both buttons for centering both.
-
-if (!document.querySelector('.app-menu')) {
-  menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
-} else {
-  //otherwise the menu button does not need to be centered because its part of the app menu and moves.
-  menuButtons = document.querySelectorAll('.panel-right-toggle');
-}
+var menuButtons = '';
 
 function placeMenuButtons() {
   var $siteTopHeight = document.querySelector('.site-top').clientHeight;
@@ -160,7 +153,26 @@ function placeMenuButtons() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  /*------- Add touch classes --------*/
+  if (!("ontouchstart" in document.documentElement)) {
+    document.documentElement.className += " no-touch-device";
+  } else {
+    document.documentElement.className += " touch-device";
+  }
+  /*------- menu buttons --------*/
+  //if the menu button is outside site-top. get both buttons for centering both.
+
+
+  if (!document.querySelector('.app-menu')) {
+    menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
+  } else {
+    //otherwise the menu button does not need to be centered because its part of the app menu and moves.
+    menuButtons = document.querySelectorAll('.panel-right-toggle');
+  } //we run menu button function below in resize event
+
   /*------- Scroll Magic Events  --------*/
+
+
   scrollMagicController = new ScrollMagic.Controller();
   document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
     runScrollerAttributes(element);
@@ -205,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var radioSelector = item.getAttribute('data-radio');
 
       if (radioSelector !== null) {
-        var radioSelectors = document.querySelectorAll("[data-radio=\"".concat(radioSelector, "\""));
+        var radioSelectors = document.querySelectorAll("[data-radio=\"".concat(radioSelector, "\"]"));
         radioSelectors.forEach(function (radioItem) {
           if (radioItem !== item && radioItem.classList.contains('toggled-on')) {
             toggleItem(radioItem); //toggle all other radio items off when this one is being turned on
@@ -293,9 +305,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     item.dispatchEvent(toggleEvent);
   }
-  /*------- Moving items --------*/
+  /*------- Moving items Event --------*/
   //on Window resize we can move items to and from divs with data-moveto="the destination"
-  //it will move there when the site reaches smaller than a size defaulted to 1030 or sett hat with data-moveat
+  //it will move there when the site reaches smaller than a size defaulted to 1030 or set that with data-moveat
   //the whole div, including the data att moveto moves back and forth
 
 
@@ -361,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       item.classList.add('visible');
     });
-    placeMenuButtons(); //running the moving of buttons here. nothing to do with moving items.
+    placeMenuButtons(); //running the moving of menu buttons here. nothing to do with moving items.
   }
 
   window.addEventListener('resize', throttle(moveItems, 250));
@@ -379,7 +391,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   document.dispatchEvent(EventFinished);
-}); //Add inline retina image if found and on retina device. To use add data-high-res to an inline element with a background-image
+});
+/*------- Function for hi red background image swap --------*/
+//check if device is retina
+
+function isHighDensity() {
+  return window.matchMedia && window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches;
+} //check if file exists on server before using
+
+
+function fileExists(image_url) {
+  var http = new XMLHttpRequest();
+  http.open('HEAD', image_url, true);
+  http.send();
+  return http.status != 404;
+} //Add inline retina image if found and on retina device. To use add data-high-res to an inline element with a background-image
+
 
 if (isHighDensity()) {
   var retinaImage = document.querySelectorAll('[data-high-res]');
@@ -399,32 +426,31 @@ if (isHighDensity()) {
       item.style.backgroundImage = 'url("' + image2x + '")';
     }
   });
-} //check if device is retina
-
-
-function isHighDensity() {
-  return window.matchMedia && window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches;
-} //check if file exists on server before using
-
-
-function fileExists(image_url) {
-  var http = new XMLHttpRequest();
-  http.open('HEAD', image_url, true);
-  http.send();
-  return http.status != 404;
 }
 "use strict";
 
-//turn icons into svg if using the icons that come with theme folder
-var swapIconToSvg = function swapIconToSvg() {
-  $('.svg-icon').each(function (index) {
-    var iconClass = $(this).prop("class").replace("svg-icon", "").trim();
-    $(this).replaceWith('<svg role="img" class="icon ' + iconClass + '"><use href="#' + iconClass + '" xlink:href="#' + iconClass + '"></use></svg>');
-  });
-};
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-jQuery(function ($) {
-  swapIconToSvg();
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+//turn icons into svg if using the icons that come with theme folder
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.svg-icon').forEach(function (icon) {
+    var _iconsvg$classList;
+
+    icon.classList.remove('svg-icon');
+    var iconsvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+    (_iconsvg$classList = iconsvg.classList).add.apply(_iconsvg$classList, ['icon'].concat(_toConsumableArray(icon.classList)));
+
+    iconsvg.setAttribute('role', 'img');
+    iconsvg.innerHTML = "<use href=\"#icon-home\" xlink:href=\"#icon-home\"></use>";
+    icon.parentNode.replaceChild(iconsvg, icon);
+  });
 });
 "use strict";
 
@@ -467,6 +493,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       ign_slide_element(subMenu, .5, isToggled);
+    }
+  });
+  /*------- Open any current menu items in vertical menus --------*/
+  //if a vertical menu has a current item it is set to display block. We can target that and use it to set the click to open
+
+  document.querySelectorAll('.menu .current-menu-item .sub-menu, .menu .current-menu-parent .sub-menu').forEach(function (subMenu) {
+    //if its a vertical menu
+    if (getComputedStyle(subMenu.closest('.menu')).flexDirection === 'column') {
+      subMenu.style.display = 'block';
+      subMenu.style.height = 'auto';
+      subMenu.closest('.menu-item').classList.add('toggled-on');
+      subMenu.closest('.menu-item').querySelector('.submenu-dropdown-toggle').classList.add('toggled-on');
     }
   });
   /*------- Tabbing through the menu for ADA compliance --------*/
@@ -639,14 +677,19 @@ jQuery(function ($) {
 });
 "use strict";
 
-jQuery(function ($) {
-  //wrap all youtube videos so they can be responsive.
-  $('iframe[src*="youtube.com"], iframe[data-src*="youtube.com"]').each(function () {
-    $(this).wrap('<div class="videowrapper"></div>');
+//make iframe videos responsive
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('iframe[src*="youtube.com"], iframe[data-src*="youtube.com"], iframe[src*="vimeo.com"], iframe[data-src*="vimeo.com"]').forEach(function (iframe) {
+    if (!iframe.parentElement.classList.contains('videowrapper')) {
+      wrap(iframe).classList.add('videowrapper');
+    }
   });
 });
 "use strict";
 
+//create menu and sidebar button sizing
+//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under opened panels.
+//this makes sure the buttons are centered, but still  on top of site-top and the menu the pops open
 jQuery(function ($) {
   var $siteContent = $('.site-content');
 

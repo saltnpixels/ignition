@@ -87,7 +87,7 @@ function runScrollerAttributes(element) {
 }
 
 /**
- * Slide any element global function
+ * Slide any element global function.
  * @param item
  * @param slideTime
  * @param direction
@@ -119,14 +119,6 @@ function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
 
 let menuButtons = '';
 
-//if the menu button is outside site-top. get both buttons for centering both.
-if (!document.querySelector('.app-menu')) {
-	menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
-} else {
-	//otherwise the menu button does not need to be centered because its part of the app menu and moves.
-	menuButtons = document.querySelectorAll('.panel-right-toggle');
-}
-
 
 function placeMenuButtons() {
 	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
@@ -147,6 +139,25 @@ function placeMenuButtons() {
 --------------------------------------------------------------*/
 
 document.addEventListener('DOMContentLoaded', function () {
+
+	/*------- Add touch classes --------*/
+
+	if (!("ontouchstart" in document.documentElement)) {
+		document.documentElement.className += " no-touch-device";
+	} else {
+		document.documentElement.className += " touch-device";
+	}
+
+	/*------- menu buttons --------*/
+	//if the menu button is outside site-top. get both buttons for centering both.
+	if (!document.querySelector('.app-menu')) {
+		menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
+	} else {
+		//otherwise the menu button does not need to be centered because its part of the app menu and moves.
+		menuButtons = document.querySelectorAll('.panel-right-toggle');
+	}
+	//we run menu button function below in resize event
+
 
 	/*------- Scroll Magic Events  --------*/
 	scrollMagicController = new ScrollMagic.Controller();
@@ -201,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 			if (radioSelector !== null) {
-				let radioSelectors = document.querySelectorAll(`[data-radio="${radioSelector}"`);
+				let radioSelectors = document.querySelectorAll(`[data-radio="${radioSelector}"]`);
 
 				radioSelectors.forEach(radioItem => {
 					if (radioItem !== item && radioItem.classList.contains('toggled-on')) {
@@ -293,9 +304,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 
-	/*------- Moving items --------*/
+	/*------- Moving items Event --------*/
 	//on Window resize we can move items to and from divs with data-moveto="the destination"
-	//it will move there when the site reaches smaller than a size defaulted to 1030 or sett hat with data-moveat
+	//it will move there when the site reaches smaller than a size defaulted to 1030 or set that with data-moveat
 	//the whole div, including the data att moveto moves back and forth
 	let movedId = 0;
 
@@ -366,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			item.classList.add('visible');
 		});
 
-		placeMenuButtons(); //running the moving of buttons here. nothing to do with moving items.
+		placeMenuButtons(); //running the moving of menu buttons here. nothing to do with moving items.
 	}
 
 	window.addEventListener('resize', throttle(moveItems, 250));
@@ -388,6 +399,23 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 	document.dispatchEvent(EventFinished);
 });
+
+
+
+/*------- Function for hi red background image swap --------*/
+
+//check if device is retina
+function isHighDensity() {
+	return ((window.matchMedia && (window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches)));
+}
+
+//check if file exists on server before using
+function fileExists(image_url) {
+	let http = new XMLHttpRequest();
+	http.open('HEAD', image_url, true);
+	http.send();
+	return http.status != 404;
+}
 
 
 //Add inline retina image if found and on retina device. To use add data-high-res to an inline element with a background-image
@@ -413,16 +441,4 @@ if (isHighDensity()) {
 	});
 }
 
-//check if device is retina
-function isHighDensity() {
-	return ((window.matchMedia && (window.matchMedia('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)').matches)));
-}
-
-//check if file exists on server before using
-function fileExists(image_url) {
-	let http = new XMLHttpRequest();
-	http.open('HEAD', image_url, true);
-	http.send();
-	return http.status != 404;
-}
 

@@ -49,10 +49,15 @@ function ignition_setup() {
 
 
 	/*
-	 * default image size for cards and thumbnails and header images
-	 */
+ * default image size for cards and thumbnails and header images
+ * Users should upload twice the size of an image size.
+ * So if the image size is 600 x 600, the user should upload a 1200 by 1200.
+ * Output the image size and WP will automatically include the full size for big display when needed.
+ *
+ * WP is also smart and if you set crop to true it will include the original only if it matches in ratio
+ */
 	set_post_thumbnail_size( 300, 300, true );
-	add_image_size( 'header_image', '2000', '600' );
+	add_image_size( 'header_image', 2000, 600 );
 
 
 	/*
@@ -121,7 +126,10 @@ function ignition_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
 	  */
-	add_editor_style( array( get_template_directory_uri() . '/editor-style.min.css?' . wp_get_theme()->get( 'Version' ), ign_google_fonts_url() ) );
+	add_editor_style( array(
+		get_template_directory_uri() . '/editor-style.min.css?' . wp_get_theme()->get( 'Version' ),
+		ign_google_fonts_url()
+	) );
 
 
 	$GLOBALS['content_width'] = 730;
@@ -236,7 +244,7 @@ add_action( 'widgets_init', 'ign_widgets_init' );
  * Disable admin bar for everyone but administrators
  * You can change this based on capabilities. By default manage_options is used to check for Administrators
  */
-define('IGN_WP_ADMIN_ACCESS_CAPABILITY', 'manage_options');
+define( 'IGN_WP_ADMIN_ACCESS_CAPABILITY', 'manage_options' );
 
 if ( ! function_exists( 'disable_admin_bar' ) ) {
 
@@ -301,7 +309,7 @@ function ignition_scripts() {
 	wp_localize_script( 'ignition-custom-js', 'frontEndAjax', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		'nonce'   => wp_create_nonce( 'ajax_nonce' ),
-		'url' => home_url(),
+		'url'     => home_url(),
 	) );
 
 	wp_localize_script( 'ignition-custom-js', 'screenReaderText', array(
@@ -354,6 +362,15 @@ function my_login_styles() {
 add_action( 'login_enqueue_scripts', 'my_login_styles' );
 
 
+/**
+ * Add admin stylesheet
+ * experimental
+ */
+function footer_styles() {
+	wp_enqueue_style( 'ignition-admin-styles', get_theme_file_uri( '/admin.css' ), '', wp_get_theme()->get( 'Version' ) );
+}
+
+add_action( 'admin_footer', 'footer_styles', 99 );
 
 /*--------------------------------------------------------------
 # Pre Post Queries
@@ -376,6 +393,7 @@ function set_posts_per_page_for_post_types( $query ) {
 }
 
 add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );
+
 
 
 

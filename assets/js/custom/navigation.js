@@ -1,6 +1,5 @@
-
 /*------- move submenus if too close to edge on desktop --------*/
-function fixOffScreenMenu (menu) {
+function fixOffScreenMenu(menu) {
 
 	//make item visible so we can get left edge
 	menu.style.display = 'block';
@@ -46,6 +45,20 @@ document.addEventListener('DOMContentLoaded', function () {
 			ign_slide_element(subMenu, .5, isToggled);
 		}
 	});
+
+	/*------- Open any current menu items in vertical menus --------*/
+	//if a vertical menu has a current item it is set to display block. We can target that and use it to set the click to open
+	document.querySelectorAll('.menu .current-menu-item .sub-menu, .menu .current-menu-parent .sub-menu').forEach(subMenu => {
+		//if its a vertical menu
+		if (getComputedStyle(subMenu.closest('.menu')).flexDirection === 'column') {
+			subMenu.style.display = 'block';
+			subMenu.style.height = 'auto';
+			subMenu.closest('.menu-item').classList.add('toggled-on');
+			subMenu.closest('.menu-item').querySelector('.submenu-dropdown-toggle').classList.add('toggled-on');
+		}
+
+	});
+
 
 	/*------- Tabbing through the menu for ADA compliance --------*/
 
@@ -113,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 
+
 	//app-menu ability for the top menu
 	let body = document.body;
 	let menuToggle = document.querySelector('.panel-left-toggle');
@@ -125,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 
-	function closeAppMenu(e){
+	function closeAppMenu(e) {
 		e.preventDefault();
 		menuToggle.click();
 	}
@@ -135,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	menuToggle.addEventListener('afterToggle', e => {
 		//if button has been toggled on
 		if (menuToggle.classList.contains('toggled-on')) {
-				body.classList.add('body-lock');
+			body.classList.add('body-lock');
 
 			//clicking anywhere outside the menu will close it
 			document.querySelector('.site-content').addEventListener('click', closeAppMenu, {once: true});
@@ -148,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
 					body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
 				}, {once: true});
-			}else{
+			} else {
 				body.classList.remove('body-lock');
 			}
 		}

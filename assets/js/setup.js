@@ -1,12 +1,3 @@
-//Set up some global stuff
-
-/*------- Test if touch enabled device --------*/
-if (!("ontouchstart" in document.documentElement)) {
-	document.documentElement.className += " no-touch-device";
-}else{
-	document.documentElement.className += " touch-device";
-}
-
 /*------- ie11 polyfills --------*/
 let  isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
@@ -51,8 +42,8 @@ if (!Element.prototype.closest) {
 /*------- Core Functions --------*/
 
 //wrap function
-function wrap(el, wrapper = '') {
-	if(!wrapper){
+function wrap(el, wrapper) {
+	if(wrapper === undefined){
 		wrapper = document.createElement('div');
 	}
 	el.parentNode.insertBefore(wrapper, el);
@@ -100,44 +91,5 @@ function throttle (fn, threshhold, scope) {
 		}
 	};
 }
-
-//create menu and sidebar button sizing
-//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under opened panels.
-//this makes sure the buttons are centered, but still  on top of site-top and the menu the pops open
-document.addEventListener('DOMContentLoaded', function () {
-
-
-
-
-	placeMenuButtons();
-	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
-	let menuButtons = '';
-
-	//if the menu button is outside site-top. get both buttons for centering both.
-	if (!document.querySelector('.app-menu')) {
-		menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
-	}
-	else {
-		//otherwise the menu button does not need to be centered because its part of the app menu and moves.
-		menuButtons = document.querySelectorAll('.panel-right-toggle');
-	}
-
-	menuButtons.forEach(button => {
-		button.style.height = $siteTopHeight + 'px';
-		button.classList.remove('hidden'); //now they can be seen after height is set. But sidebar still might not show if there is no sidebar. css does that
-	});
-
-	window.addEventListener('resize', throttle(resizeMenuButtons, 500));
-
-	function resizeMenuButtons () {
-		$siteTopHeight = document.querySelector('.site-top').clientHeight;
-		menuButtons.forEach(button => {
-			//console.log(button);
-			button.style.height = $siteTopHeight + 'px';
-		});
-
-	}
-
-});
 
 

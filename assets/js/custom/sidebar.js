@@ -1,3 +1,9 @@
+//create menu and sidebar button sizing
+//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under opened panels.
+//this makes sure the buttons are centered, but still  on top of site-top and the menu the pops open
+
+
+
 jQuery( function( $ ) {
 
 	let $siteContent = $( '.site-content' );

@@ -39,6 +39,10 @@
   }
 }
 
+.overlay{
+	box-shadow: inset 0 0 0 2000px rgba(133,133, 133,0.75)
+}
+
 //for ie11 fallbacks
 .cover-image, .background-image {
   background-size: cover;

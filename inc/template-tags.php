@@ -220,12 +220,12 @@ function is_static_frontpage() {
  */
 function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail', $attr = '', $use_thumbnail_as_fallback = false ) {
 
-	if ( ! $post_id ) {
+	if ( ! $post_id && ! is_tax() ) {
 		global $post;
 		$post_id = $post->ID;
 	}
 
-	if(is_tax()){
+	if(is_tax() && ! $post_id){
 		$post_id = 'term_' . get_queried_object()->term_id;
 	}
 
@@ -263,12 +263,13 @@ function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail',
  * @return string
  */
 function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thumbnail_as_fallback = false ) {
-	if ( ! $post_id ) {
+
+	if ( ! $post_id && ! is_tax() ) {
 		global $post;
 		$post_id = $post->ID;
 	}
 
-	if(is_tax()){
+	if(is_tax() && ! $post_id){
 		$post_id = 'term_' . get_queried_object()->term_id;
 	}
 

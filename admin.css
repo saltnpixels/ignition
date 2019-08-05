@@ -1,17 +1,19 @@
-.acf-fields.-left{
-    display: flex;
-    flex-wrap: wrap;
-}
+/*--------------------------------------------------------------
+# Icons
+--------------------------------------------------------------*/
+.icon, #wpadminbar .icon { display: inline-block; stroke-width: 0; stroke: currentColor; height: 1em; vertical-align: middle; width: 1em; position: relative; fill: currentColor; }
 
-.acf-field{
-    flex: 1 1 100%;
-}
+.icon svg, .icon path, .icon g, #wpadminbar .icon svg, #wpadminbar .icon path, #wpadminbar .icon g { fill: currentColor; }
 
-.acf-field.flex-of-2{
-    max-width: 50%;
-    border-right: #EEEEEE solid 1px;
-}
+#wp-admin-bar-icons-button-default { max-height: 60vh; overflow: auto; }
 
+#wp-admin-bar-icons-button-default .icon { margin-right: 10px; }
 
+/*--------------------------------------------------------------
+# Icon Tweaks
+--------------------------------------------------------------*/
+.icon-angle-right { top: -1px; }
 
+.icon-arrow-right { top: -2px; }
 
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImVsZW1lbnRzL19pY29ucy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztnRUFFZ0U7QUFDaEUsMkJBQ0Usc0JBQXFCLENBQ3JCLGdCQUFlLENBQ2YscUJBQW9CLENBQ3BCLFlBQVcsQ0FDWCx1QkFBc0IsQ0FDdEIsV0FBVSxDQUNWLG1CQUFrQixDQUNsQixtQkFBa0IsRUFLbkI7O0FBYkQscUdBV0ksbUJBQWtCLEVBQ25COztBQUdILHFDQUNDLGlCQUFnQixDQUNoQixlQUFjLEVBS2Q7O0FBUEQsMkNBS0UsbUJBQWtCLEVBQ2xCOztBQUtGOztnRUFFZ0U7QUFDaEUsb0JBQ0UsVUFBUyxFQUNWOztBQUVELG9CQUNFLFVBQVMsRUFDViIsImZpbGUiOiJhZG1pbi5jc3MiLCJzb3VyY2VSb290IjoiLi9hc3NldHMvc2FzcyJ9 */

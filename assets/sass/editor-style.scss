@@ -2,10 +2,10 @@
 # Editor Styling
 --------------------------------------------------------------*/
 
-/*------- Mixins --------*/ 
+/*------- Mixins --------*/
 @import "core/mixins";
 
-/*------- variables --------*/ 
+/*------- variables --------*/
 @import "core/variables";
 
 /*------- Normalize --------*/
@@ -17,7 +17,7 @@
 /*------- CSS Grid --------*/
 @import "core/grid-layout";
 
-/*------- Typography --------*/ 
+/*------- Typography --------*/
 @import "global/typography";
 
 /*------- Forms --------*/
@@ -31,9 +31,9 @@
 
 /*------- Nav Menu  --------*/
 @import "core/menu-layout";
- 
 
-/*------- Global elements --------*/ 
+
+/*------- Global elements --------*/
 @import "elements/icons";
 
 
@@ -46,7 +46,7 @@
 
 
 /*------- IE 11 --------*/
-@import "core/ie11";
+@import "core/ie11-layout";
 
 
 /*--------------------------------------------------------------

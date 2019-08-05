@@ -140,7 +140,6 @@ div .flex>.span-12,div .flex-grid>.span-12{-webkit-box-flex:0;-ms-flex-positive:
 .layout-cards-7>*:nth-child(7n - 3),.layout-cards-7>*:nth-child(7n - 6){grid-column:span 8}
 .layout-cards-7>*:nth-child(7n - 3) .hide-on-small-card,.layout-cards-7>*:nth-child(7n - 6) .hide-on-small-card{display:block}
 .menu,.menu>ul{padding:0;list-style:none;margin:0}
-#panel-left .current-menu-item .sub-menu,#panel-left .current-menu-parent .sub-menu,#panel-right .current-menu-item .sub-menu,#panel-right .current-menu-parent .sub-menu{display:block}
 .menu,.menu>ul{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}
 .menu li,.menu>ul li{position:relative;margin:0}
 .menu li .menu-item-link,.menu>ul li .menu-item-link{padding:5px 15px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-transition:all .5s;transition:all .5s}
@@ -270,8 +269,10 @@ body{background:white;background:var(--body-bg)}
 .site-container [data-scrollscrub]{-webkit-transition:none;transition:none}
 .js .animateIn{opacity:0}
 .fadeInUp{-webkit-animation-name:fadeInUp;animation-name:fadeInUp}
-.icon{display:inline-block;stroke-width:0;stroke:currentColor;height:1em;vertical-align:middle;width:1em;position:relative;fill:currentColor}
-.icon svg,.icon path,.icon g{fill:currentColor}
+.icon,#wpadminbar .icon{display:inline-block;stroke-width:0;stroke:currentColor;height:1em;vertical-align:middle;width:1em;position:relative;fill:currentColor}
+.icon svg,.icon path,.icon g,#wpadminbar .icon svg,#wpadminbar .icon path,#wpadminbar .icon g{fill:currentColor}
+#wp-admin-bar-icons-button-default{max-height:60vh;overflow:auto}
+#wp-admin-bar-icons-button-default .icon{margin-right:10px}
 .icon-angle-right{top:-1px}
 .icon-arrow-right{top:-2px}
 ul,ol{margin:0 0 1.5em 30px;margin:0 0 1.5em var(--gap);padding:0}
@@ -294,6 +295,7 @@ th:last-child,td:last-child{padding-right:0}
 .background-image ~ *{z-index:10}
 .cover-image{width:100%;display:block}
 .cover-image img{-o-object-fit:cover;object-fit:cover;left:0;right:0;height:100%;width:100%}
+.overlay{-webkit-box-shadow:inset 0 0 0 2000px rgba(133,133,133,0.75);box-shadow:inset 0 0 0 2000px rgba(133,133,133,0.75)}
 .cover-image,.background-image{background-size:cover;background-repeat:no-repeat;background-position:center}
 .no-objectfit .cover-image{min-height:300px;background-repeat:none}
 .no-objectfit .background-image img,.no-objectfit .cover-image img{display:none}
@@ -321,7 +323,7 @@ figure{margin:0;margin-bottom:30px}
 .gallery figcaption,#page .wp-block-gallery figcaption{text-align:center;position:relative;background:transparent;padding:0;font-size:1.4rem;color:#6c7781}
 .caption-first .gallery-item .gallery-icon{-webkit-box-ordinal-group:3;-ms-flex-order:2;order:2}
 .caption-first .gallery-item figcaption{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}
-.entry-header,.page-header{position:relative;min-height:22vw;padding:30px 0;color:white;background:black;background-size:cover;background-repeat:no-repeat}
+.entry-header,.page-header{position:relative;min-height:calc(600px + 5vw);padding:30px 0;color:white;background:black no-repeat center;background-size:cover}
 .entry-header h1,.page-header h1{margin:0}
 .entry-header .cover-image,.page-header .cover-image{height:500px}
 .entry-content>*:first-child{padding-top:30px;padding-top:var(--gap)}
@@ -378,7 +380,8 @@ time,time a{font-size:1.3rem}
 .pagination .page-numbers.dots{background:transparent;color:grey;margin:0}
 section{padding-top:30px;padding-top:var(--gap);padding-bottom:30px;padding-bottom:var(--gap)}
 section section{padding-top:0;padding-bottom:0}
-@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){[data-toggle] svg{pointer-events:none}
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){:root{font-size:65%}
+[data-toggle] svg{pointer-events:none}
 .flex-card-grid>*{-ms-flex-preferred-size:auto;flex-basis:auto;min-width:calc(320px)}
 }@media all and (-ms-high-contrast:none){#outdated{display:block}
 #outdated.hidden{display:none}

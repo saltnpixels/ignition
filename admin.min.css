@@ -1,0 +1,6 @@
+.icon,#wpadminbar .icon{display:inline-block;stroke-width:0;stroke:currentColor;height:1em;vertical-align:middle;width:1em;position:relative;fill:currentColor}
+.icon svg,.icon path,.icon g,#wpadminbar .icon svg,#wpadminbar .icon path,#wpadminbar .icon g{fill:currentColor}
+#wp-admin-bar-icons-button-default{max-height:60vh;overflow:auto}
+#wp-admin-bar-icons-button-default .icon{margin-right:10px}
+.icon-angle-right{top:-1px}
+.icon-arrow-right{top:-2px}

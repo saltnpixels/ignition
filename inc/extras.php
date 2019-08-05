@@ -215,6 +215,7 @@ add_filter( 'walker_nav_menu_start_el', 'ign_menu', 10, 99 );
  * Menu fallback. Link to the menu editor if that is useful.
  *
  * @param array $args from wp_nav_menu
+ *
  * @return string
  *
  */

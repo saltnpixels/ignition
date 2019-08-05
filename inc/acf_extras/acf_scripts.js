@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	addDraggableGrid();
+
 });
 
 //anytime this input changes, change the class
@@ -135,7 +136,7 @@ function changeIgnClasses (acfInput) {
 function addDraggableGrid () {
 	//get top most acf-fields which holds everything
 	let acfFields = document.querySelector('#poststuff');
-
+console.log(acfFields);
 	//start dragger at 0
 	let pageX = 0;
 
@@ -146,6 +147,7 @@ function addDraggableGrid () {
 	//when anything inside fields is clicked and matches the handle-remove and then is dragged
 	acfFields.addEventListener('mousedown', function (e) {
 		if (e.target.matches('.grid-class .acf-row-handle.remove')) {
+			console.log('mouse down');
 			//set coordinates
 			pageX = e.pageX;
 			//get this field item

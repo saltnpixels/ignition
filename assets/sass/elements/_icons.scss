@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------
 # Icons
 --------------------------------------------------------------*/
-.icon {
+.icon, #wpadminbar .icon {
   display: inline-block;
   stroke-width: 0;
   stroke: currentColor;
@@ -15,6 +15,16 @@
     fill: currentColor;
   }
 }
+
+#wp-admin-bar-icons-button-default{
+	max-height: 60vh;
+	overflow: auto;
+
+	.icon{
+		margin-right: 10px;
+	}
+}
+
 
 
 /*--------------------------------------------------------------
