@@ -87,7 +87,7 @@ function runScrollerAttributes(element) {
 }
 
 /**
- * Slide any element global function.
+ * Slide any element. global function. Also used with data-slide
  * @param item
  * @param slideTime
  * @param direction
@@ -96,25 +96,61 @@ function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
 
 	if (direction === 'open') {
 		//only open if its not open already. dont do animation again.
-		if(getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
-			TweenMax.set(item, {display: 'block', height: 'auto', clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
+		if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
+			TweenMax.set(item, {
+				display: 'block',
+				height: 'auto',
+				clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
+			}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
 			let height = item.clientHeight; //need to get height with padding included
 			TweenMax.set(item, {height: height});
-			TweenMax.from(item, slideTime, {height: 0, display: 'none', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0});
+			TweenMax.from(item, slideTime, {
+				height: 0,
+				display: 'none',
+				marginTop: 0,
+				marginBottom: 0,
+				paddingTop: 0,
+				paddingBottom: 0
+			});
 		}
 	} else if (direction === 'close') {
-		TweenMax.to(item, slideTime, {height: 0, display: 'none', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0});
+		TweenMax.to(item, slideTime, {
+			height: 0,
+			display: 'none',
+			marginTop: 0,
+			marginBottom: 0,
+			paddingTop: 0,
+			paddingBottom: 0
+		});
 	} else {
 
 		if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
 			//open
-			TweenMax.set(item, {display: 'block', height: 'auto', clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
+			TweenMax.set(item, {
+				display: 'block',
+				height: 'auto',
+				clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
+			}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
 			let height = item.clientHeight; //need to get height with padding included
 			TweenMax.set(item, {height: height});
-			TweenMax.from(item, slideTime, {height: 0, display: 'none', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0});
+			TweenMax.from(item, slideTime, {
+				height: 0,
+				display: 'none',
+				marginTop: 0,
+				marginBottom: 0,
+				paddingTop: 0,
+				paddingBottom: 0
+			});
 		} else {
 			//close
-			TweenMax.to(item, slideTime, {height: 0, display: 'none', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0});
+			TweenMax.to(item, slideTime, {
+				height: 0,
+				display: 'none',
+				marginTop: 0,
+				marginBottom: 0,
+				paddingTop: 0,
+				paddingBottom: 0
+			});
 		}
 	}
 
@@ -126,19 +162,20 @@ function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
 
 let menuButtons = '';
 
-
 function placeMenuButtons() {
 	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
-	let adminbar = document.querySelector('#wpadminbar');
-	let adminbarHeight = 0;
+	// let adminbar = document.querySelector('#wpadminbar');
+	// let adminbarHeight = 0;
+	//
+	// if (adminbar !== null) {
+	// 	adminbarHeight = adminbar.clientHeight;
+	// }
 
-	if (adminbar !== null) {
-		adminbarHeight = adminbar.clientHeight;
+	if (menuButtons.length) {
+		menuButtons.forEach(button => {
+			button.style.height = $siteTopHeight + 'px';
+		});
 	}
-
-	menuButtons.forEach(button => {
-		button.style.height = $siteTopHeight + 'px';
-	});
 }
 
 /*--------------------------------------------------------------
@@ -160,13 +197,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (!document.querySelector('.app-menu')) {
 		menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
 	} else {
-		//otherwise the menu button does not need to be centered because its part of the app menu and moves.
+		//otherwise the menu button does not need to be centered because its part of the app menu and moves. (moved in navigation.js)
 		menuButtons = document.querySelectorAll('.panel-right-toggle');
 	}
 	//we run menu button function below in resize event
 
 
-	/*------- Scroll Magic Events  --------*/
+	/*------- Scroll Magic Events Init --------*/
 	scrollMagicController = new ScrollMagic.Controller();
 	document.querySelectorAll('[data-scrollanimation]').forEach((element) => {
 		runScrollerAttributes(element);
@@ -408,7 +445,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 	document.dispatchEvent(EventFinished);
 });
-
 
 
 /*------- Function for hi red background image swap --------*/

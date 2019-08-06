@@ -62,9 +62,6 @@
 .sidebar-template{
   padding: 0 $gap; //in case there is no .container on sidebar-template, there must be container-fluid or at least some padding.
 
-  .flex{
-    margin: 0 calc(-1 * var(--gutters)); //even if .container is missing flex must be negative margined
-  }
 
   .container-content{
     padding: 0;
