@@ -92,37 +92,68 @@ function ign_slide_element(item) {
   var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'toggle';
 
   if (direction === 'open') {
-    TweenMax.set(item, {
-      display: 'block',
-      height: 'auto'
-    });
-    TweenMax.from(item, slideTime, {
-      height: 0,
-      display: 'none'
-    });
+    //only open if its not open already. dont do animation again.
+    if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
+      TweenMax.set(item, {
+        display: 'block',
+        height: 'auto',
+        clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
+      }); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
+
+      var height = item.clientHeight; //need to get height with padding included
+
+      TweenMax.set(item, {
+        height: height
+      });
+      TweenMax.from(item, slideTime, {
+        height: 0,
+        display: 'none',
+        marginTop: 0,
+        marginBottom: 0,
+        paddingTop: 0,
+        paddingBottom: 0
+      });
+    }
   } else if (direction === 'close') {
     TweenMax.to(item, slideTime, {
       height: 0,
-      display: 'none'
+      display: 'none',
+      marginTop: 0,
+      marginBottom: 0,
+      paddingTop: 0,
+      paddingBottom: 0
     });
   } else {
-    if (item.offsetHeight === 0 || item.style.display === 'none') {
+    if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
       //open
       TweenMax.set(item, {
         display: 'block',
-        height: 'auto'
-      }); //set it quickly to show if its not already
+        height: 'auto',
+        clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
+      }); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
 
+      var _height = item.clientHeight; //need to get height with padding included
+
+      TweenMax.set(item, {
+        height: _height
+      });
       TweenMax.from(item, slideTime, {
         height: 0,
-        display: 'none'
-      }); //go from 0 height
+        display: 'none',
+        marginTop: 0,
+        marginBottom: 0,
+        paddingTop: 0,
+        paddingBottom: 0
+      });
     } else {
       //close
       TweenMax.to(item, slideTime, {
         height: 0,
         display: 'none',
-        overflow: 'hidden'
+        marginTop: 0,
+        marginBottom: 0,
+        paddingTop: 0,
+        paddingBottom: 0
       });
     }
   }
@@ -229,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var switchItem = item.getAttribute('data-switch'); //finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 
       if (radioSelector !== null) {
-        toggleItem(item, 'on'); //the item cannot be unclicked
+        toggleItem(item, 'on'); //the item clicked on cannot be unclicked until another tiem is pressed
       } else if (switchItem !== null) {
         if (switchItem === 'on') {
           toggleItem(item, 'on');
@@ -278,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
         targetItem.setAttribute('aria-expanded', isToggled ? 'true' : 'false'); //data slide open or closed
 
         if (targetItem.dataset.slide !== undefined) {
-          var slideTime = item.dataset.slide ? parseInt(item.dataset.slide) : .5;
+          var slideTime = targetItem.dataset.slide ? parseFloat(targetItem.dataset.slide) : .5;
 
           if (isToggled) {
             ign_slide_element(targetItem, slideTime, 'open');
