@@ -9,6 +9,7 @@ path{fill:currentColor}
 .site-title{font-size:2rem;text-align:center;text-transform:capitalize}
 .site-title a{text-decoration:none}
 *::-webkit-input-placeholder{font-size:inherit}
+*::-moz-placeholder{font-size:inherit}
 *:-ms-input-placeholder{font-size:inherit}
 *::-ms-input-placeholder{font-size:inherit}
 *::placeholder{font-size:inherit}

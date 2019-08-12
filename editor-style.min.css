@@ -226,7 +226,7 @@ img.alignleft{float:left;margin-right:30px;margin-right:var(--gap);margin-bottom
 .menu li .submenu-dropdown-toggle,.menu>ul li .submenu-dropdown-toggle{padding-left:10px;padding-right:0;display:inline-block;color:inherit;-ms-flex-preferred-size:45px;flex-basis:45px;text-align:right}
 .menu .sub-menu,.menu .children,.menu>ul .sub-menu,.menu>ul .children{list-style:none;margin:0;display:none;-webkit-transition:none;transition:none;overflow:hidden;width:100%;padding:0}
 .menu .sub-menu .menu-item-link,.menu .children .menu-item-link,.menu>ul .sub-menu .menu-item-link,.menu>ul .children .menu-item-link{padding-left:30px}
-.submenu-dropdown-toggle .icon{transition:-webkit-transform .4s;-webkit-transition:-webkit-transform .4s;transition:transform .4s;transition:transform .4s,-webkit-transform .4s}
+.submenu-dropdown-toggle .icon{-webkit-transition:-webkit-transform .4s;transition:-webkit-transform .4s;transition:transform .4s;transition:transform .4s,-webkit-transform .4s}
 .submenu-dropdown-toggle,.submenu-dropdown-toggle:focus{background:0;border:0;margin:0;display:inline;outline:0;cursor:pointer;min-width:1.5em;text-align:left;font-size:inherit;color:inherit}
 .submenu-dropdown-toggle.toggled-on .icon,.submenu-dropdown-toggle:focus.toggled-on .icon{-webkit-transform:rotate(90deg);transform:rotate(90deg)}
 .site-top{z-index:80;z-index:var(--z-index-menu);width:100%;position:relative;left:0;top:0}
@@ -586,7 +586,7 @@ div div .flex-grid>.small-span-12,div div .flex>.small-span-12,div div .grid>.sm
 }@media(max-width:500px){.app-menu #panel-left{-webkit-transition:none;transition:none;-webkit-transform:translate(0,0);transform:translate(0,0);width:100%;z-index:calc(80 - 1);z-index:calc(var(--z-index-menu) - 1)}
 .app-menu #panel-left .menu-item-link a{max-width:40vw}
 .app-menu #panel-left .site-navigation__nav-holder{margin-top:20vh}
-.app-menu #page{background:inherit;transition:-webkit-transform .5s;-webkit-transition:-webkit-transform .5s;transition:transform .5s;transition:transform .5s,-webkit-transform .5s}
+.app-menu #page{background:inherit;-webkit-transition:-webkit-transform .5s;transition:-webkit-transform .5s;transition:transform .5s;transition:transform .5s,-webkit-transform .5s}
 .app-menu.menu-open #page{border-radius:5px;-webkit-transform:translate(50vw,-2vh) scale(0.75);transform:translate(50vw,-2vh) scale(0.75);-webkit-box-shadow:-3px 0 10px rgba(0,0,0,0.5);box-shadow:-3px 0 10px rgba(0,0,0,0.5);overflow:hidden;height:100vh}
 .app-menu.menu-open #panel-left{height:100vh;overflow:auto}
 .app-menu.menu-open.admin-bar #panel-left{height:calc(100vh - 46px)}
