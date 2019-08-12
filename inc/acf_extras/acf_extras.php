@@ -1,47 +1,5 @@
 <?php
 
-/*--------------------------------------------------------------
-# ACF functions if not installed. Just some text
---------------------------------------------------------------*/
-
-if ( ! is_admin() ) {
-
-	if ( ! function_exists( 'the_row' ) ) {
-		function the_row() {
-			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
-		}
-	}
-
-	if ( ! function_exists( 'get_field' ) ) {
-		function get_field( $field = '', $id = 0 ) {
-			return get_post_meta( $id, $field, true );
-		}
-	}
-
-	if ( ! function_exists( 'get_row_index' ) ) {
-		function get_row_index() {
-			return 0;
-		}
-	}
-
-	if ( ! function_exists( 'the_field' ) ) {
-		function the_field( $field = '', $id = 0 ) {
-			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
-		}
-	}
-
-	if ( ! function_exists( 'the_sub_field' ) ) {
-		function the_sub_field( $field = '', $id = 0 ) {
-			return __( 'Please install ACF Pro to use this function properly', 'ignition' );
-		}
-	}
-
-	if ( ! function_exists( 'get_sub_field' ) ) {
-		function get_sub_field( $field = '', $id = 0 ) {
-			return __( 'Please install ACF Pro to use this funciton properly', 'ignition' );
-		}
-	}
-}
 
 
 /**

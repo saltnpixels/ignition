@@ -230,7 +230,7 @@ function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail',
 	}
 
 	//if were passed a string we first need to get the image from the field
-	if(is_string($acf_image)){
+	if(is_string($acf_image) && function_exists('get_row_index')){
 		if(get_row_index()){
 			$acf_image = get_sub_field($acf_image, $post_id);
 		}else{
@@ -273,8 +273,8 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
 		$post_id = 'term_' . get_queried_object()->term_id;
 	}
 
-	//if were passed a string we first need to get the image from the field
-	if(is_string($acf_image)){
+	//if were passed a string we first need to get the image from the field. make sure acf is also installed
+	if(is_string($acf_image) && function_exists('get_row_index')){
 		if(get_row_index()){
 			$acf_image = get_sub_field($acf_image, $post_id);
 		}else{
