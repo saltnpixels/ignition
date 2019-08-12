@@ -34,9 +34,10 @@ function runScrollerAttributes(element) {
       //get parent element and make that the trigger, but use an offset from current element
       if (triggerElement === element) {
         triggerElement = element.parentElement;
+        offset = element.offsetTop - triggerElement.offsetTop + parseInt(offset);
       }
 
-      offset = element.offsetTop - triggerElement.offsetTop + offset;
+      triggerHook = 'onEnter';
     } //if fixed at top, wrap in div
 
 
@@ -71,7 +72,11 @@ function runScrollerAttributes(element) {
         offset: offset,
         triggerHook: triggerHook,
         duration: duration
-      }).setClassToggle(element, animationClass).addTo(scrollMagicController) //.addIndicators()
+      }).on('enter leave', function () {
+        element.classList.toggle(animationClass);
+        element.classList.toggle('active');
+      }).addTo(scrollMagicController) //.setClassToggle(element, animationClass + ' active').addTo(scrollMagicController)
+      // .addIndicators()
       ;
     } //good for knowing when its been loaded
 
@@ -80,7 +85,7 @@ function runScrollerAttributes(element) {
   }
 }
 /**
- * Slide any element global function.
+ * Slide any element. global function. Also used with data-slide
  * @param item
  * @param slideTime
  * @param direction
@@ -166,17 +171,18 @@ function ign_slide_element(item) {
 var menuButtons = '';
 
 function placeMenuButtons() {
-  var $siteTopHeight = document.querySelector('.site-top').clientHeight;
-  var adminbar = document.querySelector('#wpadminbar');
-  var adminbarHeight = 0;
+  var $siteTopHeight = document.querySelector('.site-top').clientHeight; // let adminbar = document.querySelector('#wpadminbar');
+  // let adminbarHeight = 0;
+  //
+  // if (adminbar !== null) {
+  // 	adminbarHeight = adminbar.clientHeight;
+  // }
 
-  if (adminbar !== null) {
-    adminbarHeight = adminbar.clientHeight;
+  if (menuButtons.length) {
+    menuButtons.forEach(function (button) {
+      button.style.height = $siteTopHeight + 'px';
+    });
   }
-
-  menuButtons.forEach(function (button) {
-    button.style.height = $siteTopHeight + 'px';
-  });
 }
 /*--------------------------------------------------------------
 # IGN Events
@@ -197,11 +203,11 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!document.querySelector('.app-menu')) {
     menuButtons = document.querySelectorAll('.panel-left-toggle, .panel-right-toggle');
   } else {
-    //otherwise the menu button does not need to be centered because its part of the app menu and moves.
+    //otherwise the menu button does not need to be centered because its part of the app menu and moves. (moved in navigation.js)
     menuButtons = document.querySelectorAll('.panel-right-toggle');
   } //we run menu button function below in resize event
 
-  /*------- Scroll Magic Events  --------*/
+  /*------- Scroll Magic Events Init --------*/
 
 
   scrollMagicController = new ScrollMagic.Controller();
@@ -460,28 +466,20 @@ if (isHighDensity()) {
 }
 "use strict";
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 //turn icons into svg if using the icons that come with theme folder
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.svg-icon').forEach(function (icon) {
-    var _iconsvg$classList;
+    icon.classList.remove('svg-icon'); //classlist.value does not wokr in ie11. use getAttrbiute
 
-    icon.classList.remove('svg-icon');
-    var iconClass = icon.classList.value;
-    var iconsvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    var iconClass = icon.getAttribute('class'); //ie11 does not work well with nodes. needed to add as string. no createelementNS
 
-    (_iconsvg$classList = iconsvg.classList).add.apply(_iconsvg$classList, ['icon'].concat(_toConsumableArray(icon.classList)));
+    var iconString = "<svg class=\"icon ".concat(iconClass, "\" role=\"img\"><use href=\"#").concat(iconClass, "\" xlink:href=\"#").concat(iconClass, "\"></use></svg>"); // let iconsvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    // iconsvg.setAttribute('class', 'icon ' + iconClass);
+    // iconsvg.setAttribute('role', 'img');
+    //iconsvg.innerHTML = `<use href="#${iconClass}" xlink:href="#${iconClass}"></use>`;
 
-    iconsvg.setAttribute('role', 'img');
-    iconsvg.innerHTML = "<use href=\"#".concat(iconClass, "\" xlink:href=\"#").concat(iconClass, "\"></use>");
-    icon.parentNode.replaceChild(iconsvg, icon);
+    icon.insertAdjacentHTML('afterend', iconString);
+    icon.remove();
   });
 });
 "use strict";
@@ -719,21 +717,19 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 "use strict";
 
-//create menu and sidebar button sizing
-//the buttons need to sit outside site-top, otherwise they get covered by panels when they are open because site top is under opened panels.
-//this makes sure the buttons are centered, but still  on top of site-top and the menu the pops open
-jQuery(function ($) {
-  var $siteContent = $('.site-content');
+document.addEventListener('DOMContentLoaded', function () {
+  var sidebar = document.querySelector('#secondary');
 
-  if ($('#secondary').length) {
-    //clean it of whitespaces or :empty wont hide it in css
-    var secondary = document.querySelector('#secondary');
-    secondary.innerHTML = secondary.innerHTML.trim();
+  if (sidebar !== null) {
+    sidebar.innerHTML = sidebar.innerHTML.trim(); //if moving stuff in and out its good to remove extra space so :empty works
 
-    if ($('.sidebar-template').hasClass('header-above')) {
-      //move header out of article so its above sidebar and article and add class active which shows sidebar once header is moved
-      $siteContent.prepend($('article .entry-header, .archive .entry-header, .page-header, .blog .entry-header'));
-      $('.sidebar-template').addClass('active');
+    var sidebarTemplate = document.querySelector('.sidebar-template');
+
+    if (sidebarTemplate !== null && sidebarTemplate.classList.contains('header-above')) {
+      document.querySelectorAll('.entry-header, .page-header').forEach(function (header) {
+        sidebarTemplate.parentElement.prepend(header);
+      });
+      sidebarTemplate.classList.add('active');
     }
   }
 });

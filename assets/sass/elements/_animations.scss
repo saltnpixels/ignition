@@ -1,72 +1,80 @@
 /*--------------------------------------------------------------
 # Animation Setup
 --------------------------------------------------------------*/
-//set element up for animations. Defaults
-[data-scrollanimation], .animated, [data-toggle] {
-  animation-fill-mode: both;
-  animation-duration: 1s;
-  transform: translate(0);
+
+/*------- For animations --------*/
+.animate{
+	animation-fill-mode: both;
+	animation-duration: 1s;
+	transform: translate(0);
 }
 
-[data-slide]{
-  overflow: hidden;
-}
-
-/*------- infinite animation --------*/
+/*------- infinite animations --------*/
 .infinite{
   animation-iteration-count: infinite;
 }
 
-/*------- Special class for fixing at top. Useful with scrollanimation --------*/
+
+/*--------------------------------------------------------------
+# Scroll Animation with data-scrollanimation
+--------------------------------------------------------------*/
+
+/*------- Special class for fixing at top. Used with scrollanimation --------*/
+//just add data-scrollanimation="fixed-at-top" to an element to get this effect.
 .fixed-at-top {
   position: fixed;
   width: 100%;
   top: 0;
 }
 
-
-//for scrub/tweening you will need a start and end class. make sure the item has the start class already.
-/*--------------------------------------------------------------
-# Scrub animations.
-# Expect to go from a start class of transitions to an end class.
-# make sure to include data-scrollscrub, as well as a starting class to tween from
---------------------------------------------------------------*/
-.site-container [data-scrollscrub]{
-  transition: none;
+/*------- Animate in a sequence --------*/
+@for $i from 0 through 30{
+	.active.sequence:nth-of-type(#{$i+1}){ //active makes sure the sequence only runs when it loads in but not out, so it resets fast
+		transition-delay: #{$i/4}s;
+	}
 }
 
-//if you plan on tweening from an opacity of 0, add this class too.
-.js .animateIn {
-  opacity: 0; //start at nothing
+
+#page [data-scrollscrub] {
+	transition: none; //tween cannot work if there is transitions set
 }
+
 
 
 //some animations included
 //Example: use data-scrollanimation="fadeInUp"
+//When fading or moving something in, start with js so that without javascript the item wont start with opacity 0 or offscreen.
+//use text UP or Down in class names when the item is meant to move up or down. This helps the scroll code no some extra info necessary
+// //(if an item moves down or up it can mess up when the scroll animation should start cause it keeps moving)
 /*--------------------------------------------------------------
 # Animations
 --------------------------------------------------------------*/
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
 
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
+//start class
+.js [data-scrollanimation*="fadeInUp"]{
+	opacity: 0;
+	transition: all .5s;
+	transform: translate3d(0, 100%, 0);
+
+	//end class
+	&.fadeInUp {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
 }
 
-.fadeInUp {
-  -webkit-animation-name: fadeInUp;
-  animation-name: fadeInUp;
+
+.js [data-scrollanimation*="zoomIn"]{
+	transition: all .5s;
+	opacity: 0;
+	transform: scale3d(0.3, 0.3, 0.3);
+
+	&.zoomIn {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
-//Add more animations here!
-
-
+//ADD MORE ANIMATIONS HERE
 
 

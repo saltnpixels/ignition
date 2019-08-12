@@ -1,5 +1,5 @@
 let menuIcon = "";
-
+//menuIcon experimental
 if (typeof (tinyMCE) != "undefined") {
 	tinymce.on("addeditor", ignIconEvent);
 

@@ -240,7 +240,7 @@ function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail',
 
 
 	$image = '';
-	if ( $acf_image ) {
+	if ( $acf_image && is_array($acf_image) ) {
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image( $image_id, $size, '', $attr );
 	} else {
@@ -284,7 +284,7 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
 
 	$image = '';
 
-	if ( $acf_image ) {
+	if ( $acf_image && is_array($acf_image) ) {
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image_url( $image_id, $size, '' );
 	} else {

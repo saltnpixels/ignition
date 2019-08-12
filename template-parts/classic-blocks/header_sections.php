@@ -12,8 +12,8 @@ $id = get_the_ID();
 if ( function_exists('have_rows') && have_rows( 'header_layout', $id ) && get_field( 'override_header' ) ):
 	while ( have_rows( 'header_layout', $id ) ): the_row();
 		$header = get_row_layout();
-		if ( file_exists( locate_template( 'template-parts/acf-blocks/' . $header . '.php' ) ) ) {
-			include( locate_template( 'template-parts/acf-blocks/' . $header . '.php' ) );
+		if ( file_exists( locate_template( 'template-parts/classic-blocks/' . $header . '.php' ) ) ) {
+			include( locate_template( 'template-parts/classic-blocks/' . $header . '.php' ) );
 		}
 	endwhile;
 else:

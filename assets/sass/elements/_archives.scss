@@ -1,21 +1,4 @@
 /*--------------------------------------------------------------
-# Articles
---------------------------------------------------------------*/
-//here is where you can change the styles of your articles on single and archive views
-//for acf sections use sections.scss
-.single article{
-
-  .entry-content{
-    margin-bottom: var(--gap);
-  }
-}
-
-.after-article{
-  clear: both;
-}
-
-
-/*--------------------------------------------------------------
 # Default Cards on Archive pages
 --------------------------------------------------------------*/
 //to have this only affect post-type posts, change to .post.card or override with new .post-type.card
@@ -47,7 +30,7 @@
   }
 
   a.term-link {
-    @include font-size(12);;
+    @include font-size(12);
     letter-spacing: .5px;
     text-transform: uppercase;
     font-weight: bold;
@@ -93,7 +76,7 @@ time, time a {
     color: white;
     margin: 0 3px;
     padding: 3px 8px;
-    
+
     *{
       pointer-events: none;
     }

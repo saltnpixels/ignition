@@ -150,6 +150,7 @@ gulp.task( 'styles', () => {
 		.pipe( minifycss({ maxLineLen: 10 }) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.min.css if that is enqueued.
 		.pipe( notify({ message: '\n\n✅  ===> STYLES — completed!\n', onLast: true }) );

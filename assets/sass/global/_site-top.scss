@@ -34,7 +34,9 @@ body {
 --------------------------------------------------------------*/
 @media(min-width: $media-nav) {
   .site-top .menu {
-    li {
+
+    //all menu items default
+	  li {
       color: white;
       font-weight: bold;
     }
@@ -46,7 +48,7 @@ body {
         color: black;
       }
 
-      //top level submenu dropdown
+      //top level submenu dropdown items
       & > .sub-menu {
         background: #f78da7;
 
@@ -63,7 +65,7 @@ body {
 
 
 /*--------------------------------------------------------------
-# Menu Styling: Mobile and Vertical menus
+# Menu Styling: Mobile and All other Vertical menus
 --------------------------------------------------------------*/
 .menu li {
   color: white;

@@ -17,8 +17,8 @@
 					$section = get_row_layout();
 					$section_hash ++;
 					$id = $connector_id; //need this id otherwise id will get the page id not the connector id
-					if ( file_exists( locate_template( 'template-parts/acf-blocks/' . $section . '.php' ) ) ) {
-						include( locate_template( 'template-parts/acf-blocks/' . $section . '.php' ) );
+					if ( file_exists( locate_template( 'template-parts/classic-blocks/' . $section . '.php' ) ) ) {
+						include( locate_template( 'template-parts/classic-blocks/' . $section . '.php' ) );
 					}
 
 				endwhile;

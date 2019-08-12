@@ -26,8 +26,7 @@
 
 </div><!-- #page -->
 
-<button aria-label="Toggle Right Panel" data-toggle="open" data-target="#panel-right" aria-expanded="false" class="panel-right-toggle
-hidden"><?php echo ign_get_svg( array( "icon" => "sidebar" ) ); ?></button>
+<button aria-label="Toggle Right Panel" data-toggle="open" data-target="#panel-right" aria-expanded="false" class="panel-right-toggle"><?php echo ign_get_svg( array( "icon" => "sidebar" ) ); ?></button>
 
 </div><!-- .site-container -->
 

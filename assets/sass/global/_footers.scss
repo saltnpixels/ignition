@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 
 .site-footer {
-  padding-top: $gap;
+  padding-top: var(--gap);
   padding-bottom: 5px;
   background: var(--main-text-color);
   color: var(--subtle-text-color);

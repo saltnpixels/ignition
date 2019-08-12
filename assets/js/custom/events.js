@@ -35,8 +35,10 @@ function runScrollerAttributes(element) {
 			//get parent element and make that the trigger, but use an offset from current element
 			if (triggerElement === element) {
 				triggerElement = element.parentElement;
+				offset = (element.offsetTop - triggerElement.offsetTop) + parseInt(offset);
 			}
-			offset = (element.offsetTop - triggerElement.offsetTop) + offset;
+			triggerHook = 'onEnter';
+
 		}
 
 		//if fixed at top, wrap in div
@@ -69,14 +71,19 @@ function runScrollerAttributes(element) {
 			// .addIndicators()
 			;
 		} else {
+
 			scene = new ScrollMagic.Scene({
 				triggerElement: triggerElement,
 				offset: offset,
 				triggerHook: triggerHook,
 				duration: duration
 
-			}).setClassToggle(element, animationClass).addTo(scrollMagicController)
-			//.addIndicators()
+			}).on('enter leave', function () {
+				element.classList.toggle(animationClass);
+				element.classList.toggle('active');
+			}).addTo(scrollMagicController)
+			//.setClassToggle(element, animationClass + ' active').addTo(scrollMagicController)
+			// .addIndicators()
 			;
 		}
 

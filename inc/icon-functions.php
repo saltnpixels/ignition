@@ -215,7 +215,7 @@ function ignition_social_links_icons() {
 
 
 /**
- * Add icons on the back end to any text area
+ * Add icons on the back end to any text area Experimental
  */
 
 function ign_icons_menu() {

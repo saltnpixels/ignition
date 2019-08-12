@@ -62,14 +62,14 @@ if ( $page_archive_id ) {
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
 
-				include( locate_template( 'template-parts/acf-blocks/header_sections.php' ) );
+				include( locate_template( 'template-parts/classic-blocks/header_sections.php' ) );
 				?>
 
                 <div class="entry-content container-content">
 					<?php
 
 					//include sections made with acf or falls back on the_content.
-					include( locate_template( 'template-parts/acf-blocks/sections.php' ) );
+					include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 
 					?>
                 </div>

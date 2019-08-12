@@ -20,7 +20,7 @@ $id        = get_the_ID();
 		//special header layouts can be used with acf, otherwise a fallback header is used.
 		//if this is a sidebar template, js is used to pop out this header and put above the article at full width.
 		//this way its semantically placed inside properly, but moved out and looks nicely placed above the sidebar
-		locate_template( 'template-parts/acf-blocks/header_sections.php', true );
+		locate_template( 'template-parts/classic-blocks/header_sections.php', true );
 
 		?>
 
@@ -28,7 +28,7 @@ $id        = get_the_ID();
 			<?php
 
 			//include sections made with acf.
-			locate_template( 'template-parts/acf-blocks/sections.php', true );
+			locate_template( 'template-parts/classic-blocks/sections.php', true );
 
 
 			//not sure gutenberg eve has this anymore

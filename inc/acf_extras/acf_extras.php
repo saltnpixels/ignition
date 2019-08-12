@@ -109,7 +109,7 @@ function save_sections( $post_id ) {
 				global $saving_sections;
 				$saving_sections = true;
 				//run through all sections and make sure to not save any edit link links
-				locate_template( 'template-parts/acf-blocks/sections.php', true );
+				locate_template( 'template-parts/classic-blocks/sections.php', true );
 				$sections = ob_get_clean();
 				update_post_meta( $id, 'acf_all_sections', $sections );
 				$saving_sections = false;

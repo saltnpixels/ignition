@@ -126,7 +126,7 @@ function ignition_customize_register( $wp_customize )
      */
     $wp_customize->add_setting( 'app_menu',
         array(
-            'default' => false,
+            'default' => 'regular_menu',
         ) );
 
     $wp_customize->add_control( 'app_menu',

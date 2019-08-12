@@ -25,8 +25,8 @@
 
 <?php
 $app_menu = '';
-if ( get_theme_mod( 'app_menu', '' ) ) {
-	$app_menu = 'app-menu';
+if ( get_theme_mod( 'app_menu', 'regular_menu' ) ) {
+	$app_menu = get_theme_mod( 'app_menu', 'regular_menu' );
 }
 ?>
 <body <?php body_class($app_menu); ?>>

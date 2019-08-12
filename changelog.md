@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3] - 04-25-2019
+HUGE update!
+- Fixed all js files. The file, setup.js is now separate and runs before custom.js so there are no issues in ie11
+- Most JS files now use vanilla js with ESNext
+- Renamed ACF Blocks to classic blocks to prepare for gutenberg blocks with acf
+- Streamlined font-sizing. use 1.6rem to mean 16px or 1.2rem to mean 12px... 
+- Fonts using rem get bigger by around 4 pixels on large screens. Use px if you dont want this
+- JS Events fixed and updated. 
+- Now you can use data-radio to force data-toggles to act like radio buttons
+- data-slide will slide open and closed an item that has been toggled (need data-toggle, data-target on toggle item and data-slide on target item that your toggling.)
+- Fixed grid and ie11 grid in small ways
+- Now you can add your own spans to the grid at custom breakpoints in variables.scss. see bottom of file.
+- Fixed ign image functions. You can now pass the field name directly to the function.
+- Ign image functions now work with taxonomy fields
+- Added touch to gulp so files get modified date
+
 ## [2.2.6] - 04-25-2019
  - Added ability to swap inline background image for a 2x version by adding data-high-res to element
  - Added some helpful notes to some template files

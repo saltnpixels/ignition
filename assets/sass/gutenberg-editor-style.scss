@@ -19,7 +19,7 @@
   @import "global/typography";
 
   /*------- media --------*/
-  @import "elements/media";
+  @import "global/media";
 
   /*------- Global elements --------*/
   @import "elements/icons";
@@ -39,5 +39,5 @@
 //outside so it can apply to post types specifically
 //you can add post type classes for gutenberg like .gutenberg-editor-page.post-type-portfolio .card...
 /*------- Content --------*/
-@import "elements/content";
+@import "elements/archives";
 

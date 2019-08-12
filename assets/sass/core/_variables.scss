@@ -42,7 +42,7 @@
 
 	/*------- Layout --------*/
 	--container: 1200px; //holds site in a centered container of this size
-	--container-content: 700px; //holds article text for nice reading
+	--container-content: 70rem; //holds article text for nice reading
 	--container-padding: 30px; //used on left and right side of containers
 
 	--gutters: 15px; //common padding size, used on flexbox and modules
@@ -65,20 +65,21 @@
 /*--------------------------------------------------------------
 # Wide Screen Variables
 --------------------------------------------------------------*/
-@media(min-width: 1400px) {
+@media(min-width: 1600px) {
 	:root {
 		//Large wide screens can have bigger text and a wider container
 		font-size: calc(62.5% + 2.5px); //16 becomes 20. goes up around 4. not perfectly but not bad
 		--container: 1400px;
-		--container-content: 800px;
 	}
 }
 
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+@media screen and (min-width: 1600px) and (-ms-high-contrast: active), (min-width: 1600px) and (-ms-high-contrast: none){
 	:root {
-		font-size: 65%;
+		font-size: 65%; //ie cant do calc on font-size properly
 	}
 }
+
+
 
 /*--------------------------------------------------------------
 # SASS Variables

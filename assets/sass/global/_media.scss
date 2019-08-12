@@ -1,0 +1,135 @@
+/*--------------------------------------------------------------
+# Special Images
+--------------------------------------------------------------*/
+/*
+    - Use a background-image div for holding a foreground image behind an item or header
+    - use cover-image for an image in the foreground of a header.
+*/
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: block;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  & ~ *{
+    z-index: 10;
+  }
+
+}
+
+
+.cover-image {
+  width: 100%;
+  display: block;
+  img {
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/*------- Add overlay to a div so image is shaded --------*/
+.overlay{
+	box-shadow: inset 0 0 0 2000px rgba(0, 0, 0,0.65)
+}
+
+
+
+/*--------------------------------------------------------------
+# Article images
+--------------------------------------------------------------*/
+article img, .wp-block-image img {
+  display: block;
+}
+
+figure {
+  margin-bottom: 1em;
+  max-width: 100%;
+  @include font-size(13);
+}
+
+.card-grid figure, .card-grid-full figure{
+  text-align: center;
+  margin: 0;
+}
+
+
+
+/*--------------------------------------------------------------
+# Image Alignments / WordPress Alignments
+--------------------------------------------------------------*/
+img.alignright{
+  float: right;
+  margin-left: var(--gap);
+  margin-bottom: 1em;
+}
+
+img.alignleft{
+  float: left;
+  margin-right: var(--gap);
+  margin-bottom: 1em;
+}
+
+.wp-block-image .alignright {
+	margin-top: .6em;
+	float: right;
+	margin-left: var(--gap);
+}
+
+.wp-block-image .alignleft {
+	margin-top: .6em;
+	float: left;
+	margin-right: var(--gap);
+}
+
+
+
+.aligncenter {
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.container-content .alignfull{
+  max-width: none;
+}
+
+.alignfull img{
+	object-fit: cover;
+}
+
+/*--------------------------------------------------------------
+# Videos
+--------------------------------------------------------------*/
+.videowrapper {
+  float: none;
+  clear: both;
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 0;
+  height: 0;
+}
+
+.videowrapper iframe, .videowrapper video, .videowrapper object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+

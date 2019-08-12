@@ -12,8 +12,8 @@ if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ):
 		$section = get_row_layout();
 		$section_hash ++;
 
-		if ( file_exists( locate_template( 'template-parts/acf-blocks/' . $section . '.php' ) ) ) {
-			include( locate_template( 'template-parts/acf-blocks/' . $section . '.php' ) );
+		if ( file_exists( locate_template( 'template-parts/classic-blocks/' . $section . '.php' ) ) ) {
+			include( locate_template( 'template-parts/classic-blocks/' . $section . '.php' ) );
 		}
 
 	endwhile;

@@ -27,7 +27,7 @@ html * {
 }
 
 .hide-scroll::-webkit-scrollbar {
-  width: 0 !important
+  width: 0 !important;
 }
 
 .hide-scroll{
@@ -164,6 +164,10 @@ img {
 
 [data-toggle]{
 	cursor: pointer;
+}
+
+[data-slide]{
+	overflow: hidden;
 }
 
 

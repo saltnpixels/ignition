@@ -2,14 +2,42 @@
 # Layout Fixes for ie11
 --------------------------------------------------------------*/
 
-@media all and (-ms-high-contrast: none) {
+@media screen and (-ms-high-contrast:active), (-ms-high-contrast: none) {
+
+
+	:root {
+		--flex-gap: calc(var(--grid-gap) / 2);
+	}
+
+	.site-footer {
+		min-height: 1px; //ie11 fix
+	}
+
+	//for ie11 fallbacks on object-fit images
+	.cover-image, .background-image {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.no-objectfit .cover-image{
+		min-height: 300px;
+		background-repeat: none;
+	}
+
+	.no-objectfit .background-image img,
+	.no-objectfit .cover-image img {
+		display: none;
+	}
+
+
 	/*--------------------------------------------------------------
   # Flexbox grids. 99% same as css grid
   --------------------------------------------------------------*/
 
 	.flex, .flex-grid, .grid {
 		display: flex;
-		--flex-gap: calc(var(--grid-gap) / 2);
+
 
 		margin-left: calc(-1 * var(--flex-gap));
 		margin-right: calc(-1 * var(--flex-gap));

@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-# ACF Sections Styling
+# Classic Sections Styling
 --------------------------------------------------------------*/
 section {
 	padding-top: var(--gap);
@@ -8,6 +8,12 @@ section {
 	section {
 		padding-top: 0;
 		padding-bottom: 0;
+	}
+}
+
+section.heading-center{
+	h1, h2{
+		text-align: center;
 	}
 }
 

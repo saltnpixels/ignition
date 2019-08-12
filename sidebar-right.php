@@ -23,17 +23,17 @@ get_header(); ?>
 
 					//if the post type has its own folder it must also have its own set of post format files too.
 					if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-						if ( get_post_format() ) {
-							include( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) );
-						} else {
-							include( locate_template( 'template-parts/post/content.php' ) );
+						if( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ){
+							include(locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ));
+						}else{
+							include(locate_template( 'template-parts/post/content.php' ));
 						}
 
 					} else {
-						if ( get_post_format() ) {
-							include( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) );
+						if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
+							include(locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ));
 						} else {
-							include( locate_template( 'template-parts/' . get_post_type() . '/content.php' ) );
+							include(locate_template( 'template-parts/' . get_post_type() . '/content.php' ));
 						}
 					}
 
