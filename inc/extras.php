@@ -209,6 +209,14 @@ function ign_menu( $item, $args ) {
 
 add_filter( 'walker_nav_menu_start_el', 'ign_menu', 10, 99 );
 
+//add search bar to a menu
+//add_filter('wp_nav_menu_items', 'add_search_form', 10, 2);
+function add_search_form($items, $args) {
+	if( $args->theme_location == 'top-menu' )
+		$items .= '<li class="menu-item top-level-item"><div class="menu-item-link">' . get_search_form(false) . '</div></li>';
+	return $items;
+}
+
 
 /*------- Menu Fallback --------*/
 /**

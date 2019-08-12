@@ -19,7 +19,7 @@ if ( get_theme_mod( 'site_top_use_customizer', 'yes' ) == 'yes' ):
 				<nav class="site-navigation__nav" role="navigation"
 				     aria-label="<?php _e( 'Top Menu', 'ignition' ); ?>">
 					<?php wp_nav_menu( array(
-						'theme_location' => 'top',
+						'theme_location' => 'top-menu',
 						'menu_id' => 'top-menu',
 						'container' => '',
 						'fallback_cb' => 'link_to_menu_editor'

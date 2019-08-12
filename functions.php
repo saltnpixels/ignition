@@ -65,7 +65,7 @@ function ignition_setup() {
 	 * Add menus here
 	 */
 	register_nav_menus( array(
-		'top' => __( 'Top Menu', 'ignition' ),
+		'top-menu' => __( 'Top Menu', 'ignition' ),
 	) );
 
 	/*
