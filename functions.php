@@ -48,14 +48,15 @@ function ignition_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 
-	/*
- * default image size for cards and thumbnails and header images
- * Users should upload twice the size of an image size.
- * So if the image size is 600 x 600, the user should upload a 1200 by 1200.
- * Output the image size and WP will automatically include the full size for big display when needed.
- *
- * WP is also smart and if you set crop to true it will include the original only if it matches in ratio
- */
+	/**
+	 * default image size for cards and thumbnails and header images
+	 * Users should upload twice the size of an image size.
+	 * So if the image size is 600 x 600, the user should upload a 1200 by 1200.
+	 * Output the image size and WP will automatically include the full size for big display when needed.
+	 *
+	 * WP is also smart and if you set crop to true it will include the original only if it matches in ratio
+	 * Header image size is included for large header images. Users dont have to upload twice that size unless your ok with large files.
+	 */
 	set_post_thumbnail_size( 300, 300, true );
 	add_image_size( 'header_image', 2000, 600 );
 
@@ -74,16 +75,16 @@ function ignition_setup() {
     */
 
 
-			add_theme_support( 'post-formats', array(
-				'aside',
-				'image',
-				'video',
-				'quote',
-				'link',
-				'gallery',
-				'audio',
-			) );
-	add_post_type_support( 'post', 'post-formats' );
+//	add_theme_support( 'post-formats', array(
+//		'aside',
+//		'image',
+//		'video',
+//		'quote',
+//		'link',
+//		'gallery',
+//		'audio',
+//	) );
+//	add_post_type_support( 'post', 'post-formats' );
 
 
 	// Add default posts and comments RSS feed links to head.
@@ -394,10 +395,6 @@ function set_posts_per_page_for_post_types( $query ) {
 }
 
 add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );
-
-
-
-
 
 
 /*--------------------------------------------------------------
