@@ -5,7 +5,7 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ["eslint:recommended", "wordpress"],
+  extends: ["eslint:recommended", "plugin:@wordpress/eslint-plugin/recommended"],
   parserOptions: {
     sourceType: "module"
   },
