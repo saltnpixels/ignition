@@ -21,6 +21,8 @@ HUGE update!
 - Ign image functions now work with taxonomy fields
 - Added touch to gulp so files get modified date
  - Moves some sass files around
+ - Added new sass folder for WordPress related stuff
+ - Added admin.scss for css wanted on back end
 
 ## [2.2.6] - 04-25-2019
  - Added ability to swap inline background image for a 2x version by adding data-high-res to element
