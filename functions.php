@@ -56,6 +56,8 @@ function ignition_setup() {
 	 *
 	 * WP is also smart and if you set crop to true it will include the original only if it matches in ratio
 	 * Header image size is included for large header images. Users dont have to upload twice that size unless your ok with large files.
+	 *
+	 * Recommend installing smush or imsanity so users can't upload extremely huge images without them being compressed and resized.
 	 */
 	set_post_thumbnail_size( 300, 300, true );
 	add_image_size( 'header_image', 2000, 600 );
@@ -292,16 +294,15 @@ function ignition_scripts() {
 	//Sass compiles styles. Will get child's theme version if found instead. Child theme should import with sass.
 	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', wp_get_theme()->get( 'Version' ) );
 
+	//ie11 js polyfills
+	wp_enqueue_script('polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach');
+
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );
 	wp_register_script( 'jquery-core', "https://code.jquery.com/jquery-3.3.1.min.js", array(), '3.3.1' );
 	wp_deregister_script( 'jquery-migrate' );
 	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.0.0.min.js", array(), '3.0.0' );
 
-
-	//adds polyfills for ie11 and sets a few things up
-	wp_enqueue_script( 'ignition-setup-js', get_template_directory_uri() . '/assets/js/setup.js', array( 'jquery' ),
-		wp_get_theme()->get( 'Version' ), true );
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
 	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),

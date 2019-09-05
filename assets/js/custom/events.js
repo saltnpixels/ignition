@@ -436,6 +436,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	window.addEventListener('resize', throttle(moveItems, 250));
 	moveItems();
 
+
+
+
 	document.documentElement.classList.remove('dom-loading');
 
 

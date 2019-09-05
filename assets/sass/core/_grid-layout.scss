@@ -203,7 +203,7 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
     }
   }
 
-  .no-gutters {
+  &.no-gutters {
     margin-left: 0;
     margin-right: 0;
 
@@ -221,6 +221,10 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
   & > * {
     margin-bottom: var(--grid-gap);
   }
+}
+
+#page .no-wrap{
+	flex-wrap: nowrap;
 }
 
 /*------- Span sizes for flexbox grids --------*/
@@ -351,4 +355,3 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
 
 
 
-  

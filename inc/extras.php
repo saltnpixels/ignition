@@ -17,6 +17,7 @@
  */
 function ignition_javascript_detection() {
 	echo "<script type='text/javascript'>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+	echo "<script type='text/javascript'>var  isIE11 = !!window.MSInputMethodContext && !!document.documentMode;</script>";
 }
 
 add_action( 'wp_head', 'ignition_javascript_detection', 0 );
