@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
-## [3.5] - Sep 12, 2019
+## [3.1.0] - Sep 12, 2019
 Gutenberg is here.
 Make Gutenberg blocks easily with ACF Pro
  - Gutenberg styles are automatically applied for you on the front and back end
