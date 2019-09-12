@@ -1,0 +1,212 @@
+{
+    "key": "group_5d71340447ff4",
+    "title": "Column Paragraphs",
+    "fields": [
+        {
+            "key": "field_5d76681d68659",
+            "label": "Add Paragraphs",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d7134d02eae3",
+            "label": "Paragraphs",
+            "name": "paragraphs",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "grid-class",
+                "id": ""
+            },
+            "admin_only": 0,
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5d7173b096c19",
+                    "label": "Paragraph Class",
+                    "name": "paragraph_class",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "ign_set_data": ".acf-row"
+                },
+                {
+                    "key": "field_5d7135102eae4",
+                    "label": "paragraph",
+                    "name": "paragraph",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5d7667fb68658",
+            "label": "Advanced",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d71729c0ed82",
+            "label": "Paragraphs Container",
+            "name": "container_class",
+            "type": "text",
+            "instructions": "class for div that holds all the paragraphs",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "show-alignfull",
+                "id": ""
+            },
+            "admin_only": 0,
+            "align_block": "",
+            "default_value": "",
+            "placeholder": "container | container-content | container-fluid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5d76bc1a8ba47",
+            "label": "Anchor",
+            "name": "anchor",
+            "type": "text",
+            "instructions": "Give ID so this section can be linked to",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5d71739096c18",
+            "label": "Grid Class",
+            "name": "grid_class",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "card-grid",
+            "placeholder": "grid | card-grid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "ign_set_data": ".grid-class"
+        },
+        {
+            "key": "field_5d7173100ed83",
+            "label": "Background Image",
+            "name": "background_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/paragraphs"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1568062703
+}

@@ -2,13 +2,13 @@
  * @copyright Copyright (c) 2017 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.2.2
+ * @version   1.2.6
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
 (function () {
     "use strict";
-    if (window && window.addEventListener) {
+    if (typeof window !== "undefined" && window.addEventListener) {
         var cache = Object.create(null); // holds xhr objects to prevent multiple requests
         var checkUseElems;
         var tid; // timeout id
@@ -79,13 +79,12 @@
         checkUseElems = function () {
             var base;
             var bcr;
-            var fallback = ""; // optional fallback URL in case no core path to SVG file was given and no symbol definition was found.
+            var fallback = ""; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
             var hash;
             var href;
             var i;
             var inProgressCount = 0;
             var isHidden;
-            var isXlink = false;
             var Request;
             var url;
             var uses;
@@ -101,9 +100,8 @@
             function attrUpdateFunc(spec) {
                 return function () {
                     if (cache[spec.base] !== true) {
-                        if (spec.isXlink) {
-                            spec.useEl.setAttributeNS(xlinkNS, "xlink:href", "#" + spec.hash);
-                        } else {
+                        spec.useEl.setAttributeNS(xlinkNS, "xlink:href", "#" + spec.hash);
+                        if (spec.useEl.hasAttribute("href")) {
                             spec.useEl.setAttribute("href", "#" + spec.hash);
                         }
                     }
@@ -145,13 +143,9 @@
                     // failed to get bounding rectangle of the use element
                     bcr = false;
                 }
-                href = uses[i].getAttribute("href");
-                if (!href) {
-                    href = uses[i].getAttributeNS(xlinkNS, "href");
-                    isXlink = true;
-                } else {
-                    isXlink = false;
-                }
+                href = uses[i].getAttribute("href")
+                        || uses[i].getAttributeNS(xlinkNS, "href")
+                        || uses[i].getAttribute("xlink:href");
                 if (href && href.split) {
                     url = href.split("#");
                 } else {
@@ -167,6 +161,9 @@
                     if (fallback && !base.length && hash && !document.getElementById(hash)) {
                         base = fallback;
                     }
+                    if (uses[i].hasAttribute("href")) {
+                        uses[i].setAttributeNS(xlinkNS, "xlink:href", href);
+                    }
                     if (base.length) {
                         // schedule updating xlink:href
                         xhr = cache[base];
@@ -175,8 +172,7 @@
                             setTimeout(attrUpdateFunc({
                                 useEl: uses[i],
                                 base: base,
-                                hash: hash,
-                                isXlink: isXlink
+                                hash: hash
                             }), 0);
                         }
                         if (xhr === undefined) {
@@ -209,8 +205,7 @@
                         setTimeout(attrUpdateFunc({
                             useEl: uses[i],
                             base: base,
-                            hash: hash,
-                            isXlink: isXlink
+                            hash: hash
                         }), 0);
                     }
                 }
@@ -219,10 +214,17 @@
             inProgressCount += 1;
             observeIfDone();
         };
-        // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
-        window.addEventListener("load", function winLoad() {
+        var winLoad;
+        winLoad = function () {
             window.removeEventListener("load", winLoad, false); // to prevent memory leaks
             tid = setTimeout(checkUseElems, 0);
-        }, false);
+        };
+        if (document.readyState !== "complete") {
+            // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
+            window.addEventListener("load", winLoad, false);
+        } else {
+            // No need to add a listener if the document is already loaded, initialize immediately.
+            winLoad();
+        }
     }
 }());

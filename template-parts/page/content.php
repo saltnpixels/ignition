@@ -34,9 +34,12 @@ $id        = get_the_ID();
 
 			<?php
 
-			//include sections made with acf or falls back on the_content.
-			locate_template( 'template-parts/classic-blocks/sections.php', true );
-
+			//shows blocks or classic blocks
+			if( has_blocks() ) {
+				the_content();
+			}else{
+				locate_template( 'template-parts/classic-blocks/sections.php', true );
+			}
 
 			wp_link_pages( array(
 				'before'      => '<div class="page-links">' . __( 'Pages:', 'ignition' ),

@@ -213,33 +213,3 @@ function ignition_social_links_icons() {
 	return apply_filters( 'ignition_social_links_icons', $social_links_icons );
 }
 
-
-/**
- * Add icons on the back end to any text area Experimental
- */
-
-function ign_icons_menu() {
-	global $wp_admin_bar;
-
-	$menu_id = 'icons-button';
-	$wp_admin_bar->add_menu( array( 'id' => $menu_id, 'title' => __( 'Icons' ), 'href' => '#' ) );
-
-	$icons = scandir( get_parent_theme_file_path( '/assets/icons/svg' ) );
-
-	foreach ( $icons as $icon ) {
-		if ( $icon == '..' || $icon == '.' || $icon == '' ) {
-			continue;
-		}
-
-		$icon = str_replace( '.svg', '', $icon );
-		$wp_admin_bar->add_menu( array(
-				'parent' => $menu_id,
-				'title'  => ign_get_svg( array( 'icon' => $icon ) ) . $icon,
-				'id'     => 'icon-' . $icon,
-				'href'   => '#'
-			)
-		);
-	}
-}
-
-//add_action( 'admin_bar_menu', 'ign_icons_menu', 200 );

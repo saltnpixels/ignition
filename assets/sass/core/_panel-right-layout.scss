@@ -20,13 +20,20 @@
   }
 }
 
-/*------- default if no icon is found with svg --------*/
+/*------- sidebar icon --------*/
+//button to open panel
+.panel-right-toggle {
+	color: white;
+	background: transparent;
+}
+
+
 .sidebar-icon {
   border: 2px solid white;
-  border-radius: 1px;
+  border-radius: 2px;
   position: relative;
-  height: 1.3rem; //may have to play to get it matching font size
-  width: 22px;
+  height: 1em; //may have to play to get it matching font size
+  width: 1em;
   display: block;
 
   &:after {

@@ -90,12 +90,6 @@ html * {
 }
 
 
-svg {
-  width: 100%;
-  height: auto;
-}
-
-
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
@@ -154,8 +148,26 @@ img {
   clear: both;
 }
 
+/*------- Padding classes --------*/
+.padding{
+	padding: var(--gap);
+}
 
-//fix data-toggle in ie11 on svg items
+.no-padding{
+	padding: 0;
+}
+
+.no-padding-top{
+	padding-top: 0;
+}
+
+.no-padding-bottom{
+	padding-bottom: 0;
+}
+
+
+
+//fixes data-toggle in ie11 on svg items
 @media screen and (-ms-high-contrast:active), (-ms-high-contrast: none) {
   [data-toggle] svg{
     pointer-events: none;

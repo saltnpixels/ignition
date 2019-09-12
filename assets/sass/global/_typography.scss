@@ -9,7 +9,7 @@ body,
 button,
 input,
 select,
-textarea {
+textarea{
 	font-size: 1.6rem; //results in 16px
 	line-height: var(--line-height);
 	font-family: var(--font);
@@ -20,7 +20,7 @@ textarea {
 }
 
 article{
-	font-size: 1.8rem; //18px on regular size and around 22 on large
+	font-size: var(--article-font-size); //18px on regular size and around 22.5 on large
 }
 
 
@@ -171,7 +171,6 @@ cite, .wp-block-quote cite {
 .edit-link {
 	font-size: 1.4rem;
 }
-
 
 
 /*--------------------------------------------------------------

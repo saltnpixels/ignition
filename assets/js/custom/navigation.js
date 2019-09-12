@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	//focus
 	document.body.addEventListener('focusin', e => {
-		console.log(e.target);
+
 		if (e.target.closest('.menu-item-link a')) {
 			let menuItemLink = e.target.closest('.menu-item-link a');
 
@@ -146,28 +146,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	//when button is opened we will lock the body so there is no scrolling and then open the page
-	menuToggle.addEventListener('afterToggle', e => {
-		//if button has been toggled on
-		if (menuToggle.classList.contains('toggled-on')) {
-			body.classList.add('body-lock');
+	if(menuToggle) {
+		menuToggle.addEventListener('afterToggle', e => {
+			//if button has been toggled on
+			if (menuToggle.classList.contains('toggled-on')) {
+				body.classList.add('body-lock');
 
-			//clicking anywhere outside the menu will close it
-			document.querySelector('.site-content').addEventListener('click', closeAppMenu, {once: true});
+				//clicking anywhere outside the menu will close it
+				document.querySelector('.site-content').addEventListener('click', closeAppMenu, {once: true});
 
-		} else {
-
-			document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
-
-			if (body.classList.contains('app-menu')) {
-				page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-					body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-				}, {once: true});
 			} else {
-				body.classList.remove('body-lock');
-			}
-		}
 
-	});
+				document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
+
+				if (body.classList.contains('app-menu')) {
+					page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+						body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+					}, {once: true});
+				} else {
+					body.classList.remove('body-lock');
+				}
+			}
+
+		});
+	}
 
 }); //end ready
 

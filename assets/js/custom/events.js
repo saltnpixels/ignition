@@ -45,7 +45,6 @@ function runScrollerAttributes(element) {
 		if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
 			let wrappedElement = wrap(element, document.createElement('div'));
 			wrappedElement.classList.add('fixed-holder');
-			wrappedElement.style.height = element.offsetHeight + 'px';
 			triggerHook = 'onLeave';
 			triggerElement = element.parentElement;
 		}
@@ -79,8 +78,17 @@ function runScrollerAttributes(element) {
 				duration: duration
 
 			}).on('enter leave', function () {
+				//instead of using toggle class we can use these events of on enter and leave and toggle class at both times
 				element.classList.toggle(animationClass);
 				element.classList.toggle('active');
+
+				//if fixed at top set height for spacer and width
+				if(element.getAttribute('data-scrollanimation') === 'fixed-at-top'){
+					//making fixed item have a set width matching parent
+					element.style.width = element.parentElement.clientWidth + 'px';
+					element.style.left = element.parentElement.offsetLeft + 'px';
+
+				}
 			}).addTo(scrollMagicController)
 			//.setClassToggle(element, animationClass + ' active').addTo(scrollMagicController)
 			// .addIndicators()
@@ -109,8 +117,11 @@ function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
 				height: 'auto',
 				clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
 			}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
+
 			let height = item.clientHeight; //need to get height with padding included
+			//set the hegiht with padding included
 			TweenMax.set(item, {height: height});
+			//animate to new height from 0
 			TweenMax.from(item, slideTime, {
 				height: 0,
 				display: 'none',
@@ -170,7 +181,12 @@ function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
 let menuButtons = '';
 
 function placeMenuButtons() {
-	let $siteTopHeight = document.querySelector('.site-top').clientHeight;
+	let $siteTopHeight = document.querySelector('.site-top');
+
+	if($siteTopHeight != null){
+		$siteTopHeight = $siteTopHeight.clientHeight;
+	}
+
 	// let adminbar = document.querySelector('#wpadminbar');
 	// let adminbarHeight = 0;
 	//
@@ -211,10 +227,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	/*------- Scroll Magic Events Init --------*/
-	scrollMagicController = new ScrollMagic.Controller();
-	document.querySelectorAll('[data-scrollanimation]').forEach((element) => {
-		runScrollerAttributes(element);
-	});
+	if ('undefined' != typeof ScrollMagic) {
+		scrollMagicController = new ScrollMagic.Controller();
+		document.querySelectorAll('[data-scrollanimation]').forEach((element) => {
+			runScrollerAttributes(element);
+		});
+	}
 
 
 	/*------- Toggle Buttons --------*/
@@ -357,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 
-	/*------- Moving items Event --------*/
+	/*------- Moving items Event as well as all resizing --------*/
 	//on Window resize we can move items to and from divs with data-moveto="the destination"
 	//it will move there when the site reaches smaller than a size defaulted to 1030 or set that with data-moveat
 	//the whole div, including the data att moveto moves back and forth
@@ -431,6 +449,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 
 		placeMenuButtons(); //running the moving of menu buttons here. nothing to do with moving items.
+
+		//fix height of fixed holder fixed at top items
+		document.querySelectorAll('.fixed-holder').forEach(fixed=>{
+			fixed.style.height = fixed.firstElementChild.clientHeight + 'px';
+		});
+
 	}
 
 	window.addEventListener('resize', throttle(moveItems, 250));

@@ -44,7 +44,6 @@ function runScrollerAttributes(element) {
     if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
       var wrappedElement = wrap(element, document.createElement('div'));
       wrappedElement.classList.add('fixed-holder');
-      wrappedElement.style.height = element.offsetHeight + 'px';
       triggerHook = 'onLeave';
       triggerElement = element.parentElement;
     } //if scrollscrub exists used tweenmax
@@ -73,8 +72,15 @@ function runScrollerAttributes(element) {
         triggerHook: triggerHook,
         duration: duration
       }).on('enter leave', function () {
+        //instead of using toggle class we can use these events of on enter and leave and toggle class at both times
         element.classList.toggle(animationClass);
-        element.classList.toggle('active');
+        element.classList.toggle('active'); //if fixed at top set height for spacer and width
+
+        if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
+          //making fixed item have a set width matching parent
+          element.style.width = element.parentElement.clientWidth + 'px';
+          element.style.left = element.parentElement.offsetLeft + 'px';
+        }
       }).addTo(scrollMagicController) //.setClassToggle(element, animationClass + ' active').addTo(scrollMagicController)
       // .addIndicators()
       ;
@@ -106,10 +112,12 @@ function ign_slide_element(item) {
       }); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
 
       var height = item.clientHeight; //need to get height with padding included
+      //set the hegiht with padding included
 
       TweenMax.set(item, {
         height: height
-      });
+      }); //animate to new height from 0
+
       TweenMax.from(item, slideTime, {
         height: 0,
         display: 'none',
@@ -171,12 +179,17 @@ function ign_slide_element(item) {
 var menuButtons = '';
 
 function placeMenuButtons() {
-  var $siteTopHeight = document.querySelector('.site-top').clientHeight; // let adminbar = document.querySelector('#wpadminbar');
+  var $siteTopHeight = document.querySelector('.site-top');
+
+  if ($siteTopHeight != null) {
+    $siteTopHeight = $siteTopHeight.clientHeight;
+  } // let adminbar = document.querySelector('#wpadminbar');
   // let adminbarHeight = 0;
   //
   // if (adminbar !== null) {
   // 	adminbarHeight = adminbar.clientHeight;
   // }
+
 
   if (menuButtons.length) {
     menuButtons.forEach(function (button) {
@@ -210,13 +223,16 @@ document.addEventListener('DOMContentLoaded', function () {
   /*------- Scroll Magic Events Init --------*/
 
 
-  scrollMagicController = new ScrollMagic.Controller();
-  document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
-    runScrollerAttributes(element);
-  });
+  if ('undefined' != typeof ScrollMagic) {
+    scrollMagicController = new ScrollMagic.Controller();
+    document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
+      runScrollerAttributes(element);
+    });
+  }
   /*------- Toggle Buttons --------*/
   //trigger optional afterToggle event
   //adding new custom event for after the element is toggled
+
 
   var toggleEvent = null;
 
@@ -342,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     item.dispatchEvent(toggleEvent);
   }
-  /*------- Moving items Event --------*/
+  /*------- Moving items Event as well as all resizing --------*/
   //on Window resize we can move items to and from divs with data-moveto="the destination"
   //it will move there when the site reaches smaller than a size defaulted to 1030 or set that with data-moveat
   //the whole div, including the data att moveto moves back and forth
@@ -411,6 +427,11 @@ document.addEventListener('DOMContentLoaded', function () {
       item.classList.add('visible');
     });
     placeMenuButtons(); //running the moving of menu buttons here. nothing to do with moving items.
+    //fix height of fixed holder fixed at top items
+
+    document.querySelectorAll('.fixed-holder').forEach(function (fixed) {
+      fixed.style.height = fixed.firstElementChild.clientHeight + 'px';
+    });
   }
 
   window.addEventListener('resize', throttle(moveItems, 250));
@@ -542,8 +563,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var lastTabbedItem = ''; //focus
 
   document.body.addEventListener('focusin', function (e) {
-    console.log(e.target);
-
     if (e.target.closest('.menu-item-link a')) {
       var menuItemLink = e.target.closest('.menu-item-link a');
       window.addEventListener('keyup', function (e) {
@@ -614,28 +633,30 @@ document.addEventListener('DOMContentLoaded', function () {
   } //when button is opened we will lock the body so there is no scrolling and then open the page
 
 
-  menuToggle.addEventListener('afterToggle', function (e) {
-    //if button has been toggled on
-    if (menuToggle.classList.contains('toggled-on')) {
-      body.classList.add('body-lock'); //clicking anywhere outside the menu will close it
+  if (menuToggle) {
+    menuToggle.addEventListener('afterToggle', function (e) {
+      //if button has been toggled on
+      if (menuToggle.classList.contains('toggled-on')) {
+        body.classList.add('body-lock'); //clicking anywhere outside the menu will close it
 
-      document.querySelector('.site-content').addEventListener('click', closeAppMenu, {
-        once: true
-      });
-    } else {
-      document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
-
-      if (body.classList.contains('app-menu')) {
-        page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-          body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-        }, {
+        document.querySelector('.site-content').addEventListener('click', closeAppMenu, {
           once: true
         });
       } else {
-        body.classList.remove('body-lock');
+        document.querySelector('.site-content').removeEventListener('click', closeAppMenu);
+
+        if (body.classList.contains('app-menu')) {
+          page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+            body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+          }, {
+            once: true
+          });
+        } else {
+          body.classList.remove('body-lock');
+        }
       }
-    }
-  });
+    });
+  }
 }); //end ready
 
 jQuery(function ($) {

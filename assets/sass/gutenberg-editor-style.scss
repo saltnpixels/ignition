@@ -7,37 +7,84 @@
 @import "core/variables";
 
 
-.edit-post-visual-editor {
-
-  /*------- CSS Grid --------*/
-  @import "core/grid-layout";
-
-  /*------- Forms --------*/
-  @import "elements/_forms";
-
-  /*------- Typography --------*/
-  @import "global/typography";
-
-  /*------- media --------*/
-  @import "global/media";
-
-  /*------- Global elements --------*/
-  @import "elements/icons";
-
-  /*------- Animations --------*/
-  @import "elements/animations";
-
-  /*------- Sections --------*/
-  @import "elements/sections";
-
-
-  p{
-    @include font-size(18);
-  }
+html {
+	font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px. On big screens add 4px.
 }
 
-//outside so it can apply to post types specifically
-//you can add post type classes for gutenberg like .gutenberg-editor-page.post-type-portfolio .card...
-/*------- Content --------*/
-@import "elements/archives";
 
+/*------- CSS For INSIDE Blocks. Add your styles here --------*/
+.acf-block-preview, .block-editor-rich-text{
+
+	font-size: var(--article-font-size); //results in 16px
+	line-height: var(--line-height);
+	font-family: var(--font);
+	color: var(--main-text-color);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+
+	/*------- Base --------*/
+	@import "core/base-layout";
+
+	/*------- Typography --------*/
+	@import "global/typography";
+
+	/*------- Normalize --------*/
+	@import "libs/normalize";
+
+	/*------- CSS Grid --------*/
+	@import "core/grid-layout";
+
+	/*------- Menu Layout --------*/
+	@import "core/menu-layout";
+
+	/*------- Forms --------*/
+	@import "elements/elements";
+
+	/*------- media --------*/
+	@import "global/media";
+
+}
+
+
+
+
+/*--------------------------------------------------------------
+# Small changes
+--------------------------------------------------------------*/
+
+
+.editor-post-title__block .editor-post-title__input{
+  font-family: var(--font-alt);
+}
+
+/*------- ACF textareas --------*/
+div .acf-block-component {
+	textarea {
+		font-size: 16px;
+	}
+}
+
+/*------- Hide page sections when using block editor --------*/
+.block-editor__container #acf-group_5aa6a924b02ff{
+	display: none;
+}
+
+
+.wp-block[data-align=wide] {
+	max-width: calc(var(--container) - (var(--container-padding)));
+}
+
+
+/*--------------------------------------------------------------
+# Make Gutenberg sidebar wider
+--------------------------------------------------------------*/
+@media(min-width: $media-medium) {
+	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
+		width: 30%;
+	}
+
+	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-layout__content {
+		margin-right: 30%;
+	}
+}

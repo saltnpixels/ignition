@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.5] - Sep 12, 2019
+Gutenberg is here.
+Make Gutenberg blocks easily with ACF Pro
+ - Gutenberg styles are automatically applied for you on the front and back end
+ - IE11 fixes. Now using polyfill.io
+ - Changed the default icons. Sidebar icon is now pure css.
+ - Fixed ign template tags to work with Gutenberg and added some new ones for acf links
+
+
 ## [3] - 04-25-2019
 HUGE update!
 - Fixed all js files. The file, setup.js is now separate and runs before custom.js so there are no issues in ie11

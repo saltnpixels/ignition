@@ -1,0 +1,195 @@
+{
+    "key": "group_5d791b896aad1",
+    "title": "Menu Block",
+    "fields": [
+        {
+            "key": "field_5d791c122681f",
+            "label": "Menu Type",
+            "name": "menu",
+            "type": "select",
+            "instructions": "Choose a type of menu to use. Either a WP Menu that exists or one you want to create for this page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "choices": {
+                "menu": "WP Menu",
+                "custom_menu": "Custom Menu"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d791ccb26820",
+            "label": "WP Menu Name",
+            "name": "wp_menu_name",
+            "type": "text",
+            "instructions": "The desired menus name",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d791c122681f",
+                        "operator": "==",
+                        "value": "menu"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5d791d3d26821",
+            "label": "Custom Menu",
+            "name": "custom_menu",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d791c122681f",
+                        "operator": "==",
+                        "value": "custom_menu"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5d791d4e26822",
+                    "label": "Menu Title",
+                    "name": "menu_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "ign_set_data": ""
+                },
+                {
+                    "key": "field_5d791d5f26823",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "text",
+                    "instructions": "You can use a full link or a hashtag to link to a section on this page. Make sure the section has an html anchor. (ie: #mysection)",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "ign_set_data": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5d794c017a9b2",
+            "label": "Container Class",
+            "name": "container_class",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "show-alignfull",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "container | container-fluid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5d79201e8dc56",
+            "label": "Fix Menu at Top",
+            "name": "fix_menu_at_top",
+            "type": "true_false",
+            "instructions": "When the menu reaches the top of the browser, we can fix it to the top to keep it visible at all times",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/section-menu"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1568235556
+}

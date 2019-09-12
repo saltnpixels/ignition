@@ -41,7 +41,8 @@
 
 /*------- Add overlay to a div so image is shaded --------*/
 .overlay{
-	box-shadow: inset 0 0 0 2000px rgba(0, 0, 0,0.65)
+	box-shadow: inset 0 0 0 2000px rgba(0, 0, 0,0.65);
+	color: white;
 }
 
 

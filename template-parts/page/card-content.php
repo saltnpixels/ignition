@@ -1,6 +1,7 @@
 <?php
 /**
  * Template part for displaying page as a card on an archive list or a search page
+ * This was separated out from page.php because a lot of plugins use page.php while is_page is sometimes still false and then the plugin will wrongly show the card instead of the full page
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

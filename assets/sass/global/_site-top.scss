@@ -30,10 +30,10 @@ body {
 
 
 /*--------------------------------------------------------------
-# Desktop Menu Styling
+# Desktop Menu Styling for top menu and default menus
 --------------------------------------------------------------*/
 @media(min-width: $media-nav) {
-  .site-top .menu {
+  .site-top .menu, .menu {
 
     //all menu items default
 	  li {

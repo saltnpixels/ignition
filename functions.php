@@ -63,6 +63,16 @@ function ignition_setup() {
 	add_image_size( 'header_image', 2000, 600 );
 
 
+
+	// Remove default image sizes here. medium-large is probably not needed.
+	//in the admin you can set media sizes to 0 to remove them.
+	function remove_default_images( $sizes ) {
+		unset( $sizes['medium_large']); // 768px
+		return $sizes;
+	}
+	add_filter( 'intermediate_image_sizes_advanced', 'remove_default_images' );
+
+
 	/*
 	 * Add menus here
 	 */
@@ -127,8 +137,7 @@ function ignition_setup() {
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
 	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, and column width.
+	 * tinymce styles
 	  */
 	add_editor_style( array(
 		get_template_directory_uri() . '/editor-style.min.css?' . wp_get_theme()->get( 'Version' ),
@@ -315,11 +324,6 @@ function ignition_scripts() {
 		'url'     => home_url(),
 	) );
 
-	wp_localize_script( 'ignition-custom-js', 'screenReaderText', array(
-		'quote'    => ign_get_svg( array( 'icon' => 'quote-right' ) ),
-		'expand'   => __( 'Expand child menu', 'ignition' ),
-		'collapse' => __( 'Collapse child menu', 'ignition' )
-	) );
 
 	//Icons: add icons for use in custom js here
 	wp_localize_script( 'ignition-custom-js', 'icons', array(
@@ -350,6 +354,10 @@ add_action( 'wp_enqueue_scripts', 'ignition_scripts' );
 function ign_gutenberg_styles() {
 	// Load the theme styles within Gutenberg.
 	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
+
+	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
+		wp_get_theme()->get( 'Version' ), true );
+
 }
 
 add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
@@ -434,6 +442,12 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
  * Add ACF Field Extras
  */
 require get_parent_theme_file_path( '/inc/acf_extras/acf_extras.php' );
+
+
+/**
+ * Add ACF Blocks
+ */
+require get_parent_theme_file_path( '/inc/acf-blocks.php' );
 
 
 

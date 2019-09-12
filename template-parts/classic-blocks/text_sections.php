@@ -15,7 +15,7 @@ $heading    = get_sub_field( 'heading' );
          class="alignfull <?php echo get_row_layout(); ?> <?php echo esc_attr( $class ); ?>"
 	<?php if ( $image ) { ?> style="background-image: url('<?php echo ign_get_image_url( 'background_image', $id, 'full' );
 	?>');" <?php } ?>>
-    <div class="<?php echo $container; ?>">
+    <div class="<?php echo esc_attr($container); ?>">
 		<?php
 		if ( $heading ) {
 			?><h2><?php echo $heading; ?></h2>

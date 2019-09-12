@@ -91,6 +91,12 @@
     border: 1px solid #E1E1E1;
 }
 
+.edit-post-sidebar .card-grid tbody, .edit-post-sidebar .grid tbody{
+	display: table;
+}
+
+
+
 /* add all the spans */
 div .grid .span-1, .grid.span-all-1 tr { grid-column: span 1; }
 

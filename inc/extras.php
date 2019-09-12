@@ -21,6 +21,7 @@ function ignition_javascript_detection() {
 }
 
 add_action( 'wp_head', 'ignition_javascript_detection', 0 );
+add_action( 'admin_head', 'ignition_javascript_detection', 0 );
 
 
 /*

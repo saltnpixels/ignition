@@ -27,8 +27,13 @@ $id        = get_the_ID();
         <div class="entry-content container-content">
 			<?php
 
-			//include sections made with acf.
-			locate_template( 'template-parts/classic-blocks/sections.php', true );
+
+			//shows blocks or classic acf blocks
+			if( has_blocks() ) {
+				the_content();
+			}else{
+				locate_template( 'template-parts/classic-blocks/sections.php', true );
+			}
 
 
 			//not sure gutenberg eve has this anymore

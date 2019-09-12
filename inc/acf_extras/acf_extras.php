@@ -108,12 +108,15 @@ function ign_admin_field_settings( $field ) {
 		'ui'           => 1,
 	), true );
 
+
+
 }
 
 add_action( 'acf/render_field_settings', 'ign_admin_field_settings' );
 
 
 function ign_admin_prepare_field( $field ) {
+
 	// bail early if no 'admin_only' setting
 	if ( empty( $field['admin_only'] ) ) {
 		return $field;
@@ -135,11 +138,11 @@ function ign_data_field_settings( $field ) {
 
 	acf_render_field_setting( $field, array(
 		'label'        => __( 'Set Value as Class' ),
-		'instructions' => 'The value of this custom field will now be added a class to the matching closest selector. Use .acf-row to affect this fields container.',
+		'instructions' => 'The value of this custom field will now be added as a class to the matching closest selector. Use .acf-row to affect this fields container.',
 		'name'         => 'ign_set_data',
 		'type'         => 'text',
 		'placeholder'  => '.acf-row',
-		'ui'           => 99
+		'menu_order' => 0
 	), true );
 
 }

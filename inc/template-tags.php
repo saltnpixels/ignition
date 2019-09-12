@@ -218,18 +218,11 @@ function is_static_frontpage() {
  *
  * @return string
  */
-function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail', $attr = '', $use_thumbnail_as_fallback = false ) {
+function ign_get_image( $acf_image = '', $post_id = false, $size = 'post-thumbnail', $attr = '', $use_thumbnail_as_fallback = false ) {
 
-	if ( ! $post_id && ! is_tax() ) {
-		global $post;
-		$post_id = $post->ID;
-	}
+	$image = '';
 
-	if(is_tax() && ! $post_id){
-		$post_id = 'term_' . get_queried_object()->term_id;
-	}
-
-	//if were passed a string we first need to get the image from the field
+	//if its a string turn it into an array
 	if(is_string($acf_image) && function_exists('acf_get_loop')){
 		if(acf_get_loop()){
 			$acf_image = get_sub_field($acf_image, $post_id);
@@ -238,13 +231,13 @@ function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail',
 		}
 	}
 
-
-	$image = '';
+	//get image through WP
 	if ( $acf_image && is_array($acf_image) ) {
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image( $image_id, $size, '', $attr );
 	} else {
-		if ( has_post_thumbnail( $post_id ) && $use_thumbnail_as_fallback ) {
+		//fallback on thumbnail if wanted
+		if ( is_single() && has_post_thumbnail() && $use_thumbnail_as_fallback ) {
 			$image = get_the_post_thumbnail( $post_id, $size, $attr );
 		}
 	}
@@ -262,16 +255,9 @@ function ign_get_image( $acf_image = '', $post_id = 0, $size = 'post-thumbnail',
  *
  * @return string
  */
-function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thumbnail_as_fallback = false ) {
+function ign_get_image_url( $acf_image = '', $post_id = false, $size = '', $use_thumbnail_as_fallback = false ) {
 
-	if ( ! $post_id && ! is_tax() ) {
-		global $post;
-		$post_id = $post->ID;
-	}
-
-	if(is_tax() && ! $post_id){
-		$post_id = 'term_' . get_queried_object()->term_id;
-	}
+	$image = '';
 
 	//if were passed a string we first need to get the image from the field. make sure acf is also installed
 	if(is_string($acf_image) && function_exists('acf_get_loop')){
@@ -282,7 +268,6 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
 		}
 	}
 
-	$image = '';
 
 	if ( $acf_image && is_array($acf_image) ) {
 		$image_id = $acf_image['id'];
@@ -309,13 +294,7 @@ function ign_get_image_url( $acf_image = '', $post_id = 0, $size = '', $use_thum
  * if no image is set, then nothing is returned.
  *
  */
-function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) {
-
-
-	if ( ! $post_id ) {
-		global $post;
-		$post_id = $post->ID;
-	}
+function ign_get_header_image( $post_id = false, $return_type = 'url', $attr = '' ) {
 
 
 	if ( function_exists( 'get_field' ) ) {
@@ -336,5 +315,56 @@ function ign_get_header_image( $post_id = 0, $return_type = 'url', $attr = '' ) 
 		return ign_get_image( $image, $post_id, 'header_image', $attr, true );
 	}
 }
+
+/**
+ * @param $link_field
+ * @param int $post_id
+ *
+ * If the link field is empty we still return an array so it is set and works
+ */
+function ign_get_link_field($link_field, $post_id = false){
+
+
+	if(is_string($link_field) && function_exists('acf_get_loop')){
+		if(acf_get_loop()){
+			$link_field = get_sub_field($link_field, $post_id);
+		}else{
+			$link_field = get_field($link_field, $post_id);
+		}
+	}
+
+	//return array even if not link field found so no error occurs
+	if(! $link_field){
+		$link_field = array(
+			'title' => '',
+			'url' => 'javascript:;',
+			'target' => '_self'
+		);
+	}
+
+	return $link_field;
+
+}
+
+
+
+function ign_block_class($block, $custom_classes = ''){
+
+	if($block){
+		$classnames = isset($block['className']) ? $block['className'] : '';
+		$align = isset($block['align']) ? 'align' . $block['align'] . ' ' : '';
+		$classes = 'acf-' . strtolower($block['title']) . ' ' . $align . $classnames;
+		echo 'class="' . ($custom_classes ? $custom_classes . ' ' . $classes : $classes) . '"';
+	}
+}
+
+
+
+
+
+
+
+
+
 
 

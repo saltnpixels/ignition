@@ -332,7 +332,7 @@
 		overflow: auto;
 		max-height: 90vh;
 		padding-bottom: var(--gap);
-		@extend .hide-scroll;
+		@extend .hide-scroll !optional;
 		margin-top: 50px;
 	}
 
