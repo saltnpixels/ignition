@@ -49,7 +49,7 @@ template{display:none}
 #outdated .last[dir='rtl']{right:auto !important;left:25px !important}
 #outdated #btnCloseUpdateBrowser{display:block;position:relative;width:100%;height:100%;text-decoration:none;color:#fff;font-size:36px;line-height:36px}
 * html #outdated{position:absolute}
-:root{--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--font-alt:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--line-height:1.5;--font-pre:'Source Code Pro',monospace;--line-height-pre:22px;--article-font-size:1.8rem;--black:#191919;--grey:#cacaca;--pink:#f75959;--pink-darkened:#cd5757;--pink-alpha:rgba(247,89,89,0.5);--body-bg:white;--main-text-color:var(--black);--subtle-text-color:var(--grey);--site-top:var(--pink);--highlight:var(--pink);--highlight-alpha:var(--pink-alpha);--highlight-darkened:var(--pink-darkened)}
+:root{--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--font-alt:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--line-height:1.5;--font-pre:'Source Code Pro',monospace;--line-height-pre:22px;--article-font-size:1.7rem;--black:#191919;--grey:#cacaca;--pink:#f75959;--pink-darkened:#cd5757;--pink-alpha:rgba(247,89,89,0.5);--body-bg:white;--main-text-color:var(--black);--subtle-text-color:var(--grey);--site-top:var(--pink);--highlight:var(--pink);--highlight-alpha:var(--pink-alpha);--highlight-darkened:var(--pink-darkened)}
 :root{--nav-move:800px;--desktop-menu-alignment:center;--container:1200px;--container-content:70rem;--container-padding:30px;--gutters:15px;--gap:30px;--grid-gap:30px;--panel-left-width:300px;--panel-right-width:350px;--z-index-top:99;--z-index-overlay:95;--z-index-menu-button:90;--z-index-menu:80;--z-index-behind:-1}
 html{-webkit-box-sizing:border-box;box-sizing:border-box}
 *,*:before,*:after{-webkit-box-sizing:inherit;box-sizing:inherit}
@@ -220,7 +220,7 @@ div .flex>.span-12,div .wp-block-file>.span-12,div .flex-grid>.span-12{-webkit-b
 .sidebar-holder .widget_nav_menu{padding:30px 0 30px;padding:var(--gap) 0 var(--gap)}
 html{font-size:62.5%}
 body,button,input,select,textarea{font-size:1.6rem;line-height:1.5;line-height:var(--line-height);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-family:var(--font);color:#191919;color:var(--main-text-color);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}
-article{font-size:1.8rem;font-size:var(--article-font-size)}
+article{font-size:1.7rem;font-size:var(--article-font-size)}
 h1,h2,h3,h4,h5,h6{clear:both;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-family:var(--font-alt);margin:0 0 .3em 0}
 p{margin:0 0 1em 0}
 .entry-content>p:last-child{margin-bottom:0}

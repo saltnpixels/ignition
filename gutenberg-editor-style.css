@@ -18,7 +18,7 @@ Mixins
 /*--------------------------------------------------------------
 # CSS Variables. Change these to match your theme
 --------------------------------------------------------------*/
-:root { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --line-height: 1.5; --font-pre: 'Source Code Pro', monospace; --line-height-pre: 22px; --article-font-size: 1.8rem; --black: #191919; --grey: #cacaca; --pink: #f75959; --pink-darkened: #cd5757; --pink-alpha: rgba(247, 89, 89, 0.5); --body-bg: white; --main-text-color: var(--black); --subtle-text-color: var(--grey); --site-top: var(--pink); --highlight: var(--pink); --highlight-alpha: var(--pink-alpha); --highlight-darkened: var(--pink-darkened); }
+:root { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; --line-height: 1.5; --font-pre: 'Source Code Pro', monospace; --line-height-pre: 22px; --article-font-size: 1.7rem; --black: #191919; --grey: #cacaca; --pink: #f75959; --pink-darkened: #cd5757; --pink-alpha: rgba(247, 89, 89, 0.5); --body-bg: white; --main-text-color: var(--black); --subtle-text-color: var(--grey); --site-top: var(--pink); --highlight: var(--pink); --highlight-alpha: var(--pink-alpha); --highlight-darkened: var(--pink-darkened); }
 
 /*--------------------------------------------------------------
 # Layout CSS Variables. Probably don't need to touch.
@@ -41,7 +41,7 @@ Mixins
 html { font-size: 62.5%; }
 
 /*------- CSS For INSIDE Blocks. Add your styles here --------*/
-.acf-block-preview, .block-editor-rich-text { font-size: 1.8rem; font-size: var(--article-font-size); line-height: 1.5; line-height: var(--line-height); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; font-family: var(--font); color: #191919; color: var(--main-text-color); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-smoothing: antialiased; /*------- Base --------*/ /*--------------------------------------------------------------
+.acf-block-preview, .block-editor-rich-text { font-size: 1.7rem; font-size: var(--article-font-size); line-height: 1.5; line-height: var(--line-height); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; font-family: var(--font); color: #191919; color: var(--main-text-color); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-smoothing: antialiased; /*------- Base --------*/ /*--------------------------------------------------------------
 # Basic Global Base Layout Stuff
 --------------------------------------------------------------*/ /*--------------------------------------------------------------
 # Panel Setup
@@ -204,7 +204,7 @@ Tables
 
 .acf-block-preview body, .acf-block-preview button, .acf-block-preview input, .acf-block-preview select, .acf-block-preview textarea, .block-editor-rich-text body, .block-editor-rich-text button, .block-editor-rich-text input, .block-editor-rich-text select, .block-editor-rich-text textarea { font-size: 1.6rem; line-height: 1.5; line-height: var(--line-height); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; font-family: var(--font); color: #191919; color: var(--main-text-color); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-smoothing: antialiased; }
 
-.acf-block-preview article, .block-editor-rich-text article { font-size: 1.8rem; font-size: var(--article-font-size); }
+.acf-block-preview article, .block-editor-rich-text article { font-size: 1.7rem; font-size: var(--article-font-size); }
 
 .acf-block-preview h1, .acf-block-preview h2, .acf-block-preview h3, .acf-block-preview h4, .acf-block-preview h5, .acf-block-preview h6, .block-editor-rich-text h1, .block-editor-rich-text h2, .block-editor-rich-text h3, .block-editor-rich-text h4, .block-editor-rich-text h5, .block-editor-rich-text h6 { clear: both; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; font-family: var(--font-alt); margin: 0 0 .3em 0; }
 

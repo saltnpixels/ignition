@@ -11,7 +11,7 @@
 $block_id     = isset($block['anchor']) ? $block['anchor'] : 'section-' . $block['id'];
 $fixed_at_top = get_field( 'fix_menu_at_top' );
 
-//add a container if alignfull is chosen
+
 $container = get_field( 'container_class' );
 
 ?>
