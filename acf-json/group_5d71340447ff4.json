@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_5d76681d68659",
-            "label": "Add Paragraphs",
+            "label": "Columns",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -16,7 +16,6 @@
                 "id": ""
             },
             "admin_only": 0,
-            "ign_set_data": "",
             "placement": "top",
             "endpoint": 0
         },
@@ -38,29 +37,8 @@
             "min": 0,
             "max": 0,
             "layout": "block",
-            "button_label": "",
+            "button_label": "Add Paragraph",
             "sub_fields": [
-                {
-                    "key": "field_5d7173b096c19",
-                    "label": "Paragraph Class",
-                    "name": "paragraph_class",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "admin_only": 0,
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "ign_set_data": ".acf-row"
-                },
                 {
                     "key": "field_5d7135102eae4",
                     "label": "paragraph",
@@ -80,6 +58,27 @@
                     "toolbar": "full",
                     "media_upload": 1,
                     "delay": 0
+                },
+                {
+                    "key": "field_5d7173b096c19",
+                    "label": "Paragraph Class",
+                    "name": "paragraph_class",
+                    "type": "text",
+                    "instructions": "Class that applies to this paragraph only",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "ign_set_data": ".acf-row"
                 }
             ]
         },
@@ -106,7 +105,7 @@
             "label": "Paragraphs Container",
             "name": "container_class",
             "type": "text",
-            "instructions": "class for div that holds all the paragraphs",
+            "instructions": "Class for container that holds all the paragraphs.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -115,30 +114,8 @@
                 "id": ""
             },
             "admin_only": 0,
-            "align_block": "",
             "default_value": "",
             "placeholder": "container | container-content | container-fluid",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "ign_set_data": ""
-        },
-        {
-            "key": "field_5d76bc1a8ba47",
-            "label": "Anchor",
-            "name": "anchor",
-            "type": "text",
-            "instructions": "Give ID so this section can be linked to",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "admin_only": 0,
-            "default_value": "",
-            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": "",
@@ -149,7 +126,7 @@
             "label": "Grid Class",
             "name": "grid_class",
             "type": "text",
-            "instructions": "",
+            "instructions": "Type of grid you would like. Options are card-grid for equal sized columns.\r\nFor non equal sizing use \"grid\". Then add span classes to each paragraph. There is also a span-all you can add here as a default for all columns.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -208,5 +185,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1568062703
+    "modified": 1568382688
 }

@@ -179,17 +179,12 @@ function ign_slide_element(item) {
 var menuButtons = '';
 
 function placeMenuButtons() {
-  var $siteTopHeight = document.querySelector('.site-top');
-
-  if ($siteTopHeight != null) {
-    $siteTopHeight = $siteTopHeight.clientHeight;
-  } // let adminbar = document.querySelector('#wpadminbar');
+  var $siteTopHeight = document.querySelector('.site-top').clientHeight; // let adminbar = document.querySelector('#wpadminbar');
   // let adminbarHeight = 0;
   //
   // if (adminbar !== null) {
   // 	adminbarHeight = adminbar.clientHeight;
   // }
-
 
   if (menuButtons.length) {
     menuButtons.forEach(function (button) {
@@ -223,16 +218,13 @@ document.addEventListener('DOMContentLoaded', function () {
   /*------- Scroll Magic Events Init --------*/
 
 
-  if ('undefined' != typeof ScrollMagic) {
-    scrollMagicController = new ScrollMagic.Controller();
-    document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
-      runScrollerAttributes(element);
-    });
-  }
+  scrollMagicController = new ScrollMagic.Controller();
+  document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
+    runScrollerAttributes(element);
+  });
   /*------- Toggle Buttons --------*/
   //trigger optional afterToggle event
   //adding new custom event for after the element is toggled
-
 
   var toggleEvent = null;
 
