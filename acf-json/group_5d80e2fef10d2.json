@@ -1,0 +1,218 @@
+{
+    "key": "group_5d80e2fef10d2",
+    "title": "Cards Block",
+    "fields": [
+        {
+            "key": "field_5d80e2ff04ef3",
+            "label": "Cards",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d80e2ff0025c",
+            "label": "Card Type",
+            "name": "card_type",
+            "type": "select",
+            "instructions": "Shows a recent listing.\r\nThe default listing will only work on a page set as an archive. This can be done in the customizer.\r\nOtherwise you will need to create a custom card list.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "choices": {
+                "default": "default",
+                "custom": "custom"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d80e3d58a431",
+            "label": "Post Type",
+            "name": "post_type",
+            "type": "select",
+            "instructions": "The default listing will only work on a page set as an archive. This can be done in the customizer.\r\nOtherwise you will need to create a custom card list.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d80e2ff0025c",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "choices": {
+                "post": "Posts",
+                "page": "Pages"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d80e5098a432",
+            "label": "Number of Cards",
+            "name": "posts_per_page",
+            "type": "number",
+            "instructions": "How many cards to show?",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d80e2ff0025c",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5d80e2ff0577e",
+            "label": "Advanced",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d80e2ff036cf",
+            "label": "Cards Container",
+            "name": "container_class",
+            "type": "text",
+            "instructions": "Class for container that holds all the cards.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "show-alignfull",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "container | container-content | container-fluid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "container\r\ncontainer-fluid\r\ncontainer-content",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5d80e2ff03e58",
+            "label": "Background Image",
+            "name": "background_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d80e2ff045b0",
+            "label": "Grid Class",
+            "name": "grid_class",
+            "type": "text",
+            "instructions": "Type of grid you would like. Some options include \"card-grid\" for equal sized columns, or \"grid\" for specific column sizes. \r\nIf using \"grid\" make sure to add span classes onto your paragraphs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "card-grid",
+            "placeholder": "grid | card-grid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "grid\r\ncard-grid\r\ngrid span-all-4",
+            "ign_set_data": ".grid-class"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/cards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1568746568
+}
