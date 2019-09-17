@@ -396,7 +396,7 @@ add_filter( 'login_headerurl', 'ign_login_url' );
  *
  * @return string state label OR true
  */
-function ign_is_page_archive_header( $post_id, $return_type = '' ) {
+function ign_is_page_archive( $post_id, $return_type = '' ) {
 
 	if ( 'page' == get_post_type( $post_id ) ) {
 		//get all post types that have an archive page and get the main post type post.
@@ -433,7 +433,7 @@ function ign_is_page_archive_header( $post_id, $return_type = '' ) {
 //add state label to a page used as an archive header
 function custom_post_states( $states, $post ) {
 
-	$state = ign_is_page_archive_header( $post->ID, 'label' );
+	$state = ign_is_page_archive( $post->ID, 'label' );
 
 	if ( $state ) {
 		$states[] = $state;

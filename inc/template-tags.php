@@ -207,6 +207,35 @@ function is_static_frontpage() {
 
 
 /**
+ * Gets the proper template file to show for the WP LOOP
+ * MUST BE USED INSIDE THE LOOP
+ */
+function ign_loop_template($show_full_page_content = false){
+
+	//most probably not wanting to see a full page unless this is page.php, so instead we show the card.
+	if(get_post_type() == 'page' && ! $show_full_page_content){
+		include(locate_template( 'template-parts/page/card-content.php')) ;
+	}else {
+
+		if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
+			if ( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ) {
+				include( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) );
+			} else {
+				include( locate_template( 'template-parts/post/content.php' ) );
+			}
+
+		} else {
+			if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
+				include( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) );
+			} else {
+				include( locate_template( 'template-parts/' . get_post_type() . '/content.php' ) );
+			}
+		}
+	}
+}
+
+
+/**
  * Returns the html image  for either the post thumbnail or a acf image field.
  * This goes through filters of WP and returns an image with possible mutiple srcsets
  * acf image field must be set to array
@@ -352,7 +381,7 @@ function ign_block_class($block, $custom_classes = ''){
 
 	if($block){
 		$classnames = isset($block['className']) ? $block['className'] : '';
-		$align = isset($block['align']) ? 'align' . $block['align'] . ' ' : '';
+		$align = isset($block['align']) && $block['align'] ? 'align' . $block['align'] . ' ' : '';
 		$classes = 'acf-' . strtolower($block['title']) . ' ' . $align . $classnames;
 		echo 'class="' . ($custom_classes ? $custom_classes . ' ' . $classes : $classes) . '"';
 	}

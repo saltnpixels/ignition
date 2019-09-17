@@ -27,7 +27,7 @@ get_header();
 /*
  * With ignition You can use the WP Customizer to choose a page to show its sections for an archive page
  * This way clients can control the archive page instead of needing you to make changes via php.
- * If a page is used then a page will be queried here instead of the archive loop being used. (you can still output the loop as one of the sections using ACF)
+ * If an archive page is set, then a page will be queried here instead of the archive loop being used. (you can still output the loop as one of the sections using ACF Blocks)
  *
  * For a regular index without a page used the loop will simply be output down below after "else:"
 */
@@ -36,7 +36,7 @@ get_header();
 global $post;
 $page_archive_id = ign_get_archive_page();
 
-//set if there is a sidebar on the page used, add the proper divs
+//set if there is a sidebar template on the page used, add the proper divs. divs are taken straight from those templates
 $has_sidebar = false;
 if ( $page_archive_id ) {
 	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-left' ) !== false ) {
@@ -57,8 +57,10 @@ if ( $page_archive_id ) {
         <main id="main" class="site-main" role="main">
 
 			<?php
+			//if an archive page has been set show it now
 			if ( $page_archive_id ) :
 
+				//set the post to the archive page
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
 
@@ -68,8 +70,11 @@ if ( $page_archive_id ) {
                 <div class="entry-content container-content">
 					<?php
 
-					//include sections made with acf or falls back on the_content.
-					include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
+					if( has_blocks() ) {
+						the_content();
+					}else{
+						locate_template( 'template-parts/classic-blocks/sections.php', true );
+					}
 
 					?>
                 </div>

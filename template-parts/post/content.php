@@ -9,8 +9,6 @@
  * @version 1.0
  */
 
-$post_type = get_post_type();
-$id        = get_the_ID();
 ?>
 
 <?php if ( is_single() ) : ?>

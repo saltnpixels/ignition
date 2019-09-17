@@ -26,9 +26,26 @@ function register_acf_block_types() {
 		'title'           => __( 'Menu' ),
 		'description'     => __( 'creates a menu with links where a user can scroll to a section' ),
 		'render_template' => 'template-parts/acf-blocks/section_menu.php',
-		'category'        => 'formatting',
+		'category'        => 'ign-custom',
 		'icon'            => 'menu',
 		'keywords'        => array( 'columns', 'text' ),
+		'supports'        => array(
+			'align' => array( 'wide', 'full' ),
+			'anchor' => true
+		)
+	) );
+
+
+	// Section Menu Block
+
+	acf_register_block_type( array(
+		'name'            => 'cards',
+		'title'           => __( 'Cards' ),
+		'description'     => __( 'shows a listing of items for a post type or an archive page' ),
+		'render_template' => 'template-parts/acf-blocks/cards.php',
+		'category'        => 'ign-custom',
+		'icon'            => 'editor-table',
+		'keywords'        => array( 'archive', 'cards', 'listing' ),
 		'supports'        => array(
 			'align' => array( 'wide', 'full' ),
 			'anchor' => true

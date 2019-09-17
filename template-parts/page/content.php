@@ -13,9 +13,6 @@
  *
  */
 
-$post_type = get_post_type();
-$id        = get_the_ID();
-
 ?>
 
 

@@ -243,6 +243,7 @@ img.alignleft{float:left;margin-right:30px;margin-right:var(--gap);margin-bottom
 .site-navigation .site-logo h1,.site-navigation .site-logo p{font-size:inherit}
 .site-logo{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-transform:capitalize}
 .site-logo a{color:inherit}
+.site-logo svg{max-width:100%;height:auto}
 .site-logo h1,.site-logo p{margin:0}
 .site-logo__link,.site-title a,.custom-logo-link{display:-webkit-box;display:-ms-flexbox;display:flex;text-decoration:none;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .site-logo__link img,.site-title a img,.custom-logo-link img{display:block}
@@ -298,6 +299,7 @@ img.alignleft{float:left;margin-right:30px;margin-right:var(--gap);margin-bottom
 section,.section{padding-top:30px;padding-top:var(--gap);padding-bottom:30px;padding-bottom:var(--gap)}
 section section,.section section{padding-top:0;padding-bottom:0}
 section.heading-center h1,section.heading-center h2{text-align:center}
+.entry-content>*:first-child{padding-top:30px;padding-top:var(--gap)}
 .site .acf-menu{padding:0}
 .section-menu{background:#4c545d}
 .section-menu li{font-weight:normal}

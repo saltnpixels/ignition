@@ -12,8 +12,6 @@
  * When viewing a page as a card on an archive
  */
 
-$post_type = get_post_type();
-$id        = get_the_ID();
 ?>
 
 

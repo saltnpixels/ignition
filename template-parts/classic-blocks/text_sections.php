@@ -1,5 +1,6 @@
 <?php
 //full width capable text section where you can have multiple sections arranged on a grid.
+//$post_id can be used to access this sections id. get_the_ID() might not work right because sometimes this is being called from a section stitcher
 
 $class = get_sub_field( 'class' );
 
@@ -13,7 +14,7 @@ $heading    = get_sub_field( 'heading' );
 
 <section id="section-<?php echo $section_hash; ?>"
          class="alignfull <?php echo get_row_layout(); ?> <?php echo esc_attr( $class ); ?>"
-	<?php if ( $image ) { ?> style="background-image: url('<?php echo ign_get_image_url( 'background_image', $id, 'full' );
+	<?php if ( $image ) { ?> style="background-image: url('<?php echo ign_get_image_url( 'background_image', get_the_ID(), 'full' );
 	?>');" <?php } ?>>
     <div class="<?php echo esc_attr($container); ?>">
 		<?php

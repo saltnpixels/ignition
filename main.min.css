@@ -167,6 +167,7 @@ div .flex>.span-12,div .wp-block-file>.span-12,div .flex-grid>.span-12{-webkit-b
 .site-navigation .site-logo h1,.site-navigation .site-logo p{font-size:inherit}
 .site-logo{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-transform:capitalize}
 .site-logo a{color:inherit}
+.site-logo svg{max-width:100%;height:auto}
 .site-logo h1,.site-logo p{margin:0}
 .site-logo__link,.site-title a,.custom-logo-link{display:-webkit-box;display:-ms-flexbox;display:flex;text-decoration:none;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .site-logo__link img,.site-title a img,.custom-logo-link img{display:block}
@@ -342,10 +343,9 @@ tr{border-bottom:1px solid #eee}
 td{padding:.4em}
 th:first-child,td:first-child{padding-left:0}
 th:last-child,td:last-child{padding-right:0}
-.entry-header,.page-header{position:relative;min-height:calc(500px + 5vw);padding:30px 0;color:white;background:#4780b3 no-repeat center;background-size:cover}
+.entry-header,.page-header{position:relative;min-height:calc(500px + 5vw);padding:30px 0;color:white;background:#3d2b3b no-repeat center;background-size:cover}
 .entry-header h1,.page-header h1{margin:0}
 .entry-header .cover-image,.page-header .cover-image{height:500px}
-.entry-content>*:first-child{padding-top:30px;padding-top:var(--gap)}
 .header-basic{background:transparent;min-height:0;height:auto;color:black;padding:0;margin-bottom:30px}
 .header-basic .cover-image{margin-bottom:30px;margin-bottom:var(--gap)}
 label{display:block;font-weight:800}
@@ -397,6 +397,7 @@ time,time a{font-size:1.3rem}
 section,.section{padding-top:30px;padding-top:var(--gap);padding-bottom:30px;padding-bottom:var(--gap)}
 section section,.section section{padding-top:0;padding-bottom:0}
 section.heading-center h1,section.heading-center h2{text-align:center}
+.entry-content>*:first-child{padding-top:30px;padding-top:var(--gap)}
 .site .acf-menu{padding:0}
 .section-menu{background:#4c545d}
 .section-menu li{font-weight:normal}

@@ -4,11 +4,11 @@
  */
 
 
-$id           = get_the_ID();
+$post_id           = get_the_ID();
 $section_hash = 0; //so each section has a unique ID
 
-if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ):
-	while ( have_rows( 'sections', $id ) ): the_row();
+if ( function_exists( 'have_rows' ) && have_rows( 'sections', $post_id ) ):
+	while ( have_rows( 'sections', $post_id ) ): the_row();
 		$section = get_row_layout();
 		$section_hash ++;
 

@@ -23,6 +23,7 @@ get_header(); ?>
 	            /**
 	             * Here we look for the right content. We look for a folder with the name of the post type
                  * if it doesn't exist we will use the post folder
+	             * This could be replaced with ign_loop_template();
 	             */
                 if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
                     if( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ){

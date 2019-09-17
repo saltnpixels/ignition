@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-# Classic Sections Styling
+# Sections and Blocks
 --------------------------------------------------------------*/
 section, .section {
 	//default padding. you can override with .no-padding-bottom , or top, or .padding for all around padding
@@ -18,12 +18,17 @@ section.heading-center{
 	}
 }
 
+/*------- Items directly under header should probably have padding even if not a section --------*/
+.entry-content > *:first-child {
+	padding-top: var(--gap);
+}
 
 
 /*------- ACF Menu block Defaults --------*/
 .site .acf-menu{
 	padding: 0;
 }
+
 .section-menu{
 	background: #4c545d;
 	li{

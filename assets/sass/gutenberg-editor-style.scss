@@ -77,8 +77,9 @@ div .acf-block-component {
 
 
 /*--------------------------------------------------------------
-# Make Gutenberg sidebar wider
+# Gutenberg fixes
 --------------------------------------------------------------*/
+//making sidebar wider
 @media(min-width: $media-medium) {
 	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
 		width: 30%;
@@ -87,4 +88,9 @@ div .acf-block-component {
 	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-layout__content {
 		margin-right: 30%;
 	}
+}
+
+//fixing meta boxes below editor
+div .block-editor-writing-flow{
+	height: auto;
 }

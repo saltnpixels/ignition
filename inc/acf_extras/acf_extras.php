@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * @param $field
  *
@@ -14,7 +13,7 @@ function acf_loop_field( $field ) {
 		$screen = get_current_screen();
 		if ( $screen->parent_base == 'edit' && $screen->post_type != 'acf-field-group' ) {
 
-			$post_type = ign_is_page_archive_header( $post->ID, 'post_type' );
+			$post_type = ign_is_page_archive( $post->ID, 'post_type' );
 			if ( is_admin() && get_post_type() == 'page' && $post_type ) {
 				$field['layouts']['5afb034fab739']['label'] = ucfirst( $post_type ) . ' Card List';
 			} else {
@@ -34,7 +33,7 @@ function the_loop_layout_title( $title, $field, $layout, $i ) {
 	// remove layout title from text
 	global $post;
 	if ( is_admin() && $layout['name'] == 'the_loop' ) {
-		$post_type = ign_is_page_archive_header( $post->ID, 'post_type' );
+		$post_type = ign_is_page_archive( $post->ID, 'post_type' );
 		if ( get_post_type() == 'page' && $post_type ) {
 			$title = ucfirst( $post_type ) . ' Card List';
 		} else {
@@ -59,9 +58,8 @@ function save_sections( $post_id ) {
 //must be saving a post. not any options
 	global $post;
 	if ( $post ) {
-		$id = $post->ID;
-		if ( $post_id == $id ) {
-			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $id ) ) {
+		if ( $post_id == $post->ID ) {
+			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $post_id ) ) {
 				ob_start();
 				setup_postdata( $post );
 				global $saving_sections;
@@ -69,7 +67,7 @@ function save_sections( $post_id ) {
 				//run through all sections and make sure to not save any edit link links
 				locate_template( 'template-parts/classic-blocks/sections.php', true );
 				$sections = ob_get_clean();
-				update_post_meta( $id, 'acf_all_sections', $sections );
+				update_post_meta( $post_id, 'acf_all_sections', $sections );
 				$saving_sections = false;
 			}
 		}
@@ -108,11 +106,22 @@ function ign_admin_field_settings( $field ) {
 		'ui'           => 1,
 	), true );
 
-
-
 }
 
 add_action( 'acf/render_field_settings', 'ign_admin_field_settings' );
+
+
+add_action( 'acf/render_field_settings/type=text', 'ign_add_autocomplete' );
+
+function ign_add_autocomplete( $field ) {
+
+	acf_render_field_setting( $field, array(
+		'label'        => __( 'Add Autocomplete' ),
+		'instructions' => __( 'Enter words one on each new line for autocomplete' ),
+		'name'         => 'autocomplete',
+		'type'         => 'textarea',
+	) );
+}
 
 
 function ign_admin_prepare_field( $field ) {
@@ -142,7 +151,7 @@ function ign_data_field_settings( $field ) {
 		'name'         => 'ign_set_data',
 		'type'         => 'text',
 		'placeholder'  => '.acf-row',
-		'menu_order' => 0
+		'menu_order'   => 0
 	), true );
 
 }
@@ -157,6 +166,19 @@ add_action( 'acf/render_field_settings/type=true_false', 'ign_data_field_setting
  * then with js we give that value as a class to another element based on selector chosen
  */
 function ign_show_data_field( $field ) {
+
+	if ( ! empty( $field['autocomplete'] ) ) {
+		echo '
+		<script>
+		let automcomplete = ' . json_encode($field['autocomplete']) . '.split("\n");
+		$( "#' . $field["id"] . '" ).autocomplete({
+      source: automcomplete
+    });
+		</script>
+		
+		';
+	}
+
 
 	if ( ! empty( $field['ign_set_data'] ) ) {
 		//this script runs once and the repeated fields just get cloned.
