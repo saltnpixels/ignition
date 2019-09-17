@@ -1,6 +1,6 @@
 {
     "key": "group_5d71340447ff4",
-    "title": "Column Paragraphs",
+    "title": "Column Paragraphs Block",
     "fields": [
         {
             "key": "field_5d76681d68659",
@@ -40,6 +40,26 @@
             "button_label": "Add Paragraph",
             "sub_fields": [
                 {
+                    "key": "field_5d7135102eae4",
+                    "label": "paragraph",
+                    "name": "paragraph",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                },
+                {
                     "key": "field_5d7173b096c19",
                     "label": "Paragraph Class",
                     "name": "paragraph_class",
@@ -60,26 +80,6 @@
                     "maxlength": "",
                     "autocomplete": "span-1\r\nspan-6\r\nspan-12\r\nsmall-span-6\r\nmedium-span-6\r\nlarge-span-6\r\ncontainer-span-6",
                     "ign_set_data": ".acf-row"
-                },
-                {
-                    "key": "field_5d7135102eae4",
-                    "label": "paragraph",
-                    "name": "paragraph",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "admin_only": 0,
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "full",
-                    "media_upload": 1,
-                    "delay": 0
                 }
             ]
         },
@@ -124,28 +124,6 @@
             "ign_set_data": ""
         },
         {
-            "key": "field_5d71739096c18",
-            "label": "Grid Class",
-            "name": "grid_class",
-            "type": "text",
-            "instructions": "Type of grid you would like. Some options include \"card-grid\" for equal sized columns, or \"grid\" for specific column sizes. \r\nIf using \"grid\" make sure to add span classes onto your paragraphs.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "admin_only": 0,
-            "default_value": "card-grid",
-            "placeholder": "grid | card-grid",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "autocomplete": "grid\r\ncard-grid\r\ngrid span-all-4",
-            "ign_set_data": ".grid-class"
-        },
-        {
             "key": "field_5d7173100ed83",
             "label": "Background Image",
             "name": "background_image",
@@ -169,6 +147,28 @@
             "max_height": "",
             "max_size": "",
             "mime_types": ""
+        },
+        {
+            "key": "field_5d71739096c18",
+            "label": "Grid Class",
+            "name": "grid_class",
+            "type": "text",
+            "instructions": "Type of grid you would like. Some options include \"card-grid\" for equal sized columns, or \"grid\" for specific column sizes. \r\nIf using \"grid\" make sure to add span classes onto your paragraphs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "card-grid",
+            "placeholder": "grid | card-grid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "grid\r\ncard-grid\r\ngrid span-all-4",
+            "ign_set_data": ".grid-class"
         }
     ],
     "location": [
@@ -188,5 +188,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1568678590
+    "modified": 1568746687
 }
