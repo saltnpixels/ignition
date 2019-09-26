@@ -9,7 +9,7 @@ body {
 # Logo
 --------------------------------------------------------------*/
 .site-logo {
-  @include font-size(33); //if its a text logo
+  font-size: 3.3rem; //if its a text logo
   text-transform: uppercase;
 
   color: white;

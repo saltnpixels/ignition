@@ -25,12 +25,12 @@
   }
 
   .card-title {
-    @include font-size(26);
+    font-size: 2.6rem;
     margin-bottom: var(--gutters);
   }
 
   a.term-link {
-    @include font-size(12);
+    font-size: 1.2rem;
     letter-spacing: .5px;
     text-transform: uppercase;
     font-weight: bold;
