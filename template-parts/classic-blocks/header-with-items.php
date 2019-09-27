@@ -13,7 +13,7 @@ $bg_image = ign_get_header_image( get_the_ID() );
 ?>
 
 
-<header class="entry-header layout-center-content <?php echo esc_attr( $class ); ?> <?php echo get_row_layout(); ?>"
+<header class="entry-header alignfull layout-center-content <?php echo esc_attr( $class ); ?> <?php echo get_row_layout(); ?>"
         <?php if ( $bg_image ){ ?>style="background-image: url('<?php echo $bg_image; ?>');"<?php } ?>>
 
     <div class="<?php echo $container; ?>">
