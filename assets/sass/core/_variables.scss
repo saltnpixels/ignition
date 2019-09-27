@@ -69,7 +69,7 @@
 @media(min-width: 1600px) {
 	:root {
 		//Large wide screens can have bigger text and a wider container
-		font-size: calc(62.5% + 2px); //16 becomes 20. goes up around 4. not perfectly but not bad
+		font-size: calc(62.5% + 2px); //anything using rem goes up around 2 to 3 pixels
 		--container: 1400px;
 	}
 }
