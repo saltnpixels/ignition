@@ -49,7 +49,10 @@
 }
 
 
-
+/*------- Hide override header option when gutenberg used --------*/
+.edit-post-layout .override-header{
+	display: none;
+}
 
 
 

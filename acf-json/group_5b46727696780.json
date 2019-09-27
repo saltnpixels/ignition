@@ -55,7 +55,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "override-header",
                 "id": ""
             },
             "admin_only": 0,
@@ -91,5 +91,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1549765413
+    "modified": 1569538014
 }

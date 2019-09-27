@@ -1,0 +1,204 @@
+{
+    "key": "group_5d8d13dd011ba",
+    "title": "Header Block",
+    "fields": [
+        {
+            "key": "field_5d8d1a1f98c59",
+            "label": "Header Content",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d8d15a46df5b",
+            "label": "Header Type",
+            "name": "header_type",
+            "type": "select",
+            "instructions": "You can override the basic default header. Choose a header to use. Headers are meant to appear at the top of your page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "choices": {
+                "header_paragraphs": "Header Paragraphs"
+            },
+            "default_value": [
+                "header_paragraphs"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d8d19aac2ebd",
+            "label": "Paragraphs",
+            "name": "paragraphs",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d8d15a46df5b",
+                        "operator": "==",
+                        "value": "header_paragraphs"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "grid-class",
+                "id": ""
+            },
+            "admin_only": 0,
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Paragraph",
+            "sub_fields": [
+                {
+                    "key": "field_5d8d19dac2ebe",
+                    "label": "Paragraph",
+                    "name": "paragraph",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "ign_set_data": "",
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                },
+                {
+                    "key": "field_5d8d19e9c2ebf",
+                    "label": "Paragraph Class",
+                    "name": "paragraph_class",
+                    "type": "text",
+                    "instructions": "Class that applies to this paragraph only.\r\nIf using grid, add span classes here.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "autocomplete": "span-1\r\nspan-6\r\nspan-12\r\nsmall-span-6\r\nmedium-span-6\r\nlarge-span-6\r\ncontainer-span-6",
+                    "ign_set_data": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5d8d1a2a98c5a",
+            "label": "Advanced",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d8d19436df5d",
+            "label": "Grid Class",
+            "name": "grid_class",
+            "type": "text",
+            "instructions": "Type of grid you would like. Some options include \"card-grid\" for equal sized columns, or \"grid\" for specific column sizes. \r\nIf using \"grid\" make sure to add span classes onto your paragraphs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "card-grid",
+            "placeholder": "grid | card-grid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "grid\r\ncard-grid\r\ngrid span-all-4",
+            "ign_set_data": ".grid-class"
+        },
+        {
+            "key": "field_5d8d18fd6df5c",
+            "label": "Container Class",
+            "name": "container_class",
+            "type": "text",
+            "instructions": "Class for container that holds all the paragraphs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "container-fluid",
+            "placeholder": "container | container-content | container-fluid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "container\r\ncontainer-fluid\r\ncontainer-content",
+            "ign_set_data": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/header"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1569539656
+}

@@ -9,28 +9,20 @@
 	background: #3D2B3B no-repeat center;
 	background-size: cover;
 
-  h1 {
-    margin: 0;
-  }
+	h1 {
+		margin: 0;
+	}
 
-  .cover-image {
-    height: 500px;
-  }
+	.cover-image {
+		height: 500px;
+	}
 
 }
 
-/*------- When header has no min-height and text isnt on top of any image --------*/
-.header-basic {
-  background: transparent;
-  min-height: 0;
-  height: auto;
-  color: black;
-  padding: 0;
-  margin-bottom: $gap;
-
-  .cover-image {
-    margin-bottom: var(--gap); //above title
-  }
+/*------- Items directly under header should probably have padding even if not a section --------*/
+.entry-header + * {
+	padding-top: var(--gap);
 }
+
 
 //see media.scss for background image and cover image styles

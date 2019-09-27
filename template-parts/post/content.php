@@ -12,26 +12,13 @@
 ?>
 
 <?php if ( is_single() ) : ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<?php
-		//special header layouts can be used with acf, otherwise a fallback header is used.
-		//if this is a sidebar template, js is used to pop out this header and put above the article at full width.
-		//this way its semantically placed inside properly, but moved out and looks nicely placed above the sidebar
-		locate_template( 'template-parts/classic-blocks/header_sections.php', true );
-
-		?>
-
-        <div class="entry-content container-content">
+		<div class="entry-content container-content">
 			<?php
 
 
-			//shows blocks or classic acf blocks
-			if( has_blocks() ) {
-				the_content();
-			}else{
-				locate_template( 'template-parts/classic-blocks/sections.php', true );
-			}
+			ign_the_content();
 
 
 			//not sure gutenberg eve has this anymore
@@ -44,10 +31,10 @@
 
 			?>
 
-        </div><!-- .entry-content -->
-    </article><!-- #post-## -->
+		</div><!-- .entry-content -->
+	</article><!-- #post-## -->
 
-    <section class="after-article container-content">
+	<section class="after-article container-content">
 		<?php
 		the_post_navigation( array(
 			'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'ignition' ) . '</span><div class="nav-title"><span class="nav-title-icon-wrapper">' . ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span> <span>%title</span></div>',
@@ -59,7 +46,7 @@
 			comments_template();
 		endif;
 		?>
-    </section>
+	</section>
 
 
 <?php endif; ?>
@@ -70,33 +57,33 @@
 
 
 <?php if ( ! is_single() ): ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class( 'card' ); ?>>
-        <div class="header-image cover-image">
+	<article id="post-<?php the_ID(); ?>" <?php post_class( 'card' ); ?>>
+		<div class="header-image cover-image">
 			<?php
 			if ( has_post_thumbnail() ) {
 				the_post_thumbnail( 'post-thumbnail' );
 			}
 			?>
-        </div>
+		</div>
 
-        <header class="card-header">
-            <div class="header-content">
+		<header class="card-header">
+			<div class="header-content">
 				<?php echo ign_get_term_links(); ?>
 				<?php the_title( '<h2 class="card-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
-            </div>
-        </header>
+			</div>
+		</header>
 
-        <div class="card-content">
+		<div class="card-content">
 			<?php
 			the_excerpt();
 			?>
-        </div><!-- .card-content -->
+		</div><!-- .card-content -->
 
-        <div class="card-meta">
+		<div class="card-meta">
 			<?php echo ign_posted_on(); ?>
 			<?php echo ign_comment_link(); ?>
-        </div>
-    </article><!-- #post-## -->
+		</div>
+	</article><!-- #post-## -->
 <?php endif; //end if not single ?>
 
 

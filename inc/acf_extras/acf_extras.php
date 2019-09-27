@@ -199,7 +199,7 @@ function ign_show_data_field( $field ) {
 add_filter( 'acf/render_field', 'ign_show_data_field', 11, 1 );
 
 
-//change title of sections flexible field
+//change title of sections flexible field to match a heading field found inside
 function ign_section_titles( $title, $field, $layout, $i ) {
 	//if sub field for layout title exists use it instead.
 	$layout_title = get_sub_field( 'section_title' ); //get section title field if exists
@@ -219,5 +219,38 @@ function ign_section_titles( $title, $field, $layout, $i ) {
 
 }
 
-// name
 add_filter( 'acf/fields/flexible_content/layout_title/name=sections', 'ign_section_titles', 10, 4 );
+
+
+
+
+//add classes to a wysywig field so you can control the design a bit more for each field
+function acf_plugin_wysiwyg_styling() { ?>
+	<script>
+        (function($) {
+            acf.add_filter('wysiwyg_tinymce_settings', function(mceInit, id, $field) {
+                var fieldKey = $field.data('key');
+                var fieldName = $field.data('name');
+                var flexContentName = $field.parents('[data-type="flexible_content"]').first().data('name');
+                var layoutName = $field.parents('[data-layout]').first().data('layout');
+
+                mceInit.body_class += " acf-field-key-" + fieldKey;
+                mceInit.body_class += " acf-field-name-" + fieldName;
+                if (flexContentName) {
+                    mceInit.body_class += " acf-flex-name-" + flexContentName;
+                }
+                if (layoutName) {
+                    mceInit.body_class += " acf-layout-" + layoutName;
+                }
+                // console.log(fieldName);
+                if(flexContentName === 'header_layout'){
+                   // mceInit.body_class += " entry-header";
+                }
+                return mceInit;
+            });
+
+        })(jQuery);
+	</script>
+	<?php
+}
+add_action('acf/input/admin_footer', 'acf_plugin_wysiwyg_styling');

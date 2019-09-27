@@ -16,19 +16,7 @@ if ( function_exists('have_rows') && have_rows( 'header_layout', $post_id ) && g
 	endwhile;
 else:
 
+	locate_template( 'template-parts/site-top/default-header.php', true );
 
-//DEFAULT HEADER IF NO CUSTOM HEADER CHOSEN
-
-	$bg_image = ign_get_header_image( get_the_ID() );
-	?>
-    <header class="entry-header layout-center-content <?php if($bg_image){ echo 'overlay';}?>"
-	        <?php if ( $bg_image ) { ?>style="background-image: url('<?php echo $bg_image; ?>');" <?php } ?>>
-
-        <div class="header-content container-fluid text-center">
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-        </div>
-
-    </header>
-<?php
 endif;
 

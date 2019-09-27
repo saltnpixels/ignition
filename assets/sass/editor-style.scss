@@ -8,50 +8,39 @@
 /*------- variables --------*/
 @import "core/variables";
 
-/*------- Normalize --------*/
-@import "libs/normalize"; //includes outdated browser notice
-
-/*------- Base Layout --------*/
+/*------- Base --------*/
 @import "core/base-layout";
-
-/*------- CSS Grid --------*/
-@import "core/grid-layout";
 
 /*------- Typography --------*/
 @import "global/typography";
 
-/*------- Forms --------*/
-@import "elements/forms";
+/*------- Normalize --------*/
+@import "libs/normalize";
 
-/*------- Content --------*/
-@import "elements/archives";
+/*------- CSS Grid --------*/
+@import "core/grid-layout";
+
+/*------- Menu Layout --------*/
+@import "core/menu-layout";
+
+/*------- All elements --------*/
+@import "elements/elements";
 
 /*------- media --------*/
 @import "global/media";
 
-/*------- Nav Menu  --------*/
-@import "core/menu-layout";
-
-
-/*------- Global elements --------*/
-@import "elements/icons";
-
-
-/*------- Animations --------*/
-@import "elements/animations";
-
-
-/*------- Sections --------*/
-@import "elements/sections";
 
 
 /*--------------------------------------------------------------
 # MCE Editor
 --------------------------------------------------------------*/
 .mce-content-body{
-  padding: 5px 30px !important;
+	padding: 5px 30px !important;
 }
 
 .mce-content-body{
-  @extend .container-content;
+	@extend .container-content;
 }
+
+
+

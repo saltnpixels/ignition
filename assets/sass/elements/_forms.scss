@@ -89,6 +89,7 @@ button {
 	border-radius: 3px;
 	transition: all .5s;
 	cursor: pointer;
+	box-shadow: none;
 
 	&:active, &:focus {
 		color: white;

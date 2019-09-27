@@ -38,7 +38,7 @@ html {
 	/*------- Menu Layout --------*/
 	@import "core/menu-layout";
 
-	/*------- Forms --------*/
+	/*------- All elements --------*/
 	@import "elements/elements";
 
 	/*------- media --------*/
@@ -79,6 +79,12 @@ div .acf-block-component {
 /*--------------------------------------------------------------
 # Gutenberg fixes
 --------------------------------------------------------------*/
+.entry-header{
+	h1, h2, h3, h4, h5, h6{
+		color: inherit;
+	}
+}
+
 //making sidebar wider
 @media(min-width: $media-medium) {
 	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
@@ -94,3 +100,16 @@ div .acf-block-component {
 div .block-editor-writing-flow{
 	height: auto;
 }
+
+//button fixes
+.wp-core-ui .acf-block-preview, .block-editor-rich-text{
+	.button{
+		line-height: 1.5;
+		height: auto;
+		font-size: inherit;
+	}
+
+}
+
+
+

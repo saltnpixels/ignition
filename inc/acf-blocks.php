@@ -1,7 +1,6 @@
 <?php
 
 
-
 //register ACF Blocks. Add your blocks in here
 function register_acf_block_types() {
 
@@ -15,7 +14,7 @@ function register_acf_block_types() {
 		'icon'            => ign_get_svg( array( "icon" => "view_column" ) ),
 		'keywords'        => array( 'columns', 'text' ),
 		'supports'        => array(
-			'align' => array( 'wide', 'full' ),
+			'align'  => array( 'wide', 'full' ),
 			'anchor' => true
 		)
 	) );
@@ -30,14 +29,13 @@ function register_acf_block_types() {
 		'icon'            => 'menu',
 		'keywords'        => array( 'columns', 'text' ),
 		'supports'        => array(
-			'align' => array( 'wide', 'full' ),
+			'align'  => array( 'wide', 'full' ),
 			'anchor' => true
 		)
 	) );
 
 
-	// Section Menu Block
-
+	// Card (loop) Block
 	acf_register_block_type( array(
 		'name'            => 'cards',
 		'title'           => __( 'Cards' ),
@@ -47,9 +45,27 @@ function register_acf_block_types() {
 		'icon'            => 'editor-table',
 		'keywords'        => array( 'archive', 'cards', 'listing' ),
 		'supports'        => array(
-			'align' => array( 'wide', 'full' ),
+			'align'  => array( 'wide', 'full' ),
 			'anchor' => true
 		)
+	) );
+
+	// Header Block
+	acf_register_block_type( array(
+		'name'            => 'header',
+		'title'           => __( 'Header' ),
+		'description'     => __( 'Overrides the basic header and shows a special one for this post or page.' ),
+		'render_template' => 'template-parts/acf-blocks/header.php',
+		'category'        => 'ign-custom',
+		'icon'            => 'schedule',
+		'keywords'        => array( 'header', 'hero' ),
+		'align'           => 'full',
+		'supports'        => array(
+			'anchor' => true,
+			'align'  => array( 'wide', 'full' ),
+			'multiple' => false
+		),
+
 	) );
 
 
@@ -57,9 +73,6 @@ function register_acf_block_types() {
 
 
 }
-
-
-
 
 
 // Check if function exists and hook into setup and adds all blocks.
@@ -80,7 +93,7 @@ function ign_block_categories( $categories, $post ) {
 	return array_merge(
 		array(
 			array(
-				'slug' => 'ign-custom',
+				'slug'  => 'ign-custom',
 				'title' => __( 'Ignition', 'ignition' ),
 //				'icon'  => 'marker',
 			),
@@ -88,6 +101,7 @@ function ign_block_categories( $categories, $post ) {
 		$categories
 	);
 }
+
 add_filter( 'block_categories', 'ign_block_categories', 10, 2 );
 
 

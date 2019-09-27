@@ -21,8 +21,8 @@ get_header(); ?>
 
 			<?php
 			while ( have_posts() ) : the_post();
-	//shows the page content only
-				locate_template( 'template-parts/page/content.php', true ) ;
+				//shows the page content only
+				locate_template( 'template-parts/page/content.php', true );
 
 			endwhile; // End of the loop.
 			?>

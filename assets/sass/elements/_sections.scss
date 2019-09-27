@@ -18,10 +18,6 @@ section.heading-center{
 	}
 }
 
-/*------- Items directly under header should probably have padding even if not a section --------*/
-.entry-content > *:first-child {
-	padding-top: var(--gap);
-}
 
 
 /*------- ACF Menu block Defaults --------*/

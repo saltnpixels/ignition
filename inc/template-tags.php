@@ -2,7 +2,7 @@
 /**
  * Custom template tags for ignition
  * Most expect you to be in the loop
- * ign_get_terms does not need to be in loop
+ * ign_get_terms  and ign_get_term_links does not need to be in loop
  *
  * @package Ignition
  * @since 1.0
@@ -172,8 +172,11 @@ endif;
 
 
 /**
- * ign edit link
+ * ign edit link with some extras and markup
+ * if using classic blocks use this inside those blocks
+ *
  */
+if ( ! function_exists( 'ign_edit_link' ) ) :
 function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
 	global $saving_sections;
 	if ( $saving_sections ) {
@@ -197,22 +200,26 @@ function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
 		$class
 	);
 }
+endif;
 
 /**
- * Checks to see if we're on the static front homepage or not.
+ * Checks to see if we're on a static front homepage or not as opposed to the blog frontpage.
  */
+if ( ! function_exists( 'is_static_frontpage' ) ) :
 function is_static_frontpage() {
 	return ( is_front_page() && ! is_home() );
 }
+endif;
 
 
 /**
  * Gets the proper template file to show for the WP LOOP
- * MUST BE USED INSIDE THE LOOP
+ * MUST BE USED INSIDE THE LOOP TO USE
+ * Simply routes the page to the right folder and file
  */
 function ign_loop_template($show_full_page_content = false){
 
-	//most probably not wanting to see a full page unless this is page.php, so instead we show the card.
+	//most probably not wanting to see a full page unless this is page.php, so instead we show the card content.
 	if(get_post_type() == 'page' && ! $show_full_page_content){
 		include(locate_template( 'template-parts/page/card-content.php')) ;
 	}else {
@@ -236,9 +243,10 @@ function ign_loop_template($show_full_page_content = false){
 
 
 /**
- * Returns the html image  for either the post thumbnail or a acf image field.
- * This goes through filters of WP and returns an image with possible mutiple srcsets
- * acf image field must be set to array
+ * Returns the html image for acf image field.
+ * Can default to show thumbnail
+ * show image with filters properly set
+ * This goes through filters of WP and returns an image with possible multiple srcsets
  *
  * @param int $post_id
  * @param string $size
@@ -275,7 +283,7 @@ function ign_get_image( $acf_image = '', $post_id = false, $size = 'post-thumbna
 }
 
 /**
- * Returns the image url for either the post thumbnail or a acf image field.
+ * Returns the image url for acf image field.
  * acf image field must be set to array
  *
  * @param int $post_id
@@ -376,7 +384,11 @@ function ign_get_link_field($link_field, $post_id = false){
 }
 
 
-
+/**
+ * @param $block
+ * @param string $custom_classes
+ * For use in block template, outputs the block classes
+ */
 function ign_block_class($block, $custom_classes = ''){
 
 	if($block){
@@ -387,6 +399,27 @@ function ign_block_class($block, $custom_classes = ''){
 	}
 }
 
+
+
+
+/**
+ * Show the content based on if its using Gutenberg or not
+ */
+function ign_the_content(){
+	//shows blocks or classic acf blocks. check for a header block too
+	$has_header = has_block( 'acf/header' );
+	if ( $has_header || has_blocks() ) {
+		if ( ! $has_header ) {
+			locate_template( 'template-parts/site-top/default-header.php', true );
+		}
+
+		the_content();
+	} else {
+		//show classic blocks in editor
+		locate_template( 'template-parts/classic-blocks/header_sections.php', true );
+		locate_template( 'template-parts/classic-blocks/sections.php', true );
+	}
+}
 
 
 
