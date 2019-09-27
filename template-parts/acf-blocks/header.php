@@ -25,6 +25,7 @@ $header_type = get_field('header_type');
 
 	<?php if( $header_type == 'header_paragraphs' ): ?>
 	<div class="columns-holder <?php echo esc_attr(get_field( 'container_class' ) ); ?>">
+
 		<?php
 		if ( have_rows( 'paragraphs' ) ) { ?>
 			<div class="<?php echo esc_attr( get_field( 'grid_class' ) ); ?> paragraphs-holder">
