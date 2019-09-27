@@ -139,6 +139,28 @@
             "endpoint": 0
         },
         {
+            "key": "field_5d8d18fd6df5c",
+            "label": "Container Class",
+            "name": "container_class",
+            "type": "text",
+            "instructions": "Class for container that holds all the paragraphs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "container",
+            "placeholder": "container | container-content | container-fluid",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "container\r\ncontainer-fluid\r\ncontainer-content",
+            "ign_set_data": ""
+        },
+        {
             "key": "field_5d8d19436df5d",
             "label": "Grid Class",
             "name": "grid_class",
@@ -159,28 +181,6 @@
             "maxlength": "",
             "autocomplete": "grid\r\ncard-grid\r\ngrid span-all-4",
             "ign_set_data": ".grid-class"
-        },
-        {
-            "key": "field_5d8d18fd6df5c",
-            "label": "Container Class",
-            "name": "container_class",
-            "type": "text",
-            "instructions": "Class for container that holds all the paragraphs.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "admin_only": 0,
-            "default_value": "container-fluid",
-            "placeholder": "container | container-content | container-fluid",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "autocomplete": "container\r\ncontainer-fluid\r\ncontainer-content",
-            "ign_set_data": ""
         }
     ],
     "location": [
@@ -200,5 +200,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569539656
+    "modified": 1569548559
 }
