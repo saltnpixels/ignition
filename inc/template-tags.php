@@ -394,7 +394,7 @@ function ign_block_class($block, $custom_classes = ''){
 	if($block){
 		$classnames = isset($block['className']) ? $block['className'] : '';
 		$align = isset($block['align']) && $block['align'] ? 'align' . $block['align'] . ' ' : '';
-		$classes = 'acf-' . strtolower($block['title']) . ' ' . $align . $classnames;
+		$classes = 'acf-' . sanitize_title(strtolower($block['title'])) . ' ' . $align . $classnames;
 		echo 'class="' . ($custom_classes ? $custom_classes . ' ' . $classes : $classes) . '"';
 	}
 }

@@ -353,7 +353,7 @@ add_action( 'wp_enqueue_scripts', 'ignition_scripts' );
  */
 function ign_gutenberg_styles() {
 	// Load the theme styles within Gutenberg.
-	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, '', 'all' );
+	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, wp_get_theme()->get( 'Version' ), 'all' );
 
 	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
 		wp_get_theme()->get( 'Version' ), true );

@@ -17,7 +17,6 @@ $block_id = isset($block['anchor']) ? $block['anchor'] : 'section-' . $block['id
 $bg_image = ign_get_header_image( $post_id );
 $header_type = get_field('header_type');
 
-
 ?>
 
 <header id="<?php echo $block_id; ?>" <?php ign_block_class($block, 'entry-header layout-center-content'); ?>
