@@ -848,3 +848,4 @@ jQuery(function ($) {
     }
   });
 });
+"use strict";
