@@ -40,7 +40,7 @@ $container = get_field( 'container_class' );
 						?>
 						<li>
 							<div class="menu-item-link">
-								<a href="<?php echo ign_get_link_field('link'); ?>"><?php echo get_field( 'menu_title' ); ?></a>
+								<a href="<?php echo ign_get_link_field('link'); ?>"><?php echo get_sub_field( 'menu_title' ); ?></a>
 							</div>
 						</li>
 
