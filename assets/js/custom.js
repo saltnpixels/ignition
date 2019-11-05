@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (sidebar !== null) {
     sidebar.innerHTML = sidebar.innerHTML.trim(); //if moving stuff in and out its good to remove extra space so :empty works
 
-    var sidebarTemplate = document.querySelector('.sidebar-template');
+    var sidebarTemplate = document.querySelector('.sidebar-template'); //if there is a sidebar and you want the header to be above the article and sidebar add class .header-above to the sidebar-template
 
     if (sidebarTemplate !== null && sidebarTemplate.classList.contains('header-above')) {
       document.querySelectorAll('.entry-header, .page-header').forEach(function (header) {

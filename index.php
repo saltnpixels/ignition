@@ -110,19 +110,7 @@ if ( $page_archive_id ) {
 						//default to one section fo cards
 						while ( have_posts() ) : the_post();
 
-							//if get post type is a page get the card content for pages, a special file when showing many pages as an archive
-							if ( get_post_type() == 'page' ) {
-								include( locate_template( 'template-parts/page/card-content.php' ) );
-							} //if folder of post type doesn't exist, use basic post content.
-                            elseif ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-								include( locate_template( 'template-parts/post/content.php' ) );
-							} else {
-								if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
-									include( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) );
-								} else {
-									include( locate_template( 'template-parts/' . get_post_type() . '/content.php' ) );
-								}
-							}
+						ign_loop();
 
 						endwhile; // End of the loop.
 						?>

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.2.4] - Nov 5, 2019
+BIG Changes. Now you can add JS and sass files within the template-parts folder. These files will get added into the assets folder automagically and then compile.
+With these changes, a few files were added, removed or moved around.
+ - Re added support for internationalization.
+ - Moved around some sass files and sass content: 
+   - added articles.scss for all article styles. This replaces archives.scss 
+    - moved some styles into template-parts/post/post.scss from articles.scss
+    - Added global/defaults.scss with some site defaults taken from other sass files.
+    - removed headers.scss and footers.scss because the content from those is now in defaults.scss.
+ - Added ability to show ign_loop function as opposed to the long conditionals. Easily allows routing to the right content without a lot of lines by using the ign_loop function
+
+
+## [3.2.1 - 3] - Sep 27, 2019
+Small Fixes for Stable release
+
 ## [3.2.0] - Sep 26, 2019
 Gutenberg Headers!
 <br> You can now create a header block to override the default header. 

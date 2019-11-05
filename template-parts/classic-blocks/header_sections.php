@@ -16,7 +16,7 @@ if ( function_exists('have_rows') && have_rows( 'header_layout', $post_id ) && g
 	endwhile;
 else:
 
-	locate_template( 'template-parts/site-top/default-header.php', true );
+	include( locate_template( 'template-parts/site-top/default-header.php' ) );
 
 endif;
 

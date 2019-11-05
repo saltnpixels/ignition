@@ -2,9 +2,12 @@
 
 /**
  * Header Block Template.
+ * The header block is special because we look for this block and if its not found, we output a default header instead.
+ *
+ * So if you want to add different headers, use this file and the acf header block to make more headers.
  *
  * Add different type of headers by editing this block here and in the ACf Settings
- * Add a new header tot he header_type dropdown and make conditional fields show up for the new type of header.
+ * Add a new header to the header_type dropdown and make conditional fields show up for the new type of header.
  *
  * @param array $block The block settings and attributes.
  * @param string $content The block inner HTML (empty).
@@ -15,6 +18,8 @@
 
 $block_id = isset($block['anchor']) ? $block['anchor'] : 'section-' . $block['id'];
 $bg_image = ign_get_header_image( $post_id );
+
+//type of header
 $header_type = get_field('header_type');
 
 ?>

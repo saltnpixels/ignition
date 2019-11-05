@@ -1,0 +1,42 @@
+/**
+Styles for your post type can go here or in the folder of the post type in template-parts.
+The choice is up to you.
+ */
+
+
+/*--------------------------------------------------------------
+# Default article meta Meta
+--------------------------------------------------------------*/
+time, time a, .card-meta {
+	font-size: 1.3rem;
+}
+
+
+/*--------------------------------------------------------------
+# Default Card Pagination for all loops
+--------------------------------------------------------------*/
+.pagination {
+	text-align: center;
+	padding: var(--gap) 0;
+
+	.page-numbers {
+		background: #ff4a6b;
+		color: white;
+		margin: 0 3px;
+		padding: 3px 8px;
+
+		* {
+			pointer-events: none;
+		}
+	}
+
+	.page-numbers.current {
+		background: grey;
+	}
+
+	.page-numbers.dots {
+		background: transparent;
+		color: grey;
+		margin: 0;
+	}
+}

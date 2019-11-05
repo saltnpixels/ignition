@@ -149,24 +149,6 @@ img {
   clear: both;
 }
 
-/*------- Padding classes --------*/
-.padding{
-	padding: var(--gap);
-}
-
-.no-padding{
-	padding: 0;
-}
-
-.no-padding-top{
-	padding-top: 0;
-}
-
-.no-padding-bottom{
-	padding-bottom: 0;
-}
-
-
 
 //fixes data-toggle in ie11 on svg items
 @media screen and (-ms-high-contrast:active), (-ms-high-contrast: none) {

@@ -14,6 +14,11 @@
 	animation-iteration-count: infinite;
 }
 
+#page [data-scrollscrub] {
+	transition: none; //tween cannot work if there is transitions set
+}
+
+
 
 /*--------------------------------------------------------------
 # Scroll Animation with data-scrollanimation
@@ -27,16 +32,13 @@
 }
 
 /*------- Animate in a sequence --------*/
+//simple add class sequence to your item and when it scrolls in it will scroll in the items inside in a sequence
 @for $i from 0 through 30 {
 	.active.sequence:nth-of-type(#{$i+1}) { //active makes sure the sequence only runs when it loads in but not out, so it resets fast
 		transition-delay: #{$i/4}s;
 	}
 }
 
-
-#page [data-scrollscrub] {
-	transition: none; //tween cannot work if there is transitions set
-}
 
 
 //some animations included

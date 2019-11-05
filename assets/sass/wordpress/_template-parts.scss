@@ -1,0 +1,69 @@
+/*--------------------------------------------------------------
+# Cards
+--------------------------------------------------------------*/
+//or remove this completely to design your own cards
+.post.card {
+	box-shadow: 0 1px 12px rgba(black, .3);
+	border-radius: 5px;
+	position: relative;
+	color: var(--main-text-color);
+	display: flex;
+	flex-direction: column;
+
+	> * {
+		padding: 0 var(--gutters);
+	}
+
+	/*------- Card Header --------*/
+	.cover-image {
+		padding: 0;
+		img {
+			height: 250px;
+		}
+
+	}
+
+	.card-title {
+		font-size: 2.6rem;
+		margin-bottom: var(--gutters);
+	}
+
+	a.term-link {
+		font-size: 1.2rem;
+		letter-spacing: .5px;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.more-link {
+		@extend .button;
+	}
+
+	.card-content {
+		flex: 1 0 auto;
+		font-size: 1.6rem;
+	}
+
+	.card-meta{
+		display: flex;
+		padding-bottom: 5px;
+	}
+
+	.posted-on{
+		margin-right: 10px;
+	}
+
+}//end cards styling
+
+
+/*------- ACF Menu block --------*/
+.site .acf-menu{
+	padding: 0;
+}
+
+.section-menu{
+	background: #4c545d;
+	li{
+		font-weight: normal;
+	}
+}

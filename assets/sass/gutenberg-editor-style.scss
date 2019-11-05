@@ -8,7 +8,7 @@
 
 
 html {
-	font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px. On big screens add 4px.
+	font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px. On big screens add 2px.
 }
 
 
@@ -44,13 +44,22 @@ html {
 	/*------- media --------*/
 	@import "global/media";
 
+	/*------- defaults --------*/
+	@import "global/defaults";
+
+	/*------- Default Block overrides --------*/
+	@import "wordpress/default-blocks";
+
+	/*------- Template Parts --------*/
+	@import "wordpress/template-parts";
+
 }
 
 
 
 
 /*--------------------------------------------------------------
-# Small changes
+# Gutenberg Changes
 --------------------------------------------------------------*/
 
 
@@ -65,7 +74,7 @@ div .acf-block-component {
 	}
 }
 
-/*------- Hide page sections when using block editor --------*/
+/*------- Hide acf page sections when using block editor --------*/
 .block-editor__container #acf-group_5aa6a924b02ff{
 	display: none;
 }
@@ -84,9 +93,6 @@ div .acf-block-component {
 }
 
 
-/*--------------------------------------------------------------
-# Gutenberg fixes
---------------------------------------------------------------*/
 .entry-header{
 	h1, h2, h3, h4, h5, h6{
 		color: inherit;
@@ -94,7 +100,7 @@ div .acf-block-component {
 }
 
 
-
+/*------- WP Sidebar fixes --------*/
 //making sidebar wider on wide computer screens
 @media(min-width: 1500px) {
 	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {

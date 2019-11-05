@@ -177,38 +177,38 @@ endif;
  *
  */
 if ( ! function_exists( 'ign_edit_link' ) ) :
-function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
-	global $saving_sections;
-	if ( $saving_sections ) {
-		return;
-	}
+	function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
+		global $saving_sections;
+		if ( $saving_sections ) {
+			return;
+		}
 
-	if ( ! $id ) {
-		global $post;
-		$id = $post->ID;
-	}
+		if ( ! $id ) {
+			global $post;
+			$id = $post->ID;
+		}
 
-	edit_post_link(
-		sprintf(
-		/* translators: %s: Name of current post */
-			__( '%s<span class="screen-reader-text"> "%s"</span>', 'ignition' ),
-			$text, get_the_title()
-		),
-		'<span class="edit-link">',
-		'</span>',
-		$id,
-		$class
-	);
-}
+		edit_post_link(
+			sprintf(
+			/* translators: %s: Name of current post */
+				__( '%s<span class="screen-reader-text"> "%s"</span>', 'ignition' ),
+				$text, get_the_title()
+			),
+			'<span class="edit-link">',
+			'</span>',
+			$id,
+			$class
+		);
+	}
 endif;
 
 /**
  * Checks to see if we're on a static front homepage or not as opposed to the blog frontpage.
  */
 if ( ! function_exists( 'is_static_frontpage' ) ) :
-function is_static_frontpage() {
-	return ( is_front_page() && ! is_home() );
-}
+	function is_static_frontpage() {
+		return ( is_front_page() && ! is_home() );
+	}
 endif;
 
 
@@ -217,12 +217,12 @@ endif;
  * MUST BE USED INSIDE THE LOOP TO USE
  * Simply routes the page to the right folder and file
  */
-function ign_loop_template($show_full_page_content = false){
+function ign_loop( $show_full_page_content = false ) {
 
 	//most probably not wanting to see a full page unless this is page.php, so instead we show the card content.
-	if(get_post_type() == 'page' && ! $show_full_page_content){
-		include(locate_template( 'template-parts/page/card-content.php')) ;
-	}else {
+	if ( get_post_type() == 'page' && ! $show_full_page_content ) {
+		include( locate_template( 'template-parts/page/card-content.php' ) );
+	} else {
 
 		if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
 			if ( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ) {
@@ -251,7 +251,7 @@ function ign_loop_template($show_full_page_content = false){
  * @param int $post_id
  * @param string $size
  * @param string $attr
- * @param  mixed $acf_image
+ * @param mixed $acf_image
  *
  * @return string
  */
@@ -260,16 +260,16 @@ function ign_get_image( $acf_image = '', $post_id = false, $size = 'post-thumbna
 	$image = '';
 
 	//if its a string turn it into an array
-	if(is_string($acf_image) && function_exists('acf_get_loop')){
-		if(acf_get_loop()){
-			$acf_image = get_sub_field($acf_image, $post_id);
-		}else{
-			$acf_image = get_field($acf_image, $post_id);
+	if ( is_string( $acf_image ) && function_exists( 'acf_get_loop' ) ) {
+		if ( acf_get_loop() ) {
+			$acf_image = get_sub_field( $acf_image, $post_id );
+		} else {
+			$acf_image = get_field( $acf_image, $post_id );
 		}
 	}
 
 	//get image through WP
-	if ( $acf_image && is_array($acf_image) ) {
+	if ( $acf_image && is_array( $acf_image ) ) {
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image( $image_id, $size, '', $attr );
 	} else {
@@ -288,7 +288,7 @@ function ign_get_image( $acf_image = '', $post_id = false, $size = 'post-thumbna
  *
  * @param int $post_id
  * @param string $size
- * @param  mixed $acf_image
+ * @param mixed $acf_image
  *
  * @return string
  */
@@ -297,16 +297,16 @@ function ign_get_image_url( $acf_image = '', $post_id = false, $size = '', $use_
 	$image = '';
 
 	//if were passed a string we first need to get the image from the field. make sure acf is also installed
-	if(is_string($acf_image) && function_exists('acf_get_loop')){
-		if(acf_get_loop()){
-			$acf_image = get_sub_field($acf_image, $post_id);
-		}else{
-			$acf_image = get_field($acf_image, $post_id);
+	if ( is_string( $acf_image ) && function_exists( 'acf_get_loop' ) ) {
+		if ( acf_get_loop() ) {
+			$acf_image = get_sub_field( $acf_image, $post_id );
+		} else {
+			$acf_image = get_field( $acf_image, $post_id );
 		}
 	}
 
 
-	if ( $acf_image && is_array($acf_image) ) {
+	if ( $acf_image && is_array( $acf_image ) ) {
 		$image_id = $acf_image['id'];
 		$image    = wp_get_attachment_image_url( $image_id, $size, '' );
 	} else {
@@ -359,22 +359,22 @@ function ign_get_header_image( $post_id = false, $return_type = 'url', $attr = '
  *
  * If the link field is empty we still return an array so it is set and works
  */
-function ign_get_link_field($link_field, $post_id = false){
+function ign_get_link_field( $link_field, $post_id = false ) {
 
 
-	if(is_string($link_field) && function_exists('acf_get_loop')){
-		if(acf_get_loop()){
-			$link_field = get_sub_field($link_field, $post_id);
-		}else{
-			$link_field = get_field($link_field, $post_id);
+	if ( is_string( $link_field ) && function_exists( 'acf_get_loop' ) ) {
+		if ( acf_get_loop() ) {
+			$link_field = get_sub_field( $link_field, $post_id );
+		} else {
+			$link_field = get_field( $link_field, $post_id );
 		}
 	}
 
 	//return array even if not link field found so no error occurs
-	if(! $link_field){
+	if ( ! $link_field ) {
 		$link_field = array(
-			'title' => '',
-			'url' => 'javascript:;',
+			'title'  => '',
+			'url'    => 'javascript:;',
 			'target' => '_self'
 		);
 	}
@@ -389,35 +389,34 @@ function ign_get_link_field($link_field, $post_id = false){
  * @param string $custom_classes
  * For use in block template, outputs the block classes
  */
-function ign_block_class($block, $custom_classes = ''){
+function ign_block_class( $block, $custom_classes = '' ) {
 
-	if($block){
-		$classnames = isset($block['className']) ? $block['className'] : '';
-		$align = isset($block['align']) && $block['align'] ? 'align' . $block['align'] . ' ' : '';
-		$classes = 'acf-' . sanitize_title(strtolower($block['title'])) . ' ' . $align . $classnames;
-		echo 'class="' . ($custom_classes ? $custom_classes . ' ' . $classes : $classes) . '"';
+	if ( $block ) {
+		$classnames = isset( $block['className'] ) ? $block['className'] : '';
+		$align      = isset( $block['align'] ) && $block['align'] ? 'align' . $block['align'] . ' ' : '';
+		$classes    = 'acf-' . sanitize_title( strtolower( $block['title'] ) ) . ' ' . $align . $classnames;
+		echo 'class="' . ( $custom_classes ? $custom_classes . ' ' . $classes : $classes ) . '"';
 	}
 }
-
-
 
 
 /**
  * Show the content based on if its using Gutenberg or not
  */
-function ign_the_content(){
+function ign_the_content() {
 	//shows blocks or classic acf blocks. check for a header block too
 	$has_header = has_block( 'acf/header' );
 	if ( $has_header || has_blocks() ) {
+		//if there are blocks but not a header block, show the default header
 		if ( ! $has_header ) {
-			locate_template( 'template-parts/site-top/default-header.php', true );
+			include( locate_template( 'template-parts/site-top/default-header.php' ) );
 		}
 
 		the_content();
 	} else {
 		//show classic blocks in editor
-		locate_template( 'template-parts/classic-blocks/header_sections.php', true );
-		locate_template( 'template-parts/classic-blocks/sections.php', true );
+		include( locate_template( 'template-parts/classic-blocks/header_sections.php' ) );
+		include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 	}
 }
 

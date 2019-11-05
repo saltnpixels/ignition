@@ -33,7 +33,7 @@ $old_post  = $post_id; //saving the current page id
 				//routes to the right template file
 				while ( have_posts() ) :
 					the_post();
-					ign_loop_template();
+					ign_loop();
 				endwhile;
 
 
@@ -55,7 +55,7 @@ $old_post  = $post_id; //saving the current page id
 				//loop
 				if ( $cards->have_posts() ) : ?>
 					<?php while ( $cards->have_posts() ) : $cards->the_post(); ?>
-						<?php ign_loop_template(); ?>
+						<?php ign_loop(); ?>
 					<?php endwhile; ?>
 				<?php else : ?>
 					<?php get_template_part( 'content', 'none' ); ?>

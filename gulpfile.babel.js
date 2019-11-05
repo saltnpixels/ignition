@@ -31,7 +31,9 @@ const config = require( './wpgulp.config.js' );
  *
  * Load gulp plugins and passing them semantic names.
  */
-const gulp = require( 'gulp' ); // Gulp of-course.
+//const gulp = require( 'gulp' ); // Gulp of-course.
+const { series, parallel, src, dest, lastRun, watch } = require('gulp');
+
 
 // CSS related plugins.
 const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
@@ -86,9 +88,9 @@ const errorHandler = r => {
  * Live Reloads, CSS injections, Localhost tunneling.
  * @link http://www.browsersync.io/docs/options/
  *
- * @param {Mixed} done Done.
+ * @param  done Done.
  */
-const browsersync = done => {
+function browsersync(done){
 	browserSync.init({
 		proxy: config.projectURL,
 		open: config.browserAutoOpen,
@@ -96,13 +98,32 @@ const browsersync = done => {
 		watchEvents: [ 'change', 'add', 'unlink', 'addDir', 'unlinkDir' ]
 	});
 	done();
-};
+}
 
 // Helper function to allow browser reload with Gulp 4.
-const reload = done => {
+function reload(done){
 	browserSync.reload();
 	done();
-};
+}
+
+
+const processors = [
+	postcssPresetEnv
+];
+
+
+/**
+ * Task: `TemplatePartStyles`
+ * Template Part concat Sass Styles from template part folder
+ */
+function templatePartStyles(){
+	return src(config.templatePartsStyles, { allowEmpty: true })
+		.pipe( concat( config.templatePartStyleFile + '.scss' ) )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( dest( config.templatePartsStylesDestination ) )
+		.pipe(touch());
+}
+
 
 /**
  * Task: `styles`.
@@ -118,13 +139,10 @@ const reload = done => {
  *    6. Minifies the CSS file and generates style.min.css
  *    7. Injects CSS or reloads the browser via browserSync
  */
-const processors = [
-	postcssPresetEnv
-];
 
-gulp.task( 'styles', () => {
-	return gulp
-		.src( config.styleSRC, { allowEmpty: true })
+function styles(){
+
+	return src( config.styleSRC, { allowEmpty: true })
 		.pipe( plumber( errorHandler ) )
 		.pipe( sourcemaps.init() )
 		.pipe(
@@ -141,7 +159,7 @@ gulp.task( 'styles', () => {
 		//.pipe( sourcemaps.init({ loadMaps: true }) )
 		//.pipe( sourcemaps.write( './' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe( dest( config.styleDestination ) )
 		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( mmq({ log: true }) ) // Merge Media Queries only for .min.css version.
@@ -149,12 +167,12 @@ gulp.task( 'styles', () => {
 		.pipe( rename({ suffix: '.min' }) )
 		.pipe( minifycss({ maxLineLen: 10 }) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe( dest( config.styleDestination ) )
 		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.min.css if that is enqueued.
 		.pipe( notify({ message: '\n\n✅  ===> STYLES — completed!\n', onLast: true }) );
-});
+}
 
 /**
  * Task: `stylesRTL`.
@@ -171,9 +189,8 @@ gulp.task( 'styles', () => {
  *    8. Minifies the CSS file and generates style-rtl.min.css
  *    9. Injects CSS or reloads the browser via browserSync
  */
-gulp.task( 'stylesRTL', () => {
-	return gulp
-		.src( config.styleSRC, { allowEmpty: true })
+function stylesRTL(){
+	return src( config.styleSRC, { allowEmpty: true })
 		.pipe( plumber( errorHandler ) )
 		.pipe( sourcemaps.init() )
 		.pipe(
@@ -191,18 +208,18 @@ gulp.task( 'stylesRTL', () => {
 		.pipe( rename({ suffix: '-rtl' }) ) // Append "-rtl" to the filename.
 		.pipe( rtlcss() ) // Convert to RTL.
 		.pipe( sourcemaps.write( './' ) ) // Output sourcemap for style-rtl.css.
-		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe( dest( config.styleDestination ) )
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.css or style-rtl.css, if that is enqueued.
 		.pipe( mmq({ log: true }) ) // Merge Media Queries only for .min.css version.
 		.pipe( rename({ suffix: '.min' }) )
 		.pipe( minifycss({ maxLineLen: 10 }) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe( dest( config.styleDestination ) )
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.css or style-rtl.css, if that is enqueued.
 		.pipe( notify({ message: '\n\n✅  ===> STYLES RTL — completed!\n', onLast: true }) );
-});
+}
 
 /**
  * Task: `vendorsJS`.
@@ -215,9 +232,8 @@ gulp.task( 'stylesRTL', () => {
  *     3. Renames the JS file with suffix .min.js
  *     4. Uglifes/Minifies the JS file and generates vendors.min.js
  */
-gulp.task( 'vendorsJS', () => {
-	return gulp
-		.src( config.jsVendorSRC, { since: gulp.lastRun( 'vendorsJS' ) }) // Only run on changed files.
+function vendorsJS(){
+	return src( config.jsVendorSRC, { since: lastRun( vendorsJS ) }) // Only run on changed files.
 		.pipe( plumber( errorHandler ) )
 		.pipe(
 			babel({
@@ -234,7 +250,7 @@ gulp.task( 'vendorsJS', () => {
 		.pipe( remember( config.jsVendorSRC ) ) // Bring all files back to stream.
 		.pipe( concat( config.jsVendorFile + '.js' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.jsVendorDestination ) )
+		.pipe( dest( config.jsVendorDestination ) )
 		.pipe(
 			rename({
 				basename: config.jsVendorFile,
@@ -243,9 +259,26 @@ gulp.task( 'vendorsJS', () => {
 		)
 		.pipe( uglify() )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.jsVendorDestination ) )
+		.pipe( dest( config.jsVendorDestination ) )
 		.pipe( notify({ message: '\n\n✅  ===> VENDOR JS — completed!\n', onLast: true }) );
-});
+}
+
+
+
+
+
+/**
+ * Task: `TemplatePartStyles`
+ * Template Part concat Sass Styles from template part folder
+ */
+function templatePartScripts(){
+	return src(config.templatePartsScripts, { allowEmpty: true })
+		.pipe( concat( config.templatePartScriptsFile + '.js' ) )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( dest( config.templatePartsScriptsDestination ) )
+		.pipe(touch());
+}
+
 
 /**
  * Task: `customJS`.
@@ -258,9 +291,8 @@ gulp.task( 'vendorsJS', () => {
  *     3. Renames the JS file with suffix .min.js
  *     4. Uglifes/Minifies the JS file and generates custom.min.js
  */
-gulp.task( 'customJS', () => {
-	return gulp
-		.src( config.jsCustomSRC, { since: gulp.lastRun( 'customJS' ) }) // Only run on changed files.
+function customJS(){
+	return src( config.jsCustomSRC, { since: lastRun( customJS ) }) // Only run on changed files.
 		.pipe( plumber( errorHandler ) )
 		.pipe(
 			babel({
@@ -277,7 +309,7 @@ gulp.task( 'customJS', () => {
 		.pipe( remember( config.jsCustomSRC ) ) // Bring all files back to stream.
 		.pipe( concat( config.jsCustomFile + '.js' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.jsCustomDestination ) )
+		.pipe( dest( config.jsCustomDestination ) )
 		.pipe(touch())
 		.pipe(
 			rename({
@@ -287,9 +319,9 @@ gulp.task( 'customJS', () => {
 		)
 		.pipe( uglify() )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( config.jsCustomDestination ) )
+		.pipe( dest( config.jsCustomDestination ) )
 		.pipe( notify({ message: '\n\n✅  ===> CUSTOM JS — completed!\n', onLast: true }) );
-});
+}
 
 /**
  * Task: `images`.
@@ -307,9 +339,8 @@ gulp.task( 'customJS', () => {
  * Read the following to change these options.
  * @link https://github.com/sindresorhus/gulp-imagemin
  */
-gulp.task( 'images', () => {
-	return gulp
-		.src( config.imgSRC )
+function images(){
+	return src( config.imgSRC )
 		.pipe(
 			cache(
 				imagemin([
@@ -322,9 +353,9 @@ gulp.task( 'images', () => {
 				])
 			)
 		)
-		.pipe( gulp.dest( config.imgDST ) )
+		.pipe( dest( config.imgDST ) )
 		.pipe( notify({ message: '\n\n✅  ===> IMAGES — completed!\n', onLast: true }) );
-});
+}
 
 /**
  * Task: `clear-images-cache`.
@@ -332,9 +363,9 @@ gulp.task( 'images', () => {
  * Deletes the images cache. By running the next "images" task,
  * each image will be regenerated.
  */
-gulp.task( 'clearCache', function( done ) {
+function clearCache( done ) {
 	return cache.clearAll( done );
-});
+}
 
 /**
  * WP POT Translation File Generator.
@@ -345,9 +376,8 @@ gulp.task( 'clearCache', function( done ) {
  * 3. Applies wpPot with the variable set at the top of this file
  * 4. Generate a .pot file of i18n that can be used for l10n to build .mo file
  */
-gulp.task( 'translate', () => {
-	return gulp
-		.src( config.watchPhp )
+function translate(){
+	return src( config.watchPhp )
 		.pipe( sort() )
 		.pipe(
 			wpPot({
@@ -358,22 +388,26 @@ gulp.task( 'translate', () => {
 				team: config.team
 			})
 		)
-		.pipe( gulp.dest( config.translationDestination + '/' + config.translationFile ) )
+		.pipe( dest( config.translationDestination + '/' + config.translationFile ) )
 		.pipe( notify({ message: '\n\n✅  ===> TRANSLATE — completed!\n', onLast: true }) );
-});
+}
 
 /**
  * Watch Tasks.
  *
  * Watches for file changes and runs specific tasks.
  */
-gulp.task(
-	'default',
-	gulp.parallel( 'styles', 'vendorsJS', 'customJS', 'images', browsersync, () => {
-		gulp.watch( config.watchPhp, reload ); // Reload on PHP file changes.
-		gulp.watch( config.watchStyles, gulp.parallel( 'styles' ) ); // Reload on SCSS file changes.
-		gulp.watch( config.watchJsVendor, gulp.series( 'vendorsJS', reload ) ); // Reload on vendorsJS file changes.
-		gulp.watch( config.watchJsCustom, gulp.series( 'customJS', reload ) ); // Reload on customJS file changes.
-		gulp.watch( config.imgSRC, gulp.series( 'images', reload ) ); // Reload on customJS file changes.
-	})
-);
+
+function watchFiles(){
+	watch( config.watchPhp, series(translate, reload ) ); // Reload on PHP file changes.
+	watch( config.watchTemplatePartsStyles, series( templatePartStyles, styles, reload ) ); // Reload on SCSS file changes.
+	watch( config.watchStyles, parallel( styles, reload ) ); // Reload on SCSS file changes.
+	watch( config.watchJsVendor, series( vendorsJS, reload ) ); // Reload on vendorsJS file changes.
+	watch( config.watchTemplatePartsScripts, series(templatePartScripts, customJS, reload ) ); // Reload on customJS file changes.
+	watch( config.watchJsCustom, series(customJS, reload ) ); // Reload on customJS file changes.
+	watch( config.imgSRC, series( images, reload ) ); // Reload on customJS file changes.
+}
+
+exports.default = parallel(series(templatePartStyles, styles), vendorsJS, series(templatePartScripts, customJS), images,  browsersync, watchFiles);
+
+
