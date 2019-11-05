@@ -343,13 +343,6 @@ tr{border-bottom:1px solid #eee}
 td{padding:.4em}
 th:first-child,td:first-child{padding-left:0}
 th:last-child,td:last-child{padding-right:0}
-<<<<<<< HEAD
-.entry-header,.page-header{position:relative;min-height:calc(400px + 5vw);padding:30px 0;color:white;background:#3d2b3b no-repeat center;background-size:cover}
-.entry-header h1,.page-header h1{margin:0}
-.entry-header .cover-image,.page-header .cover-image{height:500px}
-.entry-header+*{padding-top:30px;padding-top:var(--gap)}
-=======
->>>>>>> Module-Ability
 label{display:block;font-weight:800}
 fieldset{margin-bottom:30px;margin-bottom:var(--gap)}
 input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"],input[type="number"],input[type="tel"],input[type="range"],input[type="date"],input[type="month"],input[type="week"],input[type="time"],input[type="datetime"],input[type="datetime-local"],input[type="color"],input[type="file"],textarea{border:1px solid grey;background:transparent;color:grey;width:100%;min-width:0;-webkit-transition:all .5s;transition:all .5s;padding:3px 5px;-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;display:block}
