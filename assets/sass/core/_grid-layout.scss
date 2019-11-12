@@ -33,6 +33,12 @@
   padding: 0 var(--container-padding);
 }
 
+@media(min-width: $media-container){
+	.large-gap{
+		grid-gap: 60px;
+	}
+}
+
 
 /*------- Special Container Content For articles --------*/
 /*
