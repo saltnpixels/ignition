@@ -60,7 +60,7 @@
 
 //fixing some padding issues between the inner container and the outter one
 .sidebar-template{
-  padding: 0 $gap; //in case there is no .container on sidebar-template, there must be container-fluid or at least some padding.
+  padding: 0 var(--gap); //in case there is no .container on sidebar-template, there must be container-fluid or at least some padding.
 
 
   .container-content{
@@ -71,6 +71,7 @@
     margin: 0 -30px;
   }
 }
+
 
 
 

@@ -27,8 +27,8 @@ body {
 
 }
 
-/*------- Items directly under header should probably have padding even if not a section --------*/
-.entry-header + * {
+/*------- if a paragraph block made directly under header, give it some padding --------*/
+.entry-header + p {
 	padding-top: var(--gap);
 }
 

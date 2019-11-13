@@ -318,7 +318,7 @@ div .acf-block-preview .flex>.span-12,div .acf-block-preview .wp-block-file>.spa
 .acf-block-preview .entry-header,.acf-block-preview .page-header,.block-editor-rich-text .entry-header,.block-editor-rich-text .page-header{position:relative;min-height:calc(400px + 5vw);padding:30px 0;color:white;background:#3d2b3b no-repeat center;background-size:cover}
 .acf-block-preview .entry-header h1,.acf-block-preview .page-header h1,.block-editor-rich-text .entry-header h1,.block-editor-rich-text .page-header h1{margin:0}
 .acf-block-preview .entry-header .cover-image,.acf-block-preview .page-header .cover-image,.block-editor-rich-text .entry-header .cover-image,.block-editor-rich-text .page-header .cover-image{height:500px}
-.acf-block-preview .entry-header+*,.block-editor-rich-text .entry-header+*{padding-top:30px;padding-top:var(--gap)}
+.acf-block-preview .entry-header+p,.block-editor-rich-text .entry-header+p{padding-top:30px;padding-top:var(--gap)}
 .acf-block-preview .site-footer,.block-editor-rich-text .site-footer{padding-top:5px;padding-bottom:5px;background:#191919;background:var(--main-text-color);color:#cacaca;color:var(--subtle-text-color);font-size:1.1rem}
 .acf-block-preview .site-footer a,.block-editor-rich-text .site-footer a{color:inherit}
 .acf-block-preview .wp-block-file,.block-editor-rich-text .wp-block-file{-ms-flex-line-pack:center;align-content:center}
