@@ -345,7 +345,7 @@ div .acf-block-preview .flex>.span-12,div .acf-block-preview .wp-block-file>.spa
 div .acf-block-component textarea{font-size:16px}
 .block-editor__container #acf-group_5aa6a924b02ff{display:none}
 .wp-block[data-align="wide"]{max-width:calc(1200px - (30px));max-width:calc(var(--container) - (var(--container-padding)))}
-.edit-post-layout__content{background:white;background:var(--body-bg)}
+.editor-styles-wrapper{background:white;background:var(--body-bg)}
 .edit-post-layout__metaboxes{background:white}
 .entry-header h1,.entry-header h2,.entry-header h3,.entry-header h4,.entry-header h5,.entry-header h6{color:inherit}
 div .block-editor-writing-flow{height:auto}

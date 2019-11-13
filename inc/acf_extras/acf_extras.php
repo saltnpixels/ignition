@@ -171,7 +171,7 @@ function ign_show_data_field( $field ) {
 		echo '
 		<script>
 		let automcomplete = ' . json_encode($field['autocomplete']) . '.split("\n");
-		$( "#' . $field["id"] . '" ).autocomplete({
+		jQuery( "#' . $field["id"] . '" ).autocomplete({
       source: automcomplete
     });
 		</script>
