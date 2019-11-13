@@ -108,7 +108,7 @@ function reload(done){
 
 
 const processors = [
-	postcssPresetEnv
+	postcssPresetEnv()
 ];
 
 
