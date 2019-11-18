@@ -58,13 +58,52 @@ html {
 
 
 
+
 /*--------------------------------------------------------------
 # Gutenberg Changes
 --------------------------------------------------------------*/
+//contains all blocks. acts like container-content
+//added padding
+div .block-editor-block-list__layout {
+	padding: 0 var(--container-padding);
+
+	> *:not([data-align="full"] ):not([data-align="wide"] ) {
+		max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+//remove padding from blocks as it is now on the container
+.block-editor-block-list__layout .block-editor-block-list__block {
+	padding: 0;
+}
+
+//removed negative margins
+.edit-post-visual-editor .block-editor-block-list__block .block-editor-block-list__block-edit,
+.block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] > .block-editor-block-list__block-edit {
+	margin: auto;
+}
+
+.block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] {
+	margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the containers padding
+	margin-right: calc(-1 * var(--container-padding));
+}
+
+.wp-block[data-align="wide"] {
+	max-width: calc(var(--container) - (var(--container-padding) * 2));
+}
+
+//fix paragraphs
+div .editor-styles-wrapper p{
+	margin-top:0;
+	margin-bottom: 1em;
+}
 
 
-.editor-post-title__block .editor-post-title__input{
-  font-family: var(--font-alt);
+
+.editor-post-title__block .editor-post-title__input {
+	font-family: var(--font-alt);
 }
 
 /*------- ACF textareas --------*/
@@ -74,27 +113,25 @@ div .acf-block-component {
 	}
 }
 
-/*------- Hide acf page sections when using block editor --------*/
-.block-editor__container #acf-group_5aa6a924b02ff{
+/*------- Hide acf page sections flexible field when using block editor --------*/
+.block-editor__container #acf-group_5aa6a924b02ff {
 	display: none;
 }
 
 
-.wp-block[data-align="wide"] {
-	max-width: calc(var(--container) - (var(--container-padding)));
-}
 
-.editor-styles-wrapper{
+
+.editor-styles-wrapper {
 	background: var(--body-bg);
 }
 
-.edit-post-layout__metaboxes{
+.edit-post-layout__metaboxes {
 	background: white;
 }
 
 
-.entry-header{
-	h1, h2, h3, h4, h5, h6{
+.entry-header {
+	h1, h2, h3, h4, h5, h6 {
 		color: inherit;
 	}
 }
@@ -113,11 +150,11 @@ div .acf-block-component {
 }
 
 //hiding sidebar on small screens so you can have a full screen experience
-@media(max-width: 1500px){
+@media(max-width: 1500px) {
 	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
 		transition: width .5s;
 
-		&:hover{
+		&:hover {
 			width: 50%;
 			opacity: 1;
 		}
@@ -126,19 +163,20 @@ div .acf-block-component {
 }
 
 //fixing meta boxes below editor
-div .block-editor-writing-flow{
+div .block-editor-writing-flow {
 	height: auto;
 }
 
 //button fixes
-.wp-core-ui .acf-block-preview, .block-editor-rich-text{
-	.button{
+.wp-core-ui .acf-block-preview, .block-editor-rich-text {
+	.button {
 		line-height: 1.5;
 		height: auto;
 		font-size: inherit;
 	}
 
 }
+
 
 
 
