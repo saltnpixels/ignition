@@ -9,6 +9,8 @@
  *
  * This is the first file you should edit when starting a new theme.
  * Here you can edit the google fonts, the images sizes and other setup options for your theme.
+ * You can also separate and include another php file by simply creating one in the inc folder of the theme.
+ * all php files in the inc folder are automatically included unless they star with an underscore
  */
 
 /**
@@ -63,13 +65,14 @@ function ignition_setup() {
 	add_image_size( 'header_image', 2000, 600 );
 
 
-
 	// Remove default image sizes here. medium-large is probably not needed.
 	//in the admin you can set media sizes to 0 to remove them.
 	function remove_default_images( $sizes ) {
-		unset( $sizes['medium_large']); // 768px
+		unset( $sizes['medium_large'] ); // 768px
+
 		return $sizes;
 	}
+
 	add_filter( 'intermediate_image_sizes_advanced', 'remove_default_images' );
 
 
@@ -304,7 +307,7 @@ function ignition_scripts() {
 	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', wp_get_theme()->get( 'Version' ) );
 
 	//ie11 js polyfills
-	wp_enqueue_script('polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach');
+	wp_enqueue_script( 'polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach' );
 
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );
@@ -384,73 +387,26 @@ function footer_styles() {
 add_action( 'admin_footer', 'footer_styles', 99 );
 
 
-
-
-/*--------------------------------------------------------------
-# Pre Post Queries
---------------------------------------------------------------*/
 /**
- * @param $query
- * Here you can change the default query for any WordPress page/post or archive
+ * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
-function set_posts_per_page_for_post_types( $query ) {
-	if ( ! is_admin() && $query->is_main_query() ) {
-
-		//vanilla search with no post type uses search.php and only shows posts, and acts like index page
-		if ( $query->is_search() && ! $query->is_post_type_archive() ) {
-			$query->set( 'post_type', 'post' );
-			$query->is_home = true;
-		}
-
+function ignition_pingback_header() {
+	if ( is_singular() && pings_open() ) {
+		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
 	}
-
 }
 
-add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );
+add_action( 'wp_head', 'ignition_pingback_header' );
 
 
 /*--------------------------------------------------------------
-# Adding More PHP Files
+# Adding More PHP Files Automatically
 --------------------------------------------------------------*/
-/**
- * ignition abilities and extra filter and functions
- * you can edit the comment walker at the bottom of this file.
- */
-require get_parent_theme_file_path( '/inc/extras.php' );
 
+require_once get_parent_theme_file_path( '/inc/dev-helpers.php' );
 
-/**
- * Custom template tags and functions for this theme.
- * Useful in the content for showing post author and time and edit links.
- */
-require get_parent_theme_file_path( '/inc/template-tags.php' );
-
-/**
- * Additional functions and features to allow styling of the templates by adding classes to body.
- */
-require get_parent_theme_file_path( '/inc/template-classes.php' );
-
-/**
- * WP Customizer additions.
- */
-require get_parent_theme_file_path( '/inc/customizer.php' );
-
-/**
- * SVG icons functions and filters.
- */
-require get_parent_theme_file_path( '/inc/icon-functions.php' );
-
-
-/**
- * Add ACF Field Extras
- */
-require get_parent_theme_file_path( '/inc/acf_extras/acf_extras.php' );
-
-
-/**
- * Add ACF Blocks
- */
-require get_parent_theme_file_path( '/inc/acf-blocks.php' );
+//no need to include php files, just add them to the inc folder. Ignition takes care of the rest!
+//You can also include a functions.php file in each post type folder in template-parts that will be included too.
 
 
 

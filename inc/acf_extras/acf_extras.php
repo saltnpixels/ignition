@@ -5,7 +5,7 @@
  * @param $field
  *
  * @return mixed
- * Makes the loop field display archive or the content depending on what is being looked at.
+ * Makes the section loop field display archive or the content depending on what is being looked at.
  */
 function acf_loop_field( $field ) {
 	global $post;
@@ -170,7 +170,7 @@ function ign_show_data_field( $field ) {
 	if ( ! empty( $field['autocomplete'] ) ) {
 		echo '
 		<script>
-		let automcomplete = ' . json_encode($field['autocomplete']) . '.split("\n");
+		let automcomplete = ' . json_encode( $field['autocomplete'] ) . '.split("\n");
 		jQuery( "#' . $field["id"] . '" ).autocomplete({
       source: automcomplete
     });
@@ -222,13 +222,11 @@ function ign_section_titles( $title, $field, $layout, $i ) {
 add_filter( 'acf/fields/flexible_content/layout_title/name=sections', 'ign_section_titles', 10, 4 );
 
 
-
-
 //add classes to a wysywig field so you can control the design a bit more for each field
 function acf_plugin_wysiwyg_styling() { ?>
 	<script>
-        (function($) {
-            acf.add_filter('wysiwyg_tinymce_settings', function(mceInit, id, $field) {
+        (function ($) {
+            acf.add_filter('wysiwyg_tinymce_settings', function (mceInit, id, $field) {
                 var fieldKey = $field.data('key');
                 var fieldName = $field.data('name');
                 var flexContentName = $field.parents('[data-type="flexible_content"]').first().data('name');
@@ -243,8 +241,8 @@ function acf_plugin_wysiwyg_styling() { ?>
                     mceInit.body_class += " acf-layout-" + layoutName;
                 }
                 // console.log(fieldName);
-                if(flexContentName === 'header_layout'){
-                   // mceInit.body_class += " entry-header";
+                if (flexContentName === 'header_layout') {
+                    // mceInit.body_class += " entry-header";
                 }
                 return mceInit;
             });
@@ -253,4 +251,5 @@ function acf_plugin_wysiwyg_styling() { ?>
 	</script>
 	<?php
 }
-add_action('acf/input/admin_footer', 'acf_plugin_wysiwyg_styling');
+
+add_action( 'acf/input/admin_footer', 'acf_plugin_wysiwyg_styling' );

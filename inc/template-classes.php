@@ -1,6 +1,6 @@
 <?php
 /**
- * Additional features to allow styling of the templates easier
+ * Additional features to allow styling of the templates easier by adding classes to the body
  *
  * @package Ignition
  * @since 1.0
