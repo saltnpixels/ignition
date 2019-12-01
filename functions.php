@@ -18,7 +18,7 @@
  * There is nothing here for you to do.
  */
 if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
+	require get_template_directory() . '/inc/core/back-compat.php';
 
 	return;
 }
@@ -315,6 +315,8 @@ function ignition_scripts() {
 	wp_deregister_script( 'jquery-migrate' );
 	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.0.0.min.js", array(), '3.0.0' );
 
+	//needed for tweening slides
+	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/TweenMax.min.js' );
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
 	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
@@ -334,11 +336,6 @@ function ignition_scripts() {
 		'sidebar'    => ign_get_svg( array( 'icon' => 'sidebar' ) )
 	) );
 
-	//scrolling animation
-	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/TweenMax.min.js' );
-	wp_enqueue_script( 'scrollMagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'scrollMagic-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'scrollmagic-indicators', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -403,10 +400,12 @@ add_action( 'wp_head', 'ignition_pingback_header' );
 # Adding More PHP Files Automatically
 --------------------------------------------------------------*/
 
-require_once get_parent_theme_file_path( '/inc/dev-helpers.php' );
+require_once get_parent_theme_file_path( '/inc/core/dev-helpers.php' );
 
-//no need to include php files, just add them to the inc folder. Ignition takes care of the rest!
-//You can also include a functions.php file in each post type folder in template-parts that will be included too.
+//no need to include php files, just add them to the inc folder and start them with an underscore. Ignition takes care of the rest!
+//Ignition will also search one directory deep for more underscored files within inc and template-parts folders.
+// (ie: inc/acf-extras/_acf-extras.php
+
 
 
 

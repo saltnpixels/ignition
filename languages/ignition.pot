@@ -68,31 +68,31 @@ msgid ""
 "			my browser now"
 msgstr ""
 
-#: functions.php:80, template-parts/site-top/site-top.php:20
+#: functions.php:83, template-parts/site-top/site-top.php:20
 msgid "Top Menu"
 msgstr ""
 
-#: functions.php:194
+#: functions.php:197
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:196
+#: functions.php:199
 msgid "Add widgets here to appear in your sidebar."
 msgstr ""
 
-#: functions.php:206
+#: functions.php:209
 msgid "Footer"
 msgstr ""
 
-#: functions.php:217
+#: functions.php:220
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:228
+#: functions.php:231
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:238
+#: functions.php:241
 msgid "Footer 4"
 msgstr ""
 
@@ -147,76 +147,76 @@ msgstr ""
 msgid "Sidebar Right"
 msgstr ""
 
-#: inc/acf-blocks.php:97
+#: inc/acf_extras/_acf-blocks.php:97
 msgid "Ignition"
 msgstr ""
 
-#: inc/back-compat.php:38, inc/back-compat.php:50, inc/back-compat.php:65
+#: inc/core/back-compat.php:38, inc/core/back-compat.php:50, inc/core/back-compat.php:65
 msgid "Ignition requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr ""
 
-#: inc/customizer.php:34
+#: inc/core/_customizer.php:34
 msgid "Theme Options"
 msgstr ""
 
-#: inc/customizer.php:39
+#: inc/core/_customizer.php:39
 msgid "Post Type Archives"
 msgstr ""
 
-#: inc/customizer.php:58
+#: inc/core/_customizer.php:58
 msgid "You can make your own layout in header.php and ignore all this."
 msgstr ""
 
-#: inc/customizer.php:78
+#: inc/core/_customizer.php:78
 msgid "Contain the site top items"
 msgstr ""
 
-#: inc/customizer.php:85
+#: inc/core/_customizer.php:85
 msgid "You can set contained size via $container in scss"
 msgstr ""
 
-#: inc/customizer.php:104
+#: inc/core/_customizer.php:104
 msgid "You can make your own layout in php in header.php and ignore presets and manual settings."
 msgstr ""
 
-#: inc/customizer.php:170
+#: inc/core/_customizer.php:170
 msgid "Set a pages sections to be used for the post. The blog must be set to a static page"
 msgstr ""
 
-#: inc/customizer.php:172
+#: inc/core/_customizer.php:172
 msgid "Set a page to be used to display the archive For this post type. Note: Post type must have an archive page."
 msgstr ""
 
-#: inc/customizer.php:176
+#: inc/core/_customizer.php:176
 msgid "Archive Page For "
 msgstr ""
 
-#: inc/extras.php:206
+#: inc/core/_extras.php:35
 msgid "Expand child menu"
 msgstr ""
 
-#: inc/extras.php:469
+#: inc/core/_extras.php:298
 msgid "Edit %s Page"
 msgstr ""
 
-#: inc/icon-functions.php:54
+#: inc/core/_icon-functions.php:54
 msgid "Please define default parameters in the form of an array."
 msgstr ""
 
-#: inc/icon-functions.php:59
+#: inc/core/_icon-functions.php:59
 msgid "Please define an SVG icon filename."
 msgstr ""
 
-#: inc/template-tags.php:20
+#: inc/core/_template-tags.php:20
 msgid "%s by %s"
 msgstr ""
 
-#: inc/template-tags.php:103
+#: inc/core/_template-tags.php:103
 msgid ", "
 msgstr ""
 
 #. translators: %s: Name of current post
-#: inc/template-tags.php:194
+#: inc/core/_template-tags.php:194
 msgid "%s<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 

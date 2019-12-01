@@ -19,4 +19,5 @@ function set_posts_per_page_for_post_types( $query ) {
 
 }
 
-add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );
+//add_action( 'pre_get_posts', 'set_posts_per_page_for_post_types' );
+//uncomment this if you want to use it

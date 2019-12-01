@@ -54,6 +54,42 @@ add_action( 'wp_footer', 'output_log_to_footer' );
 add_action( 'admin_footer', 'output_log_to_footer' );
 
 
+/*--------------------------------------------------------------
+# Adding more php files
+--------------------------------------------------------------*/
+
+/**
+ * @param $dir
+ * Gets all php files from the directory and sub directory that start with an underscore
+ * @param int $depth
+ */
+function ign_require_all( $dir, $depth = 2 ) {
+
+	foreach ( array_diff( scandir( $dir ), array( '.', '..' ) ) as $filename ) {
+		//check if its a file
+		if ( is_file( $dir . '/' . $filename ) ) {
+			//only include automatically if it starts with an underscore
+			if ( substr( $filename, 0, 1 ) === '_' && strpos( $filename, '.php' ) !== false ) {
+					require_once( $dir . '/' . $filename );
+			}
+
+		} else {
+			//if its not a file its a directory. Look through it for more underscore php partial files
+			if ( $depth > 0 ) {
+				ign_require_all( $dir . '/' . $filename, $depth - 1 );
+			}
+		}
+
+	}
+}
+
+//always include the parent themes inc files
+ign_require_all( get_parent_theme_file_path( '/inc' ) );
+
+//get theme template part partials from current theme only (if child being used get childs)
+//child theme will have to include parents if they want them. Will be included in child theme by default.
+ign_require_all( get_stylesheet_directory() . '/template-parts');
+
 
 /**
  * Handles JavaScript detection.
@@ -70,50 +106,6 @@ add_action( 'wp_head', 'ignition_javascript_detection', 0 );
 add_action( 'admin_head', 'ignition_javascript_detection', 0 );
 
 
-/*--------------------------------------------------------------
-# Adding more php files
---------------------------------------------------------------*/
-/*
-* Require any functions.php for each post type.
-* You can have a functions.php in each post type folder in template-parts for easy plug and play.
-*/
-function ign_post_type_functions() {
-	$ign_post_types   = get_post_types( array( '_builtin' => false ) );
-	$ign_post_types[] = 'post';
-	$ign_post_types[] = 'page';
-
-
-	foreach ( $ign_post_types as $type ) {
-		$type = sanitize_key( $type );
-		if ( file_exists( locate_template( 'template-parts/' . $type . '/functions.php' ) ) ) {
-			include( locate_template( 'template-parts/' . $type . '/functions.php' ) );
-		}
-	}
-}
-
-add_action( 'init', 'ign_post_type_functions', 15 );
-
-/**
- * @param $dir
- * Gets all php files from the directory and sub directories and includes them
- * to leave a file alone have it start with an '_'
- */
-function require_all_inc( $dir ){
-	foreach (array_diff(scandir($dir), array('.', '..')) as $filename) {
-		if (is_file($dir . '/' . $filename)) {
-			if(strpos( $filename, '.php') !== false && $filename !== 'dev-helpers.php' && substr($filename, 0, 1) !== '_'){
-				require_once ($dir . '/' . $filename);
-			}
-
-		}else{
-			require_all_inc($dir . '/' . $filename);
-		}
-
-	}
-}
-require_all_inc(get_parent_theme_file_path('/inc'));
-
-
 /**
  * admin_bar_color_dev_site function.
  * So you can tell if your working on dev site or staging site by checking if admin bar is blue or not. Blue means staging
@@ -122,7 +114,7 @@ require_all_inc(get_parent_theme_file_path('/inc'));
  */
 
 function admin_bar_color_dev_site() {
-	if ( in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', "::1")) ) {
+	if ( in_array( $_SERVER['REMOTE_ADDR'], array( '127.0.0.1', "::1" ) ) ) {
 		echo '<style>
 	body #wpadminbar{ background: #156288; }
 </style>';
@@ -131,3 +123,5 @@ function admin_bar_color_dev_site() {
 
 add_action( 'wp_head', 'admin_bar_color_dev_site' );
 add_action( 'admin_head', 'admin_bar_color_dev_site' );
+
+

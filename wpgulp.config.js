@@ -15,13 +15,10 @@ module.exports = {
 	browserAutoOpen: false,
 	injectChanges: true,
 
-	//Template Part sass watches
-	templatePartsStyles: './template-parts/**/*.scss', //getting any sass from the template parts folder
-	templatePartsStylesDestination: './assets/sass/wordpress',
-	templatePartStyleFile: '_template-parts',
-	templatePartsScripts: './template-parts/**/*.js',
-	templatePartsScriptsDestination: './assets/js/custom',
-	templatePartScriptsFile: 'template-scripts',
+	//Template Part sass concat and place into sass folder for compiling
+	otherStyles: ['./template-parts/**/*.scss', './inc/**/*.scss'], //getting any sass from the template parts folder for concatenation
+	otherStylesDestination: './assets/sass/wordpress', //put it all into one big file inside wordpress folder
+	otherStylesFiles: '_template-parts', //name of sass concat file
 
 
 	// Style options.
@@ -37,11 +34,14 @@ module.exports = {
 	jsVendorFile: 'vendor', // Compiled JS vendors file name. Default set to vendors i.e. vendors.js.
 
 
-
 	// JS Custom options.
 	jsCustomSRC: './assets/js/custom/*.js', // Path to JS custom scripts folder.
 	jsCustomDestination: './assets/js/', // Path to place the compiled JS custom scripts file.
 	jsCustomFile: 'custom', // Compiled JS custom file name. Default set to custom i.e. custom.js.
+
+	//JS files in other places that start with an underscore will be added to to custom.js
+	templatePartsScripts: './template-parts/**/_?*.js',
+	incScripts: './inc/**/_?*.js',
 
 	// Images options.
 	imgSRC: './assets/images/raw/*', // Source folder of images which should be optimized and watched. You can also specify types e.g. raw/**.{png,jpg,gif} in the glob.
@@ -49,10 +49,8 @@ module.exports = {
 
 	// Watch files paths.
 	watchStyles: './assets/sass/**/*.scss', // Path to all *.scss files inside css folder and inside them.
-	watchTemplatePartsStyles: './template-parts/**/*.scss',
-	watchTemplatePartsScripts: './template-parts/**/*.js',
 	watchJsVendor: './assets/js/vendor/*.js', // Path to all vendor JS files.
-	watchJsCustom: './assets/js/custom/*.js', // Path to all custom JS files.
+	watchJsCustom: ['./assets/js/custom/*.js','./template-parts/**/_?*.js', './inc/**/_?*.js' ], // Path to all custom JS files.
 	watchPhp: './**/*.php', // Path to all PHP files.
 
 	// Translation options.

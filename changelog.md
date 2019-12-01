@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.2.5] - Dec 1, 2019
+Ignition is getting easier to plug and play blocks and extra functionality
+Files that you want added to custom.js can be in one of 3 places. 
+- Inside custom folder like always
+- inside template parts, but it must start with an underscore _file.js
+- inside inc folder, but it too must start with an underscore _file.js
+
+PHP files can now be auto included by placing them in either template-parts or inc folders and starting with an underscore. _file.php <br>
+This will allow for future drag and dropping folders of functionality that will plug and play without much work, as the proper php files with auto include. <br>
+The underscored php file must not be nested more than 3 folders deep as the scan wont go any deeper for precautions.
+The following is acceptable: template-parts/acf-blocks/some-section/_file.php
+
+All this will allow you to drag and drop folders with php and js inside that will be auto included onto your site.
+scss files from template-parts and inc will also be added to your sass main.scss automatically.
+
+
+
 ## [3.2.4] - Nov 5, 2019
 BIG Changes. Now you can add JS and sass files within the template-parts folder. These files will get added into the assets folder automagically and then compile.
 With these changes, a few files were added, removed or moved around.

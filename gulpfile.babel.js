@@ -114,13 +114,13 @@ const processors = [
 
 /**
  * Task: `TemplatePartStyles`
- * Template Part concat Sass Styles from template part folder
+ * Template Part concat Sass Styles from template part folder and inc folder
  */
 function templatePartStyles(){
-	return src(config.templatePartsStyles, { allowEmpty: true })
-		.pipe( concat( config.templatePartStyleFile + '.scss' ) )
+	return src(config.otherStyles, { allowEmpty: true })
+		.pipe( concat( config.otherStylesFiles + '.scss' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( dest( config.templatePartsStylesDestination ) )
+		.pipe( dest( config.otherStylesDestination ) )
 		.pipe(touch());
 }
 
@@ -271,13 +271,13 @@ function vendorsJS(){
  * Task: `TemplatePartStyles`
  * Template Part concat Sass Styles from template part folder
  */
-function templatePartScripts(){
-	return src(config.templatePartsScripts, { allowEmpty: true })
-		.pipe( concat( config.templatePartScriptsFile + '.js' ) )
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( dest( config.templatePartsScriptsDestination ) )
-		.pipe(touch());
-}
+// function templatePartScripts(){
+// 	return src(config.templatePartsScripts, { allowEmpty: true })
+// 		.pipe( concat( config.templatePartScriptsFile + '.js' ) )
+// 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+// 		.pipe( dest( config.templatePartsScriptsDestination ) )
+// 		.pipe(touch());
+// }
 
 
 /**
@@ -292,10 +292,11 @@ function templatePartScripts(){
  *     4. Uglifes/Minifies the JS file and generates custom.min.js
  */
 function customJS(){
-	return src( config.jsCustomSRC, { since: lastRun( customJS ) }) // Only run on changed files.
+	return src( [config.jsCustomSRC, config.templatePartsScripts, config.incScripts], { since: lastRun( customJS ) }) // Only run on changed files.
 		.pipe( plumber( errorHandler ) )
 		.pipe(
 			babel({
+				//plugins: ['@babel/transform-runtime'],
 				presets: [
 					[
 						'@babel/preset-env', // Preset to compile your modern JS to ES5.
@@ -400,14 +401,13 @@ function translate(){
 
 function watchFiles(){
 	watch( config.watchPhp, series(translate, reload ) ); // Reload on PHP file changes.
-	watch( config.watchTemplatePartsStyles, series( templatePartStyles, styles, reload ) ); // Reload on SCSS file changes.
-	watch( config.watchStyles, parallel( styles, reload ) ); // Reload on SCSS file changes.
+	watch( config.otherStyles, series( templatePartStyles) ); // concat styles from other folders, this in turn calls the styles watch below
+	watch( config.watchStyles, series(styles, reload ) ); // Reload on SCSS file changes.
 	watch( config.watchJsVendor, series( vendorsJS, reload ) ); // Reload on vendorsJS file changes.
-	watch( config.watchTemplatePartsScripts, series(templatePartScripts, customJS, reload ) ); // Reload on customJS file changes.
 	watch( config.watchJsCustom, series(customJS, reload ) ); // Reload on customJS file changes.
 	watch( config.imgSRC, series( images, reload ) ); // Reload on customJS file changes.
 }
 
-exports.default = parallel(series(templatePartStyles, styles), vendorsJS, series(templatePartScripts, customJS), images,  browsersync, watchFiles);
+exports.default = series(templatePartStyles, styles, vendorsJS, customJS, images,  browsersync, watchFiles);
 
 

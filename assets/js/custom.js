@@ -3,101 +3,13 @@
 /*--------------------------------------------------------------
 # Adding some global events and functions users can use via data attributes
 --------------------------------------------------------------*/
-var scrollMagicController = ''; //setup scroller function
 
 /**
- * element can have these data attributes:
- * data-scrollanimation = a class to add to this element on scroll
- * data-scrolltrigger = the element that triggers the scene to start
- * data-scrollhook = onEnter, onLeave, default is center
- * data-scrolloffset = offset from scrollhook on trigger element
- * data-scrollduration = how long it should last. if not set, 0  is used and that means it doesnt reset until you scroll up.
- * data-scrollscrub = tweens between two classes as you scroll. tween expects a duration, else duration will be 100
- *
- */
-
-function runScrollerAttributes(element) {
-  //this function can be run on an alement even after load and they will be added to scrollMagicController
-  //scrollmagic must be loaded
-  if ('undefined' != typeof ScrollMagic && element.hasAttribute('data-scrollanimation')) {
-    //scroll animation attributes
-    var animationClass = element.dataset.scrollanimation,
-        triggerHook = element.dataset.scrollhook || 'center',
-        offset = element.dataset.offset || 0,
-        triggerElement = element.dataset.scrolltrigger || element,
-        duration = element.dataset.duration || 0,
-        tween = element.dataset.scrollscrub,
-        scene = ''; //if animation has word up or down, its probably an animation that moves it up or down,
-    //so make sure trigger element
-
-    if (-1 !== animationClass.toLowerCase().indexOf('up') || -1 !== animationClass.toLowerCase().indexOf('down')) {
-      //get parent element and make that the trigger, but use an offset from current element
-      if (triggerElement === element) {
-        triggerElement = element.parentElement;
-        offset = element.offsetTop - triggerElement.offsetTop + parseInt(offset);
-      }
-
-      triggerHook = 'onEnter';
-    } //if fixed at top, wrap in div
-
-
-    if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
-      var wrappedElement = wrap(element, document.createElement('div'));
-      wrappedElement.classList.add('fixed-holder');
-      triggerHook = 'onLeave';
-      triggerElement = element.parentElement;
-    } //if scrollscrub exists used tweenmax
-
-
-    if (tween !== undefined) {
-      if (!duration) {
-        duration = 100;
-      }
-
-      tween = TweenMax.to(element, .65, {
-        className: '+=' + animationClass
-      }); //finally output the scene
-
-      scene = new ScrollMagic.Scene({
-        triggerElement: triggerElement,
-        offset: offset,
-        triggerHook: triggerHook,
-        duration: duration
-      }).setTween(tween).addTo(scrollMagicController) // .addIndicators()
-      ;
-    } else {
-      scene = new ScrollMagic.Scene({
-        triggerElement: triggerElement,
-        offset: offset,
-        triggerHook: triggerHook,
-        duration: duration
-      }).on('enter leave', function () {
-        //instead of using toggle class we can use these events of on enter and leave and toggle class at both times
-        element.classList.toggle(animationClass);
-        element.classList.toggle('active'); //if fixed at top set height for spacer and width
-
-        if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
-          //making fixed item have a set width matching parent
-          element.style.width = element.parentElement.clientWidth + 'px';
-          element.style.left = element.parentElement.offsetLeft + 'px';
-        }
-      }).addTo(scrollMagicController) //.setClassToggle(element, animationClass + ' active').addTo(scrollMagicController)
-      // .addIndicators()
-      ;
-    } //good for knowing when its been loaded
-
-
-    document.body.classList.add('scrollmagic-loaded');
-  }
-}
-/**
- * Slide any element. global function. Also used with data-slide
+ * Slide any element. global function. Mainly executed with data-slide
  * @param item
  * @param slideTime
  * @param direction
  */
-
-
 function ign_slide_element(item) {
   var slideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : .5;
   var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'toggle';
@@ -173,6 +85,8 @@ function ign_slide_element(item) {
 }
 /**
  * resize menu buttons on load. also runs on resize.
+ * menu button is not inside site-top for various reasons (we dont want x to be inside or when menu opens the ex is uinderneath.
+ * so we use this function to match the site -top height and center it as if it was inside
  */
 
 
@@ -203,7 +117,7 @@ function placeMenuButtons() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  /*------- Add touch classes --------*/
+  /*------- Add touch classes or not --------*/
   if (!("ontouchstart" in document.documentElement)) {
     document.documentElement.className += " no-touch-device";
   } else {
@@ -220,15 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
     menuButtons = document.querySelectorAll('.panel-right-toggle');
   } //we run menu button function below in resize event
 
-  /*------- Scroll Magic Events Init --------*/
-
-
-  if ('undefined' != typeof ScrollMagic) {
-    scrollMagicController = new ScrollMagic.Controller();
-    document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
-      runScrollerAttributes(element);
-    });
-  }
   /*------- Toggle Buttons --------*/
   //trigger optional afterToggle event
   //adding new custom event for after the element is toggled
@@ -263,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         e.stopPropagation();
       } //if data-radio is found, only one can be selected at a time.
-      // untoggle any other item with same radio value
+      // untoggles any other item with same radio value
       //radio items cannot be untoggled until another item is clicked
 
 
@@ -276,13 +181,13 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleItem(radioItem); //toggle all other radio items off when this one is being turned on
           }
         });
-      } //if item has data-switch it can only be turned on or off but not both by this button
+      } //if item has data-switch it can only be turned on or off but not both by this button based on value of data-switch (its either on or off)
 
 
       var switchItem = item.getAttribute('data-switch'); //finally toggle the clicked item. some types of items cannot be untoggled like radio or an on switch
 
       if (radioSelector !== null) {
-        toggleItem(item, 'on'); //the item clicked on cannot be unclicked until another tiem is pressed
+        toggleItem(item, 'on'); //the item clicked on cannot be unclicked until another item is pressed
       } else if (switchItem !== null) {
         if (switchItem === 'on') {
           toggleItem(item, 'on');
@@ -290,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
           toggleItem(item, 'off');
         }
       } else {
-        toggleItem(item); //normal regular toggle
+        toggleItem(item); //normal regular toggle can turn itself on or off
       }
     } //end if item found
 
@@ -849,3 +754,101 @@ jQuery(function ($) {
   });
 });
 "use strict";
+
+var scrollMagicController = ''; //setup scroller function
+
+/**
+ * element can have these data attributes:
+ * data-scrollanimation = a class to add to this element on scroll
+ * data-scrolltrigger = the element that triggers the scene to start
+ * data-scrollhook = onEnter, onLeave, default is center
+ * data-scrolloffset = offset from scrollhook on trigger element
+ * data-scrollduration = how long it should last. if not set, 0  is used and that means it doesnt reset until you scroll up.
+ * data-scrollscrub = tweens between two classes as you scroll. tween expects a duration, else duration will be 100
+ *
+ */
+
+function runScrollerAttributes(element) {
+  //this function can be run on an alement even after load and they will be added to scrollMagicController
+  //scrollmagic must be loaded
+  if ('undefined' != typeof ScrollMagic && element.hasAttribute('data-scrollanimation')) {
+    //scroll animation attributes
+    var animationClass = element.dataset.scrollanimation,
+        triggerHook = element.dataset.scrollhook || 'center',
+        offset = element.dataset.offset || 0,
+        triggerElement = element.dataset.scrolltrigger || element,
+        duration = element.dataset.duration || 0,
+        tween = element.dataset.scrollscrub,
+        scene = ''; //if animation has word up or down, its probably an animation that moves it up or down,
+    //so make sure trigger element
+
+    if (-1 !== animationClass.toLowerCase().indexOf('up') || -1 !== animationClass.toLowerCase().indexOf('down')) {
+      //get parent element and make that the trigger, but use an offset from current element
+      if (triggerElement === element) {
+        triggerElement = element.parentElement;
+        offset = element.offsetTop - triggerElement.offsetTop + parseInt(offset);
+      }
+
+      triggerHook = 'onEnter';
+    } //if fixed at top, wrap in div
+
+
+    if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
+      var wrappedElement = wrap(element, document.createElement('div'));
+      wrappedElement.classList.add('fixed-holder');
+      triggerHook = 'onLeave';
+      triggerElement = element.parentElement;
+    } //if scrollscrub exists used tweenmax
+
+
+    if (tween !== undefined) {
+      if (!duration) {
+        duration = 100;
+      }
+
+      tween = TweenMax.to(element, .65, {
+        className: '+=' + animationClass
+      }); //finally output the scene
+
+      scene = new ScrollMagic.Scene({
+        triggerElement: triggerElement,
+        offset: offset,
+        triggerHook: triggerHook,
+        duration: duration
+      }).setTween(tween).addTo(scrollMagicController) // .addIndicators()
+      ;
+    } else {
+      scene = new ScrollMagic.Scene({
+        triggerElement: triggerElement,
+        offset: offset,
+        triggerHook: triggerHook,
+        duration: duration
+      }).on('enter leave', function () {
+        //instead of using toggle class we can use these events of on enter and leave and toggle class at both times
+        element.classList.toggle(animationClass);
+        element.classList.toggle('active'); //if fixed at top set height for spacer and width
+
+        if (element.getAttribute('data-scrollanimation') === 'fixed-at-top') {
+          //making fixed item have a set width matching parent
+          element.style.width = element.parentElement.clientWidth + 'px';
+          element.style.left = element.parentElement.offsetLeft + 'px';
+        }
+      }).addTo(scrollMagicController) //.setClassToggle(element, animationClass + ' active').addTo(scrollMagicController)
+      // .addIndicators()
+      ;
+    } //good for knowing when its been loaded
+
+
+    document.body.classList.add('scrollmagic-loaded');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  /*------- Scroll Magic Events Init --------*/
+  if ('undefined' != typeof ScrollMagic) {
+    scrollMagicController = new ScrollMagic.Controller();
+    document.querySelectorAll('[data-scrollanimation]').forEach(function (element) {
+      runScrollerAttributes(element);
+    });
+  }
+});
