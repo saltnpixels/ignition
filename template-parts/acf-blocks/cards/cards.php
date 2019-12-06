@@ -17,6 +17,7 @@ $block_id  = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block[
 $container = get_field( 'container_class' );
 $card_type = get_field( 'card_type' );
 $old_post  = $post_id; //saving the current page id
+$posts_per_page = get_field( 'posts_per_page' ) ? get_field( 'posts_per_page' ) : 3;
 
 ?>
 
@@ -24,7 +25,7 @@ $old_post  = $post_id; //saving the current page id
 	<div class="card-listing <?php echo $container; ?>">
 		<div class="<?php echo esc_attr( get_field( 'grid_class' ) ); ?> cards-holder">
 
-			<?php if ( ign_is_page_archive( $post_id ) && $card_type == 'default' ) : ?>
+			<?php if ( ! $is_preview && ign_is_page_archive( $post_id ) && $card_type == 'default' ) : ?>
 
 				<?php
 				//if this is an archive page, show that archives listing. we need to change the global post for a few seconds
@@ -35,15 +36,27 @@ $old_post  = $post_id; //saving the current page id
 					the_post();
 					ign_loop();
 				endwhile;
-
-
 				?>
+
+
+			<?php elseif ( $is_preview && ign_is_page_archive( $post_id ) && $card_type == 'default' ): ?>
+				<?php
+				$archive = new WP_Query( array(
+					'post_type' => ign_is_page_archive( $post_id ),
+					'posts_per_page' => (int) $posts_per_page
+				) );
+
+				//routes to the right template file
+				if ( $archive->have_posts() ): while ( $archive->have_posts() ) :
+					$archive->the_post();
+					ign_loop();
+				endwhile; endif;
+				?>
+
 
 			<?php else: //show a simple custom set of cards
 
 				$post_type      = get_field( 'post_type' ) ? get_field( 'post_type' ) : 'post';
-				$posts_per_page = get_field( 'posts_per_page' ) ? get_field( 'posts_per_page' ) : 3;
-
 
 				$cards = new WP_Query( array(
 					'post_status'    => 'publish',
