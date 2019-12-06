@@ -64,7 +64,7 @@ if ( $page_archive_id ) {
 				//set the post to the archive page
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
-				
+
 				?>
 
 				<div class="entry-content container-content">
