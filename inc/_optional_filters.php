@@ -4,23 +4,22 @@
 # Post Extras
 --------------------------------------------------------------*/
 /**
-* Replaces "[...]" (appended to automatically generated excerpts) with ... and
-* a 'Continue reading' link.
-*
-* @return string 'Continue reading' link prepended with an ellipsis.
-* @since Ignition 1.0
-*
-*/
+ * Replaces "[...]" (appended to automatically generated excerpts) with ... and
+ * a 'Continue reading' link.
+ *
+ * @return string 'Continue reading' link prepended with an ellipsis.
+ * @since Ignition 1.0
+ *
+ */
 function ignition_excerpt_more( $more ) {
-if ( is_admin() && ! DOING_AJAX ) {
-return $more;
-}
+	if ( is_admin() && ! wp_doing_ajax() ) {
+		return $more;
+	}
 
-return '&hellip; ';
+	return '&hellip; ';
 }
 
 add_filter( 'excerpt_more', 'ignition_excerpt_more' );
-
 
 
 /*--------------------------------------------------------------

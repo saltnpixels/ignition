@@ -184,6 +184,44 @@ function ignition_customize_register( $wp_customize )
 
 add_action( 'customize_register', 'ignition_customize_register' );
 
+/**
+ * Saving the archive theme mods to the pages so we can easily get it from checking the page rather than looping over all theme mods and checking against page
+ */
+//runs before theme mods are saved. Remove the page archive fields from before.
+add_action('customize_save', 'remove_archive_page', 100);
+function remove_archive_page(){
+	if(is_customize_preview()){
+		$ignitionpress_post_types = get_post_types( array('_builtin' => false, 'has_archive' => true), 'objects' );
+		$ignitionpress_post_types[] = get_post_type_object( 'post' );
+		foreach ($ignitionpress_post_types as $post_type) {
+			//save to each page a hidden custom field.
+			$archive_theme_mod = get_theme_mod('ign_archive_' . $post_type->name);
+			if($archive_theme_mod){
+				delete_post_meta($archive_theme_mod, '_ign_archive_page');
+			}
+		}
+	}
+}
+
+add_action('customize_save_after', 'save_archive_page', 100);
+function save_archive_page(){
+	if(is_customize_preview()){
+		$ignitionpress_post_types = get_post_types( array('_builtin' => false, 'has_archive' => true), 'objects' );
+		$ignitionpress_post_types[] = get_post_type_object( 'post' );
+		foreach ($ignitionpress_post_types as $post_type) {
+			//save to each page a hidden custom field.
+			$archive_theme_mod = get_theme_mod('ign_archive_' . $post_type->name);
+			if($archive_theme_mod){
+				update_post_meta($archive_theme_mod, '_ign_archive_page', $post_type->name);
+			}
+
+		}
+	}
+}
+
+
+
+
 
 /**
  * Render the site title for the selective refresh partial.

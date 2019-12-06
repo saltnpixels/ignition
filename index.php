@@ -8,10 +8,10 @@
  *
  * E.g., it puts together the home page when no home.php file exists.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link    https://codex.wordpress.org/Template_Hierarchy
  *
- * @package ignition
- * @since 1.0
+ * @package Ignition Press
+ * @since   1.0
  * @version 1.0
  *
  *
@@ -25,16 +25,17 @@ get_header();
 
 <?php
 /*
- * With ignition You can use the WP Customizer to choose a page to show its sections for an archive page
- * This way clients can control the archive page instead of needing you to make changes via php.
- * If an archive page is set, then a page will be queried here instead of the archive loop being used. (you can still output the loop as one of the sections using ACF Blocks)
+ * With Ignition Press You can use the WP Customizer to choose a page to show its sections for an archive page
+ * This way clients can control the archive page instead of needing you to make changes via archive-post_type.php.
+ * If an archive page is set, then a page will be queried here instead of the archive loop being used. (you can still output the loop as one of the sections using the Gutenburg Block called cards)
  *
- * For a regular index without a page used the loop will simply be output down below after "else:"
+ * For a regular index without a page set, the loop will simply be output down below after "else:"
 */
 
 //checking to see if a page has been set to be used with this post type archive
 global $post;
 $page_archive_id = ign_get_archive_page();
+
 
 //set if there is a sidebar template on the page used, add the proper divs. divs are taken straight from those templates
 $has_sidebar = false;
@@ -53,8 +54,8 @@ if ( $page_archive_id ) {
 
 ?>
 
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main" role="main">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
 			<?php
 			//if an archive page has been set show it now
@@ -63,21 +64,15 @@ if ( $page_archive_id ) {
 				//set the post to the archive page
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
-
-				include( locate_template( 'template-parts/classic-blocks/header_sections.php' ) );
+				
 				?>
 
-                <div class="entry-content container-content">
+				<div class="entry-content container-content">
 					<?php
-
-					if( has_blocks() ) {
-						the_content();
-					}else{
-						locate_template( 'template-parts/classic-blocks/sections.php', true );
-					}
+					ign_the_content();
 
 					?>
-                </div>
+				</div>
 				<?php wp_reset_postdata();
 				//END PAGE ARCHIVE
 				?>
@@ -88,36 +83,36 @@ if ( $page_archive_id ) {
 			else:
 				?>
 
-                <header class="page-header layout-center-content text-center">
+				<header class="page-header layout-center-content text-center">
 
 
-                    <div class="header-content container-fluid">
-                        <h1>
+					<div class="header-content container-fluid">
+						<h1>
 							<?php
 							if ( is_home() ) {
-								echo __( 'Blog', 'ignition' );
+								echo __( 'Blog', 'ignitionpress' );
 							} else {
 								echo get_the_archive_title();
 							} ?>
-                        </h1>
+						</h1>
 
-                    </div>
-                </header>
+					</div>
+				</header>
 
-                <div class="container">
-                    <section class="archive-cards card-grid">
+				<div class="container">
+					<section class="archive-cards card-grid">
 						<?php
 						//default to one section fo cards
 						while ( have_posts() ) : the_post();
 
-						ign_loop();
+							ign_loop();
 
 						endwhile; // End of the loop.
 						?>
-                    </section><!-- .entry-content -->
+					</section><!-- .entry-content -->
 
 
-                    <div class="container card-pagination text-center">
+					<div class="container card-pagination text-center">
 						<?php
 						the_posts_pagination( array(
 							'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cmlaw' ) . '</span>',
@@ -125,14 +120,14 @@ if ( $page_archive_id ) {
 							'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cmlaw' ) . ' </span>',
 						) );
 						?>
-                    </div>
+					</div>
 
 
-                </div>
+				</div>
 			<?php endif; ?>
 
-        </main><!-- #main -->
-    </div><!-- #primary -->
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
 <?php
 if ( $has_sidebar ) {

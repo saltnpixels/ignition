@@ -5,7 +5,6 @@
  */
 
 
-
 /*--------------------------------------------------------------
 # Menu Work
 --------------------------------------------------------------*/
@@ -42,9 +41,11 @@ add_filter( 'walker_nav_menu_start_el', 'ign_menu', 10, 99 );
 
 //add search bar to a menu
 //add_filter('wp_nav_menu_items', 'add_search_form', 10, 2);
-function add_search_form($items, $args) {
-	if( $args->theme_location == 'top-menu' )
-		$items .= '<li class="menu-item top-level-item"><div class="menu-item-link">' . get_search_form(false) . '</div></li>';
+function add_search_form( $items, $args ) {
+	if ( $args->theme_location == 'top-menu' ) {
+		$items .= '<li class="menu-item top-level-item"><div class="menu-item-link">' . get_search_form( false ) . '</div></li>';
+	}
+
 	return $items;
 }
 
@@ -209,50 +210,42 @@ add_filter( 'login_headerurl', 'ign_login_url' );
 /*--------------------------------------------------------------
 # Page as Archive Feature
 --------------------------------------------------------------*/
-/**
- * Check if this page is being used as an archive header.
- * return true
- * if $return_state is true return the actual state to be used in admin on list of pages
- */
 
 /**
- * ignition_is_page_archive_header function.
+ * Return if page has an archive attached
  *
  * @access public
  *
  * @param int $post_id
- * @param bool $return_state (default: false)
  *
  * @return string state label OR true
  */
-function ign_is_page_archive( $post_id, $return_type = '' ) {
+function ign_is_page_archive( $post_id ) {
 
-	if ( 'page' == get_post_type( $post_id ) ) {
-		//get all post types that have an archive page and get the main post type post.
+	//if customizer, we need to get it from theme mods because custom fields may not be saved yet until they save customizer
+	if ( is_customize_preview() && 'page' == get_post_type( $post_id ) ) {
+		//get all post types that have an archive page including the built in type 'post'
 
 		$ign_post_types   = get_post_types( array( '_builtin' => false, 'has_archive' => true ), 'objects' );
 		$ign_post_types[] = get_post_type_object( 'post' ); //add this built in object only.
 
-
 		if ( ! empty( $ign_post_types ) ) {
 
-			//foreach post type, if that post type has a theme mod associated with it and that id is equal to this page, return true
+			//foreach post type, if that post type has an archive, of this page, return true
 			foreach ( $ign_post_types as $key => $post_type ) {
 
 				if ( (int) get_theme_mod( 'ign_archive_' . $post_type->name ) == $post_id ) {
-					if ( $return_type == 'label' ) {
-						return __( 'Archive ', 'cmlaw' ) . $post_type->labels->singular_name;
-					}
+					return $post_type->name;
+				}
+				break;
+			} //if theme mod with this post type has this page grab and stop
+		}
+	} //if page
 
-					if ( $return_type == 'post_type' ) {
-						return $post_type->name;
-					} else {
-						return true;
-					}
-					break;
-				} //if theme mod with this post type has this page
-			} //foreach
-		} //if page
+	elseif ( 'page' == get_post_type( $post_id ) ) {
+		$post_type = get_post_meta( $post_id, '_ign_archive_page', true );
+
+		return $post_type;
 	}
 
 	return false;
@@ -262,10 +255,14 @@ function ign_is_page_archive( $post_id, $return_type = '' ) {
 //add state label to a page used as an archive header
 function custom_post_states( $states, $post ) {
 
-	$state = ign_is_page_archive( $post->ID, 'label' );
+	$post_type = ign_is_page_archive( $post->ID );
+	if ( $post_type ) {
+		$obj   = get_post_type_object( $post_type );
+		$state = 'Archive ' . $obj->labels->singular_name;
 
-	if ( $state ) {
-		$states[] = $state;
+		if ( $state ) {
+			$states[] = $state;
+		}
 	}
 
 	return $states;
@@ -274,7 +271,7 @@ function custom_post_states( $states, $post ) {
 add_filter( 'display_post_states', 'custom_post_states', 10, 2 );
 
 
-//check if current archive has a page being used and return page id
+//check and get current archive has a page being used in theme mods and return page id
 /**
  * @return int ID|string
  */
@@ -286,7 +283,7 @@ function ign_get_archive_page() {
 		return get_theme_mod( 'ign_archive_' . $post_type );
 	}
 
-	return '';
+	return false;
 }
 
 add_action( 'admin_bar_menu', 'add_archive_edit_link', 100 );
@@ -295,14 +292,20 @@ function add_archive_edit_link( $admin_bar ) {
 	if ( ! is_admin() && is_post_type_archive() && $archive_id ) {
 		$admin_bar->add_menu( array(
 			'id'    => 'archive-link',
-			'title' => sprintf( __( 'Edit %s Page', 'ignition' ), get_post_type_object( get_post_type() )->labels->name ),
+			'title' => sprintf( __( 'Edit %s Page', 'ignitionpress' ), get_post_type_object( get_post_type() )->labels->name ),
 			'href'  => get_edit_post_link( $archive_id ),
 		) );
 	}
 }
 
 
-
+function archive_page_redirect(){
+	global $post;
+	if(ign_is_page_archive( $post->ID )){
+		wp_redirect(get_post_type_archive_link(ign_is_page_archive($post->ID)));
+	}
+}
+add_action( 'template_redirect', 'archive_page_redirect' );
 
 
 
@@ -312,7 +315,7 @@ function add_archive_edit_link( $admin_bar ) {
 /**
  * Add pre-connect for Google Fonts. This makes them load faster
  *
- * @param array $urls URLs to print for resource hints.
+ * @param array $urls           URLs to print for resource hints.
  * @param string $relation_type The relation type the URLs are printed.
  *
  * @return array $urls           URLs to print for resource hints.

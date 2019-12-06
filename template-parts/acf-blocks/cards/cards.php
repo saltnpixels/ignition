@@ -2,8 +2,8 @@
 /**
  * Show the loop for this page and output the content or cards
  *
- * @param array $block The block settings and attributes.
- * @param string $content The block inner HTML (empty).
+ * @param array $block     The block settings and attributes.
+ * @param string $content  The block inner HTML (empty).
  * @param bool $is_preview True during AJAX preview.
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
@@ -25,9 +25,9 @@ $old_post  = $post_id; //saving the current page id
 		<div class="<?php echo esc_attr( get_field( 'grid_class' ) ); ?> cards-holder">
 
 			<?php if ( ign_is_page_archive( $post_id ) && $card_type == 'default' ) : ?>
-				//if this is an archive page, show that archives listing. we need to change the global post for a few seconds
-				<?php
 
+				<?php
+				//if this is an archive page, show that archives listing. we need to change the global post for a few seconds
 				wp_reset_postdata(); //set back to the archive listing
 
 				//routes to the right template file

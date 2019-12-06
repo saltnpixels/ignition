@@ -16,38 +16,40 @@
  */
 
 
-$block_id = isset($block['anchor']) ? $block['anchor'] : 'section-' . $block['id'];
+$block_id = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
 $bg_image = ign_get_header_image( $post_id );
 
 //type of header
-$header_type = get_field('header_type');
+$header_type = get_field( 'header_type' );
 
 ?>
 
-<header id="<?php echo $block_id; ?>" <?php ign_block_class($block, 'entry-header layout-center-content'); ?>
+<header id="<?php echo $block_id; ?>" <?php ign_block_class( $block, 'entry-header ' . $header_type ); ?>
         <?php if ( $bg_image ){ ?>style="background-image: url('<?php echo $bg_image; ?>');"<?php } ?>>
 
-	<?php if( $header_type == 'header_paragraphs' ): ?>
-	<div class="columns-holder <?php echo esc_attr(get_field( 'container_class' ) ); ?>">
+	<?php if ( $header_type == 'header_paragraphs' ): ?>
+		<div class="layout-center-content">
+			<div class="columns-holder <?php echo esc_attr( get_field( 'container_class' ) ); ?>">
 
-		<?php
-		if ( have_rows( 'paragraphs' ) ) { ?>
-			<div class="<?php echo esc_attr( get_field( 'grid_class' ) ); ?> paragraphs-holder">
-				<?php while ( have_rows( 'paragraphs' ) ): the_row(); ?>
+				<?php
+				if ( have_rows( 'paragraphs' ) ) { ?>
+					<div class="<?php echo esc_attr( get_field( 'grid_class' ) ); ?> paragraphs-holder">
+						<?php while ( have_rows( 'paragraphs' ) ): the_row(); ?>
 
-					<div class="text-section <?php the_sub_field( 'paragraph_class' ); ?>">
-						<?php the_sub_field( 'paragraph' ); ?>
+							<div class="text-section <?php the_sub_field( 'paragraph_class' ); ?>">
+								<?php the_sub_field( 'paragraph' ); ?>
+							</div>
+
+						<?php endwhile; ?>
 					</div>
-
-				<?php endwhile; ?>
+					<?php
+				}
+				?>
 			</div>
-			<?php
-		}
-		?>
-	</div>
+		</div>
 	<?php endif; ?>
 
-	<?php  //YOUR NEW HEADER TYPE HERE?>
+	<?php //YOUR NEW HEADER TYPE HERE?>
 
 </header>
 
