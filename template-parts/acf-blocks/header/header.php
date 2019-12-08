@@ -24,11 +24,10 @@ $header_type = get_field( 'header_type' );
 
 ?>
 
-<header id="<?php echo $block_id; ?>" <?php ign_block_class( $block, 'entry-header ' . $header_type ); ?>
+<header id="<?php echo $block_id; ?>" <?php ign_block_class( $block, 'entry-header layout-center-content ' . $header_type ); ?>
         <?php if ( $bg_image ){ ?>style="background-image: url('<?php echo $bg_image; ?>');"<?php } ?>>
 
 	<?php if ( $header_type == 'header_paragraphs' ): ?>
-		<div class="layout-center-content">
 			<div class="columns-holder <?php echo esc_attr( get_field( 'container_class' ) ); ?>">
 
 				<?php
@@ -46,7 +45,7 @@ $header_type = get_field( 'header_type' );
 				}
 				?>
 			</div>
-		</div>
+
 	<?php endif; ?>
 
 	<?php //YOUR NEW HEADER TYPE HERE?>

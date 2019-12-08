@@ -98,7 +98,7 @@ html{font-size:62.5%}
 .acf-block-preview .container-left,.acf-block-preview .container-right,.block-editor-rich-text .container-left,.block-editor-rich-text .container-right{width:100%;max-width:calc(1200px + ((100% - 1200px) / 2));max-width:calc(var(--container) + ((100% - var(--container)) / 2));margin:0 auto 0 0;padding:0 30px 0 0;padding:0 var(--container-padding) 0 0}
 .acf-block-preview .container-right,.block-editor-rich-text .container-right{margin:0 0 0 auto;padding:0 0 0 30px;padding:0 0 0 var(--container-padding)}
 .acf-block-preview .container-fluid,.block-editor-rich-text .container-fluid{width:100%;margin:auto;padding:0 30px;padding:0 var(--container-padding)}
-.acf-block-preview .container-content,.block-editor-rich-text .container-content{padding:0 30px;padding:0 var(--container-padding)}
+.acf-block-preview .container-content,.block-editor-rich-text .container-content{padding:0 30px;padding:0 var(--container-padding);width:100%}
 .acf-block-preview .container-content>*:not(.alignwide):not(.alignfull):not(.full-width),.block-editor-rich-text .container-content>*:not(.alignwide):not(.alignfull):not(.full-width){max-width:70rem !important;max-width:var(--container-content) !important;margin-right:auto;margin-left:auto}
 .acf-block-preview .container-content>.full-width,.acf-block-preview .container-content>.alignfull,.block-editor-rich-text .container-content>.full-width,.block-editor-rich-text .container-content>.alignfull{width:auto;margin-left:calc(-1 * 30px);margin-left:calc(-1 * var(--container-padding));margin-right:calc(-1 * 30px);margin-right:calc(-1 * var(--container-padding))}
 .acf-block-preview .no-gutters,.block-editor-rich-text .no-gutters{padding-left:0;padding-right:0;grid-gap:0}

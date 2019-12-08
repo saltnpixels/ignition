@@ -100,10 +100,6 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: index.php:98
-msgid "Blog"
-msgstr ""
-
 #: search.php:23
 msgid "Search Results for: %s"
 msgstr ""
@@ -191,12 +187,8 @@ msgstr ""
 msgid "Archive Page For "
 msgstr ""
 
-#: inc/core/_extras.php:35
+#: inc/core/_extras.php:34
 msgid "Expand child menu"
-msgstr ""
-
-#: inc/core/_extras.php:298
-msgid "Edit %s Page"
 msgstr ""
 
 #: inc/core/_icon-functions.php:54

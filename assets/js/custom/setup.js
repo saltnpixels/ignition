@@ -2,7 +2,7 @@
 
 //wrap function
 function wrap(el, wrapper) {
-	if(wrapper === undefined){
+	if (wrapper === undefined) {
 		wrapper = document.createElement('div');
 	}
 	el.parentNode.insertBefore(wrapper, el);
@@ -28,7 +28,7 @@ function debounce(func, wait, immediate) {
 }
 
 //throttle will run every few milliseconds as opposed to every millisecond
-function throttle (fn, threshhold, scope) {
+function throttle(fn, threshhold, scope) {
 	threshhold || (threshhold = 250);
 	var last,
 		deferTimer;

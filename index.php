@@ -4,7 +4,6 @@
  *
  *
  * It is used to display a page when nothing more specific matches a query.
- * It's also used for archive post type pages, unless a set page is specified in the WP Customizer.
  *
  * E.g., it puts together the home page when no home.php file exists.
  *
@@ -14,9 +13,6 @@
  * @since   1.0
  * @version 1.0
  *
- *
- * If using an actual page to represent this archive, an archive page will be found and its ACF sections will be output instead of
- * the loop.
  */
 
 
@@ -37,7 +33,7 @@ global $post;
 $page_archive_id = ign_get_archive_page();
 
 
-//set if there is a sidebar template on the page used, add the proper divs. divs are taken straight from those templates
+//if a page has been chosen in the customizer for this post type, set if there is a sidebar template on the page used, add the proper divs.
 $has_sidebar = false;
 if ( $page_archive_id ) {
 	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-left' ) !== false ) {
@@ -54,19 +50,18 @@ if ( $page_archive_id ) {
 
 ?>
 
+
+
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
 			<?php
 			//if an archive page has been set show it now
 			if ( $page_archive_id ) :
-
 				//set the post to the archive page
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
-
 				?>
-
 				<div class="entry-content container-content">
 					<?php
 					ign_the_content();
@@ -79,13 +74,11 @@ if ( $page_archive_id ) {
 
 
 			<?php
-			//BASIC INDEX WHEN NO PAGE USED (DEFAULT)
+			//BASIC INDEX WHEN NO PAGE USED (DEFAULT).
 			else:
 				?>
 
 				<header class="page-header layout-center-content text-center">
-
-
 					<div class="header-content container-fluid">
 						<h1>
 							<?php
@@ -129,11 +122,14 @@ if ( $page_archive_id ) {
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
+
 <?php
 if ( $has_sidebar ) {
 	get_sidebar();
 	echo '</div></div><!-- #sidebar-template -->';
 }
 ?>
+
+
 <?php
 get_footer();
