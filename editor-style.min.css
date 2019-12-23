@@ -156,6 +156,7 @@ div .flex>.span-12,div .flex-grid>.span-12{-webkit-box-flex:0;-ms-flex-positive:
 .justify-center{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .flex-wrap{-ms-flex-wrap:wrap;flex-wrap:wrap}
 .flex-column{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}
+.space-between{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}
 .layout-center-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .layout-cards-7>*{grid-column:span 4}
 .layout-cards-7>* .hide-on-small-card{display:none}

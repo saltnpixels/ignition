@@ -3,9 +3,9 @@
 /**
  * Ignition functions and definitions
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @link    https://developer.wordpress.org/themes/basics/theme-functions/
  * @package Ignition
- * @since 1.0
+ * @since   1.0
  *
  * This is the first file you should edit when starting a new theme.
  * Here you can edit the google fonts, the images sizes and other setup options for your theme.
@@ -405,7 +405,4 @@ require_once get_parent_theme_file_path( '/inc/core/dev-helpers.php' );
 //no need to include php files, just add them to the inc folder and start them with an underscore. Ignition takes care of the rest!
 //Ignition will also search one directory deep for more underscored files within inc and template-parts folders.
 // (ie: inc/acf-extras/_acf-extras.php
-
-
-
 

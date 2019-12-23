@@ -38,11 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
 				fixOffScreenMenu(subMenu);
 				//add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
 				evt.target.closest('li').classList.add('toggled-on');
+				ignSlideDown(subMenu);
 			} else {
 				evt.target.closest('li').classList.remove('toggled-on');
+				ignSlideUp(subMenu);
 			}
 
-			ign_slide_element(subMenu, .5, isToggled);
 		}
 	});
 

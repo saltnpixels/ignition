@@ -5,7 +5,7 @@
  * ign_get_terms  and ign_get_term_links does not need to be in loop
  *
  * @package Ignition
- * @since 1.0
+ * @since   1.0
  */
 
 
@@ -402,14 +402,27 @@ function ign_block_class( $block, $custom_classes = '' ) {
 
 /**
  * Show the content based on if its using Gutenberg or not
+ *
+ * @param string $default_header_location
+ * relative path to location for default header
  */
-function ign_the_content() {
+function ign_the_content($default_header_location = '') {
 	//shows blocks or classic acf blocks. check for a header block too
 	$has_header = has_block( 'acf/header' );
 	if ( $has_header || has_blocks() ) {
 		//if there are blocks but not a header block, show the default header
 		if ( ! $has_header ) {
-			include( locate_template( 'template-parts/site-top/default-header.php' ) );
+			if($default_header_location){
+				include( locate_template( $default_header_location ) );
+			}else{
+				if(file_exists(locate_template( 'template-parts/'  . get_post_type() . '/header.php' ))){
+					include(locate_template( 'template-parts/'  . get_post_type() . '/header.php' ));
+				}else{
+					include( locate_template( 'template-parts/site-top/default-header.php' ) );
+				}
+
+			}
+
 		}
 
 		the_content();

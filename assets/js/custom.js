@@ -5,91 +5,10 @@
 --------------------------------------------------------------*/
 
 /**
- * Slide any element. global function. Mainly executed with data-slide
- * @param item
- * @param slideTime
- * @param direction
- */
-function ign_slide_element(item) {
-  var slideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : .5;
-  var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'toggle';
-
-  if (direction === 'open') {
-    //only open if its not open already. dont do animation again.
-    if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
-      TweenMax.set(item, {
-        display: 'block',
-        height: 'auto',
-        clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
-      }); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
-
-      var height = item.clientHeight; //need to get height with padding included
-      //set the hegiht with padding included
-
-      TweenMax.set(item, {
-        height: height
-      }); //animate to new height from 0
-
-      TweenMax.from(item, slideTime, {
-        height: 0,
-        display: 'none',
-        marginTop: 0,
-        marginBottom: 0,
-        paddingTop: 0,
-        paddingBottom: 0
-      });
-    }
-  } else if (direction === 'close') {
-    TweenMax.to(item, slideTime, {
-      height: 0,
-      display: 'none',
-      marginTop: 0,
-      marginBottom: 0,
-      paddingTop: 0,
-      paddingBottom: 0
-    });
-  } else {
-    if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
-      //open
-      TweenMax.set(item, {
-        display: 'block',
-        height: 'auto',
-        clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
-      }); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
-
-      var _height = item.clientHeight; //need to get height with padding included
-
-      TweenMax.set(item, {
-        height: _height
-      });
-      TweenMax.from(item, slideTime, {
-        height: 0,
-        display: 'none',
-        marginTop: 0,
-        marginBottom: 0,
-        paddingTop: 0,
-        paddingBottom: 0
-      });
-    } else {
-      //close
-      TweenMax.to(item, slideTime, {
-        height: 0,
-        display: 'none',
-        marginTop: 0,
-        marginBottom: 0,
-        paddingTop: 0,
-        paddingBottom: 0
-      });
-    }
-  }
-}
-/**
  * resize menu buttons on load. also runs on resize.
  * menu button is not inside site-top for various reasons (we dont want x to be inside or when menu opens the ex is uinderneath.
  * so we use this function to match the site -top height and center it as if it was inside
  */
-
-
 var menuButtons = '';
 
 function placeMenuButtons() {
@@ -239,9 +158,9 @@ document.addEventListener('DOMContentLoaded', function () {
           var slideTime = targetItem.dataset.slide ? parseFloat(targetItem.dataset.slide) : .5;
 
           if (isToggled) {
-            ign_slide_element(targetItem, slideTime, 'open');
+            ignSlideDown(targetItem, slideTime);
           } else {
-            ign_slide_element(targetItem, slideTime, 'close');
+            ignSlideUp(targetItem, slideTime);
           }
         } //allow event to happen after click for the targeted item
 
@@ -444,11 +363,11 @@ document.addEventListener('DOMContentLoaded', function () {
         fixOffScreenMenu(subMenu); //add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
 
         evt.target.closest('li').classList.add('toggled-on');
+        ignSlideDown(subMenu);
       } else {
         evt.target.closest('li').classList.remove('toggled-on');
+        ignSlideUp(subMenu);
       }
-
-      ign_slide_element(subMenu, .5, isToggled);
     }
   });
   /*------- Open any current menu items in vertical menus --------*/
@@ -696,6 +615,103 @@ function throttle(fn, threshhold, scope) {
       fn.apply(context, args);
     }
   };
+} //slide elements
+
+
+var ignSlideTimer;
+
+function ignSlidePropertyReset(target) {
+  clearTimeout(ignSlideTimer);
+  target.style.removeProperty('height');
+  target.style.removeProperty('padding-top');
+  target.style.removeProperty('padding-bottom');
+  target.style.removeProperty('margin-top');
+  target.style.removeProperty('margin-bottom');
+  target.style.removeProperty('overflow');
+  target.style.removeProperty('transition-duration');
+  target.style.removeProperty('transition-property');
+}
+
+function ignSlideUp(target) {
+  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : .5;
+  //add transition and ready the properties
+  ignSlidePropertyReset(target);
+  target.style.height = target.offsetHeight + 'px';
+  target.style.transitionProperty = 'height, margin, padding';
+  target.style.transitionDuration = duration + 's';
+  target.style.overflow = 'hidden';
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginBottom = 0;
+  target.style.marginTop = 0;
+  setTimeout(function () {
+    target.style.height = 0;
+  }, 100);
+  ignSlideTimer = setTimeout(function () {
+    target.style.display = 'none';
+    ignSlidePropertyReset(target);
+  }, duration * 1000);
+}
+/**
+ *
+ * @param target
+ * @param duration
+ *
+ * Style element as it should show then set it to display none (or have it get display none from slide up or something else)
+ */
+
+
+function ignSlideDown(target) {
+  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : .5;
+  //remove any inline properties for display and padding and margins that might be there, may have pressed this while it was sliding down
+  ignSlidePropertyReset(target); //save original margins, check whether we are setting to block or some other (flex, inline-block)...
+
+  var display = window.getComputedStyle(target).display;
+  var padding = window.getComputedStyle(target).padding;
+  var margin = window.getComputedStyle(target).margin; //if its none make it a block element then grab its height quickly
+
+  if (display === 'none') {
+    display = 'block';
+  }
+
+  target.style.display = display; //might be inline-block...
+  //show element for s milisecond and grab height
+
+  target.style.height = 'auto';
+  target.style.overflow = 'hidden';
+  var height = target.offsetHeight; //grab height while auto
+  //set any other problematic property to 0
+
+  target.style.transitionProperty = 'none';
+  target.style.height = '0px'; //set height back to 0
+
+  target.style.paddingTop = '0px';
+  target.style.paddingBottom = '0px';
+  target.style.marginTop = '0px';
+  target.style.marginBottom = '0px'; //set display to show, but padding and height to 0 right away
+
+  setTimeout(function () {
+    //turn on  transitions adn animate properties back to normal
+    target.style.transitionProperty = "height, margin, padding";
+    target.style.transitionDuration = duration + 's';
+    target.style.padding = padding;
+    target.style.height = height + 'px';
+    target.style.margin = margin;
+  }, 100); //after it slides open remove properties
+
+  ignSlideTimer = setTimeout(function () {
+    ignSlidePropertyReset(target);
+  }, duration * 1000);
+}
+
+function ignSlideToggle(target) {
+  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : .5;
+
+  if (window.getComputedStyle(target).display === 'none') {
+    return ignSlideDown(target, duration);
+  } else {
+    return ignSlideUp(target, duration);
+  }
 }
 "use strict";
 

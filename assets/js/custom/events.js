@@ -3,79 +3,6 @@
 --------------------------------------------------------------*/
 
 /**
- * Slide any element. global function. Mainly executed with data-slide
- * @param item
- * @param slideTime
- * @param direction
- */
-function ign_slide_element(item, slideTime = .5, direction = 'toggle') {
-
-	if (direction === 'open') {
-		//only open if its not open already. dont do animation again.
-		if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
-			TweenMax.set(item, {
-				display: 'block',
-				height: 'auto',
-				clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
-			}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
-
-			let height = item.clientHeight; //need to get height with padding included
-			//set the hegiht with padding included
-			TweenMax.set(item, {height: height});
-			//animate to new height from 0
-			TweenMax.from(item, slideTime, {
-				height: 0,
-				display: 'none',
-				marginTop: 0,
-				marginBottom: 0,
-				paddingTop: 0,
-				paddingBottom: 0
-			});
-		}
-	} else if (direction === 'close') {
-		TweenMax.to(item, slideTime, {
-			height: 0,
-			display: 'none',
-			marginTop: 0,
-			marginBottom: 0,
-			paddingTop: 0,
-			paddingBottom: 0
-		});
-	} else {
-
-		if (getComputedStyle(item).height === '0px' || getComputedStyle(item).display === 'none') {
-			//open
-			TweenMax.set(item, {
-				display: 'block',
-				height: 'auto',
-				clearProps: 'margin-top, margin-bottom, padding-top, padding-bottom'
-			}); //quickly set how we want it to animate to. tweenmax grabs real height here and animates to
-			let height = item.clientHeight; //need to get height with padding included
-			TweenMax.set(item, {height: height});
-			TweenMax.from(item, slideTime, {
-				height: 0,
-				display: 'none',
-				marginTop: 0,
-				marginBottom: 0,
-				paddingTop: 0,
-				paddingBottom: 0
-			});
-		} else {
-			//close
-			TweenMax.to(item, slideTime, {
-				height: 0,
-				display: 'none',
-				marginTop: 0,
-				marginBottom: 0,
-				paddingTop: 0,
-				paddingBottom: 0
-			});
-		}
-	}
-
-}
-
-/**
  * resize menu buttons on load. also runs on resize.
  * menu button is not inside site-top for various reasons (we dont want x to be inside or when menu opens the ex is uinderneath.
  * so we use this function to match the site -top height and center it as if it was inside
@@ -243,9 +170,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					let slideTime = (targetItem.dataset.slide) ? parseFloat(targetItem.dataset.slide) : .5;
 
 					if (isToggled) {
-						ign_slide_element(targetItem, slideTime, 'open');
+						ignSlideDown(targetItem, slideTime);
 					} else {
-						ign_slide_element(targetItem, slideTime, 'close');
+						ignSlideUp(targetItem, slideTime);
 					}
 				}
 
