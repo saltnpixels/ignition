@@ -5,9 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.2.6] - Jan 1, 2020
+Happy New Year!
+TweenMax has been removed from core and is now included in the scrollmagic package.
+If you dont want it, you dont need it.
+To include scrollmagic open the _scrollmagic.php in the inc folder and uncomment the add_action
+
 ## [3.2.5] - Dec 1, 2019
 Ignition is getting easier to plug and play blocks and extra functionality
-Files that you want added to custom.js can be in one of 3 places. 
+Files that you want added to custom.js can be in one of 3 places.
 - Inside custom folder like always
 - inside template parts, but it must start with an underscore _file.js
 - inside inc folder, but it too must start with an underscore _file.js
@@ -26,8 +32,8 @@ scss files from template-parts and inc will also be added to your sass main.scss
 BIG Changes. Now you can add JS and sass files within the template-parts folder. These files will get added into the assets folder automagically and then compile.
 With these changes, a few files were added, removed or moved around.
  - Re added support for internationalization.
- - Moved around some sass files and sass content: 
-   - added articles.scss for all article styles. This replaces archives.scss 
+ - Moved around some sass files and sass content:
+   - added articles.scss for all article styles. This replaces archives.scss
     - moved some styles into template-parts/post/post.scss from articles.scss
     - Added global/defaults.scss with some site defaults taken from other sass files.
     - removed headers.scss and footers.scss because the content from those is now in defaults.scss.
@@ -39,7 +45,7 @@ Small Fixes for Stable release
 
 ## [3.2.0] - Sep 26, 2019
 Gutenberg Headers!
-<br> You can now create a header block to override the default header. 
+<br> You can now create a header block to override the default header.
 
 ## [3.1.0] - Sep 12, 2019
 Gutenberg is here.
@@ -55,9 +61,9 @@ HUGE update!
 - Fixed all js files. The file, setup.js is now separate and runs before custom.js so there are no issues in ie11
 - Most JS files now use vanilla js with ESNext
 - Renamed ACF Blocks to classic blocks to prepare for gutenberg blocks with acf
-- Streamlined font-sizing. use 1.6rem to mean 16px or 1.2rem to mean 12px... 
+- Streamlined font-sizing. use 1.6rem to mean 16px or 1.2rem to mean 12px...
 - Fonts using rem get bigger by around 4 pixels on large screens. Use px if you dont want this
-- JS Events fixed and updated. 
+- JS Events fixed and updated.
 - Now you can use data-radio to force data-toggles to act like radio buttons
 - data-slide will slide open and closed an item that has been toggled (need data-toggle, data-target on toggle item and data-slide on target item that your toggling.)
 - Fixed grid and ie11 grid in small ways
@@ -78,7 +84,7 @@ HUGE update!
  - Added a new menu icon of hamburger for mobile menu
  - ACF Sections now have an auto Collapse feature so the sections are not overwhelming
  - Sections can also be identified by titles
-    
+
 ## [2.2.4] - 03-29-2019
 
 ### Added
@@ -90,7 +96,7 @@ HUGE update!
 
 ## [2.0.0] - 2018
 
-### Added 
+### Added
 
 - Ability to dynamically add classes to the acf layout in the admin area when using the repater field.
 - Header section can be added via checkbox to change the default header for each page or post type.
@@ -98,7 +104,7 @@ HUGE update!
 - CSS variables and postCSS  now added and powering all major variables in the CSS files except for media query variables.
 - Easily add ability to pull header out of page when a sidebar is used. This will place the header above content and sidebar. To do this add class "header-above" to the sidebar-template element inside sidebar template files.
 
-### Changed 
+### Changed
 
 - Ign Image functions have been changed to take the acf_image as a first parameter.
 - Restructured some css files and folders for easier finding.

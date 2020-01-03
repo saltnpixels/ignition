@@ -315,8 +315,6 @@ function ignition_scripts() {
 	wp_deregister_script( 'jquery-migrate' );
 	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.0.0.min.js", array(), '3.0.0' );
 
-	//needed for tweening slides
-	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/TweenMax.min.js' );
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
 	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
@@ -403,6 +401,6 @@ add_action( 'wp_head', 'ignition_pingback_header' );
 require_once get_parent_theme_file_path( '/inc/core/dev-helpers.php' );
 
 //no need to include php files, just add them to the inc folder and start them with an underscore. Ignition takes care of the rest!
-//Ignition will also search one directory deep for more underscored files within inc and template-parts folders.
+//Ignition will also search two directories deep for more underscored files within inc and template-parts folders.
 // (ie: inc/acf-extras/_acf-extras.php
 
