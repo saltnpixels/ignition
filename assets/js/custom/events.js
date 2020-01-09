@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			source = document.querySelector(item.getAttribute('data-movefrom'));
 
 			//if the screen is smaller than moveAt (1030), move to destination
-			if (windowWidth < moveAt) {
+			if (windowWidth < moveAt || moveAt == 0) {
 				//no need to move if its already there...
 				if (!destination.contains(item)) {
 					if (item.hasAttribute('data-moveto-pos')) {

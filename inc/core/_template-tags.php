@@ -402,11 +402,12 @@ function ign_block_class( $block, $custom_classes = '' ) {
 
 /**
  * Show the content based on if its using Gutenberg or not
+ * if using gutenberg it wont show a header file if a header block is found
+ * if no header block is found it will search for a header block inside the post type folder, else it will get the default header inside site-top
  *
- * @param string $default_header_location
- * relative path to location for default header
+ * @param string $default_header_location path to default header
  */
-function ign_the_content($default_header_location = '') {
+function ign_the_header($default_header_location = '') {
 	//shows blocks or classic acf blocks. check for a header block too
 	$has_header = has_block( 'acf/header' );
 	if ( $has_header || has_blocks() ) {
@@ -422,17 +423,13 @@ function ign_the_content($default_header_location = '') {
 				}
 
 			}
-
 		}
 
-		the_content();
 	} else {
 		//show classic blocks in editor
 		include( locate_template( 'template-parts/classic-blocks/header_sections.php' ) );
-		include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 	}
 }
-
 
 
 

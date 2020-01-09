@@ -61,10 +61,14 @@ if ( $page_archive_id ) {
 				//set the post to the archive page
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
+
+				ign_the_header();
 				?>
 				<div class="entry-content container-content">
 					<?php
-					ign_the_content();
+					the_content();
+
+					//include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 
 					?>
 				</div>

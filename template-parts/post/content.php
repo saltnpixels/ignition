@@ -14,11 +14,14 @@
 <?php if ( is_single() ) : ?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+		<?php  ign_the_header(); ?>
 		<div class="entry-content container-content">
 			<?php
 
+			the_content();
 
-			ign_the_content();
+			//old acf blocks
+			//include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 
 
 			//not sure gutenberg eve has this anymore
@@ -80,7 +83,7 @@
 		</div><!-- .card-content -->
 
 		<div class="card-meta">
-			<?php echo ign_posted_on(); ?>
+			<?php ign_posted_on(); ?>
 			<?php echo ign_comment_link(); ?>
 		</div>
 	</article><!-- #post-## -->

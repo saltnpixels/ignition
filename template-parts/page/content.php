@@ -17,12 +17,14 @@
 
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<?php ign_the_header(); ?>
 	<div class="entry-content container-content">
 		<?php
 
+		the_content();
 
-		ign_the_content();
-
+		//old blocks
+		//include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 
 		//not sure gutenberg eve has this anymore
 		wp_link_pages( array(
