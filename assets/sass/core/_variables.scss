@@ -2,32 +2,32 @@
 # CSS Variables. Change these to match your theme
 --------------------------------------------------------------*/
 :root {
-	//Fonts. change to the fonts you want. Defaults to OS Fonts
-	--font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-	--font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-	--line-height: 1.5;
-	--font-pre: 'Source Code Pro', monospace;
-	--line-height-pre: 22px;
-	--article-font-size: 1.7rem; //slightly larger text for articles and actual content
+  //Fonts. change to the fonts you want. Defaults to OS Fonts
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --line-height: 1.5;
+  --font-pre: 'Source Code Pro', monospace;
+  --line-height-pre: 22px;
+  --article-font-size: 1.7rem; //slightly larger text for articles and actual content
 
 
-	//Colors. Add colors here
-	--black: #191919;
-	--grey: #cacaca;
-	--pink: #f75959;
-	--pink-darkened: #cd5757;
-	--pink-alpha: rgba(247, 89, 89, 0.5);
+  //Colors. Add colors here
+  --black: #191919;
+  --grey: #cacaca;
+  --pink: #f75959;
+  --pink-darkened: #cd5757;
+  --pink-alpha: rgba(247, 89, 89, 0.5);
 
-	//Applied Colors. Add your own applied areas
-	--body-bg: white;
-	--main-text-color: var(--black);
-	--subtle-text-color: var(--grey);
-	--site-top: var(--pink);
+  //Applied Colors. Add your own applied areas
+  --body-bg: white;
+  --main-text-color: var(--black);
+  --subtle-text-color: var(--grey);
+  --site-top: var(--pink);
 
-	//links and form buttons. used in typography.scss and forms.scss
-	--highlight: var(--pink);
-	--highlight-alpha: var(--pink-alpha);
-	--highlight-darkened: var(--pink-darkened);
+  //links and form buttons. used in typography.scss and forms.scss
+  --highlight: var(--pink);
+  --highlight-alpha: var(--pink-alpha);
+  --highlight-darkened: var(--pink-darkened);
 
 }
 
@@ -37,49 +37,49 @@
 --------------------------------------------------------------*/
 :root {
 
-	/*------- Menu Variables --------*/
-	--nav-move: 800px; //when main menu in site-top should move into panel left. Used by data-moveat event
-	--desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
+  /*------- Menu Variables --------*/
+  --nav-move: 800px; //when main menu in site-top should move into panel left. Used by data-moveat event
+  --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
-	/*------- Layout --------*/
-	--container: 1200px; //holds site in a centered container of this size
-	--container-content: 70rem; //holds article text for nice reading
-	--container-padding: 30px; //used on left and right side of containers
+  /*------- Layout --------*/
+  --container: 1200px; //holds site in a centered container of this size
+  --container-content: 70rem; //holds article text for nice reading
+  --container-padding: 30px; //used on left and right side of containers
 
-	--gutters: 15px; //common padding size, used on flexbox and modules
-	--gap: 30px; //common gap size used for margins and grids
-	--grid-gap: 30px; //same as gap but can be changes in instances where the grid needs a smaller gap. used with .grid or .flex-grid
+  --gutters: 15px; //common padding size, used on flexbox and modules
+  --gap: 30px; //common gap size used for margins and grids
+  --grid-gap: 30px; //same as gap but can be changes in instances where the grid needs a smaller gap. used with .grid or .flex-grid
 
 
-	/*------- Panels --------*/
-	--panel-left-width: 300px; //width of panel-left when open
-	--panel-right-width: 350px; //width of panel-right when open
+  /*------- Panels --------*/
+  --panel-left-width: 300px; //width of panel-left when open
+  --panel-right-width: 350px; //width of panel-right when open
 
-	/*------- Z-index --------*/
-	--z-index-top: 99;
-	--z-index-overlay: 95;
-	--z-index-menu-button: 90;
-	--z-index-menu: 80;
-	--z-index-behind: -1;
+  /*------- Z-index --------*/
+  --z-index-top: 99;
+  --z-index-overlay: 95;
+  --z-index-menu-button: 90;
+  --z-index-menu: 80;
+  --z-index-header: 75;
+  --z-index-behind: -1;
 }
 
 /*--------------------------------------------------------------
 # Wide Screen Changes
 --------------------------------------------------------------*/
 @media(min-width: 1600px) {
-	:root {
-		//Large wide screens can have bigger text and a wider container
-		font-size: calc(62.5% + 2px); //anything using rem goes up around 2 to 3 pixels
-		--container: 1400px;
-	}
+  :root {
+	//Large wide screens can have bigger text and a wider container
+	font-size: calc(62.5% + 2px); //anything using rem goes up around 2 to 3 pixels
+	--container: 1400px;
+  }
 }
 
-@media screen and (min-width: 1600px) and (-ms-high-contrast: active), (min-width: 1600px) and (-ms-high-contrast: none){
-	:root {
-		font-size: 65%; //ie cant do calc on font-size properly
-	}
+@media screen and (min-width: 1600px) and (-ms-high-contrast: active), (min-width: 1600px) and (-ms-high-contrast: none) {
+  :root {
+	font-size: 65%; //ie cant do calc on font-size properly
+  }
 }
-
 
 
 /*--------------------------------------------------------------
