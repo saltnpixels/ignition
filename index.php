@@ -62,17 +62,20 @@ if ( $page_archive_id ) {
 				$post = get_post( $page_archive_id );
 				setup_postdata( $post );
 
-				ign_the_header();
 				?>
 				<div class="entry-content container-content">
 					<?php
+
+					ign_the_header();
 					the_content();
 
+					//if using old sections
 					//include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
 
 					?>
 				</div>
-				<?php wp_reset_postdata();
+				<?php
+				wp_reset_postdata();
 				//END PAGE ARCHIVE
 				?>
 

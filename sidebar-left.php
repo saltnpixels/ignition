@@ -12,43 +12,27 @@
  */
 
 get_header(); ?>
-    <div class="sidebar-template header-above container">
-        <div class="flex sidebar-left">
+	<div class="sidebar-template header-above">
+		<div class="container">
+			<div class="flex sidebar-left">
 
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main" role="main">
+				<div id="primary" class="content-area">
+					<main id="main" class="site-main" role="main">
 
-					<?php
-					/* Start the Loop */
-					while ( have_posts() ) : the_post();
-						/**
-						 * Here we look for the right content. We look for a folder with the name of the post type
-						 * if it doesn't exist we will use the post folder
-						 */
-						if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-							if( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ){
-								include(locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ));
-							}else{
-								include(locate_template( 'template-parts/post/content.php' ));
-							}
+						<?php
+						/* Start the Loop */
+						while ( have_posts() ) : the_post();
+							ign_loop();
+						endwhile; // End of the loop.
+						?>
 
-						} else {
-							if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
-								include(locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ));
-							} else {
-								include(locate_template( 'template-parts/' . get_post_type() . '/content.php' ));
-							}
-						}
+					</main><!-- #main -->
+				</div><!-- #primary -->
 
-					endwhile; // End of the loop.
-					?>
-
-                </main><!-- #main -->
-            </div><!-- #primary -->
-
-			<?php get_sidebar(); ?>
-        </div>
-    </div>
+				<?php get_sidebar(); ?>
+			</div>
+		</div>
+	</div>
 
 
 <?php get_footer();

@@ -1,5 +1,5 @@
 /*------- Inline Sidebar Background --------*/
-#secondary .sidebar-holder:after {
+.sidebar-bg:after {
   content: '';
   position: absolute;
   height: 100%;
@@ -12,7 +12,7 @@
 
 
 //background when on left
-.sidebar-left #secondary .sidebar-holder:after {
+.sidebar-left #secondary .sidebar-bg:after, .sidebar-bg-right:after {
   left: auto;
   right: 0;
 }

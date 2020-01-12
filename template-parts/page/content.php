@@ -2,14 +2,14 @@
 /**
  * Template part for displaying page content in page.php
  *
+ * For cards see card-content.php as that has been removed from this file.
+ *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package Ignition
  * @since 1.0
  * @version 1.0
  *
- * We have two types of views here.
- * full page views for pages.
  *
  */
 

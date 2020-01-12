@@ -18,7 +18,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 
 
 <aside id="secondary" class="widget-area span-4" role="complementary">
-	<div data-moveto="#panel-right"  data-moveat="1200" class="sidebar-holder">
+	<div data-moveto="#panel-right"  data-moveat="1200" class="sidebar-holder sidebar-bg">
 		<?php dynamic_sidebar( 'sidebar-1' ); ?>
 	</div>
 </aside><!-- #secondary -->

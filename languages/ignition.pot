@@ -1,4 +1,4 @@
-# Copyright (C) 2019 ignition
+# Copyright (C) 2020 ignition
 # This file is distributed under the same license as the ignition package.
 msgid ""
 msgstr ""
@@ -216,14 +216,14 @@ msgstr ""
 msgid "© %s Created by %s with Ignition. Proudly powered by %s"
 msgstr ""
 
-#: template-parts/page/content.php:29, template-parts/post/content.php:26
+#: template-parts/page/content.php:31, template-parts/post/content.php:29
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/post/content.php:40
+#: template-parts/post/content.php:43
 msgid "Previous Post"
 msgstr ""
 
-#: template-parts/post/content.php:41
+#: template-parts/post/content.php:44
 msgid "Next Post"
 msgstr ""

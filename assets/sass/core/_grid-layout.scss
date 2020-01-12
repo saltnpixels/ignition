@@ -15,6 +15,14 @@
   padding: 0 var(--container-padding);
 }
 
+//a container shouldnt ever have a container content, but if it does it should not have padding. example a sidebar template
+//alignfull wont work right if there is double padding
+//however container-content CAN have a container though, inside a .container-content>.alignfull you can do anything...
+.container .container-content, .container-fluid .container-content{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .container-left, .container-right {
   width: 100%;
   max-width: calc(var(--container) + ((100% - var(--container)) / 2));

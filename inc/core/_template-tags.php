@@ -327,6 +327,7 @@ function ign_get_image_url( $acf_image = '', $post_id = false, $size = '', $use_
  * @return string
  *
  * Returns the header image field for a post as a url, unless $return_type is set to anything else. then it returns the actual image element
+ * It also checks if the no_image field is checked and if so returns nothing.
  * if no image is found it will return the featured image
  * if no image is set, then nothing is returned.
  *
@@ -355,8 +356,8 @@ function ign_get_header_image( $post_id = false, $return_type = 'url', $attr = '
 
 /**
  * @param $link_field
- * @param int $post_id
- *
+ * @param mixed $post_id
+ * @return array $link_field
  * If the link field is empty we still return an array so it is set and works
  */
 function ign_get_link_field( $link_field, $post_id = false ) {
@@ -401,9 +402,10 @@ function ign_block_class( $block, $custom_classes = '' ) {
 
 
 /**
- * Show the content based on if its using Gutenberg or not
+ * Show the header for a single post or page
  * if using gutenberg it wont show a header file if a header block is found
- * if no header block is found it will search for a header block inside the post type folder, else it will get the default header inside site-top
+ * if no header block is found it will search for a default header file
+ * It will start it's search in the post type folder, else it will get the default header inside site-top folder
  *
  * @param string $default_header_location path to default header
  */

@@ -1,19 +1,22 @@
+
 document.addEventListener('DOMContentLoaded', function () {
 
+
+//move the header above the article when header-above is found
+	const headerAbove = document.querySelector('.header-above');
+	if(headerAbove !== null){
+		document.querySelectorAll('.entry-header, .page-header').forEach(header=>{
+			headerAbove.prepend(header);
+			header.classList.add('header-moved'); //might be useful for someone
+		});
+	}
+
+	//when a secondary is used, a sidebar is shown, on load we do a few things to smooth the transition of the header
 	let sidebar = document.querySelector('#secondary');
 	if(sidebar !== null){
 		sidebar.innerHTML = sidebar.innerHTML.trim(); //if moving stuff in and out its good to remove extra space so :empty works
 		let sidebarTemplate = document.querySelector('.sidebar-template');
-
-		//if there is a sidebar and you want the header to be above the article and sidebar add class .header-above to the sidebar-template
-		if(sidebarTemplate !== null && sidebarTemplate.classList.contains('header-above')){
-
-			document.querySelectorAll('.entry-header, .page-header').forEach(header=>{
-				sidebarTemplate.parentElement.prepend(header);
-			});
-
-			sidebarTemplate.classList.add('active');
-		}
+		sidebarTemplate.classList.add('active');
 	}
 
 });

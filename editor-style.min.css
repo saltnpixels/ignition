@@ -1,5 +1,5 @@
 :root{--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--font-alt:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--line-height:1.5;--font-pre:'Source Code Pro',monospace;--line-height-pre:22px;--article-font-size:1.7rem;--black:#191919;--grey:#cacaca;--pink:#f75959;--pink-darkened:#cd5757;--pink-alpha:rgba(247,89,89,0.5);--body-bg:white;--main-text-color:var(--black);--subtle-text-color:var(--grey);--site-top:var(--pink);--highlight:var(--pink);--highlight-alpha:var(--pink-alpha);--highlight-darkened:var(--pink-darkened)}
-:root{--nav-move:800px;--desktop-menu-alignment:center;--container:1200px;--container-content:70rem;--container-padding:30px;--gutters:15px;--gap:30px;--grid-gap:30px;--panel-left-width:300px;--panel-right-width:350px;--z-index-top:99;--z-index-overlay:95;--z-index-menu-button:90;--z-index-menu:80;--z-index-behind:-1}
+:root{--nav-move:800px;--desktop-menu-alignment:center;--container:1200px;--container-content:70rem;--container-padding:30px;--gutters:15px;--gap:30px;--grid-gap:30px;--panel-left-width:300px;--panel-right-width:350px;--z-index-top:99;--z-index-overlay:95;--z-index-menu-button:90;--z-index-menu:80;--z-index-header:75;--z-index-behind:-1}
 html{-webkit-box-sizing:border-box;box-sizing:border-box}
 *,*:before,*:after{-webkit-box-sizing:inherit;box-sizing:inherit}
 html *{-webkit-tap-highlight-color:rgba(0,0,0,0)}
@@ -93,6 +93,7 @@ canvas{display:inline-block}
 template{display:none}
 [hidden]{display:none}
 .container{width:100%;max-width:1200px;max-width:var(--container);margin:auto;padding:0 30px;padding:0 var(--container-padding)}
+.container .container-content,.container .mce-content-body,.container-fluid .container-content,.container-fluid .mce-content-body{padding-left:0;padding-right:0}
 .container-left,.container-right{width:100%;max-width:calc(1200px + ((100% - 1200px) / 2));max-width:calc(var(--container) + ((100% - var(--container)) / 2));margin:0 auto 0 0;padding:0 30px 0 0;padding:0 var(--container-padding) 0 0}
 .container-right{margin:0 0 0 auto;padding:0 0 0 30px;padding:0 0 0 var(--container-padding)}
 .container-fluid{width:100%;margin:auto;padding:0 30px;padding:0 var(--container-padding)}

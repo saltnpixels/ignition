@@ -12,40 +12,28 @@
  */
 
 get_header(); ?>
-<div class="sidebar-template header-above container">
-	<div class="flex sidebar-right">
-		<div id="primary" class="content-area">
-			<main id="main" class="site-main" role="main">
+	<div class="sidebar-template header-above">
+		<div class="container">
+			<div class="flex sidebar-right">
+				<div id="primary" class="content-area">
+					<main id="main" class="site-main" role="main">
 
-				<?php
-				/* Start the Loop */
-				while ( have_posts() ) : the_post();
+						<?php
+						/* Start the Loop */
+						while ( have_posts() ) : the_post();
 
-					//if the post type has its own folder it must also have its own set of post format files too.
-					if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-						if( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ){
-							include(locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ));
-						}else{
-							include(locate_template( 'template-parts/post/content.php' ));
-						}
+							ign_loop();
 
-					} else {
-						if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
-							include(locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ));
-						} else {
-							include(locate_template( 'template-parts/' . get_post_type() . '/content.php' ));
-						}
-					}
+						endwhile; // End of the loop.
+						?>
 
-				endwhile; // End of the loop.
-				?>
+					</main><!-- #main -->
+				</div><!-- #primary -->
 
-			</main><!-- #main -->
-		</div><!-- #primary -->
+				<?php get_sidebar(); ?>
 
-		<?php get_sidebar(); ?>
-
-	</div>
+			</div>
+		</div>
 	</div>
 
 <?php get_footer();

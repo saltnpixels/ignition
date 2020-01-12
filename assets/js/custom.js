@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       source = document.querySelector(item.getAttribute('data-movefrom')); //if the screen is smaller than moveAt (1030), move to destination
 
-      if (windowWidth < moveAt) {
+      if (windowWidth < moveAt || moveAt == 0) {
         //no need to move if its already there...
         if (!destination.contains(item)) {
           if (item.hasAttribute('data-moveto-pos')) {
@@ -716,19 +716,24 @@ function ignSlideToggle(target) {
 "use strict";
 
 document.addEventListener('DOMContentLoaded', function () {
+  //move the header above the article when header-above is found
+  var headerAbove = document.querySelector('.header-above');
+
+  if (headerAbove !== null) {
+    document.querySelectorAll('.entry-header, .page-header').forEach(function (header) {
+      headerAbove.prepend(header);
+      header.classList.add('header-moved'); //might be useful for someone
+    });
+  } //when a secondary is used, a sidebar is shown, on load we do a few things to smooth the transition of the header
+
+
   var sidebar = document.querySelector('#secondary');
 
   if (sidebar !== null) {
     sidebar.innerHTML = sidebar.innerHTML.trim(); //if moving stuff in and out its good to remove extra space so :empty works
 
-    var sidebarTemplate = document.querySelector('.sidebar-template'); //if there is a sidebar and you want the header to be above the article and sidebar add class .header-above to the sidebar-template
-
-    if (sidebarTemplate !== null && sidebarTemplate.classList.contains('header-above')) {
-      document.querySelectorAll('.entry-header, .page-header').forEach(function (header) {
-        sidebarTemplate.parentElement.prepend(header);
-      });
-      sidebarTemplate.classList.add('active');
-    }
+    var sidebarTemplate = document.querySelector('.sidebar-template');
+    sidebarTemplate.classList.add('active');
   }
 });
 "use strict";
@@ -742,28 +747,28 @@ jQuery(function ($) {
       // Figure out element to scroll to
       var target = $(this.hash);
       target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      var offset = $(this).data('anchor-offset');
-
-      if (!offset) {
-        offset = 0;
-      } // Does a scroll target exist?
-
+      var offset = $(this).data('anchor-offset') || 0; // Does a scroll target exist?
 
       if (target.length) {
+        //console.log(target);
         // Only prevent default if animation is actually gonna happen
         event.preventDefault();
         $('html, body').animate({
           scrollTop: target.offset().top - offset
-        }, 1000, function () {// Callback after animation
+        }, 700, function () {
+          // Callback after animation
           // Must change focus!
-          // var $target = $(target);
-          // $target.focus();
-          // if ($target.is(":focus")) { // Checking if the target was focused
-          //     return false;
-          // } else {
-          //     $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-          //     $target.focus(); // Set focus again
-          // }
+          var $target = $(target);
+          $target.focus();
+
+          if ($target.is(":focus")) {
+            // Checking if the target was focused
+            return false;
+          } else {
+            $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+
+            $target.focus(); // Set focus again
+          }
         });
       }
     }
