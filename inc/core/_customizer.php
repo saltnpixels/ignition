@@ -194,7 +194,7 @@ function remove_archive_page(){
 		$ignitionpress_post_types = get_post_types( array('_builtin' => false, 'has_archive' => true), 'objects' );
 		$ignitionpress_post_types[] = get_post_type_object( 'post' );
 		foreach ($ignitionpress_post_types as $post_type) {
-			//save to each page a hidden custom field.
+			//delete old field from old page
 			$archive_theme_mod = get_theme_mod('ign_archive_' . $post_type->name);
 			if($archive_theme_mod){
 				delete_post_meta($archive_theme_mod, '_ign_archive_page');

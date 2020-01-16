@@ -212,7 +212,7 @@ add_filter( 'login_headerurl', 'ign_login_url' );
 --------------------------------------------------------------*/
 
 /**
- * Return if page has an archive attached
+ * Return if page has an archive attached. Returns the post type it is attached to
  *
  * @access public
  *
@@ -301,7 +301,7 @@ function add_archive_edit_link( $admin_bar ) {
 
 function archive_page_redirect(){
 	global $post;
-	if(ign_is_page_archive( $post->ID )){
+	if(is_page() && ign_is_page_archive( $post->ID )){
 		wp_redirect(get_post_type_archive_link(ign_is_page_archive($post->ID)));
 	}
 }
