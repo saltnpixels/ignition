@@ -61,8 +61,8 @@ function register_acf_block_types() {
 		'keywords'        => array( 'header', 'hero' ),
 		'align'           => 'full',
 		'supports'        => array(
-			'anchor' => true,
-			'align'  => array( 'wide', 'full' ),
+			'anchor'   => true,
+			'align'    => array( 'wide', 'full' ),
 			'multiple' => false
 		),
 

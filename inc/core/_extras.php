@@ -335,3 +335,28 @@ function ignition_resource_hints( $urls, $relation_type ) {
 
 add_filter( 'wp_resource_hints', 'ignition_resource_hints', 10, 2 );
 
+
+/**
+ * @param $block_content
+ * @param $block
+ *
+ * @return string
+ * Some blocks are too naked to work nicely like ul which needs its own margins and when inside container-content they dont play nice.
+ */
+function surround_block( $block_content, $block ) {
+	if ( empty( trim( $block_content ) ) ) {
+		return $block_content;
+	}
+
+	if($block['blockName'] == 'core/list'){
+
+		return sprintf(
+			'<div class="block-%1$s">%2$s</div>',
+			sanitize_title( $block['blockName'] ),
+			$block_content
+		);
+	}
+	return $block_content;
+
+}
+add_filter( 'render_block', 'surround_block', 10, 2 );

@@ -30,14 +30,6 @@ dd {
 	margin: 0 1.5em 1.5em;
 }
 
-//Gutenberg fix
-.entry-content > ul, .entry-content > ol{
-	padding-left: var(--gap);
-
-	li{
-		padding: 5px 0;
-	}
-}
 
 /*--------------------------------------------------------------
 Tables

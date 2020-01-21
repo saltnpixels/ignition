@@ -355,7 +355,6 @@ function ign_gutenberg_styles() {
 
 	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
 		wp_get_theme()->get( 'Version' ), true );
-
 }
 
 add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
