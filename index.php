@@ -51,7 +51,6 @@ if ( $page_archive_id ) {
 ?>
 
 
-
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -102,12 +101,23 @@ if ( $page_archive_id ) {
 				<div class="container">
 					<section class="archive-cards card-grid">
 						<?php
-						//default to one section fo cards
-						while ( have_posts() ) : the_post();
+						if ( have_posts() ):
 
-							ign_loop();
+							while ( have_posts() ) : the_post();
+								ign_loop();
+							endwhile;
 
-						endwhile; // End of the loop.
+						else:
+
+							$post_type = get_query_var( 'post_type' ) ?: 'post';
+							if ( file_exists( locate_template( 'template-parts/' . $post_type . '/content-none.php' ) ) ) {
+								include( locate_template( 'template-parts/' . $post_type . '/content-none.php' ) );
+							} else {
+								echo '<p>' . __( 'Nothing has been found here' ) . '</p>';
+							}
+
+						endif;
+
 						?>
 					</section><!-- .entry-content -->
 
