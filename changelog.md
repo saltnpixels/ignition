@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.3.0] - Jan 29, 2020
+- added a z-index for the header
+ - Added ign_the_header() a function that checks and gets the header for a page. It checks for a header block and if none is found gets the default header.
+ - A default header can be included for each post type with post_type/header.php, otherwise it will get the default header found in site-top/default_header.php
+ - when using data-moveto, you can set moveat to 0 resulting in moving the item right away.
+ - when using a page as a post type archive, the page will auto redirect to the archive
+ - added .no-gutters class ability to .flex items
+ - Core Block for lists is wrapped now in a div so it can be selected with css and works better in the container
+  - Small bug fixes
+
 ## [3.2.6] - Jan 1, 2020
 Happy New Year!
 TweenMax has been removed from core and is now included in the scrollmagic package.
