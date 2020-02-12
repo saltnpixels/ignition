@@ -10,22 +10,31 @@
  */
 
 
-$block_id = isset($block['anchor']) ? $block['anchor'] : 'section-' . $block['id'];
-$image      = ign_get_image_url('background_image' ); //gets the background image url from an acf field
-
+$block_id        = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
+$image           = wp_get_attachment_image_url( get_field( 'background_image' )['ID'], 'full' ); //gets the background image url from an acf field
+$image_placement = get_field( 'background_image_placement' );
 
 ?>
 
-<section id="<?php echo $block_id; ?>" <?php ign_block_class($block); ?> style="background-image: url(<?php echo $image; ?>); background-size: cover;">
+<?php if ( $image ): ?>
+	<style>
+		#<?php echo $block_id;  if($image_placement){ echo ' .columns-holder'; } ?>{
+        background-image: url(<?php echo $image; ?>);
+        background-size: cover;
+    }
+	</style>
+<?php endif; ?>
 
-	<div class="columns-holder <?php echo esc_attr(get_field( 'container_class' ) ); ?>">
+<section id="<?php echo $block_id; ?>" <?php ign_block_class( $block ); ?>>
+
+	<div class="columns-holder <?php echo esc_attr( get_field( 'container_class' ) ); ?>">
 		<?php
 		if ( have_rows( 'paragraphs' ) ) { ?>
 			<div class="<?php echo esc_attr( get_field( 'grid_class' ) ); ?> paragraphs-holder">
 				<?php while ( have_rows( 'paragraphs' ) ): the_row(); ?>
 
 					<div class="text-section <?php the_sub_field( 'paragraph_class' ); ?>">
-						<?php the_sub_field( 'paragraph' ); ?>
+							<?php the_sub_field( 'paragraph' ); ?>
 					</div>
 
 				<?php endwhile; ?>
