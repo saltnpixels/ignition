@@ -64,22 +64,22 @@ add_action( 'admin_footer', 'output_log_to_footer' );
  * @param int $depth
  */
 function ign_require_all( $dir, $depth = 2 ) {
-
-	foreach ( array_diff( scandir( $dir ), array( '.', '..' ) ) as $filename ) {
-		//check if its a file
-		if ( is_file( $dir . '/' . $filename ) ) {
-			//only include automatically if it starts with an underscore
-			if ( substr( $filename, 0, 1 ) === '_' && strpos( $filename, '.php' ) !== false ) {
+	if ( file_exists( $dir ) ) {
+		foreach ( array_diff( scandir( $dir ), array( '.', '..' ) ) as $filename ) {
+			//check if its a file
+			if ( is_file( $dir . '/' . $filename ) ) {
+				//only include automatically if it starts with an underscore
+				if ( substr( $filename, 0, 1 ) === '_' && strpos( $filename, '.php' ) !== false ) {
 					require_once( $dir . '/' . $filename );
-			}
+				}
 
-		} else {
-			//if its not a file its a directory. Look through it for more underscore php partial files
-			if ( $depth > 0 ) {
-				ign_require_all( $dir . '/' . $filename, $depth - 1 );
+			} else {
+				//if its not a file its a directory. Look through it for more underscore php partial files
+				if ( $depth > 0 ) {
+					ign_require_all( $dir . '/' . $filename, $depth - 1 );
+				}
 			}
 		}
-
 	}
 }
 
@@ -88,7 +88,7 @@ ign_require_all( get_parent_theme_file_path( '/inc' ) );
 
 //get theme template part partials from current theme only (if child being used get childs)
 //child theme will have to include parents if they want them. Will be included in child theme by default.
-ign_require_all( get_stylesheet_directory() . '/template-parts');
+ign_require_all( get_stylesheet_directory() . '/template-parts' );
 
 
 /**
