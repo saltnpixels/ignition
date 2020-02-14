@@ -44,6 +44,9 @@ html {
 	/*------- media --------*/
 	@import "global/media";
 
+  /*------- media --------*/
+  @import "global/page";
+
 	/*------- Default Block overrides --------*/
 	@import "wordpress/default-blocks";
 

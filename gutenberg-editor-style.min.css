@@ -312,6 +312,17 @@ div .acf-block-preview .flex>.span-12,div .acf-block-preview .wp-block-file>.spa
 .acf-block-preview .alignfull img,.block-editor-rich-text .alignfull img{-o-object-fit:cover;object-fit:cover}
 .acf-block-preview .videowrapper,.block-editor-rich-text .videowrapper{float:none;clear:both;width:100%;position:relative;padding-bottom:56.25%;padding-top:0;height:0}
 .acf-block-preview .videowrapper iframe,.acf-block-preview .videowrapper video,.acf-block-preview .videowrapper object,.block-editor-rich-text .videowrapper iframe,.block-editor-rich-text .videowrapper video,.block-editor-rich-text .videowrapper object{position:absolute;top:0;left:0;width:100%;height:100%}
+.acf-block-preview body,.block-editor-rich-text body{background:white;background:var(--body-bg)}
+.acf-block-preview .entry-header,.acf-block-preview .page-header,.block-editor-rich-text .entry-header,.block-editor-rich-text .page-header{position:relative;min-height:calc(400px + 5vw);padding:30px 0;color:white;background-color:#4c545d;background-color:var(--dark-grey);background-size:cover}
+.acf-block-preview .entry-header h1,.acf-block-preview .page-header h1,.block-editor-rich-text .entry-header h1,.block-editor-rich-text .page-header h1{margin:0}
+.acf-block-preview .entry-header .cover-image,.acf-block-preview .page-header .cover-image,.block-editor-rich-text .entry-header .cover-image,.block-editor-rich-text .page-header .cover-image{height:500px}
+.acf-block-preview .entry-header+p,.acf-block-preview .entry-header+.entry-content p:first-child,.block-editor-rich-text .entry-header+p,.block-editor-rich-text .entry-header+.entry-content p:first-child{padding-top:30px;padding-top:var(--gap)}
+.acf-block-preview .site-footer,.block-editor-rich-text .site-footer{padding-top:5px;padding-bottom:5px;background:#4c545d;background:var(--footer-bg);color:#cacaca;color:var(--subtle-text-color);font-size:1.1rem}
+.acf-block-preview .site-footer a,.block-editor-rich-text .site-footer a{color:inherit}
+.acf-block-preview .error404,.block-editor-rich-text .error404{background:#4f4f4f;color:white}
+.acf-block-preview .error404 .site-content,.block-editor-rich-text .error404 .site-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
+.acf-block-preview .error404 .site-footer,.acf-block-preview .error404 .site-top,.block-editor-rich-text .error404 .site-footer,.block-editor-rich-text .error404 .site-top{display:none}
+.acf-block-preview .error404 .title-404,.block-editor-rich-text .error404 .title-404{font-size:3rem;font-weight:bold;line-height:1;color:#727272;text-shadow:1px 1px white}
 .acf-block-preview .wp-block-file,.block-editor-rich-text .wp-block-file{-ms-flex-line-pack:center;align-content:center}
 .acf-block-preview .wp-block-file a,.block-editor-rich-text .wp-block-file a{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}
 .acf-block-preview #page .wp-block-gallery,.block-editor-rich-text #page .wp-block-gallery{padding:0}
