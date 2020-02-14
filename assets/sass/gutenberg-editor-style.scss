@@ -44,9 +44,6 @@ html {
 	/*------- media --------*/
 	@import "global/media";
 
-	/*------- defaults --------*/
-	@import "global/defaults";
-
 	/*------- Default Block overrides --------*/
 	@import "wordpress/default-blocks";
 
@@ -65,19 +62,28 @@ html {
 //contains all blocks. acts like container-content
 //added padding
 div .block-editor-block-list__layout {
-	padding: 0 var(--container-padding);
+  padding: 0 var(--container-padding);
 
-	> *:not([data-align="full"] ):not([data-align="wide"] ) {
-		max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
-		margin-right: auto;
-		margin-left: auto;
-	}
+  > *:not([data-align="full"] ):not([data-align="wide"] ):not(.is-reusable) {
+	max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
+	margin-right: auto;
+	margin-left: auto;
+  }
+}
+
+.wp-block{
+  max-width: none;
 }
 
 //remove padding from blocks as it is now on the container
 .block-editor-block-list__layout .block-editor-block-list__block {
-	padding: 0;
+  padding: 0;
 }
+
+.block-editor-block-list__layout .is-reusable{
+  padding: 0 30px;
+}
+
 
 //removed negative margins
 .edit-post-visual-editor .block-editor-block-list__block .block-editor-block-list__block-edit,
