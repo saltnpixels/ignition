@@ -55,7 +55,7 @@ function register_acf_block_types() {
 		'name'            => 'header',
 		'title'           => __( 'Header' ),
 		'description'     => __( 'Overrides the basic header and shows a special one for this post or page.' ),
-		'render_template' => 'template-parts/acf-blocks/header/header.php',
+		'render_template' => 'template-parts/acf-blocks/header/header-block.php',
 		'category'        => 'ign-custom',
 		'icon'            => 'schedule',
 		'keywords'        => array( 'header', 'hero' ),
