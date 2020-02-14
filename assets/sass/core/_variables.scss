@@ -13,21 +13,24 @@
 
   //Colors. Add colors here
   --black: #191919;
+  --dark-grey: #4c545d;
   --grey: #cacaca;
-  --pink: #d93b3b;
-  --pink-darkened: #cd5757;
-  --pink-alpha: rgba(247, 89, 89, 0.5);
+  --blue: #00b9eb;
+  --dark-blue: #119fcc;
+
 
   //Applied Colors. Add your own applied areas
-  --body-bg: white;
-  --main-text-color: var(--black);
-  --subtle-text-color: var(--grey);
-  --site-top: var(--pink);
+  --body-bg: white; //found in page.scss
+  --main-text-color: var(--black); //used in various files
+  --subtle-text-color: var(--grey); //used in forms.scss and page.scss
+  --site-top: var(--blue);
+  --footer-bg: var(--dark-grey); //found in page.scss
+  --header-bg: var(--dark-grey); //found in page.scss
 
   //links and form buttons. used in typography.scss and forms.scss
-  --highlight: var(--pink);
-  --highlight-alpha: var(--pink-alpha);
-  --highlight-darkened: var(--pink-darkened);
+  --highlight: var(--blue);
+  --highlight-alpha: var(--blue);
+  --highlight-darkened: var(--dark-blue);
 
 }
 

@@ -12,7 +12,7 @@
 
 $block_id        = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
 $image           = wp_get_attachment_image_url( get_field( 'background_image' )['ID'], 'full' ); //gets the background image url from an acf field
-$image_placement = get_field( 'background_image_placement' );
+$image_placement = get_field('background_image_placement') ? 'image-inside' : '';
 
 ?>
 
@@ -25,7 +25,7 @@ $image_placement = get_field( 'background_image_placement' );
 	</style>
 <?php endif; ?>
 
-<section id="<?php echo $block_id; ?>" <?php ign_block_class( $block ); ?>>
+<section id="<?php echo $block_id; ?>" <?php ign_block_class( $block, $image_placement ); ?>>
 
 	<div class="columns-holder <?php echo esc_attr( get_field( 'container_class' ) ); ?>">
 		<?php

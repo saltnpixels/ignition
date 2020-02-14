@@ -3,6 +3,20 @@ Styles for your post type can go here or in the folder of the post type in templ
 The choice is up to you.
  */
 
+/*--------------------------------------------------------------
+# Single Posts
+--------------------------------------------------------------*/
+//some space at bottom of article before footer.
+.single article{
+  .entry-content{
+	margin-bottom: var(--gap);
+  }
+}
+
+.after-article{
+  clear: both;
+}
+
 
 /*--------------------------------------------------------------
 # Default article meta Meta

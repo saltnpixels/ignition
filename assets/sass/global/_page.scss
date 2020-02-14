@@ -14,7 +14,7 @@ body {
   min-height: calc(400px + 5vw);
   padding: 30px 0;
   color: white;
-  background: #3D2B3B no-repeat center;
+  background-color: var(--dark-grey);
   background-size: cover;
 
   h1 {
@@ -27,8 +27,8 @@ body {
 
 }
 
-/*------- if a paragraph block made directly under header, give it some padding --------*/
-.entry-header + p {
+/*------- if a paragraph block made directly under header, give it some top padding --------*/
+.entry-header + p, .entry-header + .entry-content p:first-child {
   padding-top: var(--gap);
 }
 
@@ -40,7 +40,7 @@ body {
 .site-footer {
   padding-top: 5px;
   padding-bottom: 5px;
-  background: var(--main-text-color);
+  background: var(--footer-bg);
   color: var(--subtle-text-color);
   font-size: 1.1rem;
 
@@ -49,19 +49,6 @@ body {
   }
 }
 
-
-/*--------------------------------------------------------------
-# Single Posts and pages
---------------------------------------------------------------*/
-.single article{
-	.entry-content{
-		margin-bottom: var(--gap);
-	}
-}
-
-.after-article{
-	clear: both;
-}
 
 
 /*--------------------------------------------------------------
@@ -82,7 +69,7 @@ body {
   }
 
   .title-404 {
-    @include scss-font-lock(90px, 200px);
+    font-size: 3rem;
     font-weight: bold;
     line-height: 1;
     color: #727272;

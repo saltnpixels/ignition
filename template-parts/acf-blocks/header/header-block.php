@@ -45,7 +45,7 @@ $header_type = get_field( 'header_type' );
 <?php endif; ?>
 
 
-<?php //YOUR NEW HEADER TYPE HERE?>
+<?php //YOUR NEW HEADER TYPE HERE ?>
 <?php if ( $header_type == 'something' ): ?>
 	<header></header>
 <?php endif; ?>

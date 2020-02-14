@@ -143,10 +143,6 @@ msgstr ""
 msgid "Sidebar Right"
 msgstr ""
 
-#: inc/acf_extras/_acf-blocks.php:97
-msgid "Ignition"
-msgstr ""
-
 #: inc/core/back-compat.php:38, inc/core/back-compat.php:50, inc/core/back-compat.php:65
 msgid "Ignition requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr ""
@@ -210,6 +206,10 @@ msgstr ""
 #. translators: %s: Name of current post
 #: inc/core/_template-tags.php:194
 msgid "%s<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: template-parts/acf-blocks/_acf-blocks.php:97
+msgid "Ignition"
 msgstr ""
 
 #: template-parts/footer/site-info.php:12
