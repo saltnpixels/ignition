@@ -390,11 +390,11 @@ function ign_get_link_field( $link_field, $post_id = false ) {
  * @param string $custom_classes
  * For use in block template, outputs the block classes
  */
-function ign_block_class( $block, $custom_classes = '' ) {
+function ign_block_class( $block, $custom_classes = '', $include_align = true) {
 
 	if ( $block ) {
 		$classnames = isset( $block['className'] ) ? $block['className'] : '';
-		$align      = isset( $block['align'] ) && $block['align'] ? 'align' . $block['align'] . ' ' : '';
+		$align      = isset( $block['align'] ) && $block['align'] && $include_align ? 'align' . $block['align'] . ' ' : '';
 		$classes    = 'acf-' . sanitize_title( strtolower( $block['title'] ) ) . ' ' . $align . $classnames;
 		echo 'class="' . ( $custom_classes ? $custom_classes . ' ' . $classes : $classes ) . '"';
 	}
