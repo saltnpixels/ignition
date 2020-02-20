@@ -412,14 +412,15 @@ function ign_block_class( $block, $custom_classes = '', $include_align = true) {
 function ign_the_header($default_header_location = '') {
 	//shows blocks or classic acf blocks. check for a header block too
 	$has_header = has_block( 'acf/header' );
+	//if this post uses gutenberg or has a header.
 	if ( $has_header || has_blocks() ) {
 		//if there are blocks but not a header block, show the default header
 		if ( ! $has_header ) {
 			if($default_header_location){
 				include( locate_template( $default_header_location ) );
 			}else{
-				if(file_exists(locate_template( 'template-parts/'  . get_post_type() . '/header.php' ))){
-					include(locate_template( 'template-parts/'  . get_post_type() . '/header.php' ));
+				if(file_exists(locate_template( 'template-parts/'  . get_post_type() . '/content-header.php' ))){
+					include(locate_template( 'template-parts/'  . get_post_type() . '/content-header.php' ));
 				}else{
 					include( locate_template( 'template-parts/site-top/default-header.php' ) );
 				}
