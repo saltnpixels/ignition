@@ -28,7 +28,7 @@ body {
 }
 
 /*------- if a paragraph block made directly under header, give it some top padding --------*/
-.entry-header + p, .entry-header + .entry-content p:first-child {
+.entry-header + p, .entry-header + .entry-content > p:first-child {
   padding-top: var(--gap);
 }
 
