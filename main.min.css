@@ -80,8 +80,10 @@ img{max-width:100%;height:auto}
 .container-content{padding:0 30px;padding:0 var(--container-padding);width:100%}
 .container-content>*:not(.alignwide):not(.alignfull):not(.full-width){max-width:70rem !important;max-width:var(--container-content) !important;margin-right:auto;margin-left:auto}
 .container-content>.full-width,.container-content>.alignfull{width:auto;margin-left:calc(-1 * 30px);margin-left:calc(-1 * var(--container-padding));margin-right:calc(-1 * 30px);margin-right:calc(-1 * var(--container-padding))}
+.container-content>.alignwide{padding-right:0;padding-left:0;max-width:calc(1200px - (30px * 2));max-width:calc(var(--container) - (var(--container-padding) * 2))}
+.container-content>.alignwide .container{padding-right:0;padding-left:0}
 .no-gutters{padding-left:0;padding-right:0;grid-gap:0}
-.alignwide{width:100%;max-width:calc(1200px - (30px * 2));max-width:calc(var(--container) - (var(--container-padding) * 2));margin-left:auto;margin-right:auto}
+.alignwide{width:100%;max-width:1200px;max-width:var(--container);margin-left:auto;margin-right:auto}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));grid-gap:30px}
 .card-grid-fill{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));grid-gap:30px}
 .flex-card-grid{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;margin-left:-15px;margin-right:-15px}
@@ -283,7 +285,7 @@ body{background:white;background:var(--body-bg)}
 .entry-header,.page-header{position:relative;min-height:calc(400px + 5vw);padding:30px 0;color:white;background-color:#4c545d;background-color:var(--dark-grey);background-size:cover}
 .entry-header h1,.page-header h1{margin:0}
 .entry-header .cover-image,.page-header .cover-image{height:500px}
-.entry-header+p,.entry-header+.entry-content p:first-child{padding-top:30px;padding-top:var(--gap)}
+.entry-header+p,.entry-header+.entry-content>p:first-child{padding-top:30px;padding-top:var(--gap)}
 .site-footer{padding-top:5px;padding-bottom:5px;background:#4c545d;background:var(--footer-bg);color:#cacaca;color:var(--subtle-text-color);font-size:1.1rem}
 .site-footer a{color:inherit}
 .error404{background:#4f4f4f;color:white}
