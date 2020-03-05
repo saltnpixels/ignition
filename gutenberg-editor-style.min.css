@@ -318,7 +318,7 @@ div .acf-block-preview .flex>.span-12,div .acf-block-preview .wp-block-file>.spa
 .acf-block-preview .entry-header,.acf-block-preview .page-header,.block-editor-rich-text .entry-header,.block-editor-rich-text .page-header{position:relative;min-height:calc(400px + 5vw);padding:30px 0;color:white;background-color:#4c545d;background-color:var(--dark-grey);background-size:cover}
 .acf-block-preview .entry-header h1,.acf-block-preview .page-header h1,.block-editor-rich-text .entry-header h1,.block-editor-rich-text .page-header h1{margin:0}
 .acf-block-preview .entry-header .cover-image,.acf-block-preview .page-header .cover-image,.block-editor-rich-text .entry-header .cover-image,.block-editor-rich-text .page-header .cover-image{height:500px}
-.acf-block-preview .entry-header+p,.acf-block-preview .entry-header+.entry-content>p:first-child,.block-editor-rich-text .entry-header+p,.block-editor-rich-text .entry-header+.entry-content>p:first-child{padding-top:30px;padding-top:var(--gap)}
+.acf-block-preview .entry-header+p,.acf-block-preview .sidebar-template .entry-content>p:first-child,.block-editor-rich-text .entry-header+p,.block-editor-rich-text .sidebar-template .entry-content>p:first-child{padding-top:30px;padding-top:var(--gap)}
 .acf-block-preview .site-footer,.block-editor-rich-text .site-footer{padding-top:5px;padding-bottom:5px;background:#4c545d;background:var(--footer-bg);color:#cacaca;color:var(--subtle-text-color);font-size:1.1rem}
 .acf-block-preview .site-footer a,.block-editor-rich-text .site-footer a{color:inherit}
 .acf-block-preview .error404,.block-editor-rich-text .error404{background:#4f4f4f;color:white}

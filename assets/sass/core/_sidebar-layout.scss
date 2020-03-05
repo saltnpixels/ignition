@@ -30,7 +30,7 @@
   display: none;
 }
 
-#secondary .sidebar-holder{
+#secondary{
   max-width: var(--panel-right-width);
 }
 
@@ -38,9 +38,6 @@
 .sidebar-left #secondary {
   order: 0;
 
-  .sidebar-holder{
-    float: right;
-  }
 }
 
 .sidebar-left #primary {

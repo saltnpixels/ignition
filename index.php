@@ -36,16 +36,16 @@ $page_archive_id = ign_get_archive_page();
 //if a page has been chosen in the customizer for this post type, set if there is a sidebar template on the page used, add the proper divs.
 $has_sidebar = false;
 if ( $page_archive_id ) {
-	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-left' ) !== false ) {
-		echo '<div class="sidebar-template header-above container-fluid">';
-		echo '<div class="flex sidebar-left">';
+
+	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar' ) !== false ) {
+		$template_name = str_replace( '.php', ' ', get_page_template_slug( $page_archive_id ));
+
+		echo '<div class="sidebar-template header-above">';
+		echo '<div class="container">';
+		echo '<div class="flex ' . $template_name . '">';
 		$has_sidebar = true;
 	}
-	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar-right' ) !== false ) {
-		echo '<div class="sidebar-template header-above container-fluid">';
-		echo '<div class="flex sidebar-right">';
-		$has_sidebar = true;
-	}
+
 }
 
 ?>
@@ -104,7 +104,7 @@ if ( $page_archive_id ) {
 						if ( have_posts() ):
 
 							while ( have_posts() ) : the_post();
-								ign_loop();
+								ign_loop('card');
 							endwhile;
 
 						else:
@@ -143,7 +143,7 @@ if ( $page_archive_id ) {
 <?php
 if ( $has_sidebar ) {
 	get_sidebar();
-	echo '</div></div><!-- #sidebar-template -->';
+	echo '</div></div></div><!-- #sidebar-template -->';
 }
 ?>
 
