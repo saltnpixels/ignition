@@ -2,7 +2,7 @@
 /**
  * Template part for displaying page content in page.php
  *
- * For cards see card-content.php as that has been removed from this file.
+ * For cards see card.php as that has been removed from this file.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

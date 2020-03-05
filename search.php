@@ -25,9 +25,7 @@ get_header(); ?>
                         <h1 class="page-title"><?php _e( 'Nothing Found', 'ignition' ); ?></h1>
                     <?php endif; ?>
                     <div class="container-content">
-                        <?php
-                        get_search_form();
-                        ?>
+                        <?php get_search_form(); ?>
                     </div>
                 </div>
             </header>
@@ -39,7 +37,7 @@ get_header(); ?>
 			        //default to one section fo cards
 			        while ( have_posts() ) : the_post();
 
-				       ign_loop();
+				       ign_loop('card');
 
 			        endwhile; // End of the loop.
 			        ?>

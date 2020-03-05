@@ -217,28 +217,24 @@ endif;
  * MUST BE USED INSIDE THE LOOP TO USE
  * Simply routes the page to the right folder and file
  */
-function ign_loop( $show_full_page_content = false ) {
+function ign_loop( $file_prefix = 'content' ) {
 
-	//most probably not wanting to see a full page unless this is page.php, so instead we show the card content.
-	if ( get_post_type() == 'page' && ! $show_full_page_content ) {
-		include( locate_template( 'template-parts/page/card-content.php' ) );
-	} else {
-
+	//if the post type has a folder in ignition/template-parts we use that, else we default to post folder
 		if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-			if ( get_post_format() && file_exists( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) ) ) {
-				include( locate_template( 'template-parts/post/content-' . get_post_format() . '.php' ) );
+			if ( get_post_format() && file_exists( locate_template( 'template-parts/post/'. $file_prefix . '-' .get_post_format() . '.php' ) ) ) {
+				include( locate_template( 'template-parts/post/' . $file_prefix . '-' . get_post_format() . '.php' ) );
 			} else {
-				include( locate_template( 'template-parts/post/content.php' ) );
+				include( locate_template( 'template-parts/post/' . $file_prefix . '.php' ) );
 			}
 
 		} else {
 			if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
-				include( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) );
+				include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix .  '-' . get_post_format() . '.php' ) );
 			} else {
-				include( locate_template( 'template-parts/' . get_post_type() . '/content.php' ) );
+				include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '.php' ) );
 			}
 		}
-	}
+
 }
 
 
