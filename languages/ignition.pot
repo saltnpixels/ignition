@@ -187,11 +187,11 @@ msgstr ""
 msgid "Expand child menu"
 msgstr ""
 
-#: inc/core/_icon-functions.php:54
+#: inc/core/_icon-functions.php:55
 msgid "Please define default parameters in the form of an array."
 msgstr ""
 
-#: inc/core/_icon-functions.php:59
+#: inc/core/_icon-functions.php:60
 msgid "Please define an SVG icon filename."
 msgstr ""
 

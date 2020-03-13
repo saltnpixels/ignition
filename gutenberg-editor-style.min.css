@@ -355,6 +355,7 @@ div .block-editor-block-list__layout>*:not([data-align="full"]):not([data-align=
 .block-editor-block-list__layout .block-editor-block-list__block[data-align="full"]{margin-left:calc(-1 * 30px);margin-left:calc(-1 * var(--container-padding));margin-right:calc(-1 * 30px);margin-right:calc(-1 * var(--container-padding))}
 .wp-block[data-align="wide"]{max-width:calc(1200px - (30px * 2));max-width:calc(var(--container) - (var(--container-padding) * 2))}
 div .editor-styles-wrapper p{margin-top:0;margin-bottom:1em}
+svg.css-icon{display:none}
 .editor-post-title__block .editor-post-title__input{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-family:var(--font-alt)}
 div .acf-block-component textarea{font-size:16px}
 .block-editor__container #acf-group_5aa6a924b02ff{display:none}

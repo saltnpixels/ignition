@@ -800,7 +800,8 @@ function runScrollerAttributes(element) {
         triggerElement = element.dataset.scrolltrigger || element,
         duration = element.dataset.duration || 0,
         tween = element.dataset.scrollscrub,
-        scene = ''; //if animation has word up or down, its probably an animation that moves it up or down,
+        reverse = element.dataset.reverse || true;
+    scene = ''; //if animation has word up or down, its probably an animation that moves it up or down,
     //so make sure trigger element
 
     if (-1 !== animationClass.toLowerCase().indexOf('up') || -1 !== animationClass.toLowerCase().indexOf('down')) {
@@ -835,7 +836,8 @@ function runScrollerAttributes(element) {
         triggerElement: triggerElement,
         offset: offset,
         triggerHook: triggerHook,
-        duration: duration
+        duration: duration,
+        reverse: reverse
       }).setTween(tween).addTo(scrollMagicController) // .addIndicators()
       ;
     } else {
@@ -843,7 +845,8 @@ function runScrollerAttributes(element) {
         triggerElement: triggerElement,
         offset: offset,
         triggerHook: triggerHook,
-        duration: duration
+        duration: duration,
+        reverse: reverse
       }).on('enter leave', function () {
         //instead of using toggle class we can use these events of on enter and leave and toggle class at both times
         element.classList.toggle(animationClass);
