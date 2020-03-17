@@ -156,7 +156,7 @@ function styles(){
 		.pipe(postcss(processors))
 		.pipe( autoprefixer( config.BROWSERS_LIST ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-
+		.pipe( sourcemaps.write() )
 		.pipe( dest( config.styleDestination ) )
 		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
@@ -165,7 +165,7 @@ function styles(){
 		.pipe( rename({ suffix: '.min' }) )
 		.pipe( minifycss({ maxLineLen: 10 }) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( sourcemaps.write() )
+
 		.pipe( dest( config.styleDestination ) )
 		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
