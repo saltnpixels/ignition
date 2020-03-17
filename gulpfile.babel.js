@@ -25,7 +25,6 @@
  * TODO: Customize your project in the wpgulp.js file.
  */
 const config = require( './wpgulp.config.js' );
-
 /**
  * Load Plugins.
  *
@@ -54,6 +53,7 @@ const babel = require( 'gulp-babel' ); // Compiles ESNext to browser compatible 
 
 // Image related plugins.
 const imagemin = require( 'gulp-imagemin' ); // Minify PNG, JPEG, GIF and SVG images with imagemin.
+
 
 // Utility related plugins.
 const rename = require( 'gulp-rename' ); // Renames files E.g. style.css -> style.min.css.
@@ -155,10 +155,9 @@ function styles(){
 		.on( 'error', sass.logError )
 		.pipe(postcss(processors))
 		.pipe( autoprefixer( config.BROWSERS_LIST ) )
-		.pipe( sourcemaps.write({ includeContent: false, sourceRoot: './assets/sass' }) )
-		//.pipe( sourcemaps.init({ loadMaps: true }) )
-		//.pipe( sourcemaps.write( './' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( sourcemaps.write('./assets/maps', { includeContent: false, sourceRoot: './assets/sass' }) )
+
 		.pipe( dest( config.styleDestination ) )
 		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
@@ -346,7 +345,7 @@ function images(){
 			cache(
 				imagemin([
 					imagemin.gifsicle({ interlaced: true }),
-					imagemin.jpegtran({ progressive: true }),
+					imagemin.mozjpeg({ progressive: true }),
 					imagemin.optipng({ optimizationLevel: 3 }), // 0-7 low-high.
 					imagemin.svgo({
 						plugins: [ { removeViewBox: true }, { cleanupIDs: false } ]
