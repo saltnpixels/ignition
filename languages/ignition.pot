@@ -108,15 +108,15 @@ msgstr ""
 msgid "Nothing Found"
 msgstr ""
 
-#: search.php:52, template-parts/classic-blocks/the_loop.php:67
+#: search.php:50, template-parts/classic-blocks/the_loop.php:67
 msgid "Previous page"
 msgstr ""
 
-#: search.php:53, template-parts/classic-blocks/the_loop.php:68
+#: search.php:51, template-parts/classic-blocks/the_loop.php:68
 msgid "Next page"
 msgstr ""
 
-#: search.php:54, template-parts/classic-blocks/the_loop.php:69
+#: search.php:52, template-parts/classic-blocks/the_loop.php:69
 msgid "Page"
 msgstr ""
 
@@ -187,11 +187,11 @@ msgstr ""
 msgid "Expand child menu"
 msgstr ""
 
-#: inc/core/_icon-functions.php:54
+#: inc/core/_icon-functions.php:55
 msgid "Please define default parameters in the form of an array."
 msgstr ""
 
-#: inc/core/_icon-functions.php:59
+#: inc/core/_icon-functions.php:60
 msgid "Please define an SVG icon filename."
 msgstr ""
 
@@ -216,14 +216,14 @@ msgstr ""
 msgid "© %s Created by %s with Ignition. Proudly powered by %s"
 msgstr ""
 
-#: template-parts/page/content.php:31, template-parts/post/content.php:29
+#: template-parts/page/content.php:31, template-parts/post/content.php:28
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/post/content.php:43
+#: template-parts/post/content.php:42
 msgid "Previous Post"
 msgstr ""
 
-#: template-parts/post/content.php:44
+#: template-parts/post/content.php:43
 msgid "Next Post"
 msgstr ""

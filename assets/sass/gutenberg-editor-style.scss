@@ -8,55 +8,52 @@
 
 
 html {
-	font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px. On big screens add 2px.
+  font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px. On big screens add 2px.
 }
 
 
 /*------- CSS For INSIDE Blocks. Add your styles here --------*/
-.acf-block-preview, .block-editor-rich-text{
+.acf-block-preview, .block-editor-rich-text {
 
-	font-size: var(--article-font-size); //results in 16px
-	line-height: var(--line-height);
-	font-family: var(--font);
-	color: var(--main-text-color);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-smoothing: antialiased;
+  font-size: var(--article-font-size); //results in 16px
+  line-height: var(--line-height);
+  font-family: var(--font);
+  color: var(--main-text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
 
-	/*------- Base --------*/
-	@import "core/base-layout";
+  /*------- Base --------*/
+  @import "core/base-layout";
 
-	/*------- Typography --------*/
-	@import "global/typography";
+  /*------- Typography --------*/
+  @import "global/typography";
 
-	/*------- Normalize --------*/
-	@import "libs/normalize";
+  /*------- Normalize --------*/
+  @import "libs/normalize";
 
-	/*------- CSS Grid --------*/
-	@import "core/grid-layout";
+  /*------- CSS Grid --------*/
+  @import "core/grid-layout";
 
-	/*------- Menu Layout --------*/
-	@import "core/menu-layout";
+  /*------- Menu Layout --------*/
+  @import "core/menu-layout";
 
-	/*------- All elements --------*/
-	@import "elements/elements";
+  /*------- All elements --------*/
+  @import "elements/elements";
 
-	/*------- media --------*/
-	@import "global/media";
+  /*------- media --------*/
+  @import "global/media";
 
   /*------- media --------*/
   @import "global/page";
 
-	/*------- Default Block overrides --------*/
-	@import "wordpress/default-blocks";
+  /*------- Default Block overrides --------*/
+  @import "wordpress/default-blocks";
 
-	/*------- Template Parts --------*/
-	@import "wordpress/template-parts";
+  /*------- Template Parts --------*/
+  @import "wordpress/template-parts";
 
 }
-
-
-
 
 
 /*--------------------------------------------------------------
@@ -74,7 +71,7 @@ div .block-editor-block-list__layout {
   }
 }
 
-.wp-block{
+.wp-block {
   max-width: none;
 }
 
@@ -83,7 +80,7 @@ div .block-editor-block-list__layout {
   padding: 0;
 }
 
-.block-editor-block-list__layout .is-reusable{
+.block-editor-block-list__layout .is-reusable {
   padding: 0 30px;
 }
 
@@ -91,98 +88,100 @@ div .block-editor-block-list__layout {
 //removed negative margins
 .edit-post-visual-editor .block-editor-block-list__block .block-editor-block-list__block-edit,
 .block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] > .block-editor-block-list__block-edit {
-	margin: auto;
+  margin: auto;
 }
 
 .block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] {
-	margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the containers padding
-	margin-right: calc(-1 * var(--container-padding));
+  margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the containers padding
+  margin-right: calc(-1 * var(--container-padding));
 }
 
 .wp-block[data-align="wide"] {
-	max-width: calc(var(--container) - (var(--container-padding) * 2));
+  max-width: calc(var(--container) - (var(--container-padding) * 2));
 }
 
 //fix paragraphs
-div .editor-styles-wrapper p{
-	margin-top:0;
-	margin-bottom: 1em;
+div .editor-styles-wrapper p {
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 
+//allows for using css icons in acf gutenberg block
+svg.css-icon {
+  display: none;
+}
 
 
 .editor-post-title__block .editor-post-title__input {
-	font-family: var(--font-alt);
+  font-family: var(--font-alt);
 }
 
-/*------- ACF textareas --------*/
+/*------- ACF textarea --------*/
 div .acf-block-component {
-	textarea {
-		font-size: 16px;
-	}
+  textarea {
+	font-size: 16px;
+  }
 }
 
 /*------- Hide acf page sections flexible field when using block editor --------*/
 .block-editor__container #acf-group_5aa6a924b02ff {
-	display: none;
+  display: none;
 }
-
-
 
 
 .editor-styles-wrapper {
-	background: var(--body-bg);
+  background: var(--body-bg);
 }
 
 .edit-post-layout__metaboxes {
-	background: white;
+  background: white;
 }
 
 
 .entry-header {
-	h1, h2, h3, h4, h5, h6 {
-		color: inherit;
-	}
+  h1, h2, h3, h4, h5, h6 {
+	color: inherit;
+  }
 }
 
 
 /*------- WP Sidebar fixes --------*/
 //making sidebar wider on wide computer screens
 @media(min-width: 1500px) {
-	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
-		width: 30%;
-	}
+  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
+	width: 30%;
+  }
 
-	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-layout__content {
-		margin-right: 30%;
-	}
+  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-layout__content {
+	margin-right: 30%;
+  }
 }
 
 //hiding sidebar on small screens so you can have a full screen experience
 @media(max-width: 1500px) {
-	#wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
-		transition: width .5s;
+  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
+	transition: width .5s;
 
-		&:hover {
-			width: 50%;
-			opacity: 1;
-		}
+	&:hover {
+	  width: 50%;
+	  opacity: 1;
 	}
+  }
 
 }
 
 //fixing meta boxes below editor
 div .block-editor-writing-flow {
-	height: auto;
+  height: auto;
 }
 
 //button fixes
 .wp-core-ui .acf-block-preview, .block-editor-rich-text {
-	.button {
-		line-height: 1.5;
-		height: auto;
-		font-size: inherit;
-	}
+  .button {
+	line-height: 1.5;
+	height: auto;
+	font-size: inherit;
+  }
 
 }
 

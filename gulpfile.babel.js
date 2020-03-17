@@ -291,7 +291,7 @@ function vendorsJS(){
  *     4. Uglifes/Minifies the JS file and generates custom.min.js
  */
 function customJS(){
-	return src( [config.jsCustomSRC, config.templatePartsScripts, config.incScripts], { since: lastRun( customJS ) }) // Only run on changed files.
+	return src( [config.jsCustomSRC, config.incScripts, config.templatePartsScripts], { since: lastRun( customJS ) }) // Only run on changed files.
 		.pipe( plumber( errorHandler ) )
 		.pipe(
 			babel({

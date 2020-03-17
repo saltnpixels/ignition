@@ -35,7 +35,7 @@ $post_type      = ign_is_page_archive( $post_id );
 				//routes to the right template file
 				if ( have_posts() ):
 					while ( have_posts() ): the_post();
-						ign_loop();
+						ign_loop('card');
 					endwhile;
 
 				else :
@@ -60,7 +60,7 @@ $post_type      = ign_is_page_archive( $post_id );
 				//routes to the right template file
 				if ( $archive->have_posts() ): while ( $archive->have_posts() ) :
 					$archive->the_post();
-					ign_loop();
+					ign_loop('card');
 				endwhile;
 
 				else :
@@ -88,7 +88,7 @@ $post_type      = ign_is_page_archive( $post_id );
 				//loop
 				if ( $cards->have_posts() ) : ?>
 					<?php while ( $cards->have_posts() ) : $cards->the_post(); ?>
-						<?php ign_loop(); ?>
+						<?php ign_loop('card'); ?>
 					<?php endwhile; ?>
 				<?php else :
 

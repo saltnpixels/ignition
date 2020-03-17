@@ -9,7 +9,7 @@
 
 
 /**
- * View your current icons easily! just make sure your client does not need a page called icons
+ * View your custom icons easily
  */
 function ignition_icon_template() {
 
@@ -20,6 +20,7 @@ function ignition_icon_template() {
 	}
 }
 add_action( "template_redirect", 'ignition_icon_template' );
+
 
 /**
  * Add SVG definitions to the footer.
