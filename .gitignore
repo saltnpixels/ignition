@@ -48,6 +48,10 @@ Thumbs.db
 wpcs/
 /vendor/
 
+#  Build files #
+###############
+/dist
+
 # Bower #
 ##########
 assets/bower_components/*

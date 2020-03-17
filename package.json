@@ -43,6 +43,7 @@
   },
   "scripts": {
     "start": "gulp",
+    "build": "gulp build",
     "styles": "gulp styles",
     "stylesRTL": "gulp stylesRTL",
     "vendorsJS": "gulp vendorsJS",
