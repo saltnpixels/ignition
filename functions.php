@@ -143,7 +143,7 @@ function ignition_setup() {
 	 * tinymce styles
 	  */
 	add_editor_style( array(
-		get_template_directory_uri() . '/editor-style.min.css?' . wp_get_theme()->get( 'Version' ),
+		get_template_directory_uri() . '/dist/editor-style.min.css?' . wp_get_theme()->get( 'Version' ),
 		ign_google_fonts_url()
 	) );
 
@@ -304,7 +304,7 @@ function ignition_scripts() {
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', wp_get_theme()->get( 'Version' ) );
 
 	//Sass compiles styles. Will get child's theme version if found instead. Child theme should import with sass.
-	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/main.css' ), '', wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/dist/main.min.css' ), '', wp_get_theme()->get( 'Version' ) );
 
 	//ie11 js polyfills
 	wp_enqueue_script( 'polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach' );
@@ -317,7 +317,7 @@ function ignition_scripts() {
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
-	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/dist/custom.min.js', array( 'jquery' ),
 		wp_get_theme()->get( 'Version' ), true );
 
 	//AJAX ready for .custom.js files
@@ -351,9 +351,9 @@ add_action( 'wp_enqueue_scripts', 'ignition_scripts' );
  */
 function ign_gutenberg_styles() {
 	// Load the theme styles within Gutenberg.
-	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/gutenberg-editor-style.min.css' ), false, wp_get_theme()->get( 'Version' ), 'all' );
+	wp_enqueue_style( 'ign-gutenberg-style', get_theme_file_uri( '/dist/gutenberg-editor-style.min.css' ), false, wp_get_theme()->get( 'Version' ), 'all' );
 
-	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/dist/custom.min.js', array( 'jquery' ),
 		wp_get_theme()->get( 'Version' ), true );
 }
 
@@ -364,7 +364,7 @@ add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
  * Add login stylehseet
  */
 function my_login_styles() {
-	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/login-style.css' );
+	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/login-style.min.css' );
 }
 
 add_action( 'login_enqueue_scripts', 'my_login_styles' );
@@ -375,7 +375,7 @@ add_action( 'login_enqueue_scripts', 'my_login_styles' );
  * experimental
  */
 function footer_styles() {
-	wp_enqueue_style( 'ignition-admin-styles', get_theme_file_uri( '/admin.css' ), '', wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'ignition-admin-styles', get_theme_file_uri( '/dist/admin.min.css' ), '', wp_get_theme()->get( 'Version' ) );
 }
 
 add_action( 'admin_footer', 'footer_styles', 99 );

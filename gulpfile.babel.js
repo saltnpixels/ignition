@@ -408,5 +408,6 @@ function watchFiles(){
 }
 
 exports.default = series(templatePartStyles, styles, vendorsJS, customJS, images,  browsersync, watchFiles);
+exports.build = series(templatePartStyles, styles, vendorsJS, customJS, images);
 
 
