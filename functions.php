@@ -138,6 +138,7 @@ function ignition_setup() {
 
 	// Add theme support for selective refresh for widgets in customizer.
 	add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support( 'custom-header' );
 
 	/*
 	 * tinymce styles
