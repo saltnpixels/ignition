@@ -1,0 +1,112 @@
+{
+    "key": "group_5e7257082314f",
+    "title": "Theme Options",
+    "fields": [
+        {
+            "key": "field_5e72570e914b3",
+            "label": "Getting Started",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "Welcome to your theme. You can edit some general settings under the <a target=\"_blank\" href=\"http:\/\/ignition.local\/wp-admin\/customize.php\">WP Customizer<\/a>. \r\nThere you can choose a logo, set up some main menu options and choose a default header image.\r\n\r\nOtherwise settings can be changed here. \r\nGoogle Fonts are set in the functions.php file (search \"google\").",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5e7258f5fd6e3",
+            "label": "Default Post Type Label Singular",
+            "name": "posts_label_singular",
+            "type": "text",
+            "instructions": "Change the 'Post' Label to something else. Use the singular term.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "Article",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5e725f558626c",
+            "label": "Default Post Type Label Plural",
+            "name": "posts_label_plural",
+            "type": "text",
+            "instructions": "Change the 'Post' Label to something else. Use the plural term.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "Article",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "autocomplete": "",
+            "ign_set_data": ""
+        },
+        {
+            "key": "field_5e7257e1914b4",
+            "label": "Archive Option Pages",
+            "name": "archive_option_pages",
+            "type": "checkbox",
+            "instructions": "Add Option pages for your custom post types. \r\nFor checkboxes to appear here, you need to add Custom Post Types and make sure they are public. We recommend using <a href=\"https:\/\/wordpress.org\/plugins\/pods\/\" target=\"_blank\">Pods plugin<\/a> to add post types.\r\nIf you plan on using Gutenberg with this new post type, remember to make sure the Rest API is turned on.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "choices": {
+                "newsletter": "Newsletters",
+                "portfolio": "Portfolios",
+                "post": "News"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1584567801
+}

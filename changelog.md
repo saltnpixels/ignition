@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.4] - Mar 18, 2020
+- Added ability to have scripts added to dist folder without being part of custom (just dont add an underscore to your file).
+- New Ability: Theme Options Page! Now you can manage extra theme options and create archive page options for each post type and change some other things via the theme options page.
+
 ## [3.3.1] - Mar 17, 2020
 - Changed ign_the_header so it can take a file location. If none given it will get content-header.php inside the current post type or load default-header.php
 - All build files now go into a dist folder and are not part of the repo. This allows for using githubs workflows better.
