@@ -72,27 +72,27 @@ msgstr ""
 msgid "Top Menu"
 msgstr ""
 
-#: functions.php:197
+#: functions.php:198
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:199
+#: functions.php:200
 msgid "Add widgets here to appear in your sidebar."
 msgstr ""
 
-#: functions.php:209
+#: functions.php:210
 msgid "Footer"
 msgstr ""
 
-#: functions.php:220
+#: functions.php:221
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:231
+#: functions.php:232
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:241
+#: functions.php:242
 msgid "Footer 4"
 msgstr ""
 

@@ -323,6 +323,47 @@ function customJS(){
 		.pipe( notify({ message: '\n\n✅  ===> CUSTOM JS — completed!\n', onLast: true }) );
 }
 
+
+/**
+ * Task: `noConcatJS`.
+ *
+ * Uglifies and makes a min js file of script files not meant to go into custom.js
+ *
+ * This task does the following:
+ *     1. Gets the source folder for JS  files NOT to be concatenated
+ *     2. Renames the JS file with suffix .min.js
+ */
+function noConcatJS(){
+	return src( config.noConcatScripts, { since: lastRun( noConcatJS ) }) // Only run on changed files.
+		.pipe( plumber( errorHandler ) )
+		.pipe(
+			babel({
+				//plugins: ['@babel/transform-runtime'],
+				presets: [
+					[
+						'@babel/preset-env', // Preset to compile your modern JS to ES5.
+						{
+							targets: { browsers: config.BROWSERS_LIST } // Target browser list to support.
+						}
+					]
+				]
+			})
+		)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( dest( config.jsCustomDestination ) )
+		.pipe(touch())
+		.pipe(
+			rename({
+				//basename: config.jsCustomFile,
+				suffix: '.min'
+			})
+		)
+		.pipe( uglify() )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( dest( config.jsCustomDestination ) )
+		.pipe( notify({ message: '\n\n✅  ===> No Concat JS — completed!\n', onLast: true }) );
+}
+
 /**
  * Task: `images`.
  *
@@ -404,10 +445,11 @@ function watchFiles(){
 	watch( config.watchStyles, series(styles, reload ) ); // Reload on SCSS file changes.
 	watch( config.watchJsVendor, series( vendorsJS, reload ) ); // Reload on vendorsJS file changes.
 	watch( config.watchJsCustom, series(customJS, reload ) ); // Reload on customJS file changes.
+	watch( config.watchNoConcatScripts, series(noConcatJS, reload ) ); // Reload on customJS file changes.
 	watch( config.imgSRC, series( images, reload ) ); // Reload on customJS file changes.
 }
 
-exports.default = series(templatePartStyles, styles, vendorsJS, customJS, images,  browsersync, watchFiles);
+exports.default = series(templatePartStyles, styles, vendorsJS, customJS, noConcatJS, images,  browsersync, watchFiles);
 exports.build = series(templatePartStyles, styles, vendorsJS, customJS, images);
 
 

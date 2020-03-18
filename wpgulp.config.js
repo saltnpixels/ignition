@@ -33,6 +33,7 @@ module.exports = {
 	jsVendorDestination: './dist', // Path to place the compiled JS vendors file.
 	jsVendorFile: 'vendor', // Compiled JS vendors file name. Default set to vendors i.e. vendors.js.
 
+	noConcatScripts: ['./assets/js/[^_]*.js', './template-parts/**/[^_]*.js', './inc/**/[^_]*.js'], //scripts that should be processed but not concatenated
 
 	// JS Custom options.
 	jsCustomSRC: './assets/js/custom/*.js', // Path to JS custom scripts folder.
@@ -43,6 +44,7 @@ module.exports = {
 	templatePartsScripts: './template-parts/**/_?*.js',
 	incScripts: './inc/**/_?*.js',
 
+
 	// Images options.
 	imgSRC: './assets/images/raw/*', // Source folder of images which should be optimized and watched. You can also specify types e.g. raw/**.{png,jpg,gif} in the glob.
 	imgDST: './dist', // Destination folder of optimized images. Must be different from the imagesSRC folder.
@@ -52,7 +54,7 @@ module.exports = {
 	watchJsVendor: './assets/js/vendor/*.js', // Path to all vendor JS files.
 	watchJsCustom: ['./assets/js/custom/*.js','./template-parts/**/_?*.js', './inc/**/_?*.js' ], // Path to all custom JS files.
 	watchPhp: './**/*.php', // Path to all PHP files.
-
+	watchNoConcatScripts: ['./assets/js/[^_]*.js','./template-parts/**/[^_]*.js', './inc/**/[^_]*.js'],
 	// Translation options.
 	textDomain: 'ignition', // Your textdomain here.
 	translationFile: 'ignition.pot', // Name of the translation file.
