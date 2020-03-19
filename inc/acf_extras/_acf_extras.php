@@ -74,11 +74,11 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 	function add_post_type_options() {
 
 		//add options for other post types if chosen
-		$archive_pages = get_field( 'archive_option_pages', 'option' );
-		if ( $archive_pages ) {
-			foreach ( $archive_pages as $archive_page ) {
+		$option_pages = get_field( 'archive_option_pages', 'option' );
+		if ( $option_pages ) {
+			foreach ( $option_pages as $option_page ) {
 
-				$post_type = get_post_type_object( $archive_page );
+				$post_type = get_post_type_object( $option_page );
 				if ( $post_type ) {
 					$labels = $post_type->labels;
 
