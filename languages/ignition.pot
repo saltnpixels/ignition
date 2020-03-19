@@ -208,7 +208,7 @@ msgstr ""
 msgid "%s<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: template-parts/acf-blocks/_acf-blocks.php:97
+#: template-parts/acf-blocks/_acf-blocks.php:96
 msgid "Ignition"
 msgstr ""
 
