@@ -36,13 +36,13 @@ const { series, parallel, src, dest, lastRun, watch } = require('gulp');
 
 // CSS related plugins.
 const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
-const minifycss = require( 'gulp-uglifycss' ); // Minifies CSS files.
+const minifycss = require( 'gulp-clean-css' ); // Minifies CSS files.
 const autoprefixer = require( 'gulp-autoprefixer' ); // Autoprefixing magic.
 
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcss = require( 'gulp-postcss' ); // postCSS magic.
-
+const urlAdjuster = require('gulp-css-url-adjuster');
 const mmq = require( 'gulp-merge-media-queries' ); // Combine matching media queries into one.
 const rtlcss = require( 'gulp-rtlcss' ); // Generates RTL stylesheet.
 
@@ -142,9 +142,9 @@ function templatePartStyles(){
 
 function styles(){
 
-	return src( config.styleSRC, { allowEmpty: true })
+	return src( config.styleSRC, { allowEmpty: true, sourcemaps: true })
 		.pipe( plumber( errorHandler ) )
-		.pipe( sourcemaps.init() )
+		//.pipe( sourcemaps.init() )
 		.pipe(
 			sass({
 				errLogToConsole: config.errLogToConsole,
@@ -155,18 +155,21 @@ function styles(){
 		.on( 'error', sass.logError )
 		.pipe(postcss(processors))
 		.pipe( autoprefixer( config.BROWSERS_LIST ) )
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( sourcemaps.write() )
-		.pipe( dest( config.styleDestination ) )
 		.pipe(touch())
-		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
-		.pipe( mmq({ log: true }) ) // Merge Media Queries only for .min.css version.
+		.pipe(urlAdjuster({
+			prependRelative: '../',
+		}))
+		//.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
+		//.pipe( mmq({ log: true }) ) // Merge Media Queries only for .min.css version.
 		.pipe( browserSync.stream() ) // Reloads style.css if that is enqueued.
+		//.pipe( sourcemaps.write() )
+		.pipe( dest( config.styleDestination, { sourcemaps: true} ) )
 		.pipe( rename({ suffix: '.min' }) )
-		.pipe( minifycss({ maxLineLen: 10 }) )
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( minifycss({sourcemaps: true}) )
 
-		.pipe( dest( config.styleDestination ) )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		//.pipe( sourcemaps.write({loadMaps: true}) )
+		.pipe( dest( config.styleDestination, { sourcemaps: true} ) )
 		.pipe(touch())
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.min.css if that is enqueued.
@@ -210,7 +213,7 @@ function stylesRTL(){
 		.pipe( dest( config.styleDestination ) )
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.css or style-rtl.css, if that is enqueued.
-		.pipe( mmq({ log: true }) ) // Merge Media Queries only for .min.css version.
+		//.pipe( mmq({ log: true }) ) // Merge Media Queries only for .min.css version.
 		.pipe( rename({ suffix: '.min' }) )
 		.pipe( minifycss({ maxLineLen: 10 }) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
@@ -265,20 +268,6 @@ function vendorsJS(){
 
 
 
-
-/**
- * Task: `TemplatePartStyles`
- * Template Part concat Sass Styles from template part folder
- */
-// function templatePartScripts(){
-// 	return src(config.templatePartsScripts, { allowEmpty: true })
-// 		.pipe( concat( config.templatePartScriptsFile + '.js' ) )
-// 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-// 		.pipe( dest( config.templatePartsScriptsDestination ) )
-// 		.pipe(touch());
-// }
-
-
 /**
  * Task: `customJS`.
  *
@@ -291,7 +280,7 @@ function vendorsJS(){
  *     4. Uglifes/Minifies the JS file and generates custom.min.js
  */
 function customJS(){
-	return src( [config.jsCustomSRC, config.incScripts, config.templatePartsScripts], { since: lastRun( customJS ) }) // Only run on changed files.
+	return src( [config.jsCustomSRC, config.incScripts, config.templatePartsScripts], { sourcemaps: true }) // Only run on changed files.
 		.pipe( plumber( errorHandler ) )
 		.pipe(
 			babel({
@@ -309,7 +298,7 @@ function customJS(){
 		.pipe( remember( config.jsCustomSRC ) ) // Bring all files back to stream.
 		.pipe( concat( config.jsCustomFile + '.js' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( dest( config.jsCustomDestination ) )
+		.pipe( dest( config.jsCustomDestination, { sourcemaps: true} ))
 		.pipe(touch())
 		.pipe(
 			rename({
@@ -319,7 +308,7 @@ function customJS(){
 		)
 		.pipe( uglify() )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( dest( config.jsCustomDestination ) )
+		.pipe( dest( config.jsCustomDestination , { sourcemaps: true} ))
 		.pipe( notify({ message: '\n\n✅  ===> CUSTOM JS — completed!\n', onLast: true }) );
 }
 
@@ -334,7 +323,7 @@ function customJS(){
  *     2. Renames the JS file with suffix .min.js
  */
 function noConcatJS(){
-	return src( config.noConcatScripts, { since: lastRun( noConcatJS ) }) // Only run on changed files.
+	return src( config.noConcatScripts, { since: lastRun( noConcatJS ),  sourcemaps: true }) // Only run on changed files.
 		.pipe( plumber( errorHandler ) )
 		.pipe(
 			babel({
@@ -350,7 +339,7 @@ function noConcatJS(){
 			})
 		)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( dest( config.jsCustomDestination ) )
+		.pipe( dest( config.jsCustomDestination, { sourcemaps: true} ) )
 		.pipe(touch())
 		.pipe(
 			rename({
@@ -360,7 +349,7 @@ function noConcatJS(){
 		)
 		.pipe( uglify() )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe( dest( config.jsCustomDestination ) )
+		.pipe( dest( config.jsCustomDestination, { sourcemaps: true} ) )
 		.pipe( notify({ message: '\n\n✅  ===> No Concat JS — completed!\n', onLast: true }) );
 }
 

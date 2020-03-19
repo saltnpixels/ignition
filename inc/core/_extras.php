@@ -298,7 +298,7 @@ function add_archive_edit_link( $admin_bar ) {
 	}
 }
 
-
+//todo remove when removing this feature
 function archive_page_redirect(){
 	global $post;
 	if(is_page() && ign_is_page_archive( $post->ID )){

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
+## [3.4.1] - Mar 19, 2020
+- Fixed relative css urls. They should be relative to the theme root.
+- added souremaps to the js files
+- by using script_debug you can change to unminified version of css and js files
 
 ## [3.4.0] - Mar 18, 2020
 - Added ability to have scripts added to dist folder without being part of custom (just dont add an underscore to your file).
@@ -34,7 +38,7 @@ TweenMax has been removed from core and is now included in the scrollmagic packa
 If you dont want it, you dont need it.
 To include scrollmagic open the _scrollmagic.php in the inc folder and uncomment the add_action
 
-## [3.2.5] - Dec 1, 2019
+## [3.2.5] - Dec 6, 2019
 Ignition is getting easier to plug and play blocks and extra functionality
 Files that you want added to custom.js can be in one of 3 places.
 - Inside custom folder like always

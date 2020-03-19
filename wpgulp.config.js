@@ -33,7 +33,7 @@ module.exports = {
 	jsVendorDestination: './dist', // Path to place the compiled JS vendors file.
 	jsVendorFile: 'vendor', // Compiled JS vendors file name. Default set to vendors i.e. vendors.js.
 
-	noConcatScripts: ['./assets/js/[^_]*.js', './template-parts/**/[^_]*.js', './inc/**/[^_]*.js'], //scripts that should be processed but not concatenated
+	noConcatScripts: ['./assets/js/*.js', './template-parts/**/*.js', './inc/**/*.js', '!**/_?*.js'], //scripts that should be processed but not concatenated
 
 	// JS Custom options.
 	jsCustomSRC: './assets/js/custom/*.js', // Path to JS custom scripts folder.

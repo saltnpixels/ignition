@@ -74,10 +74,9 @@
   }
 
 	> .alignwide{
-	  padding-right: 0;
-	  padding-left: 0;
 	  max-width: calc(var(--container) - (var(--container-padding) * 2));
 
+	  //stops any issues that might come up when a container is inside a alignwide
 	  .container{
 		padding-right: 0;
 		padding-left: 0;
