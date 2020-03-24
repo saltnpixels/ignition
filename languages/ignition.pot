@@ -216,14 +216,14 @@ msgstr ""
 msgid "© %s Created by %s with Ignition. Proudly powered by %s"
 msgstr ""
 
-#: template-parts/page/content.php:31, template-parts/post/content.php:28
+#: template-parts/page/content.php:31, template-parts/post/content.php:27
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/post/content.php:42
+#: template-parts/post/content.php:41
 msgid "Previous Post"
 msgstr ""
 
-#: template-parts/post/content.php:43
+#: template-parts/post/content.php:42
 msgid "Next Post"
 msgstr ""

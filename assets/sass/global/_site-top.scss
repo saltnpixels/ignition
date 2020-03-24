@@ -63,6 +63,10 @@
   .horizontal-menu .menu-item:last-child .menu-item-link{
 	padding-right: 0;
   }
+
+  .horizontal-menu .top-level-item:first-child .menu-item-link{
+	padding-left: 0;
+  }
 }
 
 
