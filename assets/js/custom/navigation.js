@@ -1,5 +1,5 @@
 /*------- move submenus if too close to edge on desktop --------*/
-function fixOffScreenMenu(menu) {
+function fixOffScreenMenu (menu) {
 
 	//make item visible so we can get left edge
 	menu.style.display = 'block';
@@ -22,28 +22,45 @@ function fixOffScreenMenu(menu) {
 	}
 }
 
+/*
+open and closes a menu dropdown based on passing the dropdown button. The buttons class determines if it opens or closes
+for it to open make sure the button being passed has a class of toggled-on
+ */
+function openCloseMenu (menuButton) {
+
+	let menuItem = menuButton.closest('li');
+	let subMenu = menuItem.querySelector('.sub-menu');
+	let isToggled = menuButton.classList.contains('toggled-on') ? 'open' : 'close';
+
+	if (isToggled === 'open') {
+		fixOffScreenMenu(subMenu);
+		//add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
+		menuItem.classList.add('toggled-on');
+		ignSlideDown(subMenu);
+
+		document.querySelector('#page').addEventListener('click', e => {
+			if (!e.target.closest('.menu-item.toggled-on')) {
+				//close menus
+				menuButton.classList.remove('toggled-on');
+				openCloseMenu(menuButton);
+			}
+		}, { once: true });
+
+	} else {
+		menuItem.classList.remove('toggled-on');
+		ignSlideUp(subMenu);
+	}
+
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
 	/*------- slide sub menus open and closed when a dropdown button is clicked --------*/
 
 	document.body.addEventListener('afterToggle', evt => {
-		//for every dropdown menu button, when clicked toggle the li parent and open the sub-menu with slide
+		//for every dropdown menu button (>), when clicked, toggle the li parent and open the sub-menu with slide
 		if (evt.target.closest('.submenu-dropdown-toggle')) {
-			let menuItem = evt.target.closest('li');
-			let isToggled = evt.target.classList.contains('toggled-on') ? 'open' : 'close';
-
-			let subMenu = menuItem.querySelector('.sub-menu');
-
-			if (isToggled === 'open') {
-				fixOffScreenMenu(subMenu);
-				//add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
-				evt.target.closest('li').classList.add('toggled-on');
-				ignSlideDown(subMenu);
-			} else {
-				evt.target.closest('li').classList.remove('toggled-on');
-				ignSlideUp(subMenu);
-			}
-
+			openCloseMenu(evt.target.closest('.submenu-dropdown-toggle'));
 		}
 	});
 
@@ -59,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 	});
-
 
 	/*------- Tabbing through the menu for ADA compliance --------*/
 
@@ -91,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				}
 
-			}, {once: true});
+			}, { once: true });
 		}
 	});
 
@@ -119,14 +135,11 @@ document.addEventListener('DOMContentLoaded', function () {
 						}
 					}
 
-
 				}
-			}, {once: true});
+			}, { once: true });
 
 		}
 	});
-
-
 
 	//app-menu ability for the top menu
 	let body = document.body;
@@ -139,22 +152,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		topNav.append(menuToggle);
 	}
 
-
-	function closeAppMenu(e) {
+	function closeAppMenu (e) {
 		e.preventDefault();
 		menuToggle.click();
 	}
 
-
 	//when button is opened we will lock the body so there is no scrolling and then open the page
-	if(menuToggle) {
+	if (menuToggle) {
 		menuToggle.addEventListener('afterToggle', e => {
 			//if button has been toggled on
 			if (menuToggle.classList.contains('toggled-on')) {
 				body.classList.add('body-lock');
 
 				//clicking anywhere outside the menu will close it
-				document.querySelector('.site-content').addEventListener('click', closeAppMenu, {once: true});
+				document.querySelector('.site-content').addEventListener('click', closeAppMenu, { once: true });
 
 			} else {
 
@@ -163,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (body.classList.contains('app-menu')) {
 					page.addEventListener('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
 						body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
-					}, {once: true});
+					}, { once: true });
 				} else {
 					body.classList.remove('body-lock');
 				}
@@ -173,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 }); //end ready
-
 
 jQuery(function ($) {
 
