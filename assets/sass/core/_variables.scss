@@ -52,7 +52,7 @@
   --gutters: 15px; //common padding size, used on flexbox and modules
   --gap: 30px; //common gap size used for margins and grids
   --grid-gap: 30px; //same as gap but can be changes in instances where the grid needs a smaller gap. used with .grid or .flex-grid
-
+  --flex-gap: calc(var(--grid-gap) / 2);
 
   /*------- Panels --------*/
   --panel-left-width: 300px; //width of panel-left when open

@@ -12,7 +12,7 @@
  */
 
 get_header(); ?>
-	<div class="sidebar-template header-above">
+	<div class="sidebar-template header-above sidebar-left">
 		<div class="container">
 			<div class="flex sidebar-left">
 

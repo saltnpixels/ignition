@@ -1,4 +1,28 @@
+
+/*--------------------------------------------------------------
+# Sidebar Sizes
+--------------------------------------------------------------*/
+#primary{
+  flex-grow: 1;
+}
+
+#secondary{
+  flex-basis: 25%;
+  flex-grow: 0;
+  padding-top: var(--gutters);
+}
+
+
+#secondary .sidebar-holder{
+  max-width: var(--panel-right-width);
+}
+
+
 /*------- Inline Sidebar Background --------*/
+.sidebar-bg{
+	position: relative;
+}
+
 .sidebar-bg:after {
   content: '';
   position: absolute;
@@ -11,11 +35,6 @@
 }
 
 
-//background when on left
-.sidebar-left #secondary .sidebar-bg:after, .sidebar-bg-right:after {
-  left: auto;
-  right: 0;
-}
 
 
 //some widget styling might be found in panels.scss

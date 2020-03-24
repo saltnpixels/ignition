@@ -27,10 +27,16 @@ body {
 
 }
 
-/*------- if a paragraph block made directly under header, give it some top padding --------*/
-.entry-header + p, .sidebar-template .entry-content > p:first-child {
+
+
+.entry-content{
   padding-top: var(--gap);
 }
+
+.entry-content section:not(.no-padding):not(.no-padding-top):first-child, .section:not(.no-padding):not(.no-padding-top):first-child{
+  margin-top: calc(-1 * var(--gap));
+}
+
 
 
 /*--------------------------------------------------------------

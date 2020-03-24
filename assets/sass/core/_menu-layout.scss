@@ -3,77 +3,78 @@
 --------------------------------------------------------------*/
 .menu,
 .menu > ul {
-	padding: 0;
-	list-style: none;
-	margin: 0;
+  padding: 0;
+  list-style: none;
+  margin: 0;
 }
 
 /*--------------------------------------------------------------
 # Vertical Menus
 --------------------------------------------------------------*/
 @mixin vertical-menu() {
-	//when there is a menu its ul.menu and when its defaulting to pages its .menu ul...annoying
-	.menu,
-	.menu > ul {
+  //when there is a menu its ul.menu and when its defaulting to pages its .menu ul...annoying
+  .menu,
+  .menu > ul {
+	display: flex;
+	flex-direction: column;
+
+	li {
+	  position: relative;
+	  margin: 0;
+
+	  //added with hook. holds anchor and submenu button is applicable
+	  .menu-item-link {
+		padding: 5px 15px;
 		display: flex;
-		flex-direction: column;
+		align-items: flex-start;
+		transition: all .5s;
 
-		li {
-			position: relative;
-			margin: 0;
-
-			//added with hook. holds anchor and submenu button is applicable
-			.menu-item-link {
-				padding: 5px 15px;
-				display: flex;
-				align-items: flex-start;
-				transition: all .5s;
-
-				a {
-					padding: 0;
-				}
-			}
-
-			a {
-				text-decoration: none;
-				outline: none;
-				color: inherit;
-				cursor: pointer;
-				display: block;
-				flex-grow: 1;
-				flex-shrink: 0;
-				font-size: inherit;
-			}
-
-			//icon for submenu
-			.submenu-dropdown-toggle {
-				padding-left: 10px;
-				padding-right: 0;
-				display: inline-block;
-				color: inherit;
-				flex-basis: 45px;
-				text-align: right;
-			}
-
+		a {
+		  padding: 0;
 		}
+	  }
 
+	  a {
+		text-decoration: none;
+		outline: none;
+		color: inherit;
+		cursor: pointer;
+		display: block;
+		flex-grow: 1;
+		flex-shrink: 0;
+		font-size: inherit;
+	  }
 
-		.sub-menu, .children {
-			list-style: none;
-			margin: 0;
-			display: none; //opens with tweenmax
-			transition: none;
-			overflow: hidden;
-			width: 100%;
-			padding: 0;
-
-			//inner items move over a bit
-			.menu-item-link {
-				padding-left: 30px;
-			}
-		}
+	  //icon for submenu
+	  .submenu-dropdown-toggle {
+		padding-left: 10px;
+		padding-right: 0;
+		display: inline-block;
+		color: inherit;
+		flex-basis: 45px;
+		text-align: right;
+	  }
 
 	}
+
+
+	.sub-menu, .children {
+	  list-style: none;
+	  margin: 0;
+	  display: none; //opens with tweenmax
+	  transition: none;
+	  overflow: hidden;
+	  width: auto;
+	  white-space: nowrap;
+	  padding: 0;
+
+	  //inner items move over a bit
+	  .menu-item-link{
+		padding-left: 30px;
+	  }
+	}
+
+  }
 
 }
 
@@ -83,77 +84,77 @@
 --------------------------------------------------------------*/
 @mixin horizontal-menu($breakpoint: $media-nav) {
 
-	@media(min-width: $breakpoint) {
-		.menu,
-		.menu > ul {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: stretch;
-			flex-direction: row;
-			height: 100%;
+  @media(min-width: $breakpoint) {
+	.menu,
+	.menu > ul {
+	  display: flex;
+	  flex-wrap: wrap;
+	  align-items: stretch;
+	  flex-direction: row;
+	  height: 100%;
 
 
-			//make top level items flexed so they can be positioned at top or bottom
-			.top-level-item .menu-item-link {
-				display: flex;
-				height: 100%;
-				align-items: var(--desktop-menu-alignment);
-			}
+	  //make top level items flexed so they can be positioned at top or bottom
+	  .top-level-item .menu-item-link {
+		display: flex;
+		height: 100%;
+		align-items: var(--desktop-menu-alignment);
+	  }
 
-			//top level sub menus dont drop down they appear.
-			.top-level-item > .sub-menu, .top-level-item > .children {
-				//the following makes sub menus fade in rather than sliding open
-				//display: block !important;
-				//height: auto !important;
-				//opacity: 0;
-				//visibility: hidden;
+	  //top level sub menus dont drop down they appear.
+	  .top-level-item > .sub-menu, .top-level-item > .children {
+		//the following makes sub menus fade in rather than sliding open
+		//display: block !important;
+		//height: auto !important;
+		//opacity: 0;
+		//visibility: hidden;
 
-				transition: opacity .5s, visibility .5s;
-				margin: 0;
-				position: absolute;
-				z-index: 10;
-				top: 100%;
-				min-width: 200px;
-				left: 50%;
-				right: 50%;
-				transform: translate(-50%, 0);
-				border-radius: 0 0 3px 3px;
+		transition: opacity .5s, visibility .5s;
+		margin: 0;
+		position: absolute;
+		z-index: 10;
+		top: 100%;
+		min-width: 200px;
+		left: 50%;
+		right: 50%;
+		transform: translate(-50%, 0);
+		border-radius: 0 0 3px 3px;
 
-				a {
-					flex-shrink: 1;
-				}
-
-			}
-
-			.sub-menu .menu-item-link {
-				padding: 3px 15px;
-			}
-
-			//top level sub-menus opened
-			.top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu {
-				opacity: 1;
-				visibility: visible;
-			}
-
-
-			//lower sub-menus
-			.sub-menu .sub-menu {
-				display: none;
-				position: relative;
-				padding: 0;
-				transition: none;
-
-				a {
-					padding-left: 10px;
-				}
-			}
-
+		a {
+		  flex-shrink: 1;
 		}
-	}
 
-	@media(max-width: $breakpoint) {
-		@include vertical-menu();
+	  }
+
+	  .sub-menu .menu-item-link {
+		padding: 3px 15px;
+	  }
+
+	  //top level sub-menus opened
+	  .top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu {
+		opacity: 1;
+		visibility: visible;
+	  }
+
+
+	  //lower sub-menus
+	  .sub-menu .sub-menu {
+		display: none;
+		position: relative;
+		padding: 0;
+		transition: none;
+
+		a {
+		  padding-left: 10px;
+		}
+	  }
+
 	}
+  }
+
+  @media(max-width: $breakpoint) {
+	@include vertical-menu();
+  }
 
 }
 
@@ -161,7 +162,7 @@
 @include vertical-menu();
 
 .horizontal-menu {
-	@include horizontal-menu();
+  @include horizontal-menu();
 }
 
 
@@ -169,25 +170,25 @@
 # Sub-Menu Dropdown Buttons
 --------------------------------------------------------------*/
 .submenu-dropdown-toggle .icon {
-	transition: transform .4s;
+  transition: transform .4s;
 }
 
 .submenu-dropdown-toggle,
 .submenu-dropdown-toggle:focus {
-	background: none;
-	border: none;
-	margin: 0;
-	display: inline;
-	outline: none;
-	cursor: pointer;
-	min-width: 1.5em;
-	text-align: left;
-	font-size: inherit;
-	color: inherit;
+  background: none;
+  border: none;
+  margin: 0;
+  display: inline;
+  outline: none;
+  cursor: pointer;
+  min-width: 1.5em;
+  text-align: left;
+  font-size: inherit;
+  color: inherit;
 
-	&.toggled-on .icon {
-		transform: rotate(90deg);
-	}
+  &.toggled-on .icon {
+	transform: rotate(90deg);
+  }
 }
 
 /*--------------------------------------------------------------
@@ -195,54 +196,54 @@
 --------------------------------------------------------------*/
 /*------- Site-top --------*/
 .site-top {
-	z-index: var(--z-index-menu);
-	width: 100%;
-	position: relative;
-	left: 0;
-	top: 0;
+  z-index: var(--z-index-menu);
+  width: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
 
-	.site-top-container {
-		height: 100%;
-	}
+  .site-top-container {
+	height: 100%;
+  }
 }
 
 /*------- Navigation --------*/
 .site-navigation {
-	flex-wrap: wrap;
-	position: relative;
-	justify-content: center;
-	height: 100%;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+  height: 100%;
 
 
-	.site-navigation__nav-holder {
-		display: flex;
-		justify-content: flex-end;
+  .site-navigation__nav-holder {
+	display: flex;
+	justify-content: flex-end;
+  }
+
+  //dealing with customizer when choosing a logo
+  .site-logo {
+
+
+	a + a {
+	  display: none;
 	}
 
-	//dealing with customizer when choosing a logo
-	.site-logo {
-
-
-		a + a {
-			display: none;
-		}
-
-		a {
-			transition: all .5s;
-		}
-
-		h1, p {
-			font-size: inherit;
-		}
+	a {
+	  transition: all .5s;
 	}
+
+	h1, p {
+	  font-size: inherit;
+	}
+  }
 }
 
 
 //hide navigation on mobile if its inside site-top while it hasnt moved yet. There is a split second where it appears as a vertical menu in site top...
 @media(max-width: $media-nav) {
-	.site-navigation .site-navigation__nav-holder {
-		display: none;
-	}
+  .site-navigation .site-navigation__nav-holder {
+	display: none;
+  }
 
 }
 
@@ -251,79 +252,79 @@
 # Site Logo Layout
 --------------------------------------------------------------*/
 .site-logo {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
 
-	a {
-		color: inherit
-	}
+  a {
+	color: inherit
+  }
 
-	svg{
-		max-width: 100%;
-		height: auto;
-	}
+  svg {
+	max-width: 100%;
+	height: auto;
+  }
 }
 
 .site-logo h1,
 .site-logo p {
-	margin: 0;
+  margin: 0;
 }
 
 .site-logo__link, .site-title a, .custom-logo-link {
-	display: flex;
-	text-decoration: none;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
 
-	img {
-		display: block;
-	}
+  img {
+	display: block;
+  }
 }
 
 //logo positions
 @media (min-width: $media-nav) {
 
-	//layout positions
-	.logo-left .site-logo {
-		justify-content: left;
-	}
+  //layout positions
+  .logo-left .site-logo {
+	justify-content: left;
+  }
 
-	.logo-right .site-logo, .logo-center-under .site-logo {
-		order: 2;
-	}
+  .logo-right .site-logo, .logo-center-under .site-logo {
+	order: 2;
+  }
 
-	.logo-center .site-navigation, .logo-center-under .site-navigation {
-		flex-direction: column;
-		align-items: center;
+  .logo-center .site-navigation, .logo-center-under .site-navigation {
+	flex-direction: column;
+	align-items: center;
 
-	}
+  }
 
-	.no-logo .site-logo {
-		display: none;
-	}
+  .no-logo .site-logo {
+	display: none;
+  }
 
-	.logo-in-middle > .site-logo, .logo-in-middle > .container .logo-in-middle {
-		display: none;
-	}
+  .logo-in-middle > .site-logo, .logo-in-middle > .container .logo-in-middle {
+	display: none;
+  }
 
-	.logo-in-middle .site-navigation__nav-holder {
-		justify-content: center;
-	}
+  .logo-in-middle .site-navigation__nav-holder {
+	justify-content: center;
+  }
 
-	.logo-in-middle .site-navigation > .site-logo {
-		display: none;
-	}
+  .logo-in-middle .site-navigation > .site-logo {
+	display: none;
+  }
 
-	.logo-right .site-navigation__nav-holder {
-		justify-content: flex-start;
-	}
+  .logo-right .site-navigation__nav-holder {
+	justify-content: flex-start;
+  }
 
 }
 
 #panel-left .site-navigation__nav-holder .site-logo {
-	display: none;
+  display: none;
 }
 
 
@@ -332,83 +333,83 @@
 --------------------------------------------------------------*/
 
 #panel-left {
-	.site-navigation__nav-holder {
-		min-width: var(--panel-left-width);
-		overflow: auto;
-		max-height: 90vh;
-		padding-bottom: var(--gap);
-		@extend .hide-scroll !optional;
-		margin-top: 50px;
-	}
+  .site-navigation__nav-holder {
+	min-width: var(--panel-left-width);
+	overflow: auto;
+	max-height: 90vh;
+	padding-bottom: var(--gap);
+	@extend .hide-scroll !optional;
+	margin-top: 50px;
+  }
 
 }
 
 /*------- Cool App like menu for mobile --------*/
 @media(max-width: $panel-left-absolute) {
-	.app-menu {
-		#panel-left {
-			transition: none;
-			transform: translate(0, 0);
-			width: 100%;
-			z-index: calc(var(--z-index-menu) - 1);
+  .app-menu {
+	#panel-left {
+	  transition: none;
+	  transform: translate(0, 0);
+	  width: 100%;
+	  z-index: calc(var(--z-index-menu) - 1);
 
-			.menu-item-link {
-				a {
-					max-width: 40vw;
-				}
-			}
-
-			.site-navigation__nav-holder{
-				margin-top: 20vh;
-			}
+	  .menu-item-link {
+		a {
+		  max-width: 40vw;
 		}
+	  }
 
-		#page {
-			background: inherit;
-			transition: transform .5s;
-		}
-
+	  .site-navigation__nav-holder {
+		margin-top: 20vh;
+	  }
 	}
 
-	.app-menu.menu-open {
-
-		#page {
-			border-radius: 5px;
-			transform: translate(50vw, -2vh) scale(.75);
-			box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
-			overflow: hidden;
-			height: 100vh;
-		}
-
-		#panel-left {
-			height: 100vh;
-			overflow: auto;
-		}
-
-		&.admin-bar #panel-left {
-			height: calc(100vh - 46px);
-		}
+	#page {
+	  background: inherit;
+	  transition: transform .5s;
 	}
+
+  }
+
+  .app-menu.menu-open {
+
+	#page {
+	  border-radius: 5px;
+	  transform: translate(50vw, -2vh) scale(.75);
+	  box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
+	  overflow: hidden;
+	  height: 100vh;
+	}
+
+	#panel-left {
+	  height: 100vh;
+	  overflow: auto;
+	}
+
+	&.admin-bar #panel-left {
+	  height: calc(100vh - 46px);
+	}
+  }
 
 }
 
 //lock body needed to make it look right and no scrolling around
 .body-lock {
-	overflow: hidden;
-	height: 100vh;
-	width: 100vw;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
 
-	.site-container {
-		height: 100%;
-	}
+  .site-container {
+	height: 100%;
+  }
 }
 
 //ios must have position relative on body for lock to work
 @supports (-webkit-overflow-scrolling: touch) {
-	/* CSS specific to iOS devices */
-	.body-lock {
-		position: fixed; // todo check on ios that it works
-	}
+  /* CSS specific to iOS devices */
+  .body-lock {
+	position: fixed; // todo check on ios that it works
+  }
 }
 
 

@@ -9,40 +9,38 @@
  */
 /*------- Containers --------*/
 .container {
-  width: 100%;
-  max-width: var(--container);
-  margin: auto;
-  padding: 0 var(--container-padding);
+	width: 100%;
+	max-width: var(--container);
+	margin: auto;
+	padding: 0 var(--container-padding);
 }
 
-//a container shouldnt ever have a container content, but if it does it should not have padding. example a sidebar template
-//alignfull wont work right if there is double padding
-//however container-content CAN have a container though, inside a .container-content>.alignfull you can do anything...
-.container .container-content, .container-fluid .container-content{
-  padding-left: 0;
-  padding-right: 0;
+.no-padding{
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .container-left, .container-right {
-  width: 100%;
-  max-width: calc(var(--container) + ((100% - var(--container)) / 2));
-  margin: 0 auto 0 0;
-  padding: 0 var(--container-padding) 0 0;
+	width: 100%;
+	max-width: calc(var(--container) + ((100% - var(--container)) / 2));
+	margin: 0 auto 0 0;
+	padding: 0 var(--container-padding) 0 0;
 }
 
+//container starts and goes all the way to the right
 .container-right {
-  margin: 0 0 0 auto;
-  padding: 0 0 0 var(--container-padding);
+	margin: 0 0 0 auto;
+	padding: 0 0 0 var(--container-padding);
 }
 
 .container-fluid {
-  width: 100%;
-  margin: auto;
-  padding: 0 var(--container-padding);
+	width: 100%;
+	margin: auto;
+	padding: 0 var(--container-padding);
 }
 
-@media(min-width: $media-container){
-	.large-gap{
+@media(min-width: $media-container) {
+	.large-gap {
 		grid-gap: 60px;
 	}
 }
@@ -58,49 +56,67 @@
 - Dont surround container-content with a container or full items wont be full width!
 */
 .container-content {
-  padding: 0 var(--container-padding); //still has padding.
-  width: 100%;
+	padding: 0 var(--container-padding); //still has padding.
+	width: 100%;
 
-  > *:not( .alignwide ):not( .alignfull ):not(.full-width) {
-    max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
-    margin-right: auto;
-    margin-left: auto;
-  }
+	> *:not( .alignwide ):not( .alignfull ):not(.full-width) {
+		max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
+		margin-right: auto;
+		margin-left: auto;
+	}
 
-  > .full-width, > .alignfull {
-    width: auto; //override gutenberg, otherwise negative margins below wont work
-    margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the content-containers padding
-    margin-right: calc(-1 * var(--container-padding));
-  }
+	> .full-width, > .alignfull {
+		width: auto; //override gutenberg, otherwise negative margins below wont work
+		margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the content-containers padding
+		margin-right: calc(-1 * var(--container-padding));
+	}
 
-	> .alignwide{
-	  max-width: calc(var(--container) - (var(--container-padding) * 2));
+	> .alignwide {
+		max-width: calc(var(--container) - (var(--container-padding) * 2));
 
-	  //stops any issues that might come up when a container is inside a alignwide
-	  .container{
-		padding-right: 0;
-		padding-left: 0;
-	  }
 	}
 
 }
 
 
-.no-gutters {
-  padding-left: 0;
-  padding-right: 0;
-  grid-gap: 0;
+/*------- Special exceptions for container contents padding  --------*/
+//remove container-content's padding when inside a container. Otherwise padding doubles up
+//also alignwide should be smaller than alignfull so make it so
+.container .container-content, .container-fluid .container-content, .container-left .container-content, .container-right .container-content {
+	padding-left: 0;
+	padding-right: 0;
+
+	> .alignwide {
+		max-width: calc(100% - (var(--container-padding) * 2))
+	}
 }
+
+
+//if container-content is inside a container-left or container-right, the align full should only stick out one side
+.container-right .container-content {
+	> .full-width, > .alignfull {
+		margin-right: 0;
+	}
+}
+
+.container-left .container-content {
+	> .full-width, > .alignfull {
+		margin-left: 0;
+	}
+}
+
+
+
 
 /*--------------------------------------------------------------
 # WP Align Wide Matches the size of a .container
 --------------------------------------------------------------*/
 
 .alignwide {
-  width: 100%;
-  max-width: var(--container);
-  margin-left: auto;
-  margin-right: auto;
+	width: 100%;
+	max-width: var(--container);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /*--------------------------------------------------------------
@@ -116,15 +132,15 @@
 - Items grow if there is room to grow, or fall to next row fi there isnt.
  */
 .card-grid {
-  @include card-grid(); //items stretch to fill space always if there arent enough cards
+	@include card-grid(); //items stretch to fill space always if there arent enough cards
 }
 
 .card-grid-fill {
-  @include card-grid(auto-fill); //only stretches items if theres no room for another item on row
+	@include card-grid(auto-fill); //only stretches items if theres no room for another item on row
 }
 
 .flex-card-grid {
-  @include flex-card-grid(); //almost the same except cards on lowest row will not be same size if there isnt an even amount
+	@include flex-card-grid(); //almost the same except cards on lowest row will not be same size if there isnt an even amount
 }
 
 
@@ -132,31 +148,35 @@
 # 12 Column CSS Grids
 --------------------------------------------------------------*/
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(1px, 1fr));
-  grid-gap: var(--grid-gap);
+.no-gutters {
+	grid-gap: 0;
+}
 
-  //span on individuals overrides span-all, thats why there is div & .span-#i...
-  @for $i from 1 through 12 {
-    div & .span-#{$i}, &.span-all-#{$i} > * {
-      grid-column: span #{$i};
-    }
-  }
+.grid {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(1px, 1fr));
+	grid-gap: var(--grid-gap);
+
+	//span on individuals overrides span-all, thats why there is div & .span-#i...
+	@for $i from 1 through 12 {
+		div & .span-#{$i}, &.span-all-#{$i} > * {
+			grid-column: span #{$i};
+		}
+	}
 }
 
 //fix the gap when it gets too small
 //even if everything collpases, the browser expects 12 gaps of 30 pixels of room to exist + container gutters brings us to 420. below this the grid won fit unless we lower the gap.
 @media(max-width: 420px) {
-  div .grid {
-    grid-gap: var(--grid-gap) 20px;
-  }
+	div .grid {
+		grid-gap: var(--grid-gap) 20px;
+	}
 }
 
 
 .span-full {
-  grid-column: 1 / -1;
-  flex-basis: 100%;
+	grid-column: 1 / -1;
+	flex-basis: 100%;
 }
 
 
@@ -165,174 +185,211 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
 
 .grid {
 
-  @each $name, $media in $media-list {
-    @if $name != 'small' {
-      @media(max-width: $media) {
-        @for $i from 1 through 12 {
-          div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
-            grid-column: span #{$i};
-          }
-        }
-      }
-    }
+	@each $name, $media in $media-list {
+		@if $name != 'small' {
+			@media(max-width: $media) {
+				@for $i from 1 through 12 {
+					div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
+						grid-column: span #{$i};
+					}
+				}
+			}
+		}
 
-    @if $name == 'small' {
-      @media(max-width: $media) {
-        //only small-span can override this. has extra specificity
-        @if ($collapse-on-small == true) {
-          div.site & > * {
-            grid-column: 1 / -1;
-          }
-        }
+		@if $name == 'small' {
+			@media(max-width: $media) {
+				//only small-span can override this. has extra specificity
+				@if ($collapse-on-small == true) {
+					div.site & > * {
+						grid-column: 1 / -1;
+					}
+				}
 
-        @for $i from 1 through 12 {
-          div & > .small-span-#{$i}, div &.small-span-all-#{$i} > * {
-            grid-column: span #{$i};
-          }
-        }
+				@for $i from 1 through 12 {
+					div & > .small-span-#{$i}, div &.small-span-all-#{$i} > * {
+						grid-column: span #{$i};
+					}
+				}
 
-      }
-    }
-  }
+			}
+		}
+	}
 
 }
 
 /*--------------------------------------------------------------
 # Flexbox grids. 99% same as css grid
 --------------------------------------------------------------*/
+//ability to put container and flex on same element. Experimental
+.container.flex, .container-fluid.flex, .container-content.flex {
+	&:not(.no-gutters) {
+		padding: 0 calc(var(--container-padding) / 2);
+		margin: auto;
+	}
 
+	&.no-gutters {
+		margin: auto;
+	}
+}
+
+.container-left.flex {
+	&:not(.no-gutters) {
+		padding-right: calc(var(--container-padding) / 2);
+		margin: 0 auto 0 0;
+	}
+
+	&.no-gutters {
+		margin: 0 auto 0 0;
+	}
+}
+
+.container-right.flex {
+	&:not(.no-gutters) {
+		padding-left: calc(var(--container-padding) / 2);
+		margin: 0 0 0 auto;
+	}
+
+	&.no-gutters {
+		margin: 0 0 0 auto;
+	}
+}
+//end experimental
+
+
+/*--------------------------------------------------------------
+# Flex gird
+--------------------------------------------------------------*/
 .flex, .flex-grid {
-  display: flex;
-  --flex-gap: calc(var(--grid-gap) / 2);
-
-  margin-left: calc(-1 * var(--flex-gap));
-  margin-right: calc(-1 * var(--flex-gap));
-
-  //gutters via margins. the flex-basis makes sure it can be sized right
-  & > * {
-    margin-right: var(--flex-gap);
-    margin-left: var(--flex-gap);
-    flex: 1;
-  }
-
-  & > .no-gutters{
-	margin-left: 0;
-	margin-right: 0;
-  }
+	display: flex;
 
 
+	margin-left: calc(-1 * var(--flex-gap));
+	margin-right: calc(-1 * var(--flex-gap));
 
-  @for $i from 1 through 12 {
-    div & .span-#{$i}, &.span-all-#{$i} > * {
-      $width: 100% / (12/$i);
-      flex-basis: calc(#{$width} - var(--grid-gap)); //magic. flex-basis is width minus gap on both sized
-    }
+	//gutters via margins. the flex-basis makes sure it can be sized right
+	& > * {
+		margin-right: var(--flex-gap);
+		margin-left: var(--flex-gap);
+		flex: 1;
+	}
 
-    div & > .span-#{$i} { //once it has a set size it cannot grow or shrink
-      flex-grow: 0;
-      flex-shrink: 0;
-    }
-  }
+	& > .no-gutters {
+		margin-left: 0;
+		margin-right: 0;
+	}
 
-  &.no-gutters {
-    margin-left: 0;
-    margin-right: 0;
 
-    & > * {
-      margin: 0;
-      --grid-gap: 0px; //fix the flex-basis sizing easily
-    }
-  }
+	@for $i from 1 through 12 {
+		div & .span-#{$i}, &.span-all-#{$i} > * {
+			$width: 100% / (12/$i);
+			flex-basis: calc(#{$width} - var(--grid-gap)); //magic. flex-basis is width minus gap on both sized
+		}
+
+		div & > .span-#{$i} { //once it has a set size it cannot grow or shrink
+			flex-grow: 0;
+			flex-shrink: 0;
+		}
+	}
+
+	&.no-gutters {
+		margin-left: 0;
+		margin-right: 0;
+
+		& > * {
+			margin: 0;
+			--grid-gap: 0px; //fix the flex-basis sizing easily
+		}
+	}
 }
 
 //flex-grid has many rows so it has margin bottom and wraps
 .flex-grid {
-  flex-wrap: wrap;
+	flex-wrap: wrap;
 
-  & > * {
-    margin-bottom: var(--grid-gap);
-  }
+	& > * {
+		margin-bottom: var(--grid-gap);
+	}
 }
 
-#page .no-wrap{
+#page .no-wrap {
 	flex-wrap: nowrap;
 }
 
 /*------- Span sizes for flexbox grids --------*/
 .flex-grid, .flex {
 
-  @each $name, $media in $media-list {
-    @if $name != 'small' {
-      @media(max-width: $media) {
-        @for $i from 1 through 12 {
-          div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
-            $width: 100% / (12/$i);
-            flex-basis: calc(#{$width} - var(--grid-gap));
-          }
+	@each $name, $media in $media-list {
+		@if $name != 'small' {
+			@media(max-width: $media) {
+				@for $i from 1 through 12 {
+					div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
+						$width: 100% / (12/$i);
+						flex-basis: calc(#{$width} - var(--grid-gap));
+					}
 
-          //no growing or shrinking
-          div & > .#{$name}-span-#{$i} {
-            flex-grow: 0;
-            flex-shrink: 0;
-          }
+					//no growing or shrinking
+					div & > .#{$name}-span-#{$i} {
+						flex-grow: 0;
+						flex-shrink: 0;
+					}
 
-        }
-      }
-    }
+				}
+			}
+		}
 
-    @if $name == 'small' {
-      @media(max-width: $media) {
-        //only small-span can override this. has extra specificity
-        @if ($collapse-on-small == true) {
-          flex-wrap: wrap;
-          div.site & > * {
-            flex-basis: calc(100% - var(--grid-gap));
-          }
-        }
-        @for $i from 1 through 12 {
-          div & > .#{$name}-span-#{$i}, div &.#{$name}-span-all-#{$i} > * {
-            $width: 100% / (12/$i);
-            flex-basis: calc(#{$width} - var(--grid-gap));
-          }
+		@if $name == 'small' {
+			@media(max-width: $media) {
+				//only small-span can override this. has extra specificity
+				@if ($collapse-on-small == true) {
+					flex-wrap: wrap;
+					div.site & > * {
+						flex-basis: calc(100% - var(--grid-gap));
+					}
+				}
+				@for $i from 1 through 12 {
+					div & > .#{$name}-span-#{$i}, div &.#{$name}-span-all-#{$i} > * {
+						$width: 100% / (12/$i);
+						flex-basis: calc(#{$width} - var(--grid-gap));
+					}
 
-          //no growing or shrinking
-          div & > .#{$name}-span-#{$i} {
-            flex-grow: 0;
-            flex-shrink: 0;
-          }
-        }
-      }
-    }
+					//no growing or shrinking
+					div & > .#{$name}-span-#{$i} {
+						flex-grow: 0;
+						flex-shrink: 0;
+					}
+				}
+			}
+		}
 
-  }
+	}
 
 }
 
-.site .flex.stay-flexed > *{
-  flex-basis: auto;
+.site .flex.stay-flexed > * {
+	flex-basis: auto;
 }
 
 /*--------------------------------------------------------------
 # Grid Helpers
 --------------------------------------------------------------*/
 .align-center {
-  align-items: center;
+	align-items: center;
 }
 
 .justify-center {
-  justify-content: center;
+	justify-content: center;
 }
 
 .flex-wrap {
-  flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 .flex-column {
-  flex-direction: column;
+	flex-direction: column;
 }
 
-.space-between{
-  justify-content: space-between;
+.space-between {
+	justify-content: space-between;
 }
 
 
@@ -342,53 +399,53 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
 
 /*------- Layout that centers vertically and horizontally --------*/
 .layout-center-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 
 /*------- Grid of cards. requires grid class --------*/
 .layout-cards-7 {
-  //small cards
-  > * {
-    grid-column: span 4;
+	//small cards
+	> * {
+		grid-column: span 4;
 
-    .hide-on-small-card {
-      display: none;
-    }
-  }
+		.hide-on-small-card {
+			display: none;
+		}
+	}
 
-  //large cards
-  > *:nth-child(7n - 3), > *:nth-child(7n - 6) {
-    grid-column: span 8;
+	//large cards
+	> *:nth-child(7n - 3), > *:nth-child(7n - 6) {
+		grid-column: span 8;
 
-    .hide-on-small-card {
-      display: block;
-    }
-  }
+		.hide-on-small-card {
+			display: block;
+		}
+	}
 }
 
 //ie11 flex the cards
 @media all and (-ms-high-contrast: none) {
-  .layout-cards-7 {
-    //small cards
-    > * {
-      width: calc(33.333% - var(--gap));
+	.layout-cards-7 {
+		//small cards
+		> * {
+			width: calc(33.333% - var(--gap));
 
-      .hide-on-small-card {
-        display: none;
-      }
-    }
+			.hide-on-small-card {
+				display: none;
+			}
+		}
 
-    > *:nth-child(7n - 3), > *:nth-child(7n - 6) {
-      width: calc(66.66666% - var(--gap));
+		> *:nth-child(7n - 3), > *:nth-child(7n - 6) {
+			width: calc(66.66666% - var(--gap));
 
-      .hide-on-small-card {
-        display: block;
-      }
-    }
-  }
+			.hide-on-small-card {
+				display: block;
+			}
+		}
+	}
 }
 
 
