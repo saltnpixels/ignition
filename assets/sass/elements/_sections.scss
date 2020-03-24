@@ -25,24 +25,26 @@ section.heading-center{
 
 
 /*------- Padding classes useful for sections --------*/
-.padding{
+.site-content {
+  .padding {
 	padding: var(--gap);
-}
+  }
 
-.no-padding{
+  .no-padding {
 	padding: 0;
-}
+  }
 
-.no-padding-top{
+  .no-padding-top {
 	padding-top: 0;
-}
+  }
 
-.no-padding-bottom{
+  .no-padding-bottom {
 	padding-bottom: 0;
-}
+  }
 
-.margin-bottom{
-  margin-bottom: var(--gap);
+  .margin-bottom {
+	margin-bottom: var(--gap);
+  }
 }
 
 

@@ -17,6 +17,7 @@ body {
   background-color: var(--dark-grey);
   background-size: cover;
 
+
   h1 {
 	margin: 0;
   }
@@ -28,13 +29,11 @@ body {
 }
 
 
-
-.entry-content{
+/*--------------------------------------------------------------
+# Entry Content
+--------------------------------------------------------------*/
+.entry-header + p, .entry-content > p:first-child{
   padding-top: var(--gap);
-}
-
-.entry-content section:not(.no-padding):not(.no-padding-top):first-child, .section:not(.no-padding):not(.no-padding-top):first-child{
-  margin-top: calc(-1 * var(--gap));
 }
 
 

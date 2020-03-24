@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
+
+## [3.4.2] - Mar 24, 2020
+- Added ability to click off a menu anywhere and it closes
+- Added default header ability to be used on an archive page
+- Simple Sidebar functionality. Now easier to work with Sidebars
+
+
 ## [3.4.1] - Mar 19, 2020
 - Fixed relative css urls. They should be relative to the theme root.
 - added souremaps to the js files
