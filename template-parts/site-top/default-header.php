@@ -3,7 +3,7 @@
  *
  * This file is used to show the default header when no header block or post type header exists.
  *
- * @package ignition
+ * @package Ignition
  * @since 1.0
  * @version 1.0
  */
@@ -21,7 +21,20 @@ if ( ! $bg_image && ! get_field( 'no_image', get_the_ID() ) ) {
         <?php if ( $bg_image ) { ?>style="background-image: url('<?php echo $bg_image; ?>');" <?php } ?>>
 
 	<div class="header-content container-fluid text-center">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		<?php
+		if ( is_single() || is_page() ):
+			the_title( '<h1 class="entry-title">', '</h1>' );
+		endif;
+		if ( is_home() ):
+			$label = get_option( 'options_posts_label_plural' ); //can be set in theme settings
+			$label = $label ? $label : 'Articles';
+			echo '<h1 class="entry-title">' . $label . '</h1>';
+		else:
+			echo '<h1 class="entry-title">' . get_the_archive_title() . '</h1>';
+		endif;
+
+
+		?>
 	</div>
 
 </header>
