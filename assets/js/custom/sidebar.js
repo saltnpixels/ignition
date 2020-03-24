@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const headerAbove = document.querySelector('.header-above');
 	if(headerAbove !== null){
 		document.querySelectorAll('.entry-header, .page-header').forEach(header=>{
-			headerAbove.prepend(header);
+			headerAbove.parentElement.prepend(header);
 			header.classList.add('header-moved'); //might be useful for someone
 		});
 	}
