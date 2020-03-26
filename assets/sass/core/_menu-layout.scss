@@ -51,7 +51,7 @@
 		padding-right: 0;
 		display: inline-block;
 		color: inherit;
-		flex-basis: 45px;
+		//flex-basis: 45px;
 		text-align: right;
 	  }
 
@@ -85,6 +85,16 @@
 @mixin horizontal-menu($breakpoint: $media-nav) {
 
   @media(min-width: $breakpoint) {
+
+	.top-level-item:last-child > .menu-item-link {
+	  padding-right: 0;
+	}
+
+	.top-level-item:first-child > .menu-item-link {
+	  padding-left: 0;
+	}
+
+
 	.menu,
 	.menu > ul {
 	  display: flex;
@@ -114,9 +124,9 @@
 		position: absolute;
 		z-index: 10;
 		top: 100%;
-		min-width: 200px;
+		//min-width: 200px;
 		left: 50%;
-		right: 50%;
+		//right: 50%;
 		transform: translate(-50%, 0);
 		border-radius: 0 0 3px 3px;
 

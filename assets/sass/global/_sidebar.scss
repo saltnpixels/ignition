@@ -20,7 +20,7 @@
 
 /*------- Inline Sidebar Background --------*/
 .sidebar-bg{
-	position: relative;
+  position: relative;
 }
 
 .sidebar-bg:after {
@@ -49,6 +49,12 @@
 
 #secondary .widget, #secondary .menu li{
   color: var(--main-text-color);
+}
+
+#secondary {
+  .menu .current-menu-item > .menu-item-link, .menu .menu-item-link.focus {
+	color: var(--highlight);
+  }
 }
 
 

@@ -124,23 +124,12 @@
 	padding: 0;
 	margin: 0;
   }
+  .menu li a{
+	flex-grow: 0;
+  }
 
-  li {
-	position: relative;
-	margin: 0;
-	color: inherit;
-	transition: all .5s;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-
-	a {
-	  text-decoration: none;
-	  outline: none;
-	  padding: 5px 0;
-	  color: inherit;
-	  cursor: pointer;
-	}
+  .menu li .menu-item-link{
+	padding-left: 0;
   }
 }
 
@@ -148,9 +137,6 @@
   padding: var(--gutters);
 }
 
-.sidebar-holder .widget_nav_menu {
-  padding: var(--gap) 0 var(--gap);
-}
 
 
 
