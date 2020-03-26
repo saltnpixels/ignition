@@ -108,15 +108,15 @@ msgstr ""
 msgid "Nothing Found"
 msgstr ""
 
-#: search.php:50, template-parts/classic-blocks/the_loop.php:67
+#: search.php:50
 msgid "Previous page"
 msgstr ""
 
-#: search.php:51, template-parts/classic-blocks/the_loop.php:68
+#: search.php:51
 msgid "Next page"
 msgstr ""
 
-#: search.php:52, template-parts/classic-blocks/the_loop.php:69
+#: search.php:52
 msgid "Page"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgid ", "
 msgstr ""
 
 #. translators: %s: Name of current post
-#: inc/core/_template-tags.php:194
+#: inc/core/_template-tags.php:191
 msgid "%s<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
@@ -216,14 +216,14 @@ msgstr ""
 msgid "© %s Created by %s with Ignition. Proudly powered by %s"
 msgstr ""
 
-#: template-parts/page/content.php:31, template-parts/post/content.php:27
+#: template-parts/page/content.php:28, template-parts/post/content.php:23
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/post/content.php:41
+#: template-parts/post/content.php:37
 msgid "Previous Post"
 msgstr ""
 
-#: template-parts/post/content.php:42
+#: template-parts/post/content.php:38
 msgid "Next Post"
 msgstr ""

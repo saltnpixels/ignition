@@ -23,9 +23,6 @@
 
 		the_content();
 
-		//old blocks
-		//include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
-
 		//not sure gutenberg eve has this anymore
 		wp_link_pages( array(
 			'before'      => '<div class="page-links">' . __( 'Pages:', 'ignition' ),

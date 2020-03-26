@@ -178,10 +178,7 @@ endif;
  */
 if ( ! function_exists( 'ign_edit_link' ) ) :
 	function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
-		global $saving_sections;
-		if ( $saving_sections ) {
-			return;
-		}
+
 
 		if ( ! $id ) {
 			global $post;
@@ -220,20 +217,20 @@ endif;
 function ign_loop( $file_prefix = 'content' ) {
 
 	//if the post type has a folder in ignition/template-parts we use that, else we default to post folder
-		if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-			if ( get_post_format() && file_exists( locate_template( 'template-parts/post/'. $file_prefix . '-' .get_post_format() . '.php' ) ) ) {
-				include( locate_template( 'template-parts/post/' . $file_prefix . '-' . get_post_format() . '.php' ) );
-			} else {
-				include( locate_template( 'template-parts/post/' . $file_prefix . '.php' ) );
-			}
-
+	if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
+		if ( get_post_format() && file_exists( locate_template( 'template-parts/post/' . $file_prefix . '-' . get_post_format() . '.php' ) ) ) {
+			include( locate_template( 'template-parts/post/' . $file_prefix . '-' . get_post_format() . '.php' ) );
 		} else {
-			if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
-				include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix .  '-' . get_post_format() . '.php' ) );
-			} else {
-				include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '.php' ) );
-			}
+			include( locate_template( 'template-parts/post/' . $file_prefix . '.php' ) );
 		}
+
+	} else {
+		if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
+			include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '-' . get_post_format() . '.php' ) );
+		} else {
+			include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '.php' ) );
+		}
+	}
 
 }
 
@@ -353,6 +350,7 @@ function ign_get_header_image( $post_id = false, $return_type = 'url', $attr = '
 /**
  * @param $link_field
  * @param mixed $post_id
+ *
  * @return array $link_field
  * If the link field is empty we still return an array so it is set and works
  */
@@ -386,7 +384,7 @@ function ign_get_link_field( $link_field, $post_id = false ) {
  * @param string $custom_classes
  * For use in block template, outputs the block classes
  */
-function ign_block_class( $block, $custom_classes = '', $include_align = true) {
+function ign_block_class( $block, $custom_classes = '', $include_align = true ) {
 
 	if ( $block ) {
 		$classnames = isset( $block['className'] ) ? $block['className'] : '';
@@ -405,19 +403,20 @@ function ign_block_class( $block, $custom_classes = '', $include_align = true) {
  *
  * @param string $default_header_location path to default header
  */
-function ign_the_header($default_header_location = '') {
+function ign_the_header( $default_header_location = '' ) {
 	//shows blocks or classic acf blocks. check for a header block too
 	$has_header = has_block( 'acf/header' );
+
 	//if this post uses gutenberg or has a header.
-	if ( $has_header || has_blocks() ) {
+	if ( is_singular() && ( $has_header || has_blocks() ) ) {
 		//if there are blocks but not a header block, show the default header
 		if ( ! $has_header ) {
-			if($default_header_location){
+			if ( $default_header_location ) {
 				include( locate_template( $default_header_location ) );
-			}else{
-				if(file_exists(locate_template( 'template-parts/'  . get_post_type() . '/content-header.php' ))){
-					include(locate_template( 'template-parts/'  . get_post_type() . '/content-header.php' ));
-				}else{
+			} else {
+				if ( file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-header.php' ) ) ) {
+					include( locate_template( 'template-parts/' . get_post_type() . '/content-header.php' ) );
+				} else {
 					include( locate_template( 'template-parts/site-top/default-header.php' ) );
 				}
 
@@ -425,8 +424,7 @@ function ign_the_header($default_header_location = '') {
 		}
 
 	} else {
-		//show classic blocks in editor
-		include( locate_template( 'template-parts/classic-blocks/header_sections.php' ) );
+		include( locate_template( 'template-parts/site-top/default-header.php' ) );
 	}
 }
 

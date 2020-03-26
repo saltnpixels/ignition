@@ -155,31 +155,8 @@ function ignition_customize_register( $wp_customize )
             )
         ) );
 
+    
 
-//add post type header page
-    $ignition_post_types = get_post_types( array('_builtin' => false, 'has_archive' => true), 'objects' );
-    $ignition_post_types[] = get_post_type_object( 'post' );
-    foreach ($ignition_post_types as $post_type) {
-
-        $wp_customize->add_setting( 'ign_archive_' . $post_type->name,
-            array(
-                'default' => '',
-            ) );
-
-        if( $post_type->name == 'post'){
-        	$description = __( 'Set a pages sections to be used for the post. The blog must be set to a static page', 'ignition');
-        }else{
-        	$description = __( 'Set a page to be used to display the archive For this post type. Note: Post type must have an archive page.', 'ignition' );
-        }
-
-        $wp_customize->add_control( 'ign_archive_' . $post_type->name, array(
-            'label' => __( 'Archive Page For ', 'ignition' ) . ucwords( $post_type->labels->singular_name ),
-            'type' => 'dropdown-pages',
-//  'allow_addition' => true,
-            'section' => 'post_types',
-            'description' => $description
-        ) );
-    }
 }
 
 add_action( 'customize_register', 'ignition_customize_register' );

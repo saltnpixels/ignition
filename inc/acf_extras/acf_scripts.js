@@ -5,44 +5,44 @@ let sectionLayouts = '';
 let mainEditor = '';
 
 //hook into prepare to load after acf loads fields
-acf.addAction('prepare', function () {
+// acf.addAction('prepare', function () {
 
 	//auto collapse all sections if found
-	sectionLayouts = acf.getPostbox('acf-group_5aa6a924b02ff');
-	if (typeof sectionLayouts !== 'undefined') {
-		sectionLayouts = sectionLayouts.$el;
-		sectionLayouts.find('.values .layout').addClass('-collapsed');
-	}
+	// sectionLayouts = acf.getPostbox('acf-group_5aa6a924b02ff');
+	// 	// if (typeof sectionLayouts !== 'undefined') {
+	// 	// 	sectionLayouts = sectionLayouts.$el;
+	// 	// 	sectionLayouts.find('.values .layout').addClass('-collapsed');
+	// 	// }
 
 	//move header layout above editor if found
-	headerLayouts = acf.getPostbox('acf-group_5a79fa1baf007');
-	if (typeof headerLayouts !== 'undefined') {
-		mainEditor = document.querySelector('#postdivrich');
-
-		//move header section under title, above editor
-		if (headerLayouts.length && mainEditor !== null) {
-			let postBody = document.querySelector('#post-body-content');
-			postBody.insertBefore(headerLayouts[0], mainEditor);
-		}
-	}
+	// headerLayouts = acf.getPostbox('acf-group_5a79fa1baf007');
+	// if (typeof headerLayouts !== 'undefined') {
+	// 	mainEditor = document.querySelector('#postdivrich');
+	//
+	// 	//move header section under title, above editor
+	// 	if (headerLayouts.length && mainEditor !== null) {
+	// 		let postBody = document.querySelector('#post-body-content');
+	// 		postBody.insertBefore(headerLayouts[0], mainEditor);
+	// 	}
+	// }
 
 	//when these checboxes are toggled scroll to the section shown
-	showMainEditor = acf.getField('field_5c5f7e2dcf40f').$el;
-	changeHeader = acf.getField('field_5c4b66a65ae2c').$el;
+	// showMainEditor = acf.getField('field_5c5f7e2dcf40f').$el;
+	// changeHeader = acf.getField('field_5c4b66a65ae2c').$el;
+	//
+	// if (showMainEditor.length) {
+	// 	if (document.querySelector('.block-editor__container') !== null) {
+	// 		showMainEditor.hide(); //hide if block editor is showing
+	// 	}
+	//
+	// 	showMainEditor[0].addEventListener('change', highlight_section);
+	// }
+	//
+	// if (changeHeader.length) {
+	// 	changeHeader[0].addEventListener('change', highlight_section);
+	// }
 
-	if (showMainEditor.length) {
-		if (document.querySelector('.block-editor__container') !== null) {
-			showMainEditor.hide(); //hide if block editor is showing
-		}
-
-		showMainEditor[0].addEventListener('change', highlight_section);
-	}
-
-	if (changeHeader.length) {
-		changeHeader[0].addEventListener('change', highlight_section);
-	}
-
-});
+// });
 
 //highlight and scroll to this section
 function highlight_section (e) {
@@ -136,7 +136,7 @@ function changeIgnClasses (acfInput) {
 function addDraggableGrid () {
 	//get top most acf-fields which holds everything
 	let acfFields = document.querySelector('#poststuff');
-console.log(acfFields);
+
 	//start dragger at 0
 	let pageX = 0;
 
@@ -147,7 +147,7 @@ console.log(acfFields);
 	//when anything inside fields is clicked and matches the handle-remove and then is dragged
 	acfFields.addEventListener('mousedown', function (e) {
 		if (e.target.matches('.grid-class .acf-row-handle.remove')) {
-			console.log('mouse down');
+			//console.log('mouse down');
 			//set coordinates
 			pageX = e.pageX;
 			//get this field item

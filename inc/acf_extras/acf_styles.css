@@ -1,7 +1,7 @@
 /* fix indicator on header box when before editor */
-#acf-group_5a79fa1baf007{
-    margin-top: 45px;
-}
+/*#acf-group_5a79fa1baf007{*/
+/*    margin-top: 45px;*/
+/*}*/
 
 .acf-postbox .toggle-indicator:before{
     content: "\f142";
@@ -40,19 +40,19 @@
 
 
 /*hide main post editor, and header layouts if unchecked set*/
-#postdivrich.unchecked, #acf-group_5a79fa1baf007.unchecked{
-    opacity: 0;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-    margin: 0;
-}
+/*#postdivrich.unchecked, #acf-group_5a79fa1baf007.unchecked{*/
+/*    opacity: 0;*/
+/*    visibility: hidden;*/
+/*    height: 0;*/
+/*    overflow: hidden;*/
+/*    margin: 0;*/
+/*}*/
 
 
 /*------- Hide override header option when gutenberg used --------*/
-.edit-post-layout .override-header{
-	display: none;
-}
+/*.edit-post-layout .override-header{*/
+/*	display: none;*/
+/*}*/
 
 
 

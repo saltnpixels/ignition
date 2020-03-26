@@ -27,8 +27,9 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 		'menu_title' => 'Theme Settings',
 		'menu_slug'  => 'theme-general-settings',
 		'capability' => 'edit_posts',
-		'redirect'   => false
+		'redirect'   => false,
 	) );
+
 
 	/*
 	 * Allow for changing the Post label and adding option pages for post types
@@ -88,10 +89,11 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 						$parent = 'edit.php?post_type=' . $post_type->name;
 					}
 
-					acf_add_options_sub_page( array(
+					acf_add_options_page( array(
 						'page_title' => $labels->singular_name . ' Options',
 						'menu_title' => $labels->singular_name . ' Options',
-						'parent'     => $parent,
+						'parent_slug'     => $parent,
+						'post_id' => $post_type->name . '_option'
 					) );
 				}
 			}
@@ -127,83 +129,8 @@ function load_post_types( $field ) {
 add_filter( 'acf/load_field/name=archive_option_pages', 'load_post_types', 99 );
 
 
-/**
- * @param $field
- *
- * @return mixed
- * Makes the section loop field display archive or the content depending on what is being looked at.
- * //TODO REMOVE if not using sections anymore
- */
-function acf_loop_field( $field ) {
-	global $post;
-	if ( $post && is_admin() ) {
-		$screen = get_current_screen();
-		if ( $screen->parent_base == 'edit' && $screen->post_type != 'acf-field-group' ) {
-
-			$post_type = ign_is_page_archive( $post->ID, 'post_type' );
-			if ( is_admin() && get_post_type() == 'page' && $post_type ) {
-				$field['layouts']['5afb034fab739']['label'] = ucfirst( $post_type ) . ' Card List';
-			} else {
-				$field['layouts']['5afb034fab739']['label'] = ucfirst( $post_type ) . 'Main Editor';
-			}
-		}
-
-	}
-
-	return $field;
-}
-
-add_filter( 'acf/load_field/name=sections', 'acf_loop_field' );
-
-//Make sure the title remains as either the card list or the editor.
-//TODO REMOVE if not using sections anymore
-function the_loop_layout_title( $title, $field, $layout, $i ) {
-	// remove layout title from text
-	global $post;
-	if ( is_admin() && $layout['name'] == 'the_loop' ) {
-		$post_type = ign_is_page_archive( $post->ID, 'post_type' );
-		if ( get_post_type() == 'page' && $post_type ) {
-			$title = ucfirst( $post_type ) . ' Card List';
-		} else {
-			$title = 'Main Editor';
-		}
-	}
-
-	// return
-	return $title;
 
 
-}
-
-add_filter( 'acf/fields/flexible_content/layout_title/name=sections', 'the_loop_layout_title', 10, 4 );
-
-/**
- * @param $post_id
- * Save the sections altogether just in case a new theme is used and the pages need to be exported. Also lets SEO work and searching works
- * TODO REMOVE IF NOT USING FLEXIBLE SECTIONS ANYMORE
- */
-$saving_sections = false;
-function save_sections( $post_id ) {
-//must be saving a post. not any options
-	global $post;
-	if ( $post ) {
-		if ( $post_id == $post->ID ) {
-			if ( function_exists( 'have_rows' ) && have_rows( 'sections', $post_id ) ) {
-				ob_start();
-				setup_postdata( $post );
-				global $saving_sections;
-				$saving_sections = true;
-				//run through all sections and make sure to not save any edit link links
-				locate_template( 'template-parts/classic-blocks/sections.php', true );
-				$sections = ob_get_clean();
-				update_post_meta( $post_id, 'acf_all_sections', $sections );
-				$saving_sections = false;
-			}
-		}
-	}
-}
-
-add_action( 'acf/save_post', 'save_sections', '99' );
 
 
 //add new field Admin only. wont show field unless your an admin
@@ -311,28 +238,6 @@ function ign_show_data_field( $field ) {
 add_filter( 'acf/render_field', 'ign_show_data_field', 11, 1 );
 
 
-//change title of sections flexible field to match a heading field found inside
-//todo remove if sections is removed
-function ign_section_titles( $title, $field, $layout, $i ) {
-	//if sub field for layout title exists use it instead.
-	$layout_title = get_sub_field( 'section_title' ); //get section title field if exists
-	if ( ! $layout_title ) {
-		$layout_title = get_sub_field( 'title' ); //try to find a title field
-	}
-	if ( ! $layout_title ) {
-		$layout_title = get_sub_field( 'heading' ); //try to find a title field
-	}
-
-	if ( $layout_title ) {
-		$title = '<strong>' . $layout_title . '</strong> - ' . $title;
-	}
-
-	// return
-	return $title;
-
-}
-
-add_filter( 'acf/fields/flexible_content/layout_title/name=sections', 'ign_section_titles', 10, 4 );
 
 
 //add classes to a wysywig field so you can control the design a bit more for each field

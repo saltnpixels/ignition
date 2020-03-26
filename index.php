@@ -5,147 +5,61 @@
  *
  * It is used to display a page when nothing more specific matches a query.
  *
+ * The index page. Default for any archive not created. Duplicate this for new archive pages for post types and rename to archive-{post-type}.php.
+ * For the 'post' post type you can duplicate this and rename it home.php
  * E.g., it puts together the home page when no home.php file exists.
  *
  * @link    https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Ignition Press
+ * @package Ignition
  * @since   1.0
  * @version 1.0
  *
  */
 
-
 get_header();
 ?>
-
-<?php
-/*
- * With Ignition Press You can use the WP Customizer to choose a page to show its sections for an archive page
- * This way clients can control the archive page instead of needing you to make changes via archive-post_type.php.
- * If an archive page is set, then a page will be queried here instead of the archive loop being used. (you can still output the loop as one of the sections using the Gutenburg Block called cards)
- *
- * For a regular index without a page set, the loop will simply be output down below after "else:"
-*/
-
-//checking to see if a page has been set to be used with this post type archive
-global $post;
-$page_archive_id = ign_get_archive_page();
-
-
-//if a page has been chosen in the customizer for this post type, set if there is a sidebar template on the page used, add the proper divs.
-$has_sidebar = false;
-if ( $page_archive_id ) {
-
-	if ( strpos( get_page_template_slug( $page_archive_id ), 'sidebar' ) !== false ) {
-		$template_name = str_replace( '.php', ' ', get_page_template_slug( $page_archive_id ));
-
-		echo '<div class="sidebar-template header-above">';
-		echo '<div class="container">';
-		echo '<div class="flex ' . $template_name . '">';
-		$has_sidebar = true;
-	}
-
-}
-
-?>
-
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-			<?php
-			//if an archive page has been set show it now
-			if ( $page_archive_id ) :
-				//set the post to the archive page
-				$post = get_post( $page_archive_id );
-				setup_postdata( $post );
+			<?php ign_the_header(); ?>
 
-				?>
-				<div class="entry-content container-content">
+			<div class="container">
+				<section class="archive-cards card-grid">
 					<?php
-
-					ign_the_header();
-					the_content();
-
-					//if using old sections
-					//include( locate_template( 'template-parts/classic-blocks/sections.php' ) );
+					if ( have_posts() ):
+						while ( have_posts() ) : the_post();
+							ign_loop( 'card' );
+						endwhile;
+					else:
+						//show no content file, or just a message
+						$post_type = get_query_var( 'post_type' ) ?: 'post';
+						if ( file_exists( locate_template( 'template-parts/' . $post_type . '/content-none.php' ) ) ) {
+							include( locate_template( 'template-parts/' . $post_type . '/content-none.php' ) );
+						} else {
+							//message
+							echo '<p>' . __( 'Nothing has been found here' ) . '</p>';
+						}
+					endif;
 
 					?>
+				</section><!-- .entry-content -->
+
+				<div class="container card-pagination text-center">
+					<?php
+					the_posts_pagination( array(
+						'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cmlaw' ) . '</span>',
+						'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'cmlaw' ) . '</span>' . ign_get_svg( array( 'icon' => 'angle-right' ) ),
+						'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cmlaw' ) . ' </span>',
+					) );
+					?>
 				</div>
-				<?php
-				wp_reset_postdata();
-				//END PAGE ARCHIVE
-				?>
 
-
-			<?php
-			//BASIC INDEX WHEN NO PAGE USED (DEFAULT).
-			else:
-				?>
-
-				<header class="page-header layout-center-content text-center">
-					<div class="header-content container-fluid">
-						<h1>
-							<?php
-							if ( is_home() ) {
-								echo __( 'Blog', 'ignitionpress' );
-							} else {
-								echo get_the_archive_title();
-							} ?>
-						</h1>
-
-					</div>
-				</header>
-
-				<div class="container">
-					<section class="archive-cards card-grid">
-						<?php
-						if ( have_posts() ):
-
-							while ( have_posts() ) : the_post();
-								ign_loop('card');
-							endwhile;
-
-						else:
-
-							$post_type = get_query_var( 'post_type' ) ?: 'post';
-							if ( file_exists( locate_template( 'template-parts/' . $post_type . '/content-none.php' ) ) ) {
-								include( locate_template( 'template-parts/' . $post_type . '/content-none.php' ) );
-							} else {
-								echo '<p>' . __( 'Nothing has been found here' ) . '</p>';
-							}
-
-						endif;
-
-						?>
-					</section><!-- .entry-content -->
-
-
-					<div class="container card-pagination text-center">
-						<?php
-						the_posts_pagination( array(
-							'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cmlaw' ) . '</span>',
-							'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'cmlaw' ) . '</span>' . ign_get_svg( array( 'icon' => 'angle-right' ) ),
-							'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cmlaw' ) . ' </span>',
-						) );
-						?>
-					</div>
-
-
-				</div>
-			<?php endif; ?>
+			</div>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-
-
-<?php
-if ( $has_sidebar ) {
-	get_sidebar();
-	echo '</div></div></div><!-- #sidebar-template -->';
-}
-?>
 
 
 <?php
