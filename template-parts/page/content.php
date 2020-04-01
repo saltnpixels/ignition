@@ -35,13 +35,3 @@
 
 	</div><!-- .entry-content -->
 </article><!-- #page-## -->
-
-<?php if ( comments_open() || get_comments_number() ) : ?>
-	<section class="after-article container-content">
-		<?php
-		// If comments are open or we have at least one comment, load up the comment template.
-		comments_template();
-		?>
-	</section>
-
-<?php endif; ?>
