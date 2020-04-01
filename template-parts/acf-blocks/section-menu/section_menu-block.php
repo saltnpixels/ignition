@@ -8,7 +8,7 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
-$block_id     = isset($block['anchor']) ? $block['anchor'] : 'section-' . $block['id'];
+$block_id        = ign_get_block_anchor($block);
 $fixed_at_top = get_field( 'fix_menu_at_top' );
 
 

@@ -10,7 +10,7 @@
  */
 
 
-$block_id        = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
+$block_id        = ign_get_block_anchor($block);
 $image           = wp_get_attachment_image_url( get_field( 'background_image' )['ID'], 'full' ); //gets the background image url from an acf field
 $image_placement = get_field('background_image_placement') ? 'image-inside' : '';
 

@@ -1,6 +1,6 @@
 {
     "key": "group_5b46727696780",
-    "title": "Header Image",
+    "title": "Header Info",
     "fields": [
         {
             "key": "field_5b467282b26c6",
@@ -15,8 +15,9 @@
                 "class": "",
                 "id": ""
             },
+            "admin_only": 0,
             "return_format": "array",
-            "preview_size": "header",
+            "preview_size": "post-thumbnail",
             "library": "all",
             "min_width": "",
             "min_height": "",
@@ -70,5 +71,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585084387
+    "modified": 1585662764
 }

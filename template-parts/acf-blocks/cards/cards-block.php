@@ -13,7 +13,7 @@
  * This can be used to get cards for an archive page.
  */
 
-$block_id       = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
+$block_id        = ign_get_block_anchor($block);
 $container      = get_field( 'container_class' );
 $card_type      = get_field( 'card_type' ) ?: 'default';
 $old_post       = $post_id; //saving the current page id

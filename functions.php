@@ -62,7 +62,7 @@ function ignition_setup() {
 	 * Recommend installing smush or imsanity so users can't upload extremely huge images without them being compressed and resized.
 	 */
 	set_post_thumbnail_size( 300, 300, true );
-	add_image_size( 'header_image', 2000, 600 );
+	add_image_size( 'header_image', 2000, 9999 );
 
 
 	// Remove default image sizes here. medium-large is probably not needed.

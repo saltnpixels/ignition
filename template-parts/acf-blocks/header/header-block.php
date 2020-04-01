@@ -10,7 +10,7 @@
 */
 
 
-$block_id = isset( $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
+$block_id        = ign_get_block_anchor($block);
 $bg_image = ign_get_header_image( $post_id );
 
 //type of header
