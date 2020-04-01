@@ -12,6 +12,25 @@
 /*
  * Prints the author image inside a link and  name inside another link.
 */
+if ( ! function_exists( 'ign_author_meta' ) ) {
+	function ign_author_meta( $user_id = false ) {
+
+		$author_id = get_the_author_meta( 'ID', $user_id );
+
+		return array(
+			'author_id'          => $author_id,
+			'author_page'        => esc_url( get_author_posts_url( $author_id ) ),
+			'author_image'       => get_avatar( $author_id, 50 ),
+			'author_name'        => get_the_author(),
+			'author_description' => get_the_author_meta( 'description', $user_id ),
+		);
+	}
+}
+
+
+/*
+ * Prints the author image inside a link and  name inside another link.
+*/
 if ( ! function_exists( 'ign_posted_by' ) ) {
 	function ign_posted_by() {
 		$author_id          = get_the_author_meta( 'ID' );
@@ -382,7 +401,7 @@ function ign_get_link_field( $link_field, $post_id = false ) {
 /**
  * @param $block
  * @param string $custom_classes
- * For use in block template, outputs the block classes
+ * For use in block template, outputs the block classes with algin classes and gives a class of section title for block
  */
 function ign_block_class( $block, $custom_classes = '', $include_align = true ) {
 
@@ -391,6 +410,19 @@ function ign_block_class( $block, $custom_classes = '', $include_align = true ) 
 		$align      = isset( $block['align'] ) && $block['align'] && $include_align ? 'align' . $block['align'] . ' ' : '';
 		$classes    = 'acf-' . sanitize_title( strtolower( $block['title'] ) ) . ' ' . $align . $classnames;
 		echo 'class="' . ( $custom_classes ? $custom_classes . ' ' . $classes : $classes ) . '"';
+	}
+}
+
+
+/**
+ * @param $block
+ * returns the block anchor
+ *
+ * @return mixed|string
+ */
+function ign_get_block_anchor( $block ) {
+	if ( $block ) {
+		return ( isset( $block['anchor'] ) && $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
 	}
 }
 
