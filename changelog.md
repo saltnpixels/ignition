@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [3.5.0] - Apr 1, 2020
+- Removed Old Sections
+- Changed gutenberg styles to match 5.4 styling on back end
+- Separated gutenberg styles from layout changes in two separate files
+- added new function for getting author meta - ign_author_meta()
+- In ACF blocks created a block ID function for getting the block anchor
+ - CSS changes
+
+## [3.4.3] - Mar 26, 2020
+- Small css fixes
+
+
+
 ## [3.4.2] - Mar 24, 2020
 - Added ability to click off a menu anywhere and it closes
 - Added default header ability to be used on an archive page
