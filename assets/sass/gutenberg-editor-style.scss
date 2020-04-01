@@ -57,10 +57,18 @@ html {
 
 
 /*--------------------------------------------------------------
-# Gutenberg Changes
+# Gutenberg Changes to Layout
 --------------------------------------------------------------*/
-//contains all blocks. acts like container-content
-//added padding
+//This holds all blocks. by default it has different padding then the front end and things wont match so we make it match
+
+.editor-styles-wrapper {
+  background: var(--body-bg);
+}
+
+.edit-post-layout__metaboxes {
+  background: white;
+}
+
 div .block-editor-block-list__layout {
   padding: 0 var(--container-padding);
 
@@ -71,40 +79,32 @@ div .block-editor-block-list__layout {
   }
 }
 
-.wp-block:not(.editor-post-title__block) {
-  max-width: none;
-}
-
-//remove padding from blocks as it is now on the container
-.block-editor-block-list__layout .block-editor-block-list__block {
-  padding: 0;
-}
-
-.block-editor-block-list__layout .is-reusable {
-  padding: 0 30px;
-}
-
-
-//removed negative margins
-.edit-post-visual-editor .block-editor-block-list__block .block-editor-block-list__block-edit,
-.block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] > .block-editor-block-list__block-edit {
-  margin: auto;
-}
-
+//alignfull fix
 .block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] {
   margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the containers padding
   margin-right: calc(-1 * var(--container-padding));
 }
 
+//align wide
 .wp-block[data-align="wide"] {
   max-width: calc(var(--container) - (var(--container-padding) * 2));
 }
 
-//fix paragraphs
+
+
+//fix paragraphs to only have a margin bottom
 div .editor-styles-wrapper p {
   margin-top: 0;
   margin-bottom: 1em;
 }
+
+//?? cant remember why
+//.block-editor-block-list__layout .is-reusable {
+//  padding: 0 30px;
+//}
+
+
+
 
 //allows for using css icons in acf gutenberg block
 svg.css-icon {
@@ -116,25 +116,13 @@ svg.css-icon {
   font-family: var(--font-alt);
 }
 
-/*------- ACF textarea --------*/
+/*--------------------------------------------------------------
+# ACF Changes
+--------------------------------------------------------------*/
 div .acf-block-component {
   textarea {
 	font-size: 16px;
   }
-}
-
-/*------- Hide acf page sections flexible field when using block editor --------*/
-.block-editor__container #acf-group_5aa6a924b02ff {
-  display: none;
-}
-
-
-.editor-styles-wrapper {
-  background: var(--body-bg);
-}
-
-.edit-post-layout__metaboxes {
-  background: white;
 }
 
 
@@ -145,10 +133,14 @@ div .acf-block-component {
 }
 
 
-/*------- WP Sidebar fixes --------*/
+/*------- WP Sidebar changes --------*/
 //making sidebar wider on wide computer screens
+#wpwrap .edit-post-sidebar{
+  width: 100%;
+}
+
 @media(min-width: 1500px) {
-  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
+  #wpwrap .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
 	width: 30%;
   }
 
@@ -159,8 +151,9 @@ div .acf-block-component {
 
 //hiding sidebar on small screens so you can have a full screen experience
 @media(max-width: 1500px) {
-  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-sidebar {
+  #wpwrap .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
 	transition: width .5s;
+	width: 30%;
 
 	&:hover {
 	  width: 50%;
@@ -170,12 +163,9 @@ div .acf-block-component {
 
 }
 
-//fixing meta boxes below editor
-div .block-editor-writing-flow {
-  height: auto;
-}
 
-//button fixes
+
+//button changes
 .wp-core-ui .acf-block-preview, .block-editor-rich-text {
   .button {
 	line-height: 1.5;
