@@ -13,6 +13,8 @@
 
 div .block-editor-block-list__layout {
   padding: 0 var(--container-padding);
+  position: relative;
+  z-index: 10;
 
   > *:not([data-align="full"] ):not([data-align="wide"] ):not(.is-reusable) {
 	max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
