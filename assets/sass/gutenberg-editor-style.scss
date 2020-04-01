@@ -55,77 +55,13 @@ html {
 
 }
 
+@import "gutenberg-layout";
+
+
 
 /*--------------------------------------------------------------
-# Gutenberg Changes to Layout
+# Add your styles here
 --------------------------------------------------------------*/
-//This holds all blocks. by default it has different padding then the front end and things wont match so we make it match
-
-.editor-styles-wrapper {
-  background: var(--body-bg);
-}
-
-.edit-post-layout__metaboxes {
-  background: white;
-}
-
-div .block-editor-block-list__layout {
-  padding: 0 var(--container-padding);
-
-  > *:not([data-align="full"] ):not([data-align="wide"] ):not(.is-reusable) {
-	max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
-	margin-right: auto;
-	margin-left: auto;
-  }
-}
-
-//alignfull fix
-.block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] {
-  margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the containers padding
-  margin-right: calc(-1 * var(--container-padding));
-}
-
-//align wide
-.wp-block[data-align="wide"] {
-  max-width: calc(var(--container) - (var(--container-padding) * 2));
-}
-
-
-
-//fix paragraphs to only have a margin bottom
-div .editor-styles-wrapper p {
-  margin-top: 0;
-  margin-bottom: 1em;
-}
-
-//?? cant remember why
-//.block-editor-block-list__layout .is-reusable {
-//  padding: 0 30px;
-//}
-
-
-
-
-//allows for using css icons in acf gutenberg block
-svg.css-icon {
-  display: none;
-}
-
-
-.editor-post-title__block .editor-post-title__input {
-  font-family: var(--font-alt);
-}
-
-/*--------------------------------------------------------------
-# ACF Changes
---------------------------------------------------------------*/
-div .acf-block-component {
-  textarea {
-	font-size: 16px;
-  }
-}
-
-
 .entry-header {
   h1, h2, h3, h4, h5, h6 {
 	color: inherit;
@@ -133,47 +69,6 @@ div .acf-block-component {
 }
 
 
-/*------- WP Sidebar changes --------*/
-//making sidebar wider on wide computer screens
-#wpwrap .edit-post-sidebar{
-  width: 100%;
-}
-
-@media(min-width: 1500px) {
-  #wpwrap .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
-	width: 30%;
-  }
-
-  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-layout__content {
-	margin-right: 30%;
-  }
-}
-
-//hiding sidebar on small screens so you can have a full screen experience
-@media(max-width: 1500px) {
-  #wpwrap .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
-	transition: width .5s;
-	width: 30%;
-
-	&:hover {
-	  width: 50%;
-	  opacity: 1;
-	}
-  }
-
-}
-
-
-
-//button changes
-.wp-core-ui .acf-block-preview, .block-editor-rich-text {
-  .button {
-	line-height: 1.5;
-	height: auto;
-	font-size: inherit;
-  }
-
-}
 
 
 

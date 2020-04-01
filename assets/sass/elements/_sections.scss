@@ -15,6 +15,10 @@ section, .section {
 		padding-top: 0;
 		padding-bottom: 0;
 	}
+
+  p:last-child{
+	margin-bottom: 0;
+  }
 }
 
 section.heading-center{
