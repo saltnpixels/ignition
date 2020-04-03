@@ -28,6 +28,7 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 		'menu_slug'  => 'theme-general-settings',
 		'capability' => 'edit_posts',
 		'redirect'   => false,
+		'position' => '4.1'
 	) );
 
 
