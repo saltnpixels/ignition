@@ -62,14 +62,28 @@ html {
 /*--------------------------------------------------------------
 # Add your styles here
 --------------------------------------------------------------*/
+
+//body background
+.editor-styles-wrapper {
+  background: var(--body-bg);
+}
+
+//acf metaboxes backgrounds
+.edit-post-layout__metaboxes {
+  background: white;
+}
+
+//post title
+.editor-post-title__block .editor-post-title__input {
+  font-family: var(--font-alt);
+}
+
+
 .entry-header {
   h1, h2, h3, h4, h5, h6 {
 	color: inherit;
   }
 }
-
-
-
 
 
 

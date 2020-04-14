@@ -3,14 +3,6 @@
 --------------------------------------------------------------*/
 //This holds all blocks. by default it has different padding then the front end and things wont match so we make it match
 
-.editor-styles-wrapper {
-  background: var(--body-bg);
-}
-
-.edit-post-layout__metaboxes {
-  background: white;
-}
-
 div .block-editor-block-list__layout {
   padding: 0 var(--container-padding);
   position: relative;
@@ -29,7 +21,7 @@ div .block-editor-block-list__layout {
   margin-right: calc(-1 * var(--container-padding));
 }
 
-//align wide
+//align wide fix
 .wp-block[data-align="wide"] {
   max-width: calc(var(--container) - (var(--container-padding) * 2));
 }
@@ -41,21 +33,12 @@ div .editor-styles-wrapper p {
   margin-bottom: 1em;
 }
 
-//?? cant remember why
-//.block-editor-block-list__layout .is-reusable {
-//  padding: 0 30px;
-//}
 
-
-//allows for using css icons in acf gutenberg block
+//allows for using css icons in acf gutenberg block experimental
 svg.css-icon {
   display: none;
 }
 
-
-.editor-post-title__block .editor-post-title__input {
-  font-family: var(--font-alt);
-}
 
 
 /*--------------------------------------------------------------
@@ -71,24 +54,22 @@ div .acf-block-component {
 /*------- WP Sidebar changes --------*/
 //making sidebar wider on wide computer screens
 #wpwrap .edit-post-sidebar {
-  width: 100%;
+  width: 100%; //always make sidebar full width of parent
 }
 
+//widening sidebar
 @media(min-width: 1500px) {
-  #wpwrap .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
-	width: 30%;
+  .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
+	width: 32%;
   }
 
-  #wpwrap .edit-post-layout.is-sidebar-opened .edit-post-layout__content {
-	margin-right: 30%;
-  }
 }
 
-//hiding sidebar on small screens so you can have a full screen experience
+//hiding sidebar on small screens so you can have a full screen experience with hover widening it
 @media(max-width: 1500px) {
-  #wpwrap .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
+  .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
 	transition: width .5s;
-	width: 30%;
+	width: 32%;
 
 	&:hover {
 	  width: 50%;
