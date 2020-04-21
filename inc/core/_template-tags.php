@@ -13,14 +13,14 @@
  * Prints the author image inside a link and  name inside another link.
 */
 if ( ! function_exists( 'ign_author_meta' ) ) {
-	function ign_author_meta( $user_id = false ) {
+	function ign_author_meta( $user_id = false, $avatar_size = 50 ) {
 
 		$author_id = get_the_author_meta( 'ID', $user_id );
 
 		return array(
 			'author_id'          => $author_id,
 			'author_page'        => esc_url( get_author_posts_url( $author_id ) ),
-			'author_image'       => get_avatar( $author_id, 50 ),
+			'author_image'       => get_avatar( $author_id, $avatar_size ),
 			'author_name'        => get_the_author(),
 			'author_description' => get_the_author_meta( 'description', $user_id ),
 		);
@@ -143,12 +143,13 @@ if ( ! function_exists( 'ign_get_terms' ) ) {
 		if ( ! $id ) {
 			$id = get_the_ID();
 		}
+		if ( $id != 0 ) {
+			$terms = get_the_terms( $id, $taxonomy );
 
-		$terms = get_the_terms( $id, $taxonomy );
-
-		if ( $terms && ! is_wp_error( $terms ) ) :
-			return $terms;
-		endif;
+			if ( $terms && ! is_wp_error( $terms ) ) :
+				return $terms;
+			endif;
+		}
 
 		return array();
 	}
@@ -244,7 +245,7 @@ function ign_loop( $file_prefix = 'content' ) {
 		}
 
 	} else {
-		if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-' . get_post_format() . '.php' ) ) ) {
+		if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '-' . get_post_format() . '.php' ) ) ) {
 			include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '-' . get_post_format() . '.php' ) );
 		} else {
 			include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '.php' ) );

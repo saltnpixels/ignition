@@ -5,6 +5,8 @@
 @import "core/mixins";
 /*------- variables --------*/
 @import "core/variables";
+/*------- Gutenberg layout  --------*/
+@import "core/gutenberg-layout";
 
 
 html {
@@ -55,7 +57,7 @@ html {
 
 }
 
-@import "gutenberg-layout";
+
 
 
 

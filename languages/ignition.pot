@@ -171,18 +171,6 @@ msgstr ""
 msgid "You can make your own layout in php in header.php and ignore presets and manual settings."
 msgstr ""
 
-#: inc/core/_customizer.php:170
-msgid "Set a pages sections to be used for the post. The blog must be set to a static page"
-msgstr ""
-
-#: inc/core/_customizer.php:172
-msgid "Set a page to be used to display the archive For this post type. Note: Post type must have an archive page."
-msgstr ""
-
-#: inc/core/_customizer.php:176
-msgid "Archive Page For "
-msgstr ""
-
 #: inc/core/_extras.php:34
 msgid "Expand child menu"
 msgstr ""
@@ -195,16 +183,16 @@ msgstr ""
 msgid "Please define an SVG icon filename."
 msgstr ""
 
-#: inc/core/_template-tags.php:20
+#: inc/core/_template-tags.php:39
 msgid "%s by %s"
 msgstr ""
 
-#: inc/core/_template-tags.php:103
+#: inc/core/_template-tags.php:122
 msgid ", "
 msgstr ""
 
 #. translators: %s: Name of current post
-#: inc/core/_template-tags.php:191
+#: inc/core/_template-tags.php:211
 msgid "%s<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 

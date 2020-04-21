@@ -58,4 +58,29 @@
   }
 }
 
+/*--------------------------------------------------------------
+# Widgets Layout
+--------------------------------------------------------------*/
+.widget {
 
+  h2 {
+	margin-top: 0;
+  }
+
+  ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+  }
+  .menu li a{
+	flex-grow: 0;
+  }
+
+  .menu li .menu-item-link{
+	padding-left: 0;
+  }
+}
+
+.sidebar-holder .widget {
+  padding: var(--gutters);
+}

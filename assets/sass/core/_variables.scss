@@ -41,7 +41,7 @@
 :root {
 
   /*------- Menu Variables --------*/
-  --nav-move: 800px; //when main menu in site-top should move into panel left. Used by data-moveat event
+  --nav-move: 800px; //should match $media-nav below. when main menu in site-top should move into panel left. Used by data-moveat event
   --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
   /*------- Layout --------*/
@@ -59,6 +59,7 @@
   --panel-right-width: 350px; //width of panel-right when open
 
   /*------- Z-index --------*/
+  //these probably should not be changed.
   --z-index-top: 99;
   --z-index-overlay: 95;
   --z-index-menu-button: 90;
@@ -72,15 +73,15 @@
 --------------------------------------------------------------*/
 @media(min-width: 1600px) {
   :root {
-	//Large wide screens can have bigger text and a wider container
-	font-size: calc(62.5% + 2px); //anything using rem goes up around 2 to 3 pixels
+	//Large wide screens are set to have bigger text and a wider container. Feel free to remove this
+	font-size: calc(62.5% + 1px); //anything using rem goes up around 2 to 3 pixels
 	--container: 1400px;
   }
 }
 
 @media screen and (min-width: 1600px) and (-ms-high-contrast: active), (min-width: 1600px) and (-ms-high-contrast: none) {
   :root {
-	font-size: 65%; //ie cant do calc on font-size properly
+	font-size: 63%; //ie cant do calc on font-size properly. This is the best we can do
   }
 }
 
@@ -111,5 +112,5 @@ $panel-right-absolute: 1030px;
 //When using the grid you have the ability to makes spans at that breakpoint.
 //ie: medium-span-4 will span 4 at the $media-medium size
 //add your own to the list below to have your own span classes available!
-//you will need a name to use in the class and the media variable
+//you will need a name to use in the class and you need to create a media variable set to a pixel size
 $media-list: ('container': $media-container, 'medium': $media-medium, 'small': $media-small, 'large': $media-large);

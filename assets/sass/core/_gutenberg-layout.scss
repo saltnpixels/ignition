@@ -58,7 +58,7 @@ div .acf-block-component {
 }
 
 //widening sidebar
-@media(min-width: 1500px) {
+@media(min-width: 1560px) {
   .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
 	width: 32%;
   }
@@ -66,7 +66,7 @@ div .acf-block-component {
 }
 
 //hiding sidebar on small screens so you can have a full screen experience with hover widening it
-@media(max-width: 1500px) {
+@media(max-width: 1560px) {
   .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
 	transition: width .5s;
 	width: 32%;

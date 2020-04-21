@@ -32,7 +32,7 @@
 	overflow: auto;
 }
 
-.menu-open #panel-left {
+.menu-open #panel-left, #panel-left.open {
 	flex-basis: var(--panel-left-width);
 	flex-shrink: 0;
 	transform: translate(0, 0);
