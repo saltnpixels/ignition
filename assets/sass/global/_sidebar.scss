@@ -1,12 +1,11 @@
-
 /*--------------------------------------------------------------
 # Sidebar Sizes
 --------------------------------------------------------------*/
-#primary{
+#primary {
   flex-grow: 1;
 }
 
-#secondary{
+#secondary {
   flex-basis: 25%;
   flex-grow: 0;
   flex-shrink: 0;
@@ -14,14 +13,11 @@
 }
 
 
-#secondary .sidebar-holder{
-  max-width: var(--panel-right-width);
-}
 
 
 /*------- Inline Sidebar Background --------*/
-.sidebar-bg{
-	position: relative;
+.sidebar-bg {
+  position: relative;
 }
 
 .sidebar-bg:after {
@@ -36,19 +32,13 @@
 }
 
 
-
-
-//some widget styling might be found in panels.scss
-/*------- Widgets --------*/
-.widget{
+/*------- Menu in sidebar --------*/
+.widget .menu li {
   color: white;
 }
 
-.widget .menu li{
-  color: white;
-}
 
-#secondary .widget, #secondary .menu li{
+#secondary .widget, #secondary .menu li {
   color: var(--main-text-color);
 }
 
@@ -61,7 +51,20 @@
 /*--------------------------------------------------------------
 # Widgets Layout
 --------------------------------------------------------------*/
+
+.sidebar-template.container #secondary{
+  .widget{
+	padding-right: 0;
+  }
+}
+
+.sidebar-holder .widget {
+  padding: var(--gutters);
+}
+
 .widget {
+
+  color: white;
 
   h2 {
 	margin-top: 0;
@@ -72,15 +75,14 @@
 	padding: 0;
 	margin: 0;
   }
-  .menu li a{
+
+  .menu li a {
 	flex-grow: 0;
   }
 
-  .menu li .menu-item-link{
+  .menu li .menu-item-link {
 	padding-left: 0;
   }
 }
 
-.sidebar-holder .widget {
-  padding: var(--gutters);
-}
+

@@ -2,21 +2,20 @@
 # Panel Left Styling
 --------------------------------------------------------------*/
 #panel-left {
-	background: #4c545d;
-	color: white;
+  background: #4c545d;
+  color: white;
 }
 
 
 /*------- Panel left button (menu button) --------*/
 body .navigation-menu-icon {
-	border-color: white;
-	color: white;
+  border-color: white;
+  color: white;
 
-	&:after, &:before {
-		background: white;
-	}
+  &:after, &:before {
+	background: white;
+  }
 }
-
 
 
 /*--------------------------------------------------------------
@@ -25,20 +24,19 @@ body .navigation-menu-icon {
 
 /*-------  #panel Right --------*/
 #panel-right {
-	background: rgb(30, 30, 34);
-	color: white;
+  background: rgb(30, 30, 34);
+  color: white;
+  padding-top: 60px;
 }
 
 /*------- Panel right button (sidebar button --------*/
 body .sidebar-icon {
-	border-color: white;
+  border-color: white;
 
-	&:after {
-		background: rgba(255, 255, 255, .85);
-	}
+  &:after {
+	background: rgba(255, 255, 255, .85);
+  }
 }
-
-
 
 
 /*------- Tips --------*/
