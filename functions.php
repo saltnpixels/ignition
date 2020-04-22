@@ -312,7 +312,7 @@ function ignition_scripts() {
 	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/dist/main' . $suffix . '.css' ), '', wp_get_theme()->get( 'Version' ) );
 
 	//ie11 js polyfills
-	wp_enqueue_script( 'polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach' );
+	wp_enqueue_script( 'polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach%2CEvent%2Csmoothscroll' );
 
 	//jQuery 3.0 replaces WP jquery
 	wp_deregister_script( 'jquery-core' );

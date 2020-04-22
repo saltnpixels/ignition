@@ -55,8 +55,15 @@ function openCloseMenu (menuButton) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	/*------- slide sub menus open and closed when a dropdown button is clicked --------*/
+	document.body.addEventListener('click', e => {
+		let item = e.target.closest('.menu a[href="#"]');
+		if(item && item.nextElementSibling != null){
+			e.preventDefault();
+			item.nextElementSibling.click();
+		}
+	});
 
+	/*------- slide sub menus open and closed when a dropdown button is clicked --------*/
 	document.body.addEventListener('afterToggle', evt => {
 		//for every dropdown menu button (>), when clicked, toggle the li parent and open the sub-menu with slide
 		if (evt.target.closest('.submenu-dropdown-toggle')) {
