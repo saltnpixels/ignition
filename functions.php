@@ -25,6 +25,38 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 
 
 /*--------------------------------------------------------------
+# Google Fonts
+--------------------------------------------------------------*/
+/**
+ * Register custom google fonts. These are loaded along with scripts and styles.
+ * Change/Remove the fonts in the $font_families array below to load different ones
+ * Open the core/variables.scss to set the font, font-alt, and font-pre variables to these fonts.
+ */
+if ( ! function_exists( 'ign_google_fonts_url' ) ) {
+	function ign_google_fonts_url() {
+		$fonts_url     = '';
+		$font_families = array();
+
+		//add your fonts here into the array below
+		//when adding from google remove the + between words Ex: 'Source+Code' becomes 'Source Code'
+		//dont forget to add your fonts in sass under variables.scss
+		$font_families[] = 'Roboto:400,400i,700,700i';
+		$font_families[] = 'Roboto Slab:400,700';
+		$font_families[] = 'Source Code Pro';
+
+		$query_args = array(
+			'family' => urlencode( implode( '|', $font_families ) ),
+			'subset' => urlencode( 'latin,latin-ext' ),
+		);
+
+		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+
+		return esc_url_raw( $fonts_url );
+	}
+}
+
+
+/*--------------------------------------------------------------
 # Setup
 --------------------------------------------------------------*/
 /**
@@ -155,33 +187,7 @@ function ignition_setup() {
 add_action( 'after_setup_theme', 'ignition_setup' );
 
 
-/**
- * Register custom google fonts. These are loaded along with scripts and styles.
- * Change/Remove the fonts in the $font_families array below to load different ones
- * Open the core/variables.scss to set the font, font-alt, and font-pre variables to these fonts.
- */
-if ( ! function_exists( 'ign_google_fonts_url' ) ) {
-	function ign_google_fonts_url() {
-		$fonts_url     = '';
-		$font_families = array();
 
-		//add your fonts here into the array below
-		//when adding from google remove the + between words Ex: 'Source+Code' becomes 'Source Code'
-		//dont forget to add your fonts in sass under variables.scss
-		$font_families[] = 'Roboto:400,400i,700,700i';
-		$font_families[] = 'Roboto Slab:400,700';
-		$font_families[] = 'Source Code Pro';
-
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
-		);
-
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-
-		return esc_url_raw( $fonts_url );
-	}
-}
 
 
 /**

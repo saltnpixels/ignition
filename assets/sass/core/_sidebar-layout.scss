@@ -22,10 +22,16 @@
 
 }
 
-
 //simple flex
 .sidebar-template {
   display: flex;
+}
+
+
+@media( max-width: $media-sidebar){
+  .sidebar-template{
+	display: block;
+  }
 }
 
 
@@ -34,7 +40,7 @@
 --------------------------------------------------------------*/
 
 //hide secondary if empty, like when the sidebar that was inside moves to the right/left panel
-#secondary:empty, .sidebar-holder:empty {
+#secondary:empty, .sidebar-holder:empty, .secondary:empty {
   display: none;
 
   &:after {

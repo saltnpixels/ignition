@@ -7,6 +7,35 @@ body {
 
 
 /*--------------------------------------------------------------
+# Logo
+--------------------------------------------------------------*/
+.site-logo {
+  font-size: 3.3rem; //if its a text logo
+  text-transform: uppercase;
+
+
+  color: white;
+  max-width: 350px;
+
+  svg, path, g {
+	fill: currentColor; //uses color above
+  }
+}
+
+.site-navigation .site-logo {
+  padding: 3px 0;
+}
+
+/*--------------------------------------------------------------
+# Site Top - holds logo and main menu at top
+--------------------------------------------------------------*/
+.site-top {
+  position: relative; //change to fixed or absolute if wanted. if absolute add padding top to your entry-header!
+  background: var(--site-top);
+}
+
+
+/*--------------------------------------------------------------
 # Default Headers
 --------------------------------------------------------------*/
 .entry-header, .page-header {

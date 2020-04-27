@@ -175,18 +175,19 @@ Mixins
   @return $sortedMap;
 }
 
+
 /*------- Grid --------*/
-//perfect grid of responsive items, no media query required!
+//perfect grid of responsive items
 @mixin card-grid($auto-type: auto-fit, $min: 350px, $grid-gap: 30px, $max: 1fr) {
   display: grid;
-  grid-template-columns: repeat(#{$auto-type}, minmax($min, $max));
-  grid-gap: $grid-gap;
+  --card-min: #{$min};
+  --card-max: #{$max};
+  --card-type: #{$auto-type};
+  --grid-gap: #{$grid-gap};
+  grid-template-columns: repeat(var(--card-type), minmax(var(--card-min), var(--card-max)));
+  grid-gap: var(--grid-gap);
 
-
-  //if width + gap is bigger than size of screen it will break the grid even when there is one column.
-  @media (max-width: $min + $grid-gap*2) {
-    grid-template-columns: 1fr;
-  }
+  justify-content: center;
 
   //fallback for ie11
   @media all and (-ms-high-contrast: none) {

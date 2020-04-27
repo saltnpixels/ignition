@@ -68,31 +68,31 @@ msgid ""
 "			my browser now"
 msgstr ""
 
-#: functions.php:83, template-parts/site-top/site-top.php:20
+#: functions.php:115, template-parts/site-top/site-top.php:20
 msgid "Top Menu"
 msgstr ""
 
-#: functions.php:198
+#: functions.php:204
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:200
+#: functions.php:206
 msgid "Add widgets here to appear in your sidebar."
 msgstr ""
 
-#: functions.php:210
+#: functions.php:216
 msgid "Footer"
 msgstr ""
 
-#: functions.php:221
+#: functions.php:227
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:232
+#: functions.php:238
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:242
+#: functions.php:248
 msgid "Footer 4"
 msgstr ""
 

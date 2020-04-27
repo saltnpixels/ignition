@@ -15,12 +15,15 @@ function scrolltoHash (element) {
 	} else {
 		//from top scroll with offset
 		let fromTop = window.pageYOffset + element.getBoundingClientRect().top + parseInt(offset);
-		
+
 		window.scroll({ behavior: 'smooth', top: fromTop });
 	}
 
 	//fire some more events
-	element.dispatchEvent(scrollEvent);
+	setTimeout(function () {
+		element.dispatchEvent(scrollEvent);
+	}, 500);
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -42,11 +45,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
+	document.addEventListener('afterScroll', function (e) {
+		//run an event after scroll begins
+	});
+
 });
 
-document.addEventListener('afterScroll', function (e) {
-	//run an event after scroll begins
-});
+
 
 
 

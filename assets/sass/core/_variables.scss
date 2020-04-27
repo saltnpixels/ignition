@@ -42,6 +42,7 @@
 
   /*------- Menu Variables --------*/
   --nav-move: 800px; //should match $media-nav below. when main menu in site-top should move into panel left. Used by data-moveat event
+  --media-sidebar: 1200px;
   --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
   /*------- Layout --------*/
@@ -94,6 +95,7 @@
 
 /*------- Media Query Sizes. Add your own --------*/
 $media-nav: 800px; //when navigations should go mobile. Should prob match --nav-move
+$media-sidebar: 1200px; //when .secondary would go mobile if you are using it.
 $media-small: 576px;
 $media-medium: 768px;
 $media-large: 1030px;

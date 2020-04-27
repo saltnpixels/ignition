@@ -1,29 +1,9 @@
 /*--------------------------------------------------------------
-# Logo
+# Menu Styling: Mobile and All other Vertical menus (sidebar)
 --------------------------------------------------------------*/
-.site-logo {
-  font-size: 3.3rem; //if its a text logo
-  text-transform: uppercase;
-
-
+//menu items
+.menu li {
   color: white;
-  max-width: 350px;
-
-  svg, path, g {
-	fill: currentColor; //uses color above
-  }
-}
-
-.site-navigation .site-logo {
-  padding: 3px 0;
-}
-
-/*--------------------------------------------------------------
-# Site Top - holds logo and main menu at top
---------------------------------------------------------------*/
-.site-top {
-  position: relative; //change to fixed or absolute if wanted.
-  background: var(--site-top);
 }
 
 
@@ -65,17 +45,9 @@
 }
 
 
-/*--------------------------------------------------------------
-# Menu Styling: Mobile and All other Vertical menus (sidebar)
---------------------------------------------------------------*/
-//menu items
-.menu li {
-  color: white;
-}
-
 
 //menu items in the left panel > current and focused
-#panel-left{
+#panel-left {
   .menu .current-menu-item > .menu-item-link, .menu .menu-item-link.focus {
 	background: rgba(0, 0, 0, .5);
 	color: white;
