@@ -54,45 +54,31 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: footer.php:37
-msgid "Your browser is out-of-date!"
-msgstr ""
-
-#: footer.php:38
-msgid "Update your browser to view this website correctly."
-msgstr ""
-
-#: footer.php:39
-msgid ""
-"Update\n"
-"			my browser now"
-msgstr ""
-
-#: functions.php:115, template-parts/site-top/site-top.php:20
+#: functions.php:119, template-parts/site-top/site-top.php:20
 msgid "Top Menu"
 msgstr ""
 
-#: functions.php:204
+#: functions.php:346
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:206
+#: functions.php:348
 msgid "Add widgets here to appear in your sidebar."
 msgstr ""
 
-#: functions.php:216
+#: functions.php:358
 msgid "Footer"
 msgstr ""
 
-#: functions.php:227
+#: functions.php:369
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:238
+#: functions.php:380
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:248
+#: functions.php:390
 msgid "Footer 4"
 msgstr ""
 
