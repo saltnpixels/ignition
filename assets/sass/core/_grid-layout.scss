@@ -149,7 +149,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(1px, 1fr));
-  grid-gap: var(--grid-gap);
+  grid-gap: min(var(--grid-gap), calc(100%/12)); //30px or smaller if the screen is too small
 
   //span on individuals overrides span-all, thats why there is div & .span-#i...
   @for $i from 1 through 12 {
@@ -160,12 +160,13 @@
 }
 
 //fix the gap when it gets too small
+//fixed above with min()
 //even if everything collpases, the browser expects 12 gaps of 30 pixels of room to exist + container gutters brings us to 420. below this the grid won fit unless we lower the gap.
-@media(max-width: 420px) {
-  div .grid {
-	grid-gap: var(--grid-gap) 20px;
-  }
-}
+//@media(max-width: 420px) {
+//  div .grid {
+//	grid-gap: var(--grid-gap) 20px;
+//  }
+//}
 
 
 .span-full {

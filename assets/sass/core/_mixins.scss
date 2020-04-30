@@ -180,11 +180,10 @@ Mixins
 //perfect grid of responsive items
 @mixin card-grid($auto-type: auto-fit, $min: 350px, $grid-gap: 30px, $max: 1fr) {
   display: grid;
-  --card-min: #{$min};
+  --card-min: 250px;
   --card-max: #{$max};
   --card-type: #{$auto-type};
-  --grid-gap: #{$grid-gap};
-  grid-template-columns: repeat(var(--card-type), minmax(var(--card-min), var(--card-max)));
+  grid-template-columns: repeat(var(--card-type), minmax( min( var(--card-min), 100%), var(--card-max)));
   grid-gap: var(--grid-gap);
 
   justify-content: center;
