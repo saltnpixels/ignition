@@ -36,6 +36,8 @@ const { series, parallel, src, dest, lastRun, watch } = require('gulp');
 
 // CSS related plugins.
 const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
+sass.compiler = require('dart-sass');
+
 const minifycss = require( 'gulp-clean-css' ); // Minifies CSS files.
 const autoprefixer = require( 'gulp-autoprefixer' ); // Autoprefixing magic.
 
@@ -149,7 +151,7 @@ function styles(){
 			sass({
 				errLogToConsole: config.errLogToConsole,
 				outputStyle: config.outputStyle,
-				precision: config.precision
+				//precision: config.precision,
 			})
 		)
 		.on( 'error', sass.logError )
