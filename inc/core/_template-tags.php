@@ -334,7 +334,7 @@ function ign_get_image_url( $acf_image = '', $post_id = false, $size = '', $use_
 
 /**
  * @param int $post_id
- * @param string $kind
+ * @param string $size
  * @param string $attr
  *
  * @return string
@@ -345,7 +345,32 @@ function ign_get_image_url( $acf_image = '', $post_id = false, $size = '', $use_
  * if no image is set, then nothing is returned.
  *
  */
-function ign_get_header_image( $post_id = false, $return_type = 'url', $attr = '' ) {
+function ign_get_header_image( $post_id = false, $size = 'header_image', $attr = '' ) {
+
+	if ( function_exists( 'get_field' ) ) {
+
+		if ( get_field( 'no_image', $post_id ) ) {
+			return '';
+		}
+
+		$image = get_field( 'header_image', $post_id );
+	} else {
+		$image = '';
+	}
+
+		return ign_get_image( $image, $post_id, $size, $attr, true );
+}
+
+
+
+/**
+ * @param bool $post_id
+ * @param string $size
+ * @param string $attr
+ *
+ * @return string
+ */
+function ign_get_header_image_url( $post_id = false, $size = 'header_image', $attr = '' ) {
 
 
 	if ( function_exists( 'get_field' ) ) {
@@ -360,11 +385,7 @@ function ign_get_header_image( $post_id = false, $return_type = 'url', $attr = '
 	}
 
 
-	if ( $return_type == 'url' ) {
-		return ign_get_image_url( $image, $post_id, 'header_image', true );
-	} else {
-		return ign_get_image( $image, $post_id, 'header_image', $attr, true );
-	}
+	return ign_get_image_url( $image, $post_id, $size, true );
 }
 
 /**

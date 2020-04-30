@@ -11,7 +11,7 @@
 
 
 $block_id        = ign_get_block_anchor($block);
-$bg_image = ign_get_header_image( $post_id );
+$bg_image = ign_get_header_image_url( $post_id );
 
 //type of header
 $header_type = get_field( 'header_type' );

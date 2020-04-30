@@ -9,7 +9,7 @@
  */
 
 
-$bg_image = ign_get_header_image( get_the_ID() );
+$bg_image = ign_get_header_image_url( get_the_ID() );
 if ( ! $bg_image && ! get_post_meta(get_the_ID(), 'no_image', true ) ) {
 	$bg_image = get_header_image();
 }
