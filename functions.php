@@ -8,7 +8,11 @@
  * @since   1.0
  *
  * This is the first file you should edit when starting a new theme.
+ * Then you should set your sass variables in variables.scss
+ * Then you should edit some global sass files.  _page.scss, _typograhpy.scss
+ *
  * Here you can edit the google fonts, the images sizes and other setup options for your theme.
+ * All css and js files should be added here using WP Enqueue functions, not in the header.
  * You can also separate and include another php file by simply creating one in the inc folder of the theme.
  * all php files in the inc folder are automatically included unless they star with an underscore
  */
@@ -188,77 +192,6 @@ add_action( 'after_setup_theme', 'ignition_setup' );
 
 
 
-
-
-/**
- * Register widget areas.
- * Change/Remove widget areas here. By default the widget areas are the sidebar and the footer which has 4 widget areas being output in columns.
- * See template-parts/footer/footer-widgets.php
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-
-if ( ! function_exists( 'ign_widgets_init' ) ) {
-	function ign_widgets_init() {
-		register_sidebar( array(
-			'name'          => __( 'Sidebar', 'ignition' ),
-			'id'            => 'sidebar-1',
-			'description'   => __( 'Add widgets here to appear in your sidebar.', 'ignition' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		) );
-
-
-//footer widgets and sections. up to 4
-		register_sidebar( array(
-			'name'          => esc_html__( 'Footer', 'ignition' ),
-			'id'            => 'sidebar-2',
-			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		) );
-
-
-		register_sidebar( array(
-			'name'          => esc_html__( 'Footer 2', 'ignition' ),
-			'id'            => 'sidebar-3',
-			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		) );
-
-
-		register_sidebar( array(
-			'name'          => esc_html__( 'Footer 3', 'ignition' ),
-			'id'            => 'sidebar-4',
-			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		) );
-
-		register_sidebar( array(
-			'name'          => esc_html__( 'Footer 4', 'ignition' ),
-			'id'            => 'sidebar-5',
-			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		) );
-
-	}
-}
-add_action( 'widgets_init', 'ign_widgets_init' );
-
-
 /*--------------------------------------------------------------
 # ADMIN ACCESS AND ADMIN BAR VISIBILITY
 --------------------------------------------------------------*/
@@ -400,6 +333,77 @@ add_action( 'admin_footer', 'footer_styles', 99 );
 
 
 /**
+ * Register widget areas.
+ * Change/Remove widget areas here. By default the widget areas are the sidebar and the footer which has 4 widget areas being output in columns.
+ * See template-parts/footer/footer-widgets.php
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+
+if ( ! function_exists( 'ign_widgets_init' ) ) {
+	function ign_widgets_init() {
+		register_sidebar( array(
+			'name'          => __( 'Sidebar', 'ignition' ),
+			'id'            => 'sidebar-1',
+			'description'   => __( 'Add widgets here to appear in your sidebar.', 'ignition' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+
+
+//footer widgets and sections. up to 4
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer', 'ignition' ),
+			'id'            => 'sidebar-2',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+
+
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer 2', 'ignition' ),
+			'id'            => 'sidebar-3',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+
+
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer 3', 'ignition' ),
+			'id'            => 'sidebar-4',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+
+		register_sidebar( array(
+			'name'          => esc_html__( 'Footer 4', 'ignition' ),
+			'id'            => 'sidebar-5',
+			'description'   => esc_html__( 'Add footer widgets here.', 'pwm' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+
+	}
+}
+add_action( 'widgets_init', 'ign_widgets_init' );
+
+
+
+
+/**
  * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
 function ignition_pingback_header() {
@@ -419,5 +423,5 @@ require_once get_parent_theme_file_path( '/inc/core/dev-helpers.php' );
 
 //no need to include php files, just add them to the inc folder and start them with an underscore. Ignition takes care of the rest!
 //Ignition will also search two directories deep for more underscored files within inc and template-parts folders.
-// (ie: inc/acf-extras/_acf-extras.php
+// (ie: inc/acf-extras/_acf-extras.php )
 

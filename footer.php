@@ -33,13 +33,16 @@
 <?php wp_footer(); ?>
 
 
-<div id="outdated">
-    <h6><?php _e( 'Your browser is out-of-date!', 'ignition' ); ?></h6>
-    <p><?php _e( 'Update your browser to view this website correctly.', 'ignition' ); ?> <a id="btnUpdateBrowser"
-                                                                                            href="http://outdatedbrowser.com/"><?php _e( 'Update
-			my browser now', 'ignition' ); ?></a></p>
-    <p class="last"><a data-toggle="hidden" data-target="#outdated" href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
+<script>
+	var $buoop = {required:{e:-4,f:-3,o:-3,s:-1,c:-3},insecure:true,api:2020.04 };
+	function $buo_f(){
+		var e = document.createElement("script");
+		e.src = "//browser-update.org/update.min.js";
+		document.body.appendChild(e);
+	};
+	try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+	catch(e){window.attachEvent("onload", $buo_f)}
+</script>
 
 </body>
 </html>
