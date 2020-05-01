@@ -69,22 +69,6 @@
   --z-index-behind: -1;
 }
 
-/*--------------------------------------------------------------
-# Wide Screen Changes
---------------------------------------------------------------*/
-@media(min-width: 1600px) {
-  :root {
-	//Large wide screens are set to have bigger text and a wider container. Feel free to remove this
-	font-size: calc(62.5% + 1px); //anything using rem goes up around 2 to 3 pixels
-	--container: 1400px;
-  }
-}
-
-@media screen and (min-width: 1600px) and (-ms-high-contrast: active), (min-width: 1600px) and (-ms-high-contrast: none) {
-  :root {
-	font-size: 63%; //ie cant do calc on font-size properly. This is the best we can do
-  }
-}
 
 
 /*--------------------------------------------------------------

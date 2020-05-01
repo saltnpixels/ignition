@@ -26,10 +26,13 @@ textarea{
 	font-size: inherit
 }
 
-
-article {
+//make body of text gets bigger on larger screens
+@media(min-width: 1500px){
+  article {
 	font-size: var(--article-font-size);
+  }
 }
+
 
 
 h1,
