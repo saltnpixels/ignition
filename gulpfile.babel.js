@@ -448,7 +448,7 @@ function watchFiles(){
 	watch( config.imgSRC, series( images, reload ) ); // Reload on customJS file changes.
 }
 
-exports.default = series(styles, vendorsJS, customJS, noConcatJS, images,  browsersync, watchFiles);
-exports.build = series(styles, vendorsJS, customJS, noConcatJS, images);
+exports.default = series(templatePartStyles, styles, deleteTemplateParts, vendorsJS, customJS, noConcatJS, images,  browsersync, watchFiles);
+exports.build = series(templatePartStyles, styles, deleteTemplateParts, vendorsJS, customJS, noConcatJS, images);
 
 
