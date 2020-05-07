@@ -41,7 +41,7 @@ sass.compiler = require('dart-sass');
 const minifycss = require( 'gulp-clean-css' ); // Minifies CSS files.
 const autoprefixer = require( 'gulp-autoprefixer' ); // Autoprefixing magic.
 
-
+const replace = require('gulp-replace');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcss = require( 'gulp-postcss' ); // postCSS magic.
 const urlAdjuster = require('gulp-css-url-adjuster');
@@ -176,6 +176,14 @@ function styles(){
 		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
 		.pipe( browserSync.stream() ) // Reloads style.min.css if that is enqueued.
 		.pipe( notify({ message: '\n\n✅  ===> STYLES — completed!\n', onLast: true }) );
+}
+
+
+
+function deleteTemplateParts(){
+	return src('./assets/sass/wordpress/_template-parts.scss', { allowEmpty: true })
+		.pipe( replace(/.+/s, '/* Leave This File Empty!! */') )
+		.pipe( dest( config.otherStylesDestination ) );
 }
 
 /**
@@ -432,15 +440,15 @@ function translate(){
 
 function watchFiles(){
 	watch( config.watchPhp, series(translate, reload ) ); // Reload on PHP file changes.
-	watch( config.otherStyles, series( templatePartStyles) ); // concat styles from other folders, this in turn calls the styles watch below
-	watch( config.watchStyles, series(styles, reload ) ); // Reload on SCSS file changes.
+	// concat styles from other folders, this in turn calls the styles watch below
+	watch( config.watchStyles, series(templatePartStyles, styles, reload, deleteTemplateParts ) ); // Reload on SCSS file changes.
 	watch( config.watchJsVendor, series( vendorsJS, reload ) ); // Reload on vendorsJS file changes.
 	watch( config.watchJsCustom, series(customJS, reload ) ); // Reload on customJS file changes.
 	watch( config.watchNoConcatScripts, series(noConcatJS, reload ) ); // Reload on customJS file changes.
 	watch( config.imgSRC, series( images, reload ) ); // Reload on customJS file changes.
 }
 
-exports.default = series(templatePartStyles, styles, vendorsJS, customJS, noConcatJS, images,  browsersync, watchFiles);
-exports.build = series(templatePartStyles, styles, vendorsJS, customJS, noConcatJS, images);
+exports.default = series(styles, vendorsJS, customJS, noConcatJS, images,  browsersync, watchFiles);
+exports.build = series(styles, vendorsJS, customJS, noConcatJS, images);
 
 

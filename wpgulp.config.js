@@ -50,7 +50,7 @@ module.exports = {
 	imgDST: './dist', // Destination folder of optimized images. Must be different from the imagesSRC folder.
 
 	// Watch files paths.
-	watchStyles: './assets/sass/**/*.scss', // Path to all *.scss files inside css folder and inside them.
+	watchStyles: ['./assets/sass/**/*.scss', '!./assets/sass/**/_template-parts.scss'], // Path to all *.scss files inside css folder and inside them.
 	watchJsVendor: './assets/js/vendor/*.js', // Path to all vendor JS files.
 	watchJsCustom: ['./assets/js/custom/*.js','./template-parts/**/_?*.js', './inc/**/_?*.js' ], // Path to all custom JS files.
 	watchPhp: './**/*.php', // Path to all PHP files.

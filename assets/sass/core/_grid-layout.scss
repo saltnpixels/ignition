@@ -253,7 +253,7 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
 
 
 /*--------------------------------------------------------------
-# Flex gird
+# Flex grid
 --------------------------------------------------------------*/
 .flex, .flex-grid {
   display: flex;
@@ -365,6 +365,16 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
   flex-basis: auto;
 }
 
+
+/*------- hide at break points --------*/
+@each $name, $media in $media-list {
+  @media(max-width: $media) {
+	.hide-on-#{$name} {
+	  display: none;
+	}
+  }
+}
+
 /*--------------------------------------------------------------
 # Grid Helpers
 --------------------------------------------------------------*/
@@ -382,6 +392,10 @@ $media-list: map-sort-by-values($media-list, true); //reorder largest first so s
 
 .flex-column {
   flex-direction: column;
+}
+
+.flex-grow{
+  flex-grow: 1;
 }
 
 .space-between {
