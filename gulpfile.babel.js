@@ -440,8 +440,10 @@ function translate(){
 
 function watchFiles(){
 	watch( config.watchPhp, series(translate, reload ) ); // Reload on PHP file changes.
-	// concat styles from other folders, this in turn calls the styles watch below
+
+	watch(config.otherStyles, series(templatePartStyles, styles, reload, deleteTemplateParts));
 	watch( config.watchStyles, series(templatePartStyles, styles, reload, deleteTemplateParts ) ); // Reload on SCSS file changes.
+
 	watch( config.watchJsVendor, series( vendorsJS, reload ) ); // Reload on vendorsJS file changes.
 	watch( config.watchJsCustom, series(customJS, reload ) ); // Reload on customJS file changes.
 	watch( config.watchNoConcatScripts, series(noConcatJS, reload ) ); // Reload on customJS file changes.
