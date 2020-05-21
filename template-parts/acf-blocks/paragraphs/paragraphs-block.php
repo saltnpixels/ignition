@@ -25,7 +25,7 @@ $image_placement = get_field('background_image_placement') ? 'image-inside' : ''
 	</style>
 <?php endif; ?>
 
-<section id="<?php echo $block_id; ?>" <?php ign_block_class( $block, $image_placement ); ?>>
+<section <?php ign_block_attrs($block, $image_placement); ?>>
 
 	<div class="columns-holder <?php echo esc_attr( get_field( 'container_class' ) ); ?>">
 		<?php

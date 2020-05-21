@@ -23,7 +23,7 @@
 	.top-level-item {
 
 	  //current and hovered
-	  &.current-menu-item .menu-item-link, .menu-item-link:hover, .menu-item-link.focus, &.toggled-on {
+	  &.current-menu-item > .menu-item-link, .menu-item-link:hover, .menu-item-link.focus, &.toggled-on, &.current-menu-parent > .menu-item-link{
 		background: transparent;
 		color: black;
 	  }

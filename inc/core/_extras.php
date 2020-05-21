@@ -27,10 +27,11 @@ add_filter( 'nav_menu_css_class', 'ign_nav_menu_css_class', 10, 3 );
 // surround anchor ( and buttons if there is one)
 function ign_menu( $item, $args ) {
 	$classes = $args->classes;
+	$arrow = '<div class="icon iconify icon-angle-right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path d="M22 16L12 26l-1.4-1.4l8.6-8.6l-8.6-8.6L12 6z" fill="#626262"/><rect x="0" y="0" width="32" height="32" fill="rgba(0, 0, 0, 0)" /></svg></div>';
 
 
 	if ( in_array( 'menu-item-has-children', (array) $classes ) ) {
-		$item .= '<button tabindex="-1" aria-haspopup="true" data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . ign_get_svg( array( "icon" => "angle-right" ) ) . '
+		$item .= '<button tabindex="-1" aria-haspopup="true" data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . $arrow . '
                     <span class="screen-reader-text">' . __( 'Expand child menu', 'ignition' ) . '</span></button>';
 	}
 

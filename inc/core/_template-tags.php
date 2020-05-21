@@ -232,24 +232,23 @@ endif;
 /**
  * Gets the proper template file to show for the WP LOOP
  * MUST BE USED INSIDE THE LOOP TO USE
- * Simply routes the page to the right folder and file
+ * Simply routes the page to the right folder and file, or falls back on the post folder.
+ * post formats should be used at end of file like: card-link.php
  */
 function ign_loop( $file_prefix = 'content' ) {
 
-	//if the post type has a folder in ignition/template-parts we use that, else we default to post folder
-	if ( ! file_exists( locate_template( 'template-parts/' . get_post_type() ) ) ) {
-		if ( get_post_format() && file_exists( locate_template( 'template-parts/post/' . $file_prefix . '-' . get_post_format() . '.php' ) ) ) {
-			include( locate_template( 'template-parts/post/' . $file_prefix . '-' . get_post_format() . '.php' ) );
-		} else {
-			include( locate_template( 'template-parts/post/' . $file_prefix . '.php' ) );
-		}
+	$format = '';
+	if(get_post_format()){
+		$format = '-' . get_post_format();
+	}
 
-	} else {
-		if ( get_post_format() && file_exists( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '-' . get_post_format() . '.php' ) ) ) {
-			include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '-' . get_post_format() . '.php' ) );
-		} else {
-			include( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . '.php' ) );
-		}
+	//if file exists load it otherwise fall back on post
+	if(file_exists( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . $format . '.php' ))){
+		include(locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . $format . '.php' ));
+	}elseif(file_exists( locate_template( 'template-parts/' . 'post' . '/' . $file_prefix . $format . '.php' ))){
+		include(locate_template( 'template-parts/' . 'post' . '/' . $file_prefix . $format . '.php' ));
+	}else{
+		include( locate_template( 'template-parts/post/' . $file_prefix . '.php' ) );
 	}
 
 }
@@ -358,9 +357,8 @@ function ign_get_header_image( $post_id = false, $size = 'header_image', $attr =
 		$image = '';
 	}
 
-		return ign_get_image( $image, $post_id, $size, $attr, true );
+	return ign_get_image( $image, $post_id, $size, $attr, true );
 }
-
 
 
 /**
@@ -423,28 +421,50 @@ function ign_get_link_field( $link_field, $post_id = false ) {
 /**
  * @param $block
  * @param string $custom_classes
- * For use in block template, outputs the block classes with algin classes and gives a class of section title for block
+ * @param bool $include_align
+ * @param bool $echo
+ *
+ * @return string|void
  */
-function ign_block_class( $block, $custom_classes = '', $include_align = true ) {
+function ign_block_class( $block, $custom_classes = '', $include_align = true, $echo = true ) {
 
 	if ( $block ) {
 		$classnames = isset( $block['className'] ) ? $block['className'] : '';
 		$align      = isset( $block['align'] ) && $block['align'] && $include_align ? 'align' . $block['align'] . ' ' : '';
 		$classes    = 'acf-' . sanitize_title( strtolower( $block['title'] ) ) . ' ' . $align . $classnames;
-		echo 'class="' . ( $custom_classes ? $custom_classes . ' ' . $classes : $classes ) . '"';
+		if ( $echo ) {
+			echo 'class="' . ( $custom_classes ? $custom_classes . ' ' . $classes : $classes ) . '"';
+		} else {
+			return ( $custom_classes ? $custom_classes . ' ' . $classes : $classes );
+		}
 	}
+	return;
 }
 
 
 /**
  * @param $block
- * returns the block anchor
+ * returns the block anchor or the block id to be used as the anchor
  *
  * @return mixed|string
  */
 function ign_get_block_anchor( $block ) {
 	if ( $block ) {
 		return ( isset( $block['anchor'] ) && $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
+	}
+}
+
+/**
+ * @param $block
+ * @param string $custom_classes
+ * @param bool $include_align
+ */
+function ign_block_attrs( $block, $custom_classes = '', $include_align = true ) {
+	if ( $block ) {
+		$block_id    = ign_get_block_anchor( $block );
+		$block_class = ign_block_class( $block, $custom_classes, $include_align, false );
+
+		echo "id='$block_id' class='$block_class'";
 	}
 }
 

@@ -58,7 +58,7 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 		if ( $post_label ) {
 			global $wp_post_types;
 			$labels                     = &$wp_post_types['post']->labels;
-			$labels->name               = $post_label;
+			$labels->name               = $post_label_p;
 			$labels->singular_name      = $post_label;
 			$labels->add_new            = 'Add New ' . $post_label;
 			$labels->add_new_item       = 'Add New ' . $post_label;

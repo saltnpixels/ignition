@@ -8,7 +8,7 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
-$block_id        = ign_get_block_anchor($block);
+
 $fixed_at_top = get_field( 'fix_menu_at_top' );
 
 
@@ -17,7 +17,7 @@ $container = get_field( 'container_class' );
 ?>
 
 
-<section id="<?php echo $block_id; ?>" <?php ign_block_class( $block ); ?>>
+<section <?php ign_block_attrs($block); ?>>
 	<div class="section-menu" <?php if ( $fixed_at_top ) {
 		echo 'data-scrollanimation="fixed-at-top"';
 	} ?>>
