@@ -33,7 +33,8 @@ Here are just some of the features found in ignition.
 ## Setup
 First things first! <br>
 Download the theme into your WordPress theme directory.
-Run the following in the terminal (make sure the terminal is pointing to the theme directory)
+You should also install Advanced Custom Fields Pro as Ignition works best with it.
+Then run the following in the terminal (make sure the terminal is pointing to the theme directory)
 
  ```shell script
 npm run setup
