@@ -152,6 +152,7 @@ ign_template('src/some-folder/some-file.php');
 With ign_template, you don't need to make a single-portfolio.php for a portfolio post-type. You just make a new post-type folder with all the different views that exist for the post type.
 Your post type folders should have a content-{post-type}.php and a card-{post-type}.php file to begin with. A good place to start is to duplicate and rename the post folder. Rename the files inside too.
 The content one is for full view and the card one is for archive listings.
+
 ----
 This documentation is not complete! It will be finished soon!
 
