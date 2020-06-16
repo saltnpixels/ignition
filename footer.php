@@ -15,34 +15,23 @@
 </div><!-- #site-content -->
 
 <footer id="colophon" class="site-footer" role="contentinfo">
-    <div class="container">
-		<?php
-		get_template_part( 'template-parts/footer/footer', 'widgets' );
-
-		get_template_part( 'template-parts/footer/site', 'info' );
-		?>
-    </div><!-- .wrap -->
+		<?php ign_template('src/parts/global/site-footer.php'); ?>
 </footer><!-- #colophon -->
 
 </div><!-- #page -->
 
-<button aria-label="Toggle Right Panel" data-toggle="open" data-target="#panel-right" aria-expanded="false" class="panel-right-toggle"><span class="sidebar-icon"></span></button>
+<?php
+$sidebar_icon = ign_get_config( 'sidebar_icon', 'sidebar-icon' );
+if($sidebar_icon == 'sidebar-icon'){
+	$sidebar_icon = "<span class='$sidebar_icon'></span>";
+}
+?>
+
+<button aria-label="Toggle Right Panel" data-toggle="open" data-target="#panel-right" aria-expanded="false" class="panel-right-toggle"><?php echo $sidebar_icon; ?></button>
 
 </div><!-- .site-container -->
 
 <?php wp_footer(); ?>
-
-
-<script>
-	var $buoop = {required:{e:-4,f:-3,o:-3,s:-1,c:-3},insecure:true,api:2020.04 };
-	function $buo_f(){
-		var e = document.createElement("script");
-		e.src = "//browser-update.org/update.min.js";
-		document.body.appendChild(e);
-	};
-	try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-	catch(e){window.attachEvent("onload", $buo_f)}
-</script>
 
 </body>
 </html>

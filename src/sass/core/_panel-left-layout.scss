@@ -1,0 +1,142 @@
+@use "../resources" as *; //should also load resources
+@use "base-layout";
+/*--------------------------------------------------------------
+# Panel Left
+--------------------------------------------------------------*/
+
+//hide menu button unless there is something inside the left panel
+#panel-left:empty ~ .panel-left-toggle, #panel-left:empty ~ #page .panel-left-toggle {
+	display: none;
+}
+
+//if site top is in container, add room for button only when necessary
+@media (max-width: $media-container + $gap) {
+	#panel-left:not(:empty) ~ .site .site-top .container {
+		padding-left: 52px;
+	}
+}
+
+//if site nav is full width, add room for sidebar button always, if its visible
+#panel-left:not(:empty) ~ .site .site-top .container-fluid {
+	padding-left: 52px;
+}
+
+//when there is only a logo, make it centered wether left or right or both buttons are showing
+@media(max-width: $media-nav) {
+	.site-top .container, .site-top .container-fluid {
+		padding: 0 52px;
+	}
+}
+
+
+#panel-left {
+	@extend .hide-scroll;
+	overflow: auto;
+}
+
+.menu-open #panel-left, #panel-left.open {
+	flex-basis: var(--panel-left-width);
+	flex-shrink: 0;
+	transform: translate(0, 0);
+}
+
+//if left panel starts open, leave open until mobile, and hide button till mobile
+@media(min-width: $media-nav) {
+	#panel-left.stay-open {
+		flex-basis: var(--panel-left-width);
+		flex-shrink: 0;
+		transform: translate(0, 0);
+
+		& ~ .panel-left-toggle, & ~ .site .panel-left-toggle {
+			display: none;
+		}
+	}
+}
+
+//panel becomes absolute
+@media(max-width: $panel-left-absolute) {
+	#panel-left {
+		position: absolute;
+		height: 100%;
+		left: 0;
+		transform: translate(-100%, 0);
+	}
+}
+
+
+/*------- Panel Left Button --------*/
+.panel-left-toggle {
+	position: absolute;
+	border: none;
+	box-shadow: none;
+	z-index: 99;
+	cursor: pointer;
+	will-change: transform;
+	line-height: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0 15px;
+	outline: none;
+	transition: all .5s;
+	background: transparent;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.site-top .panel-left-toggle {
+	height: 100%;
+}
+
+
+/*--------------------------------------------------------------
+# Menu icons
+--------------------------------------------------------------*/
+.navigation-menu-icon{
+	font-size: 3rem;
+}
+.navigation-menu-icon .icon-regular {
+	position: relative;
+	display: block;
+	border-radius: .5px;
+	width: 25px;
+	height: 25px;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 30%;
+		height: 3px;
+		width: 100%;
+		background: white;
+		transition: all .5s;
+		outline: none;
+		border-radius: inherit;
+	}
+
+	&:after {
+		bottom: 30%;
+		top: auto;
+	}
+}
+
+//opened-state for x version. Becomes X
+.panel-left-toggle.toggled-on .navigation-menu-icon .icon-regular {
+	height: 25px;
+	width: 25px;
+	&:before {
+		transform: rotate(45deg);
+		top: 45%;
+	}
+
+	&:after {
+		transform: rotate(-45deg);
+		bottom: 42%;
+	}
+}
+

@@ -1,0 +1,41 @@
+/*--------------------------------------------------------------
+# Default Card Pagination for all loops
+--------------------------------------------------------------*/
+.pagination {
+	text-align: center;
+	padding: var(--gap) 0;
+
+	.page-numbers {
+		background: var(--highlight);
+		color: white;
+		margin: 0 3px;
+		padding: 3px 8px;
+
+		* {
+			pointer-events: none;
+		}
+	}
+
+	.page-numbers.current {
+		background: grey;
+	}
+
+	.page-numbers.dots {
+		background: transparent;
+		color: grey;
+		margin: 0;
+	}
+}
+
+.nav-links{
+	padding: var(--gutters) 0;
+	display: flex;
+
+	& > div{
+		flex-grow: 1;
+	}
+}
+
+.nav-next{
+	text-align: right;
+}

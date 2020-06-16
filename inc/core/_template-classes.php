@@ -44,6 +44,10 @@ function ignition_body_classes( $classes ) {
 		$classes[] = 'has-sidebar';
 	}
 
+	if(get_page_template_slug() == 'sidebar-left.php' || get_page_template_slug() == 'sidebar-right.php'){
+		$classes[] = 'has-sidebar-template';
+	}
+
 
 	// adds users role as class
 	if ( is_user_logged_in() ) {

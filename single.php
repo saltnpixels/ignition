@@ -20,13 +20,7 @@ get_header(); ?>
 	        <?php
 	        if ( have_posts() ):
 		        while ( have_posts() ) : the_post();
-
-			        /**
-			         * Here we look for the right content. We look for a folder with the name of the post type
-			         * if it doesn't exist we will use the post folder
-			         */
-			        ign_loop();
-
+	                ign_template('content');
 		        endwhile; // End of the loop.
 
 	        endif;
@@ -36,3 +30,4 @@ get_header(); ?>
     </div><!-- #primary -->
 
 <?php get_footer();
+

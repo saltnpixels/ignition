@@ -20,11 +20,11 @@
             "endpoint": 0
         },
         {
-            "key": "field_5d80e2ff0025c",
-            "label": "Card Type",
-            "name": "card_type",
+            "key": "field_5d80e3d58a431",
+            "label": "Post Types",
+            "name": "post_types",
             "type": "select",
-            "instructions": "Shows a recent listing.\r\nThe default listing will only work on a page set as an archive. This can be done in the customizer.\r\nOtherwise you will need to create a custom card list.",
+            "instructions": "The default listing will only work on a page set as an archive. This can be done in the customizer.\r\nOtherwise you will need to create a custom card list.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -34,46 +34,16 @@
             },
             "admin_only": 0,
             "choices": {
-                "default": "default",
-                "custom": "custom"
+                "post": "News",
+                "page": "Pages",
+                "newsletter": "Newsletters",
+                "portfolio": "Portfolios"
             },
-            "default_value": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_5d80e3d58a431",
-            "label": "Post Type",
-            "name": "post_type",
-            "type": "select",
-            "instructions": "The default listing will only work on a page set as an archive. This can be done in the customizer.\r\nOtherwise you will need to create a custom card list.",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5d80e2ff0025c",
-                        "operator": "==",
-                        "value": "custom"
-                    }
-                ]
+            "default_value": [
+                "post"
             ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "admin_only": 0,
-            "choices": {
-                "post": "Posts",
-                "page": "Pages"
-            },
-            "default_value": [],
             "allow_null": 0,
-            "multiple": 0,
+            "multiple": 1,
             "ui": 0,
             "return_format": "value",
             "ajax": 0,
@@ -187,6 +157,27 @@
             "maxlength": "",
             "autocomplete": "grid\r\ncard-grid\r\ngrid span-all-4",
             "ign_set_data": ".grid-class"
+        },
+        {
+            "key": "field_5ee7cc7d226a2",
+            "label": "Skip This Post",
+            "name": "skip_this_id",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "ign_set_data": "",
+            "message": "Skip This Page when getting cards",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -194,7 +185,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/cards"
+                "value": "acf\/post-cards"
             }
         ]
     ],
@@ -204,7 +195,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1575607398
+    "modified": 1592249502
 }

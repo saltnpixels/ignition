@@ -197,7 +197,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/paragraphs"
+                "value": "acf\/advanced-columns"
             }
         ]
     ],
@@ -207,7 +207,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1581520950
+    "modified": 1592236961
 }

@@ -17,65 +17,65 @@ function my_acf_admin_enqueue_scripts() {
 
 add_action( 'acf/input/admin_enqueue_scripts', 'my_acf_admin_enqueue_scripts', 99 );
 
+
+//change the post labels
+function change_post_object_label() {
+	$post_label   = get_option( 'options_posts_label_singular' );
+	$post_label_p = get_option( 'options_posts_label_plural' );
+	if ( $post_label ) {
+		global $wp_post_types;
+		$labels                     = &$wp_post_types['post']->labels;
+		$labels->name               = $post_label_p;
+		$labels->singular_name      = $post_label;
+		$labels->add_new            = 'Add New ' . $post_label;
+		$labels->add_new_item       = 'Add New ' . $post_label;
+		$labels->edit_item          = 'Edit ' . $post_label;
+		$labels->new_item           = $post_label;
+		$labels->view_item          = 'View ' . $post_label;
+		$labels->search_items       = 'Search ' . $post_label_p;
+		$labels->not_found          = 'No ' . $post_label_p . ' found';
+		$labels->not_found_in_trash = 'No' . $post_label_p . 'found in Trash';
+		$labels->name_admin_bar     = $post_label_p;
+	}
+}
+
+add_action( 'init', 'change_post_object_label', 10 );
+
+function change_post_menu_label() {
+	$post_label   = get_option( 'options_posts_label_singular' );
+	$post_label_p = get_option( 'options_posts_label_plural' );
+
+	if ( $post_label ) {
+		global $menu;
+		global $submenu;
+		$menu[5][0]                 = $post_label_p;
+		$submenu['edit.php'][5][0]  = $post_label;
+		$submenu['edit.php'][10][0] = 'Add New';
+	}
+}
+
+add_action( 'admin_menu', 'change_post_menu_label' );
+
+
 /*
  * Add Theme options page to streamline some easy steps
  */
-if ( function_exists( 'acf_add_options_page' ) ) {
-	//add theme options page
-	acf_add_options_page( array(
-		'page_title' => 'Ignition General Settings',
-		'menu_title' => 'Theme Settings',
-		'menu_slug'  => 'theme-general-settings',
-		'capability' => 'edit_posts',
-		'redirect'   => false,
-		'position' => '4.1'
-	) );
+function ign_post_type_options() {
 
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		//add theme options page
+		acf_add_options_page( array(
+			'page_title' => 'Ignition General Settings',
+			'menu_title' => 'Theme Settings',
+			'menu_slug'  => 'theme-general-settings',
+			'capability' => 'edit_posts',
+			'redirect'   => false,
+			'position'   => '4.1'
+		) );
 
-	/*
-	 * Allow for changing the Post label and adding option pages for post types
-	 */
-	function change_post_menu_label() {
-		$post_label   = get_field( 'posts_label_singular', 'option' );
-		$post_label_p = get_field( 'posts_label_plural', 'option' );
-
-		if ( $post_label ) {
-			global $menu;
-			global $submenu;
-			$menu[5][0]                 = $post_label_p;
-			$submenu['edit.php'][5][0]  = $post_label;
-			$submenu['edit.php'][10][0] = 'Add New';
-		}
-	}
-
-	add_action( 'admin_menu', 'change_post_menu_label' );
-
-
-	//changing the label further
-	function change_post_object_label() {
-		$post_label   = get_field( 'posts_label_singular', 'option' );
-		$post_label_p = get_field( 'posts_label_plural', 'option' );
-		if ( $post_label ) {
-			global $wp_post_types;
-			$labels                     = &$wp_post_types['post']->labels;
-			$labels->name               = $post_label_p;
-			$labels->singular_name      = $post_label;
-			$labels->add_new            = 'Add New ' . $post_label;
-			$labels->add_new_item       = 'Add New ' . $post_label;
-			$labels->edit_item          = 'Edit ' . $post_label;
-			$labels->new_item           = $post_label;
-			$labels->view_item          = 'View ' . $post_label;
-			$labels->search_items       = 'Search ' . $post_label_p;
-			$labels->not_found          = 'No ' . $post_label_p . ' found';
-			$labels->not_found_in_trash = 'No' . $post_label_p . 'found in Trash';
-		}
-	}
-
-
-	//adding sub option pages for each post type
-	function add_post_type_options() {
 
 		//add options for other post types if chosen
+
 		$option_pages = get_field( 'archive_option_pages', 'option' );
 		if ( $option_pages ) {
 			foreach ( $option_pages as $option_page ) {
@@ -84,27 +84,52 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 				if ( $post_type ) {
 					$labels = $post_type->labels;
 
-					if($post_type->name == 'post'){
+					if ( $post_type->name == 'post' ) {
 						$parent = 'edit.php';
-					}else{
+					} else {
 						$parent = 'edit.php?post_type=' . $post_type->name;
 					}
 
 					acf_add_options_page( array(
-						'page_title' => $labels->singular_name . ' Options',
-						'menu_title' => $labels->singular_name . ' Options',
-						'parent_slug'     => $parent,
-						'post_id' => $post_type->name . '_option'
+						'page_title'  => $labels->singular_name . ' Options',
+						'menu_title'  => $labels->singular_name . ' Options',
+						'parent_slug' => $parent,
+						'post_id'     => $post_type->name . '_option'
 					) );
 				}
 			}
 		}
 	}
 
-
-	add_action( 'wp_loaded', 'change_post_object_label' );
-	add_action( 'wp_loaded', 'add_post_type_options' );
 }
+
+add_action( 'wp_loaded', 'ign_post_type_options' );
+
+
+
+/**
+ * @param $categories
+ * @param $post
+ *
+ * @return array
+ *
+ * Adding a new Block category for this theme
+ */
+function ign_block_categories( $categories, $post ) {
+	return array_merge(
+		array(
+			array(
+				'slug'  => 'ign-custom',
+				'title' => __( 'Ignition', 'ignition' ),
+//				'icon'  => 'marker',
+			),
+		),
+		$categories
+	);
+}
+
+add_filter( 'block_categories', 'ign_block_categories', 10, 2 );
+
 
 
 /*
@@ -113,11 +138,11 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 function load_post_types( $field ) {
 
 	$ign_post_types   = get_post_types( array( '_builtin' => false, 'public' => true ), 'objects' );
-	$ign_post_types[]	= get_post_type_object('post');
+	$ign_post_types[] = get_post_type_object( 'post' );
 
 	$field['choices'] = array();
 	foreach ( $ign_post_types as $key => $post_type ) {
-		if($post_type->name == 'post' && $post_label = get_field( 'posts_label_plural', 'option' )){
+		if ( $post_type->name == 'post' && $post_label = get_field( 'posts_label_plural', 'option' ) ) {
 			$post_type->label = $post_label;
 		}
 
@@ -128,10 +153,6 @@ function load_post_types( $field ) {
 }
 
 add_filter( 'acf/load_field/name=archive_option_pages', 'load_post_types', 99 );
-
-
-
-
 
 
 //add new field Admin only. wont show field unless your an admin
@@ -239,35 +260,33 @@ function ign_show_data_field( $field ) {
 add_filter( 'acf/render_field', 'ign_show_data_field', 11, 1 );
 
 
-
-
 //add classes to a wysywig field so you can control the design a bit more for each field
 function acf_plugin_wysiwyg_styling() { ?>
-	<script>
-		(function ($) {
-			acf.add_filter('wysiwyg_tinymce_settings', function (mceInit, id, $field) {
-				var fieldKey = $field.data('key');
-				var fieldName = $field.data('name');
-				var flexContentName = $field.parents('[data-type="flexible_content"]').first().data('name');
-				var layoutName = $field.parents('[data-layout]').first().data('layout');
+    <script>
+       (function ($) {
+          acf.add_filter('wysiwyg_tinymce_settings', function (mceInit, id, $field) {
+             var fieldKey = $field.data('key')
+             var fieldName = $field.data('name')
+             var flexContentName = $field.parents('[data-type="flexible_content"]').first().data('name')
+             var layoutName = $field.parents('[data-layout]').first().data('layout')
 
-				mceInit.body_class += " acf-field-key-" + fieldKey;
-				mceInit.body_class += " acf-field-name-" + fieldName;
-				if (flexContentName) {
-					mceInit.body_class += " acf-flex-name-" + flexContentName;
-				}
-				if (layoutName) {
-					mceInit.body_class += " acf-layout-" + layoutName;
-				}
-				// console.log(fieldName);
-				if (flexContentName === 'header_layout') {
-					// mceInit.body_class += " entry-header";
-				}
-				return mceInit;
-			});
+             mceInit.body_class += ' acf-field-key-' + fieldKey
+             mceInit.body_class += ' acf-field-name-' + fieldName
+             if (flexContentName) {
+                mceInit.body_class += ' acf-flex-name-' + flexContentName
+             }
+             if (layoutName) {
+                mceInit.body_class += ' acf-layout-' + layoutName
+             }
+             // console.log(fieldName);
+             if (flexContentName==='header_layout') {
+                // mceInit.body_class += " entry-header";
+             }
+             return mceInit
+          })
 
-		})(jQuery);
-	</script>
+       })(jQuery)
+    </script>
 	<?php
 }
 

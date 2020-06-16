@@ -1,5 +1,30 @@
 <?php
 
+
+/*--------------------------------------------------------------
+# Theme Config file setup
+--------------------------------------------------------------*/
+// search and remove comments like /* */ and //
+//$json       = preg_replace( "#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t]//.*)|(^//.*)#", '', $json );
+$ign_config = json_decode( file_get_contents( get_theme_file_path( 'theme.config.json' ) ), true );
+
+
+/**
+ * @param $item
+ * @param bool $default
+ *
+ * @return bool|mixed
+ */
+function ign_get_config( $item, $default = false ) {
+	global $ign_config;
+	if ( isset( $ign_config[ $item ] ) && $ign_config[$item] ) {
+		return $ign_config[ $item ];
+	} else {
+		return $default;
+	}
+}
+
+
 /*--------------------------------------------------------------
 # Development Work and Helpers
 --------------------------------------------------------------*/
@@ -26,7 +51,7 @@ if ( ! function_exists( 'write_log' ) ) {
 }
 
 /**
- * Send debug code to the Javascript console.
+ * Send debug code to the Javascript console!
  * Will only work if the page loads fully without an error that stops wp_footer from outputting.
  */
 $console_log = '';
@@ -60,7 +85,7 @@ add_action( 'admin_footer', 'output_log_to_footer' );
 
 /**
  * @param $dir
- * Gets all php files from the directory and sub directory that start with an underscore
+ * Gets all php files from the directory and sub directory that start with an underscore _
  * @param int $depth
  */
 function ign_require_all( $dir, $depth = 2 ) {
@@ -83,12 +108,13 @@ function ign_require_all( $dir, $depth = 2 ) {
 	}
 }
 
-//always include the parent themes inc files
-ign_require_all( get_parent_theme_file_path( '/inc' ) );
+//always include the main parent themes inc files
+ign_require_all( locate_template( '/inc' ) );
 
-//get theme template part partials from current theme only (if child being used get childs)
-//child theme will have to include parents if they want them. Will be included in child theme by default.
-ign_require_all( get_stylesheet_directory() . '/template-parts' );
+
+//get themes folders. child themes can override
+ign_require_all( locate_template( '/src/post-types' ) );
+ign_require_all( locate_template( '/src/blocks' ) );
 
 
 /**
@@ -114,9 +140,10 @@ add_action( 'admin_head', 'ignition_javascript_detection', 0 );
  */
 
 function admin_bar_color_dev_site() {
+
 	if ( in_array( $_SERVER['REMOTE_ADDR'], array( '127.0.0.1', "::1" ) ) ) {
 		echo '<style>
-	body #wpadminbar{ background: #156288; }
+	body #wpadminbar{ background:' . ign_get_config( 'dev_admin_bar_color', '#156288' ) . '; }
 </style>';
 	}
 }
@@ -125,3 +152,10 @@ add_action( 'wp_head', 'admin_bar_color_dev_site' );
 add_action( 'admin_head', 'admin_bar_color_dev_site' );
 
 
+// Remove default image sizes here. medium-large is probably not needed.
+//in the admin you can set media sizes to 0 to remove them and save disk space.
+function remove_default_images( $sizes ) {
+	unset( $sizes['medium_large'] ); // 768px
+
+	return $sizes;
+}

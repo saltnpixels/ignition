@@ -1,0 +1,24 @@
+/*
+	This file is for styling your comment sections
+*/
+#comments{
+  padding: var(--gap) 0;
+}
+.comments-holder{
+  max-width: var(--container-content);
+  margin: auto;
+}
+
+.comment-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comment-form-cookies-consent{
+  label{
+    display: inline;
+    font-weight: normal;
+  }
+}
+

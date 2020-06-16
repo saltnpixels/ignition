@@ -1,0 +1,98 @@
+/*--------------------------------------------------------------
+# Sidebar Sizes
+--------------------------------------------------------------*/
+
+//use .sidebar-template to surround your primary and secondary for quick sidebar layout
+
+
+#primary, .primary {
+  flex-grow: 1;
+}
+
+#secondary, .secondary {
+  flex-basis: 25%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding-top: var(--gutters);
+}
+
+
+
+/*------- Inline Sidebar Background --------*/
+.sidebar-bg {
+  position: relative;
+}
+
+.sidebar-bg:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 50vw;
+  top: 0;
+  left: 0;
+  background: #efefef;
+  z-index: -1;
+}
+
+
+/*------- Menu in sidebar --------*/
+.widget .menu li {
+  color: white;
+}
+
+
+#secondary .widget, #secondary .menu li {
+  color: var(--main-text-color);
+}
+
+#secondary {
+  .menu .current-menu-item > .menu-item-link, .menu .menu-item-link.focus {
+	color: var(--highlight);
+  }
+}
+
+/*--------------------------------------------------------------
+# Widgets Layout
+--------------------------------------------------------------*/
+
+.sidebar-template.container #secondary{
+  .widget{
+	padding-right: 0;
+  }
+}
+
+.sidebar-template.sidebar-left.container #secondary{
+  .widget{
+    padding-left: 0;
+    padding-right: var(--gutters);
+  }
+}
+
+.sidebar-holder .widget {
+  padding: var(--gutters);
+}
+
+.widget {
+
+  color: white;
+
+  h2 {
+	margin-top: 0;
+  }
+
+  ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+  }
+
+  .menu li a {
+	flex-grow: 0;
+  }
+
+  .menu li .menu-item-link {
+	padding-left: 0;
+  }
+}
+
+

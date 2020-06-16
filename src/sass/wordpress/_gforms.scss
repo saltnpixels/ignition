@@ -1,0 +1,509 @@
+@use "../resources" as *; //should also load resources
+@use "../core/grid-layout" as *;
+
+/*--------------------------------------------------------------
+# Normalizing Gravity Forms
+--------------------------------------------------------------*/
+//turn off output css under gravity forms settings to use this.
+:root{
+	--form-gutters: 10px; //the padding between inputs if two are on one line or between gfields
+}
+
+
+//used on hidden fields
+.gfield_visibility_hidden {
+	visibility: hidden;
+	position: absolute;
+	left: -9999px;
+}
+
+/*--------------------------------------------------------------
+# Gform header and footer
+--------------------------------------------------------------*/
+.gform_heading, .gform_footer {
+	text-transform: capitalize;
+}
+
+//if using an icon in the submit button which is really only possible if you change the submit to a type <button>
+//this is done in gform_extras
+.gform_footer .button .icon {
+	margin-left: 5px;
+}
+
+.gform_footer {
+	margin-bottom: var(--gap);
+	margin-top: var(--gap);
+	text-align: center;
+}
+
+/*--------------------------------------------------------------
+# Basic styling for some elements
+--------------------------------------------------------------*/
+.gfield_description {
+	font-size: 1.2rem;
+}
+
+.field_description_above .gfield_description{
+	font-size: 1.8rem;
+}
+
+.gfield_required{
+	color: red;
+}
+
+/*--------------------------------------------------------------
+# Gform Fields
+--------------------------------------------------------------*/
+.gform_fields {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	@extend .grid;
+	grid-gap: var(--grid-gap);
+}
+
+//Every gfield has margin bottom and gutters on both sides
+.gform_wrapper .gfield {
+	grid-column: span 12;
+	padding: 0;
+}
+
+.ginput_container{
+	width: 100%;
+}
+
+.gform_wrapper .gform_fields{
+	padding-left: 0;
+}
+
+//fields with more than one input
+.ginput_complex{
+	@include card-grid(auto-fit, 175px, 15px, 1fr);
+	width: 100%;
+
+	label{
+		font-size: 1.4rem;
+	}
+}
+
+
+.hidden_label .gfield_label{
+	@extend .screen-reader-text;
+}
+
+.hidden_sub_label .ginput_complex label{
+	@extend .screen-reader-text;
+}
+
+/*--------------------------------------------------------------
+# Checkbox and Radios
+--------------------------------------------------------------*/
+.gfield_radio, .gfield_checkbox {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	margin-top: 5px;
+}
+
+.gfield_radio li, .gfield_checkbox li {
+	display: flex;
+	align-items: center;
+	padding: 0;
+
+	label{
+		font-weight: normal;
+		font-size: 1.6rem;
+	}
+	input:checked + label{
+		font-weight: bold;
+	}
+
+}
+
+
+
+/*--------------------------------------------------------------
+# Time input
+--------------------------------------------------------------*/
+.gfield .clear-multi{
+	display: flex;
+}
+
+.gfield_time_minute{
+	margin-right: 10px;
+}
+
+.gfield_time_hour, .gfield_time_minute {
+	display: flex;
+	align-items: center;
+	width: 100px;
+
+	> * {
+		order: 1;
+		flex-grow: 1;
+	}
+
+	label {
+		display: none;
+	}
+
+	i {
+		font-style: normal;
+		margin: 0 4px;
+		flex-grow: 0;
+	}
+
+}
+
+/*--------------------------------------------------------------
+# List item input
+--------------------------------------------------------------*/
+.gfield_list{
+	width: 100%;
+}
+
+.add_list_item, .delete_list_item {
+	width: 15px;
+}
+
+.gfield_list_icons {
+	width: 30px;
+	padding-left: 4px;
+}
+
+.gfield_list_icons, .gfield_list_icons img {
+	vertical-align: middle;
+}
+
+.gfield_list_cell {
+	vertical-align: baseline;
+}
+
+/*--------------------------------------------------------------
+# Privacy Policy
+--------------------------------------------------------------*/
+.ginput_container_consent{
+	display: flex;
+	align-items: center;
+	label{
+		font-size: 1rem;
+		font-weight: normal;
+	}
+}
+
+
+/*--------------------------------------------------------------
+# Products and totals
+--------------------------------------------------------------*/
+body .ginput_quantity {
+	display: inline-block;
+	width: 100px;
+}
+
+.ginput_product_price {
+	margin-right: 5px;
+}
+
+.gform_card_icon {
+	margin-right: 4px;
+	text-indent: -9000px;
+	background-image: url('../../plugins/gravityforms/images/gf-creditcard-icons.png'); //should get the original cards images
+	background-repeat: no-repeat;
+	width: 36px;
+	height: 32px;
+	float: left;
+}
+
+.gform_card_icon_container {
+	@extend .clear !optional;
+	margin-bottom: 5px;
+}
+
+//it has ginput_full but then has even deeper sections. should not have used this class
+.ginput_complex .ginput_cardextras {
+	margin-left: calc(-1 * var(--form-gutters));
+	margin-right: calc(-1 * var(--form-gutters));
+	display: flex;
+}
+
+.ginput_card_expiration_container {
+	display: block;
+}
+
+.ginput_cardinfo_right select {
+	width: auto;
+	margin-right: 15px;
+}
+
+//cvc code
+.ginput_cardinfo_right {
+	position: relative;
+
+	input {
+		padding-right: 40px;
+	}
+}
+
+//put cvc code inside input to right side.
+.ginput_card_security_code_icon {
+	width: 32px;
+	height: 23px;
+	background-image: url('../../plugins/gravityforms/images/gf-creditcard-icons.png');
+	background-repeat: no-repeat;
+	background-position: 0 -128px;
+	position: absolute;
+	top: .4em;
+	right: 15px;
+	display: block;
+}
+
+//sass magic!
+$cards: visa mastercard amex discover maestro jcb;
+$position-x: 0;
+
+@each $card in $cards {
+
+	.gform_card_icon_#{$card} {
+		background-position: $position-x 0;
+
+		&.gform_card_icon_selected {
+			background-position: $position-x -32px;
+		}
+
+		&.gform_card_icon_inactive {
+			background-position: $position-x -64px;
+		}
+	}
+
+	.gform_card_icon_style2 .gform_card_icon#{$card} {
+		background-position: $position-x -192px;
+
+		&.gform_card_icon_selected {
+			background-position: $position-x -224px;
+		}
+
+		&.gform_card_icon_inactive {
+			background-position: $position-x -256px;
+		}
+	}
+	//set a new background position for x for next card in list
+	$position-x: $position-x - 36px;
+}
+
+/*--------------------------------------------------------------
+# Errors and messages
+--------------------------------------------------------------*/
+.validation_error {
+	margin: 0 var(--form-gutters) 20px;
+	color: white;
+	background: rgba(darkred, .8);
+	padding: var(--form-gutters);
+}
+
+.gfield_error {
+	border-top: 1px solid rgba(darkred, .4);
+	border-bottom: 1px solid rgba(darkred, .4);
+}
+
+.validation_message {
+	color: darkred;
+	font-size: 1.1rem;
+	margin-top: 5px;
+}
+
+/*--------------------------------------------------------------
+# Date Picker jquery ui crap!
+--------------------------------------------------------------*/
+.ginput_container_date{
+	display: flex;
+	align-items: center;
+	input{
+		max-width: 80%;
+		order: 0;
+	}
+
+	img{
+		margin-left: 15px;
+	}
+}
+
+
+/* DatePicker Container */
+.ui-datepicker {
+	width: 216px;
+	height: auto;
+	margin: 5px auto 0;
+	font-size: 1.1rem;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+
+	select {
+		display: inline-block;
+		width: auto;
+		font-size: 14px;
+		color: white;
+		background: black;
+	}
+}
+
+.ui-datepicker a {
+	text-decoration: none;
+}
+
+/* DatePicker Table */
+.ui-datepicker table {
+	width: 100%;
+	margin-bottom: 0;
+	table-layout: fixed;
+	background: white;
+}
+
+.ui-datepicker-header {
+	background: black;
+	color: #e0e0e0;
+	font-weight: bold;
+	box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+	text-shadow: 1px -1px 0px #000;
+	line-height: 30px;
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	border-color: #111;
+}
+
+.ui-datepicker-title {
+	text-align: center;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	cursor: pointer;
+	//background-image: url('assets/images/arrow.png');
+	background-repeat: no-repeat;
+	overflow: hidden;
+	position: relative;
+
+	span {
+		display: none;
+	}
+
+	&:after {
+		content: '';
+		width: 0;
+		height: 0;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+		border-left: 8px solid white;
+		display: inline-block;
+		margin-top: 6px;
+	}
+}
+
+.ui-datepicker-prev {
+	float: left;
+	background-position: center -30px;
+	&:after {
+		border-left: 0;
+		border-right: 8px solid white;
+	}
+}
+
+.ui-datepicker-next {
+	float: right;
+	background-position: center 0px;
+}
+
+.ui-datepicker thead {
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #bbb;
+}
+
+.ui-datepicker th {
+	text-transform: uppercase;
+	font-size: 6pt;
+	padding: 5px 0;
+	color: #666666;
+	text-shadow: 1px 0px 0px #fff;
+	filter: dropshadow(color=#fff, offx=1, offy=0);
+	text-align: center;
+}
+
+.ui-datepicker tbody td {
+	padding: 0;
+	border-right: 1px solid #bbb;
+	background: white;
+	padding: 0;
+}
+
+.ui-datepicker tbody td:last-child {
+	border-right: 0px;
+}
+
+.ui-datepicker tbody tr {
+	border-bottom: 1px solid #bbb;
+}
+
+.ui-datepicker tbody tr:last-child {
+	border-bottom: 0px;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	color: #666666;
+	text-shadow: 1px 1px 0px #fff;
+	filter: dropshadow(color=#fff, offx=1, offy=1);
+}
+
+.ui-datepicker-calendar .ui-state-default {
+	background: #ededed;
+	background: -moz-linear-gradient(top, #ededed 0%, #dedede 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ededed), color-stop(100%, #dedede));
+	background: -webkit-linear-gradient(top, #ededed 0%, #dedede 100%);
+	background: -o-linear-gradient(top, #ededed 0%, #dedede 100%);
+	background: -ms-linear-gradient(top, #ededed 0%, #dedede 100%);
+	background: linear-gradient(top, #ededed 0%, #dedede 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dedede', GradientType=0);
+	-webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+	-moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+	box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+	background: #f7f7f7;
+}
+
+.ui-datepicker-calendar .ui-state-active {
+	background: #6eafbf;
+	-webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+	-moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+	box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+	color: #e0e0e0;
+	text-shadow: 0px 1px 0px #4d7a85;
+	filter: dropshadow(color=#4d7a85, offx=0, offy=1);
+	border: 1px solid #55838f;
+	position: relative;
+}
+
+.ui-datepicker-unselectable .ui-state-default {
+	background: #f4f4f4;
+	color: #b4b3b3;
+}
+
+.ui-datepicker-calendar td:first-child .ui-state-active {
+	margin-left: 0;
+}
+
+.ui-datepicker-calendar td:last-child .ui-state-active {
+	margin-right: 0;
+}
+
+.ui-datepicker-calendar tr:last-child .ui-state-active {
+	height: 29px;
+	margin-bottom: 0;
+}

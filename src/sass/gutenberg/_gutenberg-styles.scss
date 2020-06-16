@@ -1,0 +1,35 @@
+@use "sass:meta";
+@use "../resources" as *; //should also load resources
+
+html {
+  font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px.
+}
+
+
+//override only certain parts of backend - only for gutenberg area
+div .editor-styles-wrapper{
+  background: var(--body-bg);
+  font-size: 1.6rem; //results in 16px
+  line-height: var(--line-height);
+  font-family: var(--font);
+  color: var(--main-text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+
+
+  @include meta.load-css( '../global/typography');
+
+  //only applying inside acf preview blocks, so we dont mess with buttons and inputs of WordPress
+  .acf-block-preview {
+    @include meta.load-css('../core/base');
+    @include meta.load-css('../global/_page.scss');
+    @include meta.load-css('../global/_media.scss');
+    @include meta.load-css('../global/_menus.scss');
+    @include meta.load-css('../global/_forms.scss');
+    @include meta.load-css("../settings/settings");
+  }
+}
+
+
+

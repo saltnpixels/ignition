@@ -1,0 +1,9 @@
+@use 'variables';
+@use 'wordpress/default-blocks';
+@use "gutenberg/gutenberg-layout";
+@use "gutenberg/gutenberg-styles";
+
+@import "../parts/**/_?*.scss"; //glob does not support @use
+@import "../blocks/**/_?*.scss"; //glob does not support @use
+@import "../../inc/**/_?*.scss"; //glob does not support @use
+

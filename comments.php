@@ -24,7 +24,7 @@ if ( post_password_required() ) {
 ?>
 
 <div id="comments" class="comments-area alignfull">
-	<div class="comments-holder">
+	<div class="comments-holder container-content">
 		<?php
 
 		if ( have_comments() ) : ?>
@@ -64,8 +64,8 @@ if ( post_password_required() ) {
 			</ol>
 
 			<?php the_comments_pagination( array(
-				'prev_text' => ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous', 'ignition' ) . '</span>',
-				'next_text' => '<span class="screen-reader-text">' . __( 'Next', 'ignition' ) . '</span>' . ign_get_svg( array( 'icon' => 'arrow-right' ) ),
+				'prev_text' => '<span class="iconify" data-icon="carbon:chevron-left"></span><span class="screen-reader-text">' . __( 'Previous', 'ignition' ) . '</span>',
+				'next_text' => '<span class="screen-reader-text">' . __( 'Next', 'ignition' ) . '</span><span class="iconify" data-icon="carbon:chevron-right"></span>',
 			) );
 
 		endif; // Check for have_comments().

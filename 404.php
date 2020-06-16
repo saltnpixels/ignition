@@ -15,11 +15,8 @@ get_header(); ?>
 
 			<div class="container-content text-center">
 				<div class="h1 title-404">404</div>
-				<section>
 					<p><?php _e( 'It looks like nothing was found at this location.', 'ignition' ); ?></p>
 					<a class="button" href="<?php echo home_url(); ?>"><?php _e( 'Go To Home', 'ignition' ); ?></a>
-
-				</section>
 			</div>
 
 		</main><!-- #main -->

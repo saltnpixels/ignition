@@ -1,0 +1,132 @@
+@use "../resources" as *; //should also load resources
+
+/*--------------------------------------------------------------
+# Layout Fixes for ie11
+--------------------------------------------------------------*/
+
+@media screen and (-ms-high-contrast:active), (-ms-high-contrast: none) {
+
+
+	:root {
+		--flex-gap: calc(var(--grid-gap) / 2);
+	}
+
+	.site-footer {
+		min-height: 1px; //ie11 fix
+	}
+
+	//for ie11 fallbacks on object-fit images
+	.cover-image, .background-image {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.no-objectfit .cover-image{
+		min-height: 300px;
+		background-repeat: none;
+	}
+
+	.no-objectfit .background-image img,
+	.no-objectfit .cover-image img {
+		display: none;
+	}
+
+
+	/*--------------------------------------------------------------
+  # Flexbox grids. 99% same as css grid
+  --------------------------------------------------------------*/
+
+	.flex, .flex-grid, .grid {
+		display: flex;
+
+
+		margin-left: calc(-1 * var(--flex-gap));
+		margin-right: calc(-1 * var(--flex-gap));
+
+		//gutters via margins. the flex-basis makes sure it can be sized right
+		& > * {
+			margin-right: var(--flex-gap);
+			margin-left: var(--flex-gap);
+			flex-grow: 1;
+			flex-shrink: 1;
+		}
+
+
+		@for $i from 1 through 12 {
+			div & .span-#{$i}, &.span-all-#{$i} > * {
+				$width: 100% / (12/$i);
+				width: calc(#{$width} - var(--grid-gap));
+				flex-grow: 0;
+				flex-shrink: 0;
+				flex-basis: auto;
+			}
+
+			div & > .span-#{$i} { //once it has a set size it cannot grow or shrink
+				flex-grow: 0;
+				flex-shrink: 0;
+			}
+		}
+
+	}
+
+	//many rows has margin bottom and wraps
+	.grid {
+		flex-wrap: wrap;
+
+		& > * {
+			margin-bottom: var(--grid-gap);
+		}
+	}
+
+
+	div .flex-grid, div .flex, div .grid {
+
+
+		@each $name, $media in $media-list {
+			@if $name != 'small' {
+				@media(max-width: $media) {
+					@for $i from 1 through 12 {
+						div & > .#{$name}-span-#{$i}, &.#{$name}-span-all-#{$i} > * {
+							$width: 100% / (12/$i);
+							width: calc(#{$width} - var(--grid-gap));
+							flex-basis: auto;
+							flex-grow: 0;
+							flex-shrink: 0;
+						}
+
+					}
+				}
+			}
+
+			@if $name == 'small' {
+				@media(max-width: $media) {
+					//only small-span can override this. has extra specificity
+					@if ($collapse-on-small == true) {
+						flex-wrap: wrap;
+						div.site & > * {
+							width: calc(100% - var(--grid-gap));
+						}
+					}
+					@for $i from 1 through 12 {
+						div & > .#{$name}-span-#{$i}, div &.#{$name}-span-all-#{$i} > * {
+							$width: 100% / (12/$i);
+							width: calc(#{$width} - var(--grid-gap));
+						}
+
+						//no growing or shrinking
+						div & > .#{$name}-span-#{$i} {
+							flex-grow: 0;
+							flex-shrink: 0;
+						}
+					}
+				}
+			}
+
+		}
+	}
+
+	.layout-center-content > * {
+		margin: 0; //ie11 freaks out if the inner div has a margin: auto;
+	}
+}

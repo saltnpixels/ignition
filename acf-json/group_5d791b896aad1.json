@@ -33,7 +33,7 @@
             "key": "field_5d791ccb26820",
             "label": "WP Menu Name",
             "name": "wp_menu_name",
-            "type": "text",
+            "type": "select",
             "instructions": "The desired menus name",
             "required": 0,
             "conditional_logic": [
@@ -51,12 +51,17 @@
                 "id": ""
             },
             "admin_only": 0,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "ign_set_data": ""
+            "ign_set_data": "",
+            "choices": {
+                "top-menu": "Top Menu"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
         },
         {
             "key": "field_5d791d3d26821",
@@ -88,31 +93,10 @@
             "button_label": "",
             "sub_fields": [
                 {
-                    "key": "field_5d791d4e26822",
-                    "label": "Menu Title",
-                    "name": "menu_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "admin_only": 0,
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "ign_set_data": ""
-                },
-                {
                     "key": "field_5d791d5f26823",
                     "label": "Link",
                     "name": "link",
-                    "type": "text",
+                    "type": "link",
                     "instructions": "You can use a full link or a hashtag to link to a section on this page. Make sure the section has an html anchor. (ie: #mysection)",
                     "required": 0,
                     "conditional_logic": 0,
@@ -122,12 +106,8 @@
                         "id": ""
                     },
                     "admin_only": 0,
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "ign_set_data": ""
+                    "ign_set_data": "",
+                    "return_format": "array"
                 }
             ]
         },
@@ -189,7 +169,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1568382766
+    "modified": 1592246380
 }

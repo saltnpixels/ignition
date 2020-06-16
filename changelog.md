@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
 
+## [4.0.0] Jun 16, 2020
+ - Completely Revamped the entire starter theme!
+ - Ignition no longer uses gulp. It uses webpack. This will eventually push towards using react and making blocks in your theme
+ - Currently still relies on acf blocks
+ - The assets folder is now src and also holds the template-parts now known as parts
+ - JS modules are used as well as SASS modules with @use and @import
+ - Easy templating with ign_template() which also supports passing variables in an second parameter
+ - theme.config file allows for quick settings for all sorts of things
+ - 'npm run setup' to create new theme and replace 'ignition' throughout files
+ - You can still create underscore files of js, scss, and php in folder inc, parts, and blocks for automatic importing to the site.
+ - Default header block for posts listed in theme.config under default-acf-header-block
+ - Change header block template by making header-{post-type}.php file in the post type folder.
+
 ## [3.5.0] - Apr 1, 2020
 - Removed Old Sections
 - Changed gutenberg styles to match 5.4 styling on back end

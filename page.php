@@ -21,9 +21,7 @@ get_header(); ?>
 
 			<?php
 			while ( have_posts() ) : the_post();
-				//shows the page content only
-				locate_template( 'template-parts/page/content.php', true );
-
+				ign_template('content');
 			endwhile; // End of the loop.
 			?>
 

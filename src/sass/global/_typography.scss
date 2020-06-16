@@ -1,0 +1,221 @@
+@use "../resources" as *;
+
+
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+html {
+	font-size: 62.5%; // resets so rem is easy to use 1.2rem = 12px.
+}
+
+//because we are using this on the front end and the back end we need to be careful
+body{
+	font-size: 1.6rem; //results in 16px
+	line-height: var(--line-height);
+	font-family: var(--font);
+	color: var(--main-text-color);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+}
+
+
+
+//make article body of text get bigger on larger screens
+@media(min-width: 1500px){
+  .grow-font {
+	font-size: var(--article-font-size); //1.7rem
+  }
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+	font-family: var(--font-alt);
+}
+
+.font-alt {
+	font-family: var(--font-alt);
+}
+
+p {
+	margin: 0 0 1em 0;
+}
+
+
+.entry-content > p, section p{
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/*------- Quick text alignment classes --------*/
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-justify {
+	text-align: justify;
+}
+
+
+/*--------------------------------------------------------------
+# Default Headings in articles. Front page and other special pages should override the more common setting
+--------------------------------------------------------------*/
+h1, .h1 {
+	font-size: 5rem;
+	line-height: 1.3;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin-bottom: 40px;
+}
+
+h2, .h2 {
+	font-size: 3.8rem;
+	margin-top: 42px;
+	line-height: 1.3;
+
+	&:first-child{
+		margin-top: 0;
+		margin-bottom: 42px;
+	}
+}
+
+h3, .h3 {
+	font-size: 2.6rem;
+	margin-top: 40px;
+	line-height: 1.4;
+}
+
+h4, .h4 {
+	font-size: 1.9rem;
+	margin-top: 30px;
+	line-height: 1.5;
+}
+
+/*--------------------------------------------------------------
+# Basic Links
+--------------------------------------------------------------*/
+
+a {
+	color: var(--highlight);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+h1 a, h2 a{
+	color: inherit;
+}
+
+
+/*--------------------------------------------------------------
+# Selection Highlighting
+--------------------------------------------------------------*/
+::selection {
+	background: var(--highlight);
+	color: white;
+}
+
+
+/*--------------------------------------------------------------
+# quotes
+--------------------------------------------------------------*/
+dfn,
+cite,
+em,
+blockquote {
+	font-style: italic;
+}
+
+blockquote {
+	quotes: "“" "”";
+	overflow: hidden;
+	position: relative;
+	margin: 0 0 2em 0;
+	font-family: var(--font);
+	background: transparent;
+
+	p {
+		padding-left: 40px;
+	}
+
+	p:last-of-type {
+		margin: 0;
+	}
+
+	//quote mark
+	&:before {
+		content: open-quote;
+		font-size: 4rem;
+		position: absolute;
+		left: 0;
+		top: 0;
+		line-height: 1;
+	}
+}
+
+
+cite, .wp-block-quote cite {
+	font-family: var(--font);
+	float: right;
+	margin-top: 0;
+	font-size: 14px;
+
+	&:before {
+		content: '\2014';
+		margin-right: 1em;
+	}
+}
+
+/*--------------------------------------------------------------
+# Post Meta defaults
+--------------------------------------------------------------*/
+time, time a, .card-meta {
+  font-size: 1.3rem;
+}
+
+/*--------------------------------------------------------------
+# WP Edit Post Link
+--------------------------------------------------------------*/
+.edit-link {
+	font-size: 1.4rem;
+}
+
+
+/*--------------------------------------------------------------
+# Code
+--------------------------------------------------------------*/
+pre {
+	background: #f7f9fa;
+	border: 1px solid #e6e8eb;
+	font-family: var(--font-pre);
+	font-size: 14px;
+	line-height: var(--line-height-pre);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	overflow: auto;
+	padding: 20px;
+	white-space: pre-wrap;
+}
+
+code,
+kbd,
+tt,
+var {
+	font-family: var(--font-pre);
+	font-size: 15px;
+}

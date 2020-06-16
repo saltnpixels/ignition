@@ -1,0 +1,60 @@
+@use "../resources" as *; //should also load resources
+@use "../core/grid-layout" as *;
+/*--------------------------------------------------------------
+# Gutenburg file
+--------------------------------------------------------------*/
+.wp-block-file{
+	@extend .flex;
+	align-content: center;
+	a{
+		flex: 0 0 auto;
+	}
+}
+/*--------------------------------------------------------------
+# Gallery
+--------------------------------------------------------------*/
+#page .wp-block-gallery{
+	@extend .grid;
+	padding: 0;
+
+	li{
+		padding: 0;
+	}
+
+	&.columns-1{
+		@extend .span-all-12;
+	}
+	&.columns-2{
+		@extend .span-all-6;
+	}
+
+	&.columns-3{
+		@extend .span-all-4;
+	}
+
+	&.columns-4{
+		@extend .span-all-3;
+	}
+
+	.blocks-gallery-item{
+		width: 100%;
+		margin: 0;
+		height: 300px;
+	}
+
+}
+
+
+//overriding gutenberg on front end
+.wp-block-quote.is-large {
+	&:before {
+		font-size: 4rem;;
+	}
+	p {
+		font-size: 4rem;
+	}
+}
+
+q {
+	quotes: "“" "”" "‘" "’";
+}

@@ -1,0 +1,82 @@
+/*--------------------------------------------------------------
+# Animation Setup
+--------------------------------------------------------------*/
+
+/*------- For animations --------*/
+.animate {
+	animation-fill-mode: both;
+	animation-duration: 1s;
+	transform: translate(0);
+}
+
+/*------- infinite animations --------*/
+.infinite {
+	animation-iteration-count: infinite;
+}
+
+
+
+
+/*--------------------------------------------------------------
+# Scroll Animation with data-scrollanimation
+--------------------------------------------------------------*/
+
+/*------- when using data-scrollanimation with scrubbing, turn off transitions --------*/
+#page [data-scrollscrub] {
+	transition: none; //tween cannot work if there is transitions set
+}
+
+/*------- Special class for fixing at top. Used with scrollanimation --------*/
+//just add data-scrollanimation="fixed-at-top" to an element to get this effect.
+.fixed-at-top {
+	position: fixed;
+	top: 0;
+}
+
+/*------- Animate in a sequence --------*/
+//simple add class sequence to your item and when it scrolls in it will scroll in the items inside in a sequence
+@for $i from 0 through 30 {
+	.active.sequence:nth-of-type(#{$i+1}) { //active makes sure the sequence only runs when it loads in but not out, so it resets fast
+		transition-delay: #{$i/4}s;
+	}
+}
+
+
+
+//some animations included
+//Example: use data-scrollanimation="fadeInUp"
+//When fading or moving something in, start with js so that without javascript the item wont start with opacity 0 or offscreen.
+//use text UP or Down in class names when the item is meant to move up or down. This helps the scroll code no some extra info necessary
+// //(if an item moves down or up it can mess up when the scroll animation should start cause it keeps moving)
+/*--------------------------------------------------------------
+# Animations
+--------------------------------------------------------------*/
+
+//start class
+.js [data-scrollanimation*="fadeInUp"] {
+	opacity: 0;
+	transition: all .5s;
+	transform: translate3d(0, 100%, 0);
+
+	//end class
+	&.fadeInUp {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+
+.js [data-scrollanimation*="zoomIn"] {
+	transition: all .5s;
+	opacity: 0;
+	transform: scale3d(0.3, 0.3, 0.3);
+
+	&.zoomIn {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+//ADD MORE ANIMATIONS HERE
+
+

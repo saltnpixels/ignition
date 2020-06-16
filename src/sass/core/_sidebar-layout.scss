@@ -1,0 +1,132 @@
+@use "../resources" as *; //should also load resources
+@use "base-layout" as *;
+/*--------------------------------------------------------------
+# Sidebar Layout
+--------------------------------------------------------------*/
+//If your looking to style the sidebar, go to sidebar.scss
+//this file is for layout only and usually does not need to be touched
+
+
+
+//alignfull sticks into the secondary area with negative margins when they are snug against each other. fix
+@media(min-width: $media-container) {
+  .sidebar-template.container .container-content > .alignfull {
+	margin-right: 0;
+	margin-left: 0;
+  }
+
+  //set content not centered. useful on sidebar pages. add align-content-left to sidebar-template
+  .sidebar-template.align-content-left .container-content, .sidebar-template.align-content-left.container-content{
+	> *:not( .alignfull ):not(.full-width) {
+	  margin-left: 0;
+	}
+  }
+
+}
+
+
+//fixed the site content sot he sidebar template stretches
+.has-sidebar-template .site-content{
+  display: flex;
+  flex-direction: column;
+}
+
+//simple flex
+.sidebar-template {
+  display: flex;
+  flex-grow: 1;
+}
+
+
+@media( max-width: $media-sidebar){
+  .sidebar-template{
+	display: block;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Inline Sidebar #secondary
+--------------------------------------------------------------*/
+
+//hide secondary if empty, like when the sidebar that was inside moves to the right/left panel
+#secondary:empty, .sidebar-holder:empty, .secondary:empty {
+  display: none;
+
+  &:after {
+	content: '';
+  }
+}
+
+
+/*------- Sidebar on left/right ordering --------*/
+.sidebar-left #secondary {
+  order: 0;
+}
+
+.sidebar-left #primary {
+  order: 1;
+}
+
+//background when on left
+.sidebar-left .sidebar-bg:after{
+  left: auto;
+  right: 0;
+}
+
+.sidebar-left .sidebar-holder{
+  float: right;
+}
+
+
+.sidebar-holder {
+  position: relative;
+}
+
+
+#secondary .sidebar-holder {
+  height: 100%;
+  display: block;
+}
+
+
+/*--------------------------------------------------------------
+# Pulling out the header with .header-above
+--------------------------------------------------------------*/
+//by adding class .header-above to .sidebar-template, you can pull the header out of the article and put it above everything, even the sidebar.
+//This is done with javascript. a class active is added when it has finished moving
+//when header-above is found we dont show the sidebar till header has been pulled out. this way it looks seamless and not jumpy.
+
+//dont show sidebar till js moves out header. We also make header full width below resulting in smooth transition
+.js .sidebar-template.header-above:not(.active) {
+  #secondary {
+	display: none;
+  }
+}
+
+//show the header full width even inside container for a split second before it moves out. looks smooth.
+.js .sidebar-template.header-above:not(.active) .container, .js .sidebar-template.header-above:not(.active) .container-fluid {
+  max-width: 100%;
+  padding: 0;
+}
+
+
+/*------- Sidebar in panel right layout --------*/
+#panel-right {
+  .sidebar-holder { //the holder with data-moveto attr
+	height: 100%;
+	overflow: auto;
+	overflow-x: hidden;
+	min-width: var(--panel-right-width);
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	@extend .hide-scroll;
+  }
+}
+
+
+
+
+
+
+

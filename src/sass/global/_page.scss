@@ -1,0 +1,118 @@
+@use "../resources" as *;
+
+/*--------------------------------------------------------------
+# Body Background
+--------------------------------------------------------------*/
+body {
+  background: var(--body-bg);
+}
+
+
+/*--------------------------------------------------------------
+# Logo
+--------------------------------------------------------------*/
+.site-logo {
+  font-size: 3.3rem; //if its a text logo
+  text-transform: uppercase;
+
+
+  color: white;
+  max-width: 350px;
+
+  svg, path, g {
+	fill: currentColor; //uses color above
+  }
+}
+
+.site-navigation .site-logo {
+  padding: 3px 0;
+}
+
+
+/*--------------------------------------------------------------
+# Site Top - holds logo and main menu at top
+--------------------------------------------------------------*/
+.site-top {
+  position: relative; //change to fixed or absolute if wanted. if absolute add padding top to your entry-header!
+  background: var(--site-top);
+}
+
+
+/*--------------------------------------------------------------
+# Default Headers
+--------------------------------------------------------------*/
+.entry-header, .page-header {
+  position: relative;
+  min-height: calc(400px + 5vw);
+  padding: 30px 0;
+  color: white;
+  background-color: var(--dark-grey);
+  background-size: cover;
+
+
+  h1 {
+	margin: 0;
+  }
+
+  .cover-image {
+	height: 500px;
+  }
+
+}
+
+
+/*--------------------------------------------------------------
+# Under header first thing should probably have padding-top. Usually its a section
+# expect it to be a paragraph or a heading or a section
+# Sometimes header is outside entry-content so we select the very first thing inside there
+--------------------------------------------------------------*/
+.entry-header + p, .entry-content > p:first-child{
+  padding-top: var(--gap);
+}
+
+
+
+/*--------------------------------------------------------------
+# Default Footer
+--------------------------------------------------------------*/
+
+.site-footer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: var(--footer-bg);
+  color: var(--subtle-text-color);
+  font-size: 1.1rem;
+
+  a{
+	color: inherit;
+  }
+}
+
+
+
+/*--------------------------------------------------------------
+# Error 404 Page
+--------------------------------------------------------------*/
+.error404 {
+  background: white;
+  color: var(--highlight);
+
+  .site-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-footer, .site-top {
+    display: none;
+  }
+
+  .title-404 {
+    font-size: 27vmin;
+    font-weight: bold;
+    line-height: 1;
+    color: rgba(74, 58, 148, 0.82);
+    text-shadow: 1px 1px white;
+    margin-bottom: var(--gap);
+  }
+}

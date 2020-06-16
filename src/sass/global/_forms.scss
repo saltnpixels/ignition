@@ -1,0 +1,194 @@
+@use "../resources" as *; //should also load resources
+
+/*--------------------------------------------------------------
+# Global Forms
+--------------------------------------------------------------*/
+//because this file is used on front and back end, we need to make sure it is only being applied in those places
+//wordpress also requires a class in front for specificity as it uses .button and other elements here on the back end
+
+label {
+  display: block;
+  font-weight: 800;
+}
+
+fieldset {
+  margin-bottom: var(--gap);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+input[type="file"],
+textarea {
+  border: 1px solid grey;
+  background: transparent;
+  color: var(--main-text-color);
+  width: 100%;
+  min-width: 0;
+  font-size: inherit;
+  transition: all .5s;
+  padding: 3px 5px;
+  display: block;
+
+  &:focus {
+    border: 1px solid var(--highlight);
+  }
+}
+
+
+select {
+  width: 100%;
+
+  //cool select.
+  $dropdown-color: #000;
+  $dropdown-icon: inline-svg("<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 32 32'><path d='M16 22L6 12l1.4-1.4l8.6 8.6l8.6-8.6L26 12z' fill='#{$dropdown-color}'/><rect x='0' y='0' width='32' height='32' fill='rgba(0, 0, 0, 0)' /></svg>");
+
+  background-image: $dropdown-icon; //, linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right .8rem top 50%, 0 0;
+  background-size: 1.2em auto, 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: black;
+  background-color: transparent;
+  font-size: inherit;
+
+  option {
+    font-weight: normal;
+  }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+/*--------------------------------------------------------------
+# Buttons
+--------------------------------------------------------------*/
+.btn, .button, input[type="submit"] {
+  border: 1px solid transparent;
+  display: inline-block;
+  text-transform: capitalize;
+  background: var(--highlight);
+  padding: 5px 10px;
+  color: white;
+  border-radius: 3px;
+  transition: all .5s;
+  cursor: pointer;
+  box-shadow: none;
+  font-size: inherit;
+
+  &:active, &:focus {
+    color: white;
+    background: var(--highlight-darkened);
+    box-shadow: 0 0 0 2px var(--highlight-alpha);
+  }
+
+  &:hover {
+    color: white;
+    background: var(--highlight-darkened);
+  }
+}
+
+
+.btn--o, .button--o {
+  border: 1px solid var(--highlight);
+  color: var(--highlight);
+  background: transparent;
+
+  &:hover, &:focus {
+    background: var(--highlight);
+    color: white;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Input Placeholders
+--------------------------------------------------------------*/
+::placeholder {
+  color: var(--grey);
+  opacity: .7;
+  font-family: var(--font);
+}
+
+
+/*--------------------------------------------------------------
+# Search form
+--------------------------------------------------------------*/
+
+.search-form {
+  display: flex;
+  font-size: 2rem;
+  //input
+  .search-field {
+    flex: 1 1 auto;
+    padding: 3px 10px 3px 10px;
+    border: 1px solid var(--highlight);
+    border-radius: 3px;
+    background: white;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Input Icons
+--------------------------------------------------------------*/
+
+/*------- input appends and prepends for icons --------*/
+/*
+ * when adding a button near an input you can make it a prepend or append
+ * all prepends and appends go AFTER the input. Never before or :focus wont affect the prepend.
+ */
+.input-prepend, .input-append {
+  transition: all .5s;
+  background: white;
+  z-index: 2;
+  color: var(--subtle-text-color);
+  box-shadow: none;
+}
+
+.input-append {
+  border-radius: 0 3px 3px 0;
+  margin-left: -2px;
+  order: 1;
+  border: 1px solid var(--highlight);
+  border-left: 0;
+}
+
+.input-prepend {
+  border-radius: 3px 0 0 3px;
+  margin-right: -2px;
+  border: 1px solid var(--highlight);
+  order: -1;
+  border-right: 0;
+}
+
+input:focus + .input-prepend {
+  border-color: var(--highlight);
+}
+
+input:focus + .input-append {
+  border-color: var(--highlight);
+}
+
+
+
+
+

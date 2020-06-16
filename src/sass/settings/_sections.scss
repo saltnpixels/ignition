@@ -1,0 +1,64 @@
+@use "../resources" as *;
+/*--------------------------------------------------------------
+# Sections and Blocks and Parts
+--------------------------------------------------------------*/
+/*
+  Most block and section styling can go here or in the block folder with the template-parts folder for that block. The choice is up to you.
+ */
+
+/*------- Section defaults --------*/
+section, .section {
+	//default padding.
+	padding-top: var(--gap);
+	padding-bottom: var(--gap);
+
+	section {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+  p:last-child{
+	margin-bottom: 0;
+  }
+}
+
+//if a section does not have a background and its near another one with no background, the space between them looks large. remove the second ones top space
+section.no-bg, .section.no-bg{
+	+ section.no-bg, + .section.no-bg{
+		padding-top: 0;
+	}
+}
+
+
+section.heading-center{
+	h1, h2{
+		text-align: center;
+	}
+}
+
+
+/*------- Padding classes useful for sections --------*/
+.site-content {
+  .padding {
+	padding: var(--gap);
+  }
+
+  .no-padding {
+	padding: 0;
+  }
+
+  .no-padding-top {
+	padding-top: 0;
+  }
+
+  .no-padding-bottom {
+	padding-bottom: 0;
+  }
+
+  .margin-bottom {
+	margin-bottom: var(--gap);
+  }
+}
+
+
+/*------- Your block, parts,  and section styling --------*/

@@ -1,6 +1,6 @@
 {
     "key": "group_5d8d13dd011ba",
-    "title": "Header Block",
+    "title": "Header Default",
     "fields": [
         {
             "key": "field_5d8d1a1f98c59",
@@ -19,33 +19,6 @@
             "ign_set_data": "",
             "placement": "top",
             "endpoint": 0
-        },
-        {
-            "key": "field_5d8d15a46df5b",
-            "label": "Header Type",
-            "name": "header_type",
-            "type": "select",
-            "instructions": "You can override the basic default header. Choose a header to use. Headers are meant to appear at the top of your page.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "admin_only": 0,
-            "choices": {
-                "header_paragraphs": "Header Paragraphs"
-            },
-            "default_value": [
-                "header_paragraphs"
-            ],
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": ""
         },
         {
             "key": "field_5d8d19aac2ebd",
@@ -165,7 +138,7 @@
             "label": "Grid Class",
             "name": "grid_class",
             "type": "text",
-            "instructions": "Type of grid you would like. Some options include \"card-grid\" for equal sized columns, or \"grid\" for specific column sizes. \r\nIf using \"grid\" make sure to add span classes onto your paragraphs.",
+            "instructions": "Type of grid you would like. Some options include \"card-grid\" for equal sized columns, or \"grid\" for specific column sizes. \r\nIf using \"grid\" make sure to add span classes onto your paragraphs or use a span-all class here.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -188,7 +161,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/header"
+                "value": "acf\/header-post"
             }
         ]
     ],
@@ -200,5 +173,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1584555760
+    "modified": 1592158035
 }

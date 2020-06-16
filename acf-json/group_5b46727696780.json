@@ -7,7 +7,7 @@
             "label": "Header Image",
             "name": "header_image",
             "type": "image",
-            "instructions": "A larger image to show when viewing this single post\/page.\r\nIf none is specified, the featured image will be used, unless you select to show nothing below.",
+            "instructions": "A larger alternate image to show when viewing this single post\/page.\r\nIf none is specified, the featured image will be used, unless you select to show nothing below.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -45,6 +45,26 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5ee65e051dcba",
+            "label": "Header Description",
+            "name": "header_description",
+            "type": "textarea",
+            "instructions": "Some sites will allow for adding a description here that will show up in the header section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "entry-description",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
         }
     ],
     "location": [
@@ -71,5 +91,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585662764
+    "modified": 1592156438
 }

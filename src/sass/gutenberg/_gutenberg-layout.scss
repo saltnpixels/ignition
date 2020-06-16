@@ -1,0 +1,122 @@
+@use "../resources" as *; //should also load resources
+
+/*--------------------------------------------------------------
+# Gutenberg Changes to Layout
+--------------------------------------------------------------*/
+//This holds all blocks. by default it has different padding then the front end and things wont match so we make it match
+
+//.editor-styles-wrapper holds the title area and well as all blocks and contains the entire gutenberg part
+//.block-editor-block-list__layout holds all .wp-block items that are inside .editor-styles-wrapper
+
+
+//here we make it act like an entry-content.container-content
+div .block-editor-block-list__layout {
+  padding: 0 var(--container-padding);
+  position: relative;
+  z-index: 10;
+
+  > *:not([data-align="full"] ):not([data-align="wide"] ):not(.is-reusable) {
+	max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
+	margin-right: auto;
+	margin-left: auto;
+  }
+}
+
+//alignfull fix
+.block-editor-block-list__layout .block-editor-block-list__block[data-align="full"] {
+  margin-left: calc(-1 * var(--container-padding)); //negative margins to counteract the containers padding
+  margin-right: calc(-1 * var(--container-padding));
+}
+
+//align wide fix
+.wp-block[data-align="wide"] {
+  max-width: calc(var(--container) - (var(--container-padding) * 2));
+}
+
+
+//fix paragraph blocks to only have a margin bottom
+div .editor-styles-wrapper p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+
+/*--------------------------------------------------------------
+# ACF Changes
+--------------------------------------------------------------*/
+div .acf-block-component {
+  textarea {
+	font-size: 16px;
+  }
+}
+
+
+/*------- WP Sidebar changes --------*/
+//making sidebar wider on wide computer screens so you can edit acf fields easier in sidebar
+#wpwrap .edit-post-sidebar {
+  width: 100%; //always make sidebar full width of parent
+}
+
+//widening sidebar
+@media(min-width: 1560px) {
+  .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
+	width: 32%;
+  }
+
+}
+
+//hiding sidebar on small screens so you can have a full screen experience with hover widening it
+@media(max-width: 1560px) {
+  .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
+	transition: width .5s;
+	width: 32%;
+
+	&:hover {
+	  width: 50%;
+	  opacity: 1;
+	}
+  }
+
+}
+
+
+//button changes
+.wp-core-ui .acf-block-preview, .block-editor-rich-text {
+  .button {
+	line-height: 1.5;
+	height: auto;
+	font-size: inherit;
+  }
+
+}
+
+
+
+/*--------------------------------------------------------------
+# Fixing inputs on back end
+--------------------------------------------------------------*/
+//broke from setting html font size to 65.5%
+input[type="radio"], input[type="checkbox"]{
+  width: 1.6rem;
+  height: 1.6rem;
+}
+input[type=checkbox]:checked::before{
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: -.2885rem 0 0 -.4rem;
+}
+
+input[type=radio]:checked::before{
+  width: .8rem;
+  height: .8rem;
+  margin: .3rem;
+}
+
+.components-base-control .components-base-control__label{
+  display: block;
+}
+
+
+ #editor .has-inner-blocks{
+   display: block;
+ }

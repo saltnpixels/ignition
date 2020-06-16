@@ -34,11 +34,8 @@ get_header(); ?>
 	        <div class="container search-items">
 		        <section class="card-grid">
 			        <?php
-			        //default to one section fo cards
 			        while ( have_posts() ) : the_post();
-
-				       ign_loop('card');
-
+				       ign_template('card');
 			        endwhile; // End of the loop.
 			        ?>
 		        </section><!-- .entry-content -->
@@ -47,8 +44,8 @@ get_header(); ?>
 			        <?php
 
 			        the_posts_pagination( array(
-				        'prev_text'          => ign_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'ignition' ) . '</span>',
-				        'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'ignition' ) . '</span>' . ign_get_svg( array( 'icon' => 'arrow-right' ) ),
+				        'prev_text'          => '<span class="iconify" data-icon="carbon:chevron-left"></span><span class="screen-reader-text">' . __( 'Previous page', 'ignition' ) . '</span>',
+				        'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'ignition' ) . '</span><span class="iconify" data-icon="carbon:chevron-right"></span>',
 				        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'ignition' ) . ' </span>',
 			        ) );
 

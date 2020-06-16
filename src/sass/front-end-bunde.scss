@@ -1,0 +1,12 @@
+//by bundling all the files in scss as opposed to in index.js we can use @extend and @use properly.
+@use "resources" as *;
+@use "variables" as *;
+@use 'core/base' as *;
+@use "settings/settings";
+@use 'global/global';
+@use 'wordpress/wordpress';
+
+
+@import "../parts/**/_?*.scss"; //glob does not support @use
+@import "../blocks/**/_?*.scss"; //glob does not support @use
+@import "../../inc/**/_?*.scss"; //glob does not support @use

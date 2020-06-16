@@ -9,20 +9,33 @@
  */
 
 
+/**
+ * Checks to see if we're on a static front homepage or not, as opposed to the blog frontpage.
+ */
+if ( ! function_exists( 'is_static_frontpage' ) ) :
+	function is_static_frontpage() {
+		return ( is_front_page() && ! is_home() );
+	}
+endif;
+
+
 /*
  * Prints the author image inside a link and  name inside another link.
 */
 if ( ! function_exists( 'ign_author_meta' ) ) {
-	function ign_author_meta( $user_id = false, $avatar_size = 50 ) {
+	function ign_author_meta( $post_id = 0, $avatar_size = 50 ) {
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
 
-		$author_id = get_the_author_meta( 'ID', $user_id );
+		$author_id = get_post_field( 'post_author', $post_id );
 
 		return array(
 			'author_id'          => $author_id,
 			'author_page'        => esc_url( get_author_posts_url( $author_id ) ),
 			'author_image'       => get_avatar( $author_id, $avatar_size ),
-			'author_name'        => get_the_author(),
-			'author_description' => get_the_author_meta( 'description', $user_id ),
+			'author_name'        => get_the_author_meta( 'display_name', $author_id ),
+			'author_description' => get_the_author_meta( 'description', $author_id ),
 		);
 	}
 }
@@ -32,12 +45,15 @@ if ( ! function_exists( 'ign_author_meta' ) ) {
  * Prints the author image inside a link and  name inside another link.
 */
 if ( ! function_exists( 'ign_posted_by' ) ) {
-	function ign_posted_by() {
-		$author_id          = get_the_author_meta( 'ID' );
-		$author_link        = esc_url( get_author_posts_url( $author_id ) );
-		$author_image       = '<a href="' . $author_link . '" class="author-avatar">' . get_avatar( $author_id, 50 ) . '</a>';
-		$author_name        = sprintf( __( '%s by %s', 'ignition' ), '<a href="' . $author_link . '" class="author-name"><span class="byline">', '</span>' . get_the_author() . '</a>' );
-		$author_description = '<div class="author-description">' . get_the_author_meta( 'description' ) . '</div>';
+	function ign_posted_by( $post_id, $avatar_size = 50 ) {
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+		$author_meta        = ign_author_meta( $post_id, $avatar_size );
+		$author_link        = esc_url( get_author_posts_url( $author_meta['author_id'] ) );
+		$author_image       = '<a href="' . $author_link . '" class="author-avatar">' . $author_meta( 'author_image' ) . '</a>';
+		$author_name        = sprintf( __( '%s by %s', 'ignition' ), '<a href="' . $author_link . '" class="author-name"><span class="byline">', '</span>' . $author_meta( 'author_name' ) . '</a>' );
+		$author_description = '<div class="author-description">' . $author_meta( 'author_description' ) . '</div>';
 
 		echo '<div class="posted-by">' . $author_image . '<div class="author-info">' . $author_name . $author_description . '</div></div>';
 
@@ -53,9 +69,12 @@ if ( ! function_exists( 'ign_posted_by' ) ) {
  * Prints HTML with meta information for the current post-date/time.
  */
 if ( ! function_exists( 'ign_posted_on' ) ) {
-	function ign_posted_on( $date_format = '' ) {
+	function ign_posted_on( $post_id = '', $date_format = '' ) {
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
 		// post published and modified dates
-		echo '<div class="posted-on">' . ign_time_link( $date_format ) . '</div>';
+		echo '<div class="posted-on">' . ign_time_link( $post_id, $date_format ) . '</div>';
 	}
 }
 
@@ -65,67 +84,30 @@ if ( ! function_exists( 'ign_posted_on' ) ) {
  */
 if ( ! function_exists( 'ign_time_link' ) ) {
 
-	function ign_time_link( $date_format ) {
+	function ign_time_link( $post_id = '', $date_format ) {
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
 		$time_string = '<time class="published" datetime="%1$s">%2$s</time>';
 
 		//if when post was made does not equal the modified date
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		if ( get_the_time( 'U', $post_id ) !== get_the_modified_time( 'U', $post_id ) ) {
 			$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated screen-reader-text" datetime="%3$s">%4$s</time>';
 		}
 
 		$time_string = sprintf( $time_string,
-			get_the_date( DATE_W3C ),
-			get_the_date( $date_format ),
-			get_the_modified_date( DATE_W3C ),
-			get_the_modified_date( $date_format )
+			get_the_date( DATE_W3C, $post_id ),
+			get_the_date( $date_format, $post_id ),
+			get_the_modified_date( DATE_W3C, $post_id ),
+			get_the_modified_date( $date_format, $post_id )
 		);
 
 		// Wrap the time string in a link, and preface it with 'Posted on'.
 		return sprintf(
 		/* translators: %s: post date */
-			__( '<span class="screen-reader-text">Posted on</span> %s', 'ganton' ),
-			'<a class="entry-date" href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+			__( '<span class="screen-reader-text">Posted on</span> %s', 'ignition' ),
+			'<a class="entry-date" href="' . esc_url( get_permalink( $post_id ) ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
-	}
-}
-
-
-/**
- * @param string $taxonomy
- * @param bool $get_all
- *
- * @return string|void
- * Get all or one term for a taxonomy for a post
- */
-if ( ! function_exists( 'ign_get_term_links' ) ) {
-
-	function ign_get_term_links( $taxonomy = 'category', $get_all = false, $id = 0 ) {
-
-		if ( ! $id ) {
-			$id = get_the_ID();
-		}
-
-		$terms = get_the_terms( $id, $taxonomy );
-
-		if ( $terms && ! is_wp_error( $terms ) ) :
-			//get first term found
-			if ( ! $get_all ) {
-				$term              = $terms[0];
-				$term_links_output = '<a class="term-link ' . $taxonomy . '" href="' . get_term_link( $term->term_id, $taxonomy ) . '">' . $term->name . '</a>';
-			} //else get all terms with a comma
-			else {
-				$term_links = array();
-				foreach ( $terms as $term ) {
-					$term_links[] = '<a class="term-link ' . $taxonomy . '" href="' . get_term_link( $term->term_id, $taxonomy ) . '">' . $term->name . '</a>';
-				}
-				//add comma after each one
-				$term_links_output = join( '<span class="delim">' . __( ', ', 'ignition' ) . '</span>', $term_links );
-			}
-
-			return $term_links_output;
-		endif;
-
-		return '';
 	}
 }
 
@@ -160,9 +142,15 @@ if ( ! function_exists( 'ign_comment_link' ) ) :
 	/**
 	 * Returns the comment link with icon for comments as well as comment or comments if wanted.
 	 */
-	function ign_comment_link( $comment_string = false ) {
-		$num_comments = get_comments_number(); // get_comments_number returns only a numeric value
+	function ign_comment_link( $post_id = '', $icon = '', $comment_string = false ) {
+		$num_comments = get_comments_number( $post_id ); // get_comments_number returns only a numeric value
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
 
+		if ( ! $icon ) {
+			$icon = ign_get_config( 'comment_icon', "<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='0.71em' height='1em' style='vertical-align: -0.2em;-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 -205 768 1086'><path d='M227 507L97 594s27-72 29-124C49 429 0 362 0 287C0 162 139 60 310 60c142 0 262 71 299 166c-14-2-28-3-42-3h-14c-70 3-135 26-185 65c-55 44-85 106-83 168c1 19 5 40 12 58c-24 0-47-3-70-7zm481 127l-85-46c-17 4-37 7-55 8h-12c-109 0-197-63-200-143c-4-83 86-154 200-158h11c109 0 198 61 201 142c2 49-28 93-77 123c2 35 17 74 17 74z' fill='currentColor'/><rect x='0' y='-205' width='768' height='1086' fill='rgba(0, 0, 0, 0)' /></svg>" );
+		}
 		if ( comments_open() ) {
 			if ( $num_comments == 0 ) {
 				$num_comments = '';
@@ -174,13 +162,9 @@ if ( ! function_exists( 'ign_comment_link' ) ) :
 			}
 
 			if ( $comment_string ) {
-				$write_comments = '<a class="comment-link" href="' . get_comments_link() . '"><span class="screen-reader-text">Comments</span>' . ign_get_svg( array(
-						'icon' => 'comments'
-					) ) . ' ' . $comments . '</a>';
+				$write_comments = '<a class="comment-link" href="' . get_comments_link( $post_id ) . '"><span class="screen-reader-text">Comments</span>' . $icon . ' ' . $comments . '</a>';
 			} else {
-				$write_comments = '<a class="comment-link" href="' . get_comments_link() . '"><span class="screen-reader-text">Comments</span>' . ign_get_svg( array(
-						'icon' => 'comments'
-					) ) . ' ' . $num_comments . '</a>';
+				$write_comments = '<a class="comment-link" href="' . get_comments_link( $post_id ) . '"><span class="screen-reader-text">Comments</span>' . $icon . ' ' . $num_comments . '</a>';
 			}
 
 			return $write_comments;
@@ -193,12 +177,10 @@ endif;
 
 /**
  * ign edit link with some extras and markup
- * if using classic blocks use this inside those blocks
  *
  */
 if ( ! function_exists( 'ign_edit_link' ) ) :
 	function ign_edit_link( $id = null, $class = '', $text = 'Edit' ) {
-
 
 		if ( ! $id ) {
 			global $post;
@@ -219,38 +201,86 @@ if ( ! function_exists( 'ign_edit_link' ) ) :
 	}
 endif;
 
-/**
- * Checks to see if we're on a static front homepage or not as opposed to the blog frontpage.
- */
-if ( ! function_exists( 'is_static_frontpage' ) ) :
-	function is_static_frontpage() {
-		return ( is_front_page() && ! is_home() );
-	}
-endif;
-
 
 /**
- * Gets the proper template file to show for the WP LOOP
+ * @param string $file_prefix
+ * @param string $vars
+ *  * Gets the proper template file to show for the WP LOOP
  * MUST BE USED INSIDE THE LOOP TO USE
  * Simply routes the page to the right folder and file, or falls back on the post folder.
  * post formats should be used at end of file like: card-link.php
+ *
  */
-function ign_loop( $file_prefix = 'content' ) {
+function ign_template( $file_prefix = 'content', $vars = '' ) {
 
 	$format = '';
-	if(get_post_format()){
-		$format = '-' . get_post_format();
+	if ( get_post_format() ) {
+		$format = get_post_format() . '-';
+	}
+	$post_type = get_post_type();
+
+	//if no vars are passed, at least pass empty $block because there is a chance we are grabbing a template that expects $block to exist for block attributes.
+	if ( ! $vars ) {
+		$vars = array( 'block' => '' );
 	}
 
-	//if file exists load it otherwise fall back on post
-	if(file_exists( locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . $format . '.php' ))){
-		include(locate_template( 'template-parts/' . get_post_type() . '/' . $file_prefix . $format . '.php' ));
-	}elseif(file_exists( locate_template( 'template-parts/' . 'post' . '/' . $file_prefix . $format . '.php' ))){
-		include(locate_template( 'template-parts/' . 'post' . '/' . $file_prefix . $format . '.php' ));
-	}else{
-		include( locate_template( 'template-parts/post/' . $file_prefix . '.php' ) );
+
+	if ( is_array( $vars ) ) {
+		foreach ( $vars as $key => $value ) {
+			set_query_var( $key, $value );
+		}
 	}
 
+	//also allow for full paths. if / is found in prefix then we wont check src. we expect a full path no prefix
+	if ( strpos( $file_prefix, '/' ) !== false ) {
+		locate_template( $file_prefix, true, false );
+	} else {
+
+		locate_template( array(
+			'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . $post_type . '.php',
+			//searches for {prefix}-{post-type}.php inside post type folder
+			'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . '.php',
+			//if it cant find the above, searches for {prefix}.php in post-type folder
+			'src/parts/post/' . $file_prefix . '-' . $format . 'post.php',
+			//searches for {prefix}-post.php
+			'src/parts/post/content-' . $format . 'post.php',
+			//gets content.php
+		),
+			true,
+			false
+		);
+
+	}
+}
+
+//deprecated
+function ign_loop( $file_prefix = 'content', $vars = '' ) {
+	ign_template( $file_prefix, $vars );
+}
+
+
+/**
+ * @param string $file_prefix
+ * @param $posts
+ * @param bool $past_as_ids
+ *
+ * quick way to get templates for a list of ID's like from a relationship field.
+ */
+function ign_loop_ids( $file_prefix = 'content', $posts, $vars = '', $past_as_ids = false ) {
+	if ( is_array( $posts ) ) {
+		global $post;
+		$old_post = $post;
+
+		if ( $past_as_ids ) {
+			$posts = get_posts( $posts );
+		}
+
+		foreach ( $posts as $post ) {
+			setup_postdata( $post );
+			ign_template( $file_prefix, $vars );
+		}
+		$post = $old_post; //setting it back to whatever it was.
+	}
 }
 
 
@@ -438,6 +468,7 @@ function ign_block_class( $block, $custom_classes = '', $include_align = true, $
 			return ( $custom_classes ? $custom_classes . ' ' . $classes : $classes );
 		}
 	}
+
 	return;
 }
 
@@ -450,7 +481,7 @@ function ign_block_class( $block, $custom_classes = '', $include_align = true, $
  */
 function ign_get_block_anchor( $block ) {
 	if ( $block ) {
-		return ( isset( $block['anchor'] ) && $block['anchor'] ) ? $block['anchor'] : 'section-' . $block['id'];
+		return ( isset( $block['anchor'] ) && $block['anchor'] ) ? $block['anchor'] : $block['id'];
 	}
 }
 
@@ -465,41 +496,74 @@ function ign_block_attrs( $block, $custom_classes = '', $include_align = true ) 
 		$block_class = ign_block_class( $block, $custom_classes, $include_align, false );
 
 		echo "id='$block_id' class='$block_class'";
+	} else {
+		echo "class='$custom_classes'";
 	}
 }
 
 
+
+
 /**
- * Show the header for a single post or page
- * if using gutenberg it wont show a header file if a header block is found
- * if no header block is found it will search for a default header file
- * It will start it's search in the post type folder, else it will get the default header inside site-top folder
  *
- * @param string $default_header_location path to default header
+ * Shows a header block if none is in the content
  */
-function ign_the_header( $default_header_location = '' ) {
-	//shows blocks or classic acf blocks. check for a header block too
-	$has_header = has_block( 'acf/header' );
+function ign_header_block() {
+	$has_header = false;
+	$post_type  = get_post_type();
 
-	//if this post uses gutenberg or has a header.
-	if ( is_singular() && ( $has_header || has_blocks() ) ) {
-		//if there are blocks but not a header block, show the default header
-		if ( ! $has_header ) {
-			if ( $default_header_location ) {
-				include( locate_template( $default_header_location ) );
-			} else {
-				if ( file_exists( locate_template( 'template-parts/' . get_post_type() . '/content-header.php' ) ) ) {
-					include( locate_template( 'template-parts/' . get_post_type() . '/content-header.php' ) );
-				} else {
-					include( locate_template( 'template-parts/site-top/default-header.php' ) );
-				}
+	//make sure blocks is an array even if empty passed
 
-			}
-		}
-
-	} else {
-		include( locate_template( 'template-parts/site-top/default-header.php' ) );
+	if (! ign_has_header_block() ) {
+		ign_template( 'header', array( 'block' => '' ) );
 	}
+}
+
+
+//fuzzy has_block search for any block with word header-
+/**
+ * @param string $block_name
+ * @param null $post
+ *
+ * @return bool
+ * Hijacking the has_block function to search for fuzzy header- part
+ */
+function ign_has_header_block( $block_name = 'acf/header-', $post = null ) {
+	if ( ! has_blocks( $post ) ) {
+		return false;
+	}
+
+	if ( ! is_string( $post ) ) {
+		$wp_post = get_post( $post );
+		if ( $wp_post instanceof WP_Post ) {
+			$post = $wp_post->post_content;
+		}
+	}
+
+	/*
+	 * Normalize block name to include namespace, if provided as non-namespaced.
+	 * This matches behavior for WordPress 5.0.0 - 5.3.0 in matching blocks by
+	 * their serialized names.
+	 */
+	if ( false === strpos( $block_name, '/' ) ) {
+		$block_name = 'core/' . $block_name;
+	}
+
+	// Test for existence of block by its fuzzy qualified name. Searching for it to have the word header- in it
+	$has_block = false !== strpos( $post, '<!-- wp:' . $block_name );
+
+	if ( ! $has_block ) {
+		/*
+		 * If the given block name would serialize to a different name, test for
+		 * existence by the serialized form.
+		 */
+		$serialized_block_name = strip_core_block_namespace( $block_name );
+		if ( $serialized_block_name !== $block_name ) {
+			$has_block = false !== strpos( $post, '<!-- wp:' . $serialized_block_name );
+		}
+	}
+
+	return $has_block;
 }
 
 

@@ -15,10 +15,10 @@
 	<label for="<?php echo $unique_id; ?>">
 		<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'ignition' ); ?></span>
 	</label>
-	<input type="search" id="<?php echo $unique_id; ?>" class="search-field"
+	<input <?php if(is_admin()){ echo 'disabled'; }?> type="text" id="<?php echo $unique_id; ?>" class="search-field"
 	       placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'ignition' ); ?>"
 	       value="<?php echo get_search_query(); ?>" name="s"/>
-	<button type="submit" class="search-submit input-append"><?php echo ign_get_svg( array( 'icon' => 'search' ) ); ?><span
-				class="screen-reader-text"><?php echo _x( 'Search', 'submit button', 'ignition' ); ?></span>
+	<button <?php if(is_admin()){ echo 'disabled'; }?> type="submit" class="search-submit input-append"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="true"></span>
+        <span class="screen-reader-text"><?php echo _x( 'Search', 'submit button', 'ignition' ); ?></span>
 	</button>
 </form>

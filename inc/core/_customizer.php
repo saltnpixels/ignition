@@ -30,87 +30,87 @@ function ignition_customize_register( $wp_customize )
     /**
      * Theme options.
      */
-    $wp_customize->add_section( 'theme_options', array(
-        'title' => __( 'Theme Options', 'ignition' ),
-        'priority' => 130, // Before Additional CSS.
-    ) );
-
-    $wp_customize->add_section( 'post_types', array(
-        'title' => __( 'Post Type Archives', 'ignition' ),
-        'priority' => 130, // Before Additional CSS.
-    ) );
+//    $wp_customize->add_section( 'theme_options', array(
+//        'title' => __( 'Theme Options', 'ignition' ),
+//        'priority' => 130, // Before Additional CSS.
+//    ) );
+//
+//    $wp_customize->add_section( 'post_types', array(
+//        'title' => __( 'Post Type Archives', 'ignition' ),
+//        'priority' => 130, // Before Additional CSS.
+//    ) );
 
 
     /**
      * Layout of Site top
      */
-    $wp_customize->add_setting( 'site_top_use_customizer',
-        array(
-            'default' => 'yes'
-        ) );
-
-    // Add a control to choose yes/no
-    $wp_customize->add_control( 'site_top_use_customizer',
-        array(
-            'label' => __( 'Use the customizer?' ),
-            'section' => 'theme_options',
-            'type' => 'radio',
-            'description' => __('You can make your own layout in header.php and ignore all this.', 'ignition'),
-            'choices' => array(
-                'yes' => 'yes',
-                'no' => 'no'
-            )
-        ) );
-
+//    $wp_customize->add_setting( 'site_top_use_customizer',
+//        array(
+//            'default' => 'yes'
+//        ) );
+//
+//    // Add a control to choose yes/no
+//    $wp_customize->add_control( 'site_top_use_customizer',
+//        array(
+//            'label' => __( 'Use the customizer?' ),
+//            'section' => 'theme_options',
+//            'type' => 'radio',
+//            'description' => __('You can make your own layout in header.php and ignore all this.', 'ignition'),
+//            'choices' => array(
+//                'yes' => 'yes',
+//                'no' => 'no'
+//            )
+//        ) );
+//
 
     /**
      * Nav Menu and Logo Options
      */
-    $wp_customize->add_setting( 'site_top_contained',
-        array(
-            'default' => 'container',
-            'transport' => 'postMessage',
-        ) );
-
-
-    $wp_customize->add_control( 'site_top_contained',
-        array(
-            'label' => __( 'Contain the site top items', 'ignition' ),
-            'section' => 'theme_options',
-            'type' => 'select',
-            'choices' => array(
-                'container' => 'contained',
-                'container-fluid' => 'full width'
-            ),
-            'description' => __('You can set contained size via $container in scss', 'ignition')
-        ) );
+//    $wp_customize->add_setting( 'site_top_contained',
+//        array(
+//            'default' => 'container',
+//            'transport' => 'postMessage',
+//        ) );
+//
+//
+//    $wp_customize->add_control( 'site_top_contained',
+//        array(
+//            'label' => __( 'Contain the site top items', 'ignition' ),
+//            'section' => 'theme_options',
+//            'type' => 'select',
+//            'choices' => array(
+//                'container' => 'contained',
+//                'container-fluid' => 'full width'
+//            ),
+//            'description' => __('You can set contained size via $container in scss', 'ignition')
+//        ) );
 
 
     /**
      * Layout of Site top
      */
-    $wp_customize->add_setting( 'site_top_layout',
-        array(
-            'default' => 'logo-left',
-            'transport' => 'postMessage'
-        ) );
-
-    // Add a control to upload the logo
-    $wp_customize->add_control( 'site_top_layout',
-        array(
-            'label' => __( 'Logo Position' ),
-            'section' => 'theme_options',
-            'type' => 'select',
-            'description' => __('You can make your own layout in php in header.php and ignore presets and manual settings.', 'ignition'),
-            'choices' => array(
-                'logo-left' => 'logo-left',
-                'logo-right' => 'logo-right',
-                'logo-center' => 'logo-center',
-                'logo-center-under' => 'logo-center-under',
-                'logo-in-middle' => 'logo-in-middle',
-                'no-logo' => 'no-logo'
-            )
-        ) );
+//    $wp_customize->add_setting( 'site_top_layout',
+//        array(
+//            'default' => 'logo-left',
+//            'transport' => 'postMessage'
+//        ) );
+//
+//    // Add a control to upload the logo
+//    $wp_customize->add_control( 'site_top_layout',
+//        array(
+//            'label' => __( 'Logo Position' ),
+//            'section' => 'theme_options',
+//            'type' => 'select',
+//            'description' => __('You can make your own layout in php in header.php and ignore presets and manual settings.', 'ignition'),
+//            'choices' => array(
+//                'logo-left' => 'logo-left',
+//                'logo-right' => 'logo-right',
+//                'logo-center' => 'logo-center',
+//                'logo-center-under' => 'logo-center-under',
+//                'logo-in-middle' => 'logo-in-middle',
+//                'no-logo' => 'no-logo'
+//            )
+//        ) );
 
 
     /*
@@ -124,36 +124,36 @@ function ignition_customize_register( $wp_customize )
      * Add cool menu capability. app like menu on mobile
      *
      */
-    $wp_customize->add_setting( 'app_menu',
-        array(
-            'default' => 'regular_menu',
-        ) );
-
-    $wp_customize->add_control( 'app_menu',
-        array(
-            'label' => __( 'Enable App-like Menu' ),
-            'section' => 'theme_options',
-            'type' => 'checkbox'
-        ) );
-
-
-    $wp_customize->add_setting( 'menu_icon',
-        array(
-            'default' => 'icon-regular',
-        ) );
-
-    $wp_customize->add_control( 'menu_icon',
-        array(
-            'label' => __( 'Menu Icon' ),
-            'section' => 'theme_options',
-            'description' => __('Choose a menu icon to use. All are made of pure css.'),
-            'type' => 'select',
-            'choices' => array(
-                'icon-regular' => '= to x',
-                'navigation-menu-icon--alt' => 'menu icon',
-	            'navigation-menu-icon--bars' => 'menu icon bars'
-            )
-        ) );
+//    $wp_customize->add_setting( 'app_menu',
+//        array(
+//            'default' => 'regular_menu',
+//        ) );
+//
+//    $wp_customize->add_control( 'app_menu',
+//        array(
+//            'label' => __( 'Enable App-like Menu' ),
+//            'section' => 'theme_options',
+//            'type' => 'checkbox'
+//        ) );
+//
+//
+//    $wp_customize->add_setting( 'menu_icon',
+//        array(
+//            'default' => 'icon-regular',
+//        ) );
+//
+//    $wp_customize->add_control( 'menu_icon',
+//        array(
+//            'label' => __( 'Menu Icon' ),
+//            'section' => 'theme_options',
+//            'description' => __('Choose a menu icon to use. All are made of pure css.'),
+//            'type' => 'select',
+//            'choices' => array(
+//                'icon-regular' => '= to x',
+//                'navigation-menu-icon--alt' => 'menu icon',
+//	            'navigation-menu-icon--bars' => 'menu icon bars'
+//            )
+//        ) );
 
     
 

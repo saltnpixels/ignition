@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------
+# Panel Left Styling
+--------------------------------------------------------------*/
+#panel-left {
+  background: #4c545d;
+  color: white;
+  padding-top: 80px;
+}
+
+
+/*------- Panel left button (menu button). Set svg icon in theme.config --------*/
+body .navigation-menu-icon {
+  border-color: white;
+  color: white;
+
+  &:after, &:before {
+	background: white;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Panel Right Styling
+--------------------------------------------------------------*/
+
+/*-------  #panel Right --------*/
+#panel-right {
+  background: rgb(30, 30, 34);
+  color: white;
+  padding-top: 60px;
+}
+
+/*------- Panel right button (sidebar button --------*/
+body .sidebar-icon {
+  border-color: white;
+
+  &:after {
+	background: rgba(255, 255, 255, .85);
+  }
+}
+
+
+/*------- Tips --------*/
+//did you know that you can keep a panel open all the time on desktop, by adding class .stay-open to the panel element
+
+//Did you know the sidebar is set to go into the right panel when the window reaches a certain width.
+// You can change that by opening sidebar.php and changing the data-moveto or remove it completely
+

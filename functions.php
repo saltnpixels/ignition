@@ -7,14 +7,21 @@
  * @package Ignition
  * @since   1.0
  *
- * This is the first file you should edit when starting a new theme.
- * Then you should set your sass variables in variables.scss
- * Then you should edit some global sass files.  _page.scss, _typograhpy.scss
+ * The first file to look at is theme.config.json where you can quickly set up some theme settings
+ * like google fonts, icons for various areas and logo position
+ * you can also set the mobile menu by editing the mobile_menu_type option to open as app-menu or leave blank to open regular
+ * default-acf-header-block: add your post types here to force them to have a header block when a new post is made.
  *
- * Here you can edit the google fonts, the images sizes and other setup options for your theme.
- * All css and js files should be added here using WP Enqueue functions, not in the header.
- * You can also separate and include another php file by simply creating one in the inc folder of the theme.
- * all php files in the inc folder are automatically included unless they star with an underscore
+ * Then you should set your CSS variables in variables.scss
+ *
+ * Once those are both edited, you can come here and add image sizes, widgets and anything else
+ * Remember it might not be necessary to enqueue js files here as any js file starting with an underscore will be added automatically to the front end js build
+ * That will work only if the file is inside the inc or parts folders.
+ * This ability also works for any scss file added with an underscore in those folders too.
+ * This also works for underscored php files.
+ * therefore all php files in the inc folder are already automatically included
+ *
+ * Besides adding image sizes, you may find you dont have to do much in here.
  */
 
 /**
@@ -23,41 +30,12 @@
  */
 if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/core/back-compat.php';
-
 	return;
 }
 
-
 /*--------------------------------------------------------------
-# Google Fonts
+# Check theme.config.json and make changes as needed.
 --------------------------------------------------------------*/
-/**
- * Register custom google fonts. These are loaded along with scripts and styles.
- * Change/Remove the fonts in the $font_families array below to load different ones
- * Open the core/variables.scss to set the font, font-alt, and font-pre variables to these fonts.
- */
-if ( ! function_exists( 'ign_google_fonts_url' ) ) {
-	function ign_google_fonts_url() {
-		$fonts_url     = '';
-		$font_families = array();
-
-		//add your fonts here into the array below
-		//when adding from google remove the + between words Ex: 'Source+Code' becomes 'Source Code'
-		//dont forget to add your fonts in sass under variables.scss
-		$font_families[] = 'Roboto:400,400i,700,700i';
-		$font_families[] = 'Roboto Slab:400,700';
-		$font_families[] = 'Source Code Pro';
-
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
-		);
-
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-
-		return esc_url_raw( $fonts_url );
-	}
-}
 
 
 /*--------------------------------------------------------------
@@ -68,8 +46,10 @@ if ( ! function_exists( 'ign_google_fonts_url' ) ) {
  * Runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  * Here is where you can start changing settings.
+ * you can also add google fonts and a submenu arrow via the ign_config variable below
  */
 function ignition_setup() {
+
 
 	/*
 	 * Make theme available for translation.
@@ -85,7 +65,7 @@ function ignition_setup() {
     */
 	add_theme_support( 'post-thumbnails' );
 
-
+	add_post_type_support( 'page', 'excerpt' );
 	/**
 	 * default image size for cards and thumbnails and header images
 	 * Users should upload twice the size of an image size.
@@ -95,19 +75,11 @@ function ignition_setup() {
 	 * WP is also smart and if you set crop to true it will include the original only if it matches in ratio
 	 * Header image size is included for large header images. Users dont have to upload twice that size unless your ok with large files.
 	 *
-	 * Recommend installing smush or imsanity so users can't upload extremely huge images without them being compressed and resized.
+	 * Recommend installing imsanity so users can't upload extremely huge images without them being compressed and resized.
 	 */
 	set_post_thumbnail_size( 300, 300, true );
 	add_image_size( 'header_image', 2000, 9999 );
 
-
-	// Remove default image sizes here. medium-large is probably not needed.
-	//in the admin you can set media sizes to 0 to remove them.
-	function remove_default_images( $sizes ) {
-		unset( $sizes['medium_large'] ); // 768px
-
-		return $sizes;
-	}
 
 	add_filter( 'intermediate_image_sizes_advanced', 'remove_default_images' );
 
@@ -116,7 +88,7 @@ function ignition_setup() {
 	 * Add menus here
 	 */
 	register_nav_menus( array(
-		'top-menu' => __( 'Top Menu', 'ignition' ),
+		'top-menu' => __( 'Top Menu', 'ignition' ), //main menu at top.
 	) );
 
 	/*
@@ -124,7 +96,6 @@ function ignition_setup() {
     * Uncomment if you want to use this feauture
     * See: https://codex.wordpress.org/Post_Formats
     */
-
 
 //	add_theme_support( 'post-formats', array(
 //		'aside',
@@ -180,7 +151,7 @@ function ignition_setup() {
 	 * tinymce styles
 	  */
 	add_editor_style( array(
-		get_template_directory_uri() . '/dist/editor-style.min.css?' . wp_get_theme()->get( 'Version' ),
+		get_template_directory_uri() . '/dist/frontEnd.css?' . wp_get_theme()->get( 'Version' ),
 		ign_google_fonts_url()
 	) );
 
@@ -191,21 +162,19 @@ function ignition_setup() {
 add_action( 'after_setup_theme', 'ignition_setup' );
 
 
-
 /*--------------------------------------------------------------
 # ADMIN ACCESS AND ADMIN BAR VISIBILITY
 --------------------------------------------------------------*/
-
 /**
  * Disable admin bar for everyone but administrators
  * You can change this based on capabilities. By default manage_options is used to check for Administrators
  */
-define( 'IGN_WP_ADMIN_ACCESS_CAPABILITY', 'manage_options' );
+
+
 
 if ( ! function_exists( 'disable_admin_bar' ) ) {
-
 	function disable_admin_bar() {
-		if ( ! current_user_can( IGN_WP_ADMIN_ACCESS_CAPABILITY ) ) {
+		if ( ! current_user_can( ign_get_config('admin_access_capability', 'manage_options') ) ) {
 			add_filter( 'show_admin_bar', '__return_false' );
 		}
 	}
@@ -214,12 +183,12 @@ add_action( 'after_setup_theme', 'disable_admin_bar' );
 
 
 /**
- * Redirect back to homepage and not allow access to WP Admin. Except admins and ajax
+ * Redirect back to homepage and not allow access to WP Admin.
  */
 if ( ! function_exists( 'redirect_admin' ) ) {
 
 	function redirect_admin() {
-		if ( ! current_user_can( IGN_WP_ADMIN_ACCESS_CAPABILITY ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+		if ( ! current_user_can( ign_get_config('admin_access_capability', 'manage_options') ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 			wp_redirect( home_url() );
 			exit;
 		}
@@ -237,9 +206,7 @@ add_action( 'admin_init', 'redirect_admin' );
  * Add your own scripts and styles below.
  */
 function ignition_scripts() {
-
-	//load regular versions if script debug is set to true in wp-config file.
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	global $wp;
 
 	// Add google fonts
 	wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), wp_get_theme()->get( 'Version' ) );
@@ -248,7 +215,9 @@ function ignition_scripts() {
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', wp_get_theme()->get( 'Version' ) );
 
 	//Sass compiles styles. Will get child's theme version if found instead. Child theme should import with sass.
-	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/dist/main' . $suffix . '.css' ), '', wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'ignition-sass-styles', get_theme_file_uri( '/dist/frontEnd.css' ), '', wp_get_theme()->get( 'Version' ) );
+
+	wp_enqueue_script( 'iconify', 'https://code.iconify.design/1/1.0.6/iconify.min.js' );
 
 	//ie11 js polyfills
 	wp_enqueue_script( 'polyfill', 'https://polyfill.io/v3/polyfill.min.js?flags=gated&features=AbortController%2Cdefault%2CNodeList.prototype.forEach%2CEvent%2Csmoothscroll' );
@@ -261,14 +230,18 @@ function ignition_scripts() {
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
-	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/dist/custom' . $suffix . '.js', array( 'jquery' ),
+	wp_enqueue_script( 'ignition-custom-js', get_template_directory_uri() . '/dist/frontEnd_bundle.js', array(
+		'jquery',
+		'polyfill'
+	),
 		wp_get_theme()->get( 'Version' ), true );
 
 	//AJAX ready for .custom.js files
 	wp_localize_script( 'ignition-custom-js', 'frontEndAjax', array(
-		'ajaxurl' => admin_url( 'admin-ajax.php' ),
-		'nonce'   => wp_create_nonce( 'ajax_nonce' ),
-		'url'     => home_url(),
+		'ajaxurl'    => admin_url( 'admin-ajax.php' ),
+		'nonce'      => wp_create_nonce( 'ajax_nonce' ),
+		'url'        => home_url(),
+		'currentUrl' => home_url($wp->request )
 	) );
 
 
@@ -305,16 +278,14 @@ function ign_gutenberg_styles() {
 		wp_get_theme()->get( 'Version' ), true );
 }
 
-add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' );
+//add_action( 'enqueue_block_editor_assets', 'ign_gutenberg_styles' ); //todo remove if already adding admin-css?
 
 
 /**
  * Add login stylehseet
  */
 function my_login_styles() {
-	//load regular versions if script debug is set to true in wp-config file.
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/login-style' . $suffix . '.css' );
+	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/admin-index_bundle.css', '', wp_get_theme()->get( 'Version' ) ); //todo make another entry or use admin?
 }
 
 add_action( 'login_enqueue_scripts', 'my_login_styles' );
@@ -325,8 +296,9 @@ add_action( 'login_enqueue_scripts', 'my_login_styles' );
  */
 function footer_styles() {
 	//load regular versions if script debug is set to true in wp-config file.
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_style( 'ignition-admin-styles', get_theme_file_uri( '/dist/admin' . $suffix . '.css' ), '', wp_get_theme()->get( 'Version' ) );
+	//$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	wp_enqueue_script( 'iconify', 'https://code.iconify.design/1/1.0.6/iconify.min.js' );
+	wp_enqueue_style( 'ignition-admin-styles', get_theme_file_uri( '/dist/backEnd.css' ), '', wp_get_theme()->get( 'Version' ) );
 }
 
 add_action( 'admin_footer', 'footer_styles', 99 );
@@ -401,8 +373,6 @@ if ( ! function_exists( 'ign_widgets_init' ) ) {
 add_action( 'widgets_init', 'ign_widgets_init' );
 
 
-
-
 /**
  * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
@@ -422,6 +392,6 @@ add_action( 'wp_head', 'ignition_pingback_header' );
 require_once get_parent_theme_file_path( '/inc/core/dev-helpers.php' );
 
 //no need to include php files, just add them to the inc folder and start them with an underscore. Ignition takes care of the rest!
-//Ignition will also search two directories deep for more underscored files within inc and template-parts folders.
+//Ignition will also search two directories deep for more underscored files within inc, blocks, and post-types folders.
 // (ie: inc/acf-extras/_acf-extras.php )
 

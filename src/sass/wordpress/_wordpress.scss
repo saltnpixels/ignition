@@ -1,0 +1,22 @@
+@forward "default-blocks";
+
+@forward "comments";
+
+@forward "pagination";
+
+//uncomment if using gravity forms with their css turned off
+//@import "gforms";
+
+.admin-bar #page{
+  min-height: calc(100vh - 32px);
+}
+
+@media(max-width: 782px){
+  .admin-bar #page{
+    min-height: calc(100vh - 46px);
+  }
+}
+
+#tinymce{
+  padding: 0 var(--gap);
+}

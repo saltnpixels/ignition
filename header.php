@@ -13,44 +13,44 @@
 
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js no-svg dom-loading">
+<html <?php language_attributes(); ?> class="no-js no-svg dom-loading front-end">
 
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
 </head>
 
+
 <?php
-$app_menu = '';
-if ( get_theme_mod( 'app_menu', 'regular_menu' ) ) {
-	$app_menu = get_theme_mod( 'app_menu', 'regular_menu' );
-}
+$app_menu = ign_get_config("mobile_menu_type", 'regular_menu'); //accepts svg icon or 'app' which renders the special = to x
+
 ?>
-<body <?php body_class($app_menu); ?>>
+
+<body <?php body_class( $app_menu ); ?>>
+
 <a class="skip-link screen-reader-text" href="#site-content">
 	<?php _e( 'Skip to content', 'ignition' ); ?>
 </a>
 
 <div class="site-container" id="site-container">
-
-	<div id="panel-left"></div>
-	<div id="panel-right"></div>
+    <div id="panel-left"></div>
+    <div id="panel-right"></div>
 
 	<?php
-	$menu_icon = get_theme_mod( 'menu_icon', 'icon-regular' );
-
+	$menu_icon = ign_get_config( 'menu_icon', 'icon-regular' );
+	if($menu_icon == 'icon-regular'){
+	    $menu_icon = "<span class='$menu_icon'></span>";
+    }
 	?>
 
-	<button aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
-		<span class="navigation-menu-icon <?php echo $menu_icon; ?>"></span>
-	</button>
+    <button aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
+        <span class="navigation-menu-icon"><?php echo $menu_icon; ?></span>
+    </button>
 
-	<div id="page" class="site">
+    <div id="page" class="site">
 
-
-		<?php include( locate_template( 'template-parts/site-top/site-top.php' ) ); ?>
-
-		<div id="site-content" class="site-content">
+	    <?php locate_template('src/parts/global/site-top.php', true, true); ?>
+        <div id="site-content" class="site-content">
