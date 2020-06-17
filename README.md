@@ -185,7 +185,7 @@ You can change this by adding a string inside so a different file is loaded.
 Default headers per post type are great, but they are not blocks... They wont show up on the back end when your client is creating posts and pages with Gutenberg. This does not result in a smooth experience!
 While the template part would load on the front end it will not show up on the back. However, wouldn't it be nice if this file can be seen in the back end as well and act like a Gutenberg block so the client gets a smooth experience when using the default header?
 
-Ignition to the rescue! In the themes.config file there is a setting for `default-acf-header-block`. Add your post type here and automatically your header-{post-type}.php template file will be added as a choosable block for that post type. Whats more it will be automatically loaded when the client goes to make a new block!<br>
+Ignition to the rescue! In the themes.config file there is a setting for `default-acf-header-block`. Add your post type here and automatically your header-{post-type}.php template file will be added as a choosable block for that post type. Whats more it will be automatically loaded when the client goes to make a new post!<br>
 This gives the client a smooth experience when creating a page. It even updates when the client changes the title! The header template file can continue being used as a template file and works the same. You can use `the_title()` or any in-the-loop template tags, that you normally might not have access to in a block. It's magic.
 
 You can add an ACF group and connect it to your default header block...er... template hybrid.
@@ -202,7 +202,7 @@ get_field('some_post_meta', get_the_ID()); //make sure to get the meta from the 
 get_field('some_post_meta'); //note: if this header is loaded as a template this might yield nothing.
 ```
 
-So now your header template file is showing up in Gutenberg and 'pretending' to be a block!
+So now your header template file is showing up in Gutenberg and 'pretending' to be a block! This feature is enabled by default for posts and pages. go try and make a post and see the header template file show up.
 
 
 ----
