@@ -127,7 +127,7 @@ SASS files can be imported via @use or @forward within the SASS folder in one of
 
 
 ## Routing and Template Parts
-When a single post is shown it uses the single.php file in the root. This is standard WordPress templating. <br>This file in turn will check which current post type is being shown and find the appropriate content file. This is ignition templating.<b> By default it will go to src/parts/post-type/ folder and get a file there.
+When a single post is shown it uses the single.php file in the root. This is standard WordPress templating. <br>This file in turn will check which current post type is being shown and find the appropriate content file. This is ignition templating.<br> By default it will go to src/parts/post-type/ folder and get a file there.
 This is all done using a special template function Ignition comes with. It's similar to say, get_template_part() and actually uses locate_template() under the hood, except it's faster and you can pass variables to it.
 
 ```php
