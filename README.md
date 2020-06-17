@@ -142,27 +142,36 @@ See the difference below:
 locate_template( 'src/parts/' . get_post_type() . '/content-'  . get_post_type() . '.php');
 
 //The following is the ignition way. It also has fallbacks that eventually go to the post folder
-ign_template('content'); //looks for a content-{post-type}.php or a content.php file inside a post-type folder.
+ign_template('content');
+//This little line will search for a file in this order, stops after it finds one:
+//looks for src/parts/{post-type}/content-{post-type}.php
+//looks for src/parts/{post-type}/content.php
+//looks for src/parts/post/content-{post-type}.php
+//looks for src/parts/post/content.php
 ```
+
+Therefore it's best to work and divide your content into post type folders and give your files name-{post-type}.php
 
 Furthermore you can pass a second parameter of variables like so:
 ```php
 
-$var = 'hello'; //will not be available inside the file below using WP function
+$var = 'hello'; //will not be available inside the file below using WP function locate_template()
 locate_template( 'src/parts/' . get_post_type() . '/content-'  . get_post_type() . '.php');
 
-$var = 'hello'; //WILL be available using Ignition function
-ign_template('content', array('var'=> $var)); //pass an array of variables
+$var = 'hello'; //WILL be available using Ignition function ign_template()
+ign_template('content', array('var'=> $var)); //pass an array of variables $var will now work
 ```
 
 You can also use ign_template outside the loop by giving it a full path from the root of the theme
 ```php
-ign_template('src/some-folder/some-file.php');
+ign_template('src/some-folder/some-file.php'); //you can also pass variables if wanted here too
 ```
 
-With ign_template(), you don't need to make a single-portfolio.php for a portfolio post-type. You just make a new post-type folder with all the different views that exist for that post type.
+With ign_template(), you don't need to make a single-portfolio.php for a portfolio post-type. You just make a new post-type folder with all the different views and template files that exist for that post type.
 Your post type folders should have a content-{post-type}.php and a card-{post-type}.php file to begin with. If the header is to look different, it should also have a header-{post-type}.php file.<br> A good place to start is to duplicate and rename the post folder. Rename the files inside too.
 The content one is for full view and the card one is usually for archive listings. The card view is used by default in index.php
+
+Remember you can and should also add scss files as well as js files into your post-type folders. This keeps your post types and everything they need together.
 
 ## Header Block/Template
 Every post and page has a header. Sometimes you need the same header. Sometimes you want a different one per post type. Sometimes you want three for one post type and one for another. It can get confusing, but Ignition has finally made this part somewhat easier!
