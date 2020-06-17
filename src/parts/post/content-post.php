@@ -11,16 +11,16 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <div class="entry-content container-content grow-font">
-	    <?php ign_header_block(); ?>
-		<?php the_content(); ?>
-    </div>
-</article>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="entry-content container-content grow-font">
+			<?php ign_header_block(); ?>
+			<?php the_content(); ?>
+		</div>
+	</article>
 
 
-<?php if (  ! is_page() ): ?>
-    <section class="after-article container-content">
+<?php if ( ! is_page() ): ?>
+	<section class="after-article container-content">
 		<?php
 		the_post_navigation( array(
 			'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'ignition' ) . '</span><div class="nav-title"><span class="nav-title-icon-wrapper"><span class="iconify" data-icon="carbon:chevron-left"></span></span> <span>%title</span></div>',
@@ -33,5 +33,6 @@
 			comments_template();
 		endif;
 		?>
-    </section>
-<?php endif; ?>
+	</section>
+<?php
+endif;

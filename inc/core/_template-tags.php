@@ -504,18 +504,14 @@ function ign_block_attrs( $block, $custom_classes = '', $include_align = true ) 
 
 
 
+
 /**
- *
+ * @param string $prefix
  * Shows a header block if none is in the content
  */
-function ign_header_block() {
-	$has_header = false;
-	$post_type  = get_post_type();
-
-	//make sure blocks is an array even if empty passed
-
+function ign_header_block($prefix = 'header') {
 	if (! ign_has_header_block() ) {
-		ign_template( 'header', array( 'block' => '' ) );
+		ign_template( $prefix, array( 'block' => '' ) );
 	}
 }
 
