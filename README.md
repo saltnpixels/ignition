@@ -127,9 +127,12 @@ SASS files can be imported via @use or @forward within the SASS folder in one of
 
 
 ## Routing and Template Parts
-When a single post is shown it uses the single.php file in the root. This is standard WordPress templating. This file in turn will check which current post type is being shown and find the appropriate content file. This is ignition templating. By default it will go to src/parts/post-type/ folder and get a file there.
+When a single post is shown it uses the single.php file in the root. This is standard WordPress templating. <br>This file in turn will check which current post type is being shown and find the appropriate content file. This is ignition templating.<b> By default it will go to src/parts/post-type/ folder and get a file there.
 This is all done using a special template function Ignition comes with. It's similar to say, get_template_part() and actually uses locate_template() under the hood, except it's faster and you can pass variables to it.
 
+```php
+ign_template('somePrefix'); //gets somePrefix-{post-type}.php
+```
 See the difference below:
 
 ```php
@@ -158,7 +161,7 @@ ign_template('src/some-folder/some-file.php');
 ```
 
 With ign_template(), you don't need to make a single-portfolio.php for a portfolio post-type. You just make a new post-type folder with all the different views that exist for that post type.
-Your post type folders should have a content-{post-type}.php and a card-{post-type}.php file to begin with. If the header is to look different it should also have a header-{post-type}.php file. A good place to start is to duplicate and rename the post folder. Rename the files inside too.
+Your post type folders should have a content-{post-type}.php and a card-{post-type}.php file to begin with. If the header is to look different, it should also have a header-{post-type}.php file.<br> A good place to start is to duplicate and rename the post folder. Rename the files inside too.
 The content one is for full view and the card one is usually for archive listings. The card view is used by default in index.php
 
 ## Header Block/Template
@@ -193,6 +196,7 @@ Just make sure you understand that when the default header-{post-type}.php file 
 
 ```php
 //inside some portfolio/header-portfolio.php
+
 the_title(); //works even when used as a block!
 
 //if you want a custom field from the post
