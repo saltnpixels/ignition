@@ -7,14 +7,14 @@ import 'normalize.css'
 import './sass/front-end-bunde.scss'
 
 //js from src
-import "./js/events"
-import "./js/objectfitFallback"
-import "./js/sidebar"
-import "./js/navigation"
-import "./js/panel-left"
-import "./js/smooth-scroll"
-import "./js/icons"
-import "./js/responsive-iframe"
+import "./js/core/events"
+import "./js/core/objectfitFallback"
+import "./js/core/sidebar"
+import "./js/core/navigation"
+import "./js/core/panel-left"
+import "./js/core/smooth-scroll"
+import "./js/core/icons"
+import "./js/core/responsive-iframe"
 
 
 //add all underscored js files from inc and parts

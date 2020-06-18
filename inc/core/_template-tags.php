@@ -206,7 +206,6 @@ endif;
  * @param string $file_prefix
  * @param string $vars
  *  * Gets the proper template file to show for the WP LOOP
- * MUST BE USED INSIDE THE LOOP TO USE
  * Simply routes the page to the right folder and file, or falls back on the post folder.
  * post formats should be used at end of file like: card-link.php
  *

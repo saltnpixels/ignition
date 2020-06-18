@@ -1,3 +1,4 @@
+import {wrap} from "./setup"
 
 //make iframe videos responsive
 document.addEventListener('DOMContentLoaded', function () {
