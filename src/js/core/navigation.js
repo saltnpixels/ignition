@@ -1,171 +1,254 @@
-import {ignSlideDown, ignSlidePropertyReset, debounce, throttle, ignSlideUp} from "./setup"
+import { ignSlideDown, ignSlidePropertyReset, debounce, throttle, ignSlideUp } from './setup'
+import * as themeConfig from '../../../theme.config'
 
-/*------- move submenus if too close to edge on desktop --------*/
-function fixOffScreenMenu (menu) {
 
-	//make item visible so we can get left edge
-	menu.style.display = 'block';
-	menu.style.opacity = '0';
-	let rightEdge = menu.getBoundingClientRect().right;
-	let leftEdge = menu.getBoundingClientRect().right;
-	//set menu back
-	menu.style.display = '';
-	menu.style.opacity = '';
+//change these functions so that the menus appear how you want them to. default is to slide open and closed
+//adds toggled-on to menu li and to submenu if exists, also slides down submenu if theme config has this setting
+export function openSubMenu(menuItem, subMenu = '') {
+   if (!subMenu) {
+      subMenu = menuItem.querySelector('.sub-menu')
+   }
 
-	let viewport = document.documentElement.clientWidth;
+   menuItem.classList.add('toggled-on')
 
-	//if the submenu is off the page, pull it back somewhat
-	if (rightEdge > viewport) {
-		menu.style.left = '40px';
-	}
+   if (subMenu) {
+      subMenu.classList.add('toggled-on')
+      //move top level submenu over if it would end up offscreen
+      if (menuItem.classList.contains('top-level-item')) {
+         fixOffScreenMenu(subMenu)
+      }
 
-	if (leftEdge < 0) {
-		menu.style.left = '60%';
-	}
+      if (subMenu) {
+         ignSlideDown(subMenu)
+      }
+
+   }
 }
 
-/*
-open and closes a menu dropdown based on passing the dropdown button. The buttons class determines if it opens or closes
-for it to open make sure the button being passed has a class of toggled-on
+export function closeSubMenu(menuItem, subMenu = '') {
+   if (!subMenu) {
+      subMenu = menuItem.querySelector('.sub-menu')
+   }
+
+   menuItem.classList.remove('toggled-on')
+   if (subMenu) {
+      subMenu.classList.remove('toggled-on')
+      if (subMenu) {
+         ignSlideUp(subMenu)
+      }
+   }
+}
+
+
+/**
+ * if hovered on, it opens, hover off closes - this is only for a mouse
+ * if pen or touch, it requires a click
  */
-function openCloseMenu (menuButton) {
+export function createMenuListener(menuItem) {
+   if (!menuItem.id) {
+      menuItem.id = 'menu-item' + Date.now()
+   }
 
-	let menuItem = menuButton.closest('li');
-	let subMenu = menuItem.querySelector('.sub-menu');
-	let isToggled = menuButton.classList.contains('toggled-on') ? 'open' : 'close';
+   //click / mousehover event
+   menuItem.addEventListener('pointerover', (e) => {
+      //sometimes there are nested menus, we dont want them all firing
+      e.stopPropagation()
 
-	if (isToggled === 'open') {
-		fixOffScreenMenu(subMenu);
-		//add class toggled-on to li. cant do it via data-target cause menu might be showing twice on page
-		menuItem.classList.add('toggled-on');
-		ignSlideDown(subMenu);
+      //if this is a touch or pen item, this will open and close the menu
+      if (e.pointerType!=='mouse') {
+         if (e.target.closest('.menu a[href="#"]')) {
+            e.preventDefault()
+         }
+         //if its not a mouse its a click event and will toggle open and closed
+         if (!menuItem.classList.contains('toggled-on')) {
+            openSubMenu(menuItem)
+         } else {
+            setTimeout(function () {
+               document.activeElement.blur()
+               closeSubMenu(menuItem)
+            }, 100)
+         }
+      } else {
+         //mouseover event will open on hover always
+         if (!menuItem.classList.contains('toggled-on')) {
+            openSubMenu(menuItem)
+         }
+      }
+   })
 
-		document.querySelector('#page').addEventListener('click', e => {
-			if (!e.target.closest('.menu-item.toggled-on')) {
-				//close menus
-				menuButton.classList.remove('toggled-on');
-				openCloseMenu(menuButton);
-			}
-		}, { once: true });
+   //only for mouse, touch will return
+   menuItem.addEventListener('pointerleave', (e) => {
+      if (e.pointerType!=='mouse') {
+         return
+      }
+      e.stopPropagation()
 
-	} else {
-		menuItem.classList.remove('toggled-on');
-		ignSlideUp(subMenu);
-	}
 
+      if (!menuItem.classList.contains('toggled-on')) {
+         return
+      }
+
+      //smart way to make sure pointer out only runs when its off the parent item
+      let elementTo = e.toElement || e.relatedTarget //where we went out to
+      //if its a child dont close it
+      if (elementTo!==null && elementTo.closest('#' + menuItem.id)) {
+         return
+      }
+      closeSubMenu(menuItem)
+      setTimeout(function () {
+         document.activeElement.blur()
+      }, 300)
+   })
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	document.body.addEventListener('click', e => {
-		let item = e.target.closest('.menu a[href="#"]');
-		if(item && item.nextElementSibling != null){
-			e.preventDefault();
-			item.nextElementSibling.click();
-		}
-	});
-
-	/*------- slide sub menus open and closed when a dropdown button is clicked --------*/
-	document.body.addEventListener('afterToggle', evt => {
-		//for every dropdown menu button (>), when clicked, toggle the li parent and open the sub-menu with slide
-		if (evt.target.closest('.submenu-dropdown-toggle')) {
-			openCloseMenu(evt.target.closest('.submenu-dropdown-toggle'));
-		}
-	});
-
-	/*------- Open any current menu items in vertical menus --------*/
-	//if a vertical menu has a current item it is set to display block. We can target that and use it to set the click to open
-	document.querySelectorAll('.menu .current-menu-item .sub-menu, .menu .current-menu-parent .sub-menu').forEach(subMenu => {
-		//if its a vertical menu
-		if (getComputedStyle(subMenu.closest('.menu')).flexDirection === 'column') {
-			subMenu.style.display = 'block';
-			subMenu.style.height = 'auto';
-			subMenu.closest('.menu-item').classList.add('toggled-on');
-			subMenu.closest('.menu-item').querySelector('.submenu-dropdown-toggle').classList.add('toggled-on');
-		}
-
-	});
-
-	/*------- Tabbing through the menu for ADA compliance --------*/
-
-	let lastTabbedItem = '';
-
-	//focus
-	document.body.addEventListener('focusin', e => {
-
-		if (e.target.closest('.menu-item-link a')) {
-			let menuItemLink = e.target.closest('.menu-item-link a');
-
-			window.addEventListener('keyup', function (e) {
-				let code = (e.keyCode ? e.keyCode : e.which);
-				//tab or shift tab
-				if (code === 9 || code === 16) {
-					menuItemLink.parentElement.classList.add('focus'); //add focus to .menu-item-link
-					//if this element has a dropdown near it, toggle it now
-					if (menuItemLink.nextElementSibling !== null && !menuItemLink.closest('li').classList.contains('toggled-on')) {
-						menuItemLink.nextElementSibling.click(); //click the button to open the sub-menu
-					}
-
-					//if there is an item focused before
-					if (lastTabbedItem) {
-						//check if last item had a sub menu and we are not inside it now
-						if (lastTabbedItem.nextElementSibling !== null && !lastTabbedItem.closest('li').contains(menuItemLink)) {
-							lastTabbedItem.nextElementSibling.click();
-						}
-					}
-
-				}
-
-			}, { once: true });
-		}
-	});
-
-//blur
-	document.body.addEventListener('focusout', e => {
-
-		if (e.target.closest('.menu-item-link a')) {
-			let menuItemLink = e.target.closest('.menu-item-link a');
-			window.addEventListener('keyup', function (e) {
-				let code = (e.keyCode ? e.keyCode : e.which);
-				console.log(code);
-				if (code === 9 || code === 16) {
-					//blur current tabbed item, but dont close it if its a sub-menu
-					menuItemLink.parentElement.classList.remove('focus');
-					lastTabbedItem = menuItemLink;
-					const subMenu = menuItemLink.closest('.sub-menu');
-
-					//if we blurred an item in a sub-menu
-					if (subMenu !== null) {
-						console.log('blurred item inside sub-menu');
-						const menuItem = menuItemLink.closest('.menu-item');
-						//if its the last item in the submenu and it does not have a sub-menu itself
-						if (menuItem.nextElementSibling == null && menuItem.querySelector('.sub-menu') == null) {
-							menuItem.parentElement.closest('.menu-item').querySelector('.submenu-dropdown-toggle').click();
-						}
-					}
-
-				}
-			}, { once: true });
-
-		}
-	});
+   //adds menu events to all menus. more menus can be added later by passing it through createMenuListener
+   let menus = document.querySelectorAll('.menu .menu-item-has-children')
+   menus.forEach((menuItem, index) => {
+      if (!menuItem.id) {
+         menuItem.id = 'menu-item-' + index
+      }
+      createMenuListener(menuItem)
+   })
 
 
+   //on load if its a vertical menu, open the parent dropdown right away
+   document.querySelectorAll('.menu .current-menu-item, .menu .current-menu-parent').forEach(menu => {
+      //if its a vertical menu. we can know by the flex direction of menu
+      if (getComputedStyle(menu.closest('.menu')).flexDirection==='column') {
+         openSubMenu(menu)
+      }
+
+   })
 
 
+   // FOCUS EVENTS
+   document.body.addEventListener('focusin', e => {
 
-}); //end ready
+      const focusInElement = e.target
+
+      if (focusInElement.closest('.menu-item')) {
+         //get this links {a} li element
+         const liItem = focusInElement.closest('.menu-item')
+         //checking if this was a keyboard tab
+         window.addEventListener('keyup', function (e) {
+
+            let code = (e.keyCode ? e.keyCode:e.which)
+            if (code===9 || code===16) {
+
+               if (liItem.classList.contains('menu-item-has-children')) {
+                  if (!liItem.classList.contains('toggled-on')) {
+                     openSubMenu(liItem)
+
+                     if (code===16) {
+                        const lastMenuItem = liItem.querySelectorAll('.sub-menu li:last-child a')
+                        lastMenuItem[lastMenuItem.length - 1].focus()
+                     }
+                  }
+               }
+            }
+
+
+         }, { once: true })
+      }
+   })
+
+   let activeElement = '' //new active element
+   document.body.addEventListener('focusout', e => {
+
+      let focusOutElement = e.target
+
+      //if clicked off the entire menu system
+      if (focusOutElement.closest('.menu-item')) {
+
+         const liItem = focusOutElement.closest('.top-level-item')
+
+         setTimeout(function () {
+            //if active element is not even a menu-item close menu
+            activeElement = document.activeElement
+
+            //close element if click off somewhere else
+            if (!activeElement.closest('.top-level-item')) {
+               closeSubMenu(liItem)
+            }
+            return 2
+         }, 200)
+
+
+         window.addEventListener('keyup', function (e) {
+
+            let code = (e.keyCode ? e.keyCode:e.which)
+
+            //if shift tabbing off a current li that has a submenu
+            if (code===16) {
+               if (liItem && liItem.classList.contains('toggled-on')) {
+                  closeSubMenu(liItem)
+               }
+            }
+
+            //closing the whole menu if we tab off last item in the submenu
+            if (code===9) {
+               if (liItem.closest('.sub-menu li:last-child') && ! liItem.classList.contains('menu-item-has-children')) {
+                  let menuParent = liItem.closest('.top-level-item')
+
+                  if (menuParent.classList.contains('toggled-on')) {
+                     closeSubMenu(menuParent)
+                  }
+               }
+            }
+
+         }, {
+            once: true
+         })
+      }
+   })
+
+
+})
+
+
+/*------- move submenus if too close to edge on desktop --------*/
+function fixOffScreenMenu(menu) {
+   let display = window.getComputedStyle(menu).display
+   if (display!=='block') {
+      menu.style.display = 'block'
+   }
+   //make item visible so we can get left edge
+
+   let rightEdge = menu.getBoundingClientRect().right
+   let leftEdge = menu.getBoundingClientRect().right
+   //set menu back
+
+   if (display!=='block') {
+      menu.style.removeProperty('display')
+   }
+
+
+   let viewport = document.documentElement.clientWidth
+
+   //if the submenu is off the page, pull it back somewhat
+   if (rightEdge > viewport) {
+      menu.style.left = '40px'
+   }
+
+   if (leftEdge < 0) {
+      menu.style.left = '60%'
+   }
+}
+
 
 jQuery(function ($) {
 
-	//move logo in middle of menu on desktop if logo is middle position
-	if ($('.logo-in-middle').length) {
-		let navigationLi = $('.site-navigation__nav-holder .menu li');
-		let middle = Math.floor($(navigationLi).length / 2) - 1;
+   //move logo in middle of menu on desktop if logo is middle position
+   if ($('.logo-in-middle').length) {
+      let navigationLi = $('.site-navigation__nav-holder .menu li')
+      let middle = Math.floor($(navigationLi).length / 2) - 1
 
-		//add logo to the middle when page loads
-		$('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'));
-		$('.site-logo').clone().appendTo('.li-logo-holder');
-	}
+      //add logo to the middle when page loads
+      $('<li class="menu-item li-logo-holder"><div class="menu-item-link"></div></li>').insertAfter(navigationLi.filter(':eq(' + middle + ')'))
+      $('.site-logo').clone().appendTo('.li-logo-holder')
+   }
 
-});
+})

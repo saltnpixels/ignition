@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	}
 
-	window.addEventListener('resize', throttle(moveItems, 250));
+	window.addEventListener('resize', throttle(moveItems, 400));
 	moveItems();
 
 

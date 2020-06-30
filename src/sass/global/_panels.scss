@@ -1,3 +1,8 @@
+.panel-left-toggle:focus, .panel-right-toggle:focus{
+  border: 1px dashed white;
+}
+
+
 /*--------------------------------------------------------------
 # Panel Left Styling
 --------------------------------------------------------------*/
@@ -12,11 +17,14 @@
 body .navigation-menu-icon {
   border-color: white;
   color: white;
+  display: block;
 
   &:after, &:before {
 	background: white;
   }
 }
+
+
 
 
 /*--------------------------------------------------------------
@@ -30,7 +38,7 @@ body .navigation-menu-icon {
   padding-top: 60px;
 }
 
-/*------- Panel right button (sidebar button --------*/
+/*------- Panel right button (sidebar button) --------*/
 body .sidebar-icon {
   border-color: white;
 

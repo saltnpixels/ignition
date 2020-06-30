@@ -10,6 +10,12 @@
   margin: 0;
 }
 
+//sub-menus opened easily with focus. unfortunately i cannot control if this was done with a keyboard or not so it messes with slideup events
+.no-js .menu-item:focus-within > .sub-menu {
+  display: block !important;
+}
+
+
 /*--------------------------------------------------------------
 # Vertical Menus
 --------------------------------------------------------------*/
@@ -17,66 +23,70 @@
   //when there is a menu its ul.menu and when its defaulting to pages its .menu ul...annoying
   .menu,
   .menu > ul {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-	li {
-	  position: relative;
-	  margin: 0;
+    li {
+      position: relative;
+      margin: 0;
 
-	  //added with hook. holds anchor and submenu button is applicable
-	  .menu-item-link {
-		padding: 5px 15px;
-		display: flex;
-		align-items: flex-start;
-		transition: all .5s;
+      //added with hook. holds anchor and submenu button if applicable
+      .menu-item-link {
+        padding: 5px 15px;
+        display: flex;
+        align-items: flex-start;
+        transition: all .5s;
 
-		a {
-		  padding: 0;
-		}
-	  }
+        a {
+          padding: 0;
+        }
+      }
 
-	  a {
-		text-decoration: none;
-		outline: none;
-		color: inherit;
-		cursor: pointer;
-		display: block;
-		flex-grow: 1;
-		flex-shrink: 0;
-		font-size: inherit;
-	  }
+      a {
+        text-decoration: none;
+        outline: none;
+        color: inherit;
+        cursor: pointer;
+        display: block;
+        flex-grow: 1;
+        flex-shrink: 0;
+        font-size: inherit;
+      }
 
-	  //icon for submenu
-	  .submenu-dropdown-toggle {
-		padding-left: 10px;
-		padding-right: 0;
-		display: inline-block;
-		color: inherit;
-		//flex-basis: 45px;
-		text-align: right;
-	  }
+      //icon for submenu button layout
+      .submenu-dropdown-toggle {
+        padding-left: 10px;
+        padding-right: 0;
+        display: inline-block;
+        color: inherit;
+        text-align: right;
+      }
 
-	}
+    }
 
 
-	.sub-menu, .children {
-	  list-style: none;
-	  margin: 0;
-	  display: none; //opens with tweenmax
-	  transition: none;
-	  overflow: hidden;
-	  width: auto;
-	  white-space: nowrap;
-	  padding: 0;
+    //sub-menu basic styling for vertical and horizontal
+    .sub-menu, .children {
+      list-style: none;
+      margin: 0;
+      display: none; //opens with slidedown especially on mobile
+      overflow: hidden;
+      width: auto;
+      white-space: nowrap;
+      padding: 0;
 
-	  //inner items move over a bit
-	  .menu-item-link{
-		padding-left: 30px;
-	  }
-	}
+      //inner items move over a bit
+      .menu-item-link {
+        padding-left: 30px;
+      }
+    }
+
+    .current-menu-item > .sub-menu{
+      display: block;
+    }
 
   }
+  //.menu ul
 
 }
 
@@ -88,84 +98,68 @@
 
   @media(min-width: $breakpoint) {
 
-	.top-level-item:last-child > .menu-item-link {
-	  padding-right: 0;
-	}
+    .top-level-item:last-child > .menu-item-link {
+      padding-right: 0;
+    }
 
-	.top-level-item:first-child > .menu-item-link {
-	  padding-left: 0;
-	}
-
-
-	.menu,
-	.menu > ul {
-	  display: flex;
-	  flex-wrap: wrap;
-	  align-items: stretch;
-	  flex-direction: row;
-	  height: 100%;
+    .top-level-item:first-child > .menu-item-link {
+      padding-left: 0;
+    }
 
 
-	  //make top level items flexed so they can be positioned at top or bottom
-	  .top-level-item .menu-item-link {
-		display: flex;
-		height: 100%;
-		align-items: var(--desktop-menu-alignment);
-	  }
-
-	  //top level sub menus dont drop down they appear.
-	  .top-level-item > .sub-menu, .top-level-item > .children {
-		//the following makes sub menus fade in rather than sliding open
-		//display: block !important;
-		//height: auto !important;
-		//opacity: 0;
-		//visibility: hidden;
-
-		transition: opacity .5s, visibility .5s;
-		margin: 0;
-		position: absolute;
-		z-index: 10;
-		top: 100%;
-		//min-width: 200px;
-		left: 50%;
-		//right: 50%;
-		transform: translate(-50%, 0);
-		border-radius: 0 0 3px 3px;
-
-		a {
-		  flex-shrink: 1;
-		}
-
-	  }
-
-	  .sub-menu .menu-item-link {
-		padding: 3px 15px;
-	  }
-
-	  //top level sub-menus opened
-	  .top-level-item .menu-item-link.focus + .sub-menu, .top-level-item.toggled-on > .sub-menu {
-		opacity: 1;
-		visibility: visible;
-	  }
+    .menu,
+    .menu > ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      flex-direction: row;
+      height: 100%;
 
 
-	  //lower sub-menus
-	  .sub-menu .sub-menu {
-		display: none;
-		position: relative;
-		padding: 0;
-		transition: none;
+      //make top level items flexed so they can be positioned at top or bottom
+      .top-level-item .menu-item-link {
+        display: flex;
+        height: 100%;
+        align-items: var(--desktop-menu-alignment);
+      }
 
-		a {
-		  padding-left: 10px;
-		}
-	  }
+      //top level sub menus layout. appear right below the top level item
+      .top-level-item > .sub-menu, .top-level-item > .children {
+        position: absolute;
+        z-index: 10;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 0);
 
-	}
+        a {
+          flex-shrink: 1;
+        }
+
+      }
+
+      .sub-menu .menu-item-link {
+        padding: 3px 15px;
+      }
+
+
+
+      //even lower sub-menus
+      .sub-menu .sub-menu {
+        display: none;
+        position: relative;
+        padding: 0;
+        transition: none;
+
+        a {
+          padding-left: 10px;
+        }
+      }
+
+    }
   }
 
   @media(max-width: $breakpoint) {
-	@include vertical-menu();
+    @include vertical-menu();
   }
 
 }
@@ -179,31 +173,6 @@
 
 
 /*--------------------------------------------------------------
-# Sub-Menu Dropdown Buttons
---------------------------------------------------------------*/
-.submenu-dropdown-toggle .icon {
-  transition: transform .4s;
-}
-
-.submenu-dropdown-toggle,
-.submenu-dropdown-toggle:focus {
-  background: none;
-  border: none;
-  margin: 0;
-  display: inline;
-  outline: none;
-  cursor: pointer;
-  min-width: 1.5em;
-  text-align: left;
-  font-size: inherit;
-  color: inherit;
-
-  &.toggled-on .icon {
-	transform: rotate(90deg);
-  }
-}
-
-/*--------------------------------------------------------------
 # Site-top Layout
 --------------------------------------------------------------*/
 /*------- Site-top --------*/
@@ -215,7 +184,7 @@
   top: 0;
 
   .site-top-container {
-	height: 100%;
+    height: 100%;
   }
 }
 
@@ -228,25 +197,25 @@
 
 
   .site-navigation__nav-holder {
-	display: flex;
-	justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
   }
 
   //dealing with customizer when choosing a logo
   .site-logo {
 
 
-	a + a {
-	  display: none;
-	}
+    a + a {
+      display: none;
+    }
 
-	a {
-	  transition: all .5s;
-	}
+    a {
+      transition: all .5s;
+    }
 
-	h1, p {
-	  font-size: inherit;
-	}
+    h1, p {
+      font-size: inherit;
+    }
   }
 }
 
@@ -254,7 +223,7 @@
 //hide navigation on mobile if its inside site-top while it hasnt moved yet. There is a split second where it appears as a vertical menu in site top...
 @media(max-width: $media-nav) {
   .site-navigation .site-navigation__nav-holder {
-	display: none;
+    display: none;
   }
 
 }
@@ -270,12 +239,12 @@
   text-transform: capitalize;
 
   a {
-	color: inherit
+    color: inherit
   }
 
   svg {
-	max-width: 100%;
-	height: auto;
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -291,7 +260,7 @@
   align-items: center;
 
   img {
-	display: block;
+    display: block;
   }
 }
 
@@ -300,37 +269,37 @@
 
   //layout positions
   .logo-left .site-logo {
-	justify-content: left;
+    justify-content: left;
   }
 
   .logo-right .site-logo, .logo-center-under .site-logo {
-	order: 2;
+    order: 2;
   }
 
   .logo-center .site-navigation, .logo-center-under .site-navigation {
-	flex-direction: column;
-	align-items: center;
+    flex-direction: column;
+    align-items: center;
 
   }
 
   .no-logo .site-logo {
-	display: none;
+    display: none;
   }
 
   .logo-in-middle > .site-logo, .logo-in-middle > .container .logo-in-middle {
-	display: none;
+    display: none;
   }
 
   .logo-in-middle .site-navigation__nav-holder {
-	justify-content: center;
+    justify-content: center;
   }
 
   .logo-in-middle .site-navigation > .site-logo {
-	display: none;
+    display: none;
   }
 
   .logo-right .site-navigation__nav-holder {
-	justify-content: flex-start;
+    justify-content: flex-start;
   }
 
 }
@@ -346,11 +315,11 @@
 
 #panel-left {
   .site-navigation__nav-holder {
-	min-width: var(--panel-left-width);
-	overflow: auto;
-	max-height: 90vh;
-	padding-bottom: var(--gap);
-	@extend .hide-scroll !optional;
+    min-width: var(--panel-left-width);
+    overflow: auto;
+    max-height: 90vh;
+    padding-bottom: var(--gap);
+    @extend .hide-scroll !optional;
 
   }
 
@@ -359,49 +328,49 @@
 /*------- Cool App like menu for mobile --------*/
 @media(max-width: $panel-left-absolute) {
   .app-menu {
-	#panel-left {
-	  transition: none;
-	  transform: translate(0, 0);
-	  width: 100%;
-	  z-index: calc(var(--z-index-menu) - 1);
+    #panel-left {
+      transition: none;
+      transform: translate(0, 0);
+      width: 100%;
+      z-index: calc(var(--z-index-menu) - 1);
 
-	  .menu-item-link {
-		a {
-		  max-width: 40vw;
-		}
-	  }
+      .menu-item-link {
+        a {
+          max-width: 40vw;
+        }
+      }
 
-	  .site-navigation__nav-holder {
-		margin-top: 20vh;
-	  }
-	}
+      .site-navigation__nav-holder {
+        margin-top: 20vh;
+      }
+    }
 
-	#page {
-	  background: inherit;
-	  transition: transform .5s;
-	}
+    #page {
+      background: inherit;
+      transition: transform .5s;
+    }
 
   }
 
-	//when menu is opened body gets class menu-open, #page moves
+  //when menu is opened body gets class menu-open, #page moves
   .app-menu.menu-open {
 
-	#page {
-	  border-radius: 5px;
-	  transform: translate(50vw, -2vh) scale(.75);
-	  box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
-	  overflow: hidden;
-	  height: 100vh;
-	}
+    #page {
+      border-radius: 5px;
+      transform: translate(50vw, -2vh) scale(.75);
+      box-shadow: -3px 0 10px rgba(0, 0, 0, .5);
+      overflow: hidden;
+      height: 100vh;
+    }
 
-	#panel-left {
-	  height: 100vh;
-	  overflow: auto;
-	}
+    #panel-left {
+      height: 100vh;
+      overflow: auto;
+    }
 
-	&.admin-bar #panel-left {
-	  height: calc(100vh - 46px);
-	}
+    &.admin-bar #panel-left {
+      height: calc(100vh - 46px);
+    }
   }
 
 }
@@ -413,7 +382,7 @@
   width: 100vw;
 
   .site-container {
-	height: 100%;
+    height: 100%;
   }
 }
 
@@ -421,7 +390,7 @@
 @supports (-webkit-overflow-scrolling: touch) {
   /* CSS specific to iOS devices */
   .body-lock {
-	position: fixed; // todo check on ios that it works
+    position: fixed; // todo check on ios that it works
   }
 }
 

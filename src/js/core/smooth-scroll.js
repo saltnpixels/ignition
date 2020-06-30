@@ -6,23 +6,25 @@ let scrollEvent = new Event('afterScroll', { bubbles: true }); //bubble allows f
  * @param element
  */
 function scrolltoHash (element) {
+ if(element) {
+    let offset = element.dataset.offset || 'start';
 
-	let offset = element.dataset.offset || 'start';
+    //if the offset is a string 'start, center, or end'
+    if (isNaN(parseInt(offset))) {
+       element.scrollIntoView({ behavior: 'smooth', block: offset });
+    } else {
+       //from top scroll with offset
+       let fromTop = window.pageYOffset + element.getBoundingClientRect().top + parseInt(offset);
 
-	//if the offset is a string 'start, center, or end'
-	if (isNaN(parseInt(offset))) {
-		element.scrollIntoView({ behavior: 'smooth', block: offset });
-	} else {
-		//from top scroll with offset
-		let fromTop = window.pageYOffset + element.getBoundingClientRect().top + parseInt(offset);
+       window.scroll({ behavior: 'smooth', top: fromTop });
+    }
 
-		window.scroll({ behavior: 'smooth', top: fromTop });
-	}
+    //fire some more events
+    setTimeout(function () {
+       element.dispatchEvent(scrollEvent);
+    }, 500);
 
-	//fire some more events
-	setTimeout(function () {
-		element.dispatchEvent(scrollEvent);
-	}, 500);
+ }
 
 }
 

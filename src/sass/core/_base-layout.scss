@@ -93,8 +93,17 @@ html * {
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
+.screen-reader-skip{
+  height: 0;
+  overflow: hidden;
+  width: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 .screen-reader-text {
   clip: rect(1px, 1px, 1px, 1px);
+  color: white;
+  background-color: black;
   height: 1px;
   overflow: hidden;
   position: absolute !important;

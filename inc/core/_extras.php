@@ -72,7 +72,7 @@ function ign_menu( $item, $args ) {
 	$arrow   = '<div class="icon iconify icon-angle-right">' . ign_get_config('submenu_arrow_icon', '<svg xmlns=\'http://www.w3.org/2000/svg\' xmlns:xlink=\'http://www.w3.org/1999/xlink\' aria-hidden=\'true\' focusable=\'false\' width=\'1em\' height=\'1em\' style=\'-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);\' preserveAspectRatio=\'xMidYMid meet\' viewBox=\'0 0 32 32\'><path d=\'M22 16L12 26l-1.4-1.4l8.6-8.6l-8.6-8.6L12 6z\' fill=\'#626262\'/><rect x=\'0\' y=\'0\' width=\'32\' height=\'32\' fill=\'rgba(0, 0, 0, 0)\' /></svg>') . '</div>';
 
 	if ( in_array( 'menu-item-has-children', (array) $classes ) ) {
-		$item .= '<button tabindex="-1" aria-haspopup="true" data-toggle aria-expanded="false" class="submenu-dropdown-toggle">' . $arrow . '
+		$item .= '<button tabindex="-1" aria-haspopup="true"  aria-expanded="false" class="submenu-dropdown-toggle">' . $arrow . '
                     <span class="screen-reader-text">' . __( 'Expand child menu', 'ignition' ) . '</span></button>';
 	}
 
@@ -187,6 +187,11 @@ function ignition_output_inline_svg( $html ) {
 	if ( get_post_mime_type( $logo_id ) == 'image/svg+xml' ) {
 		$image = get_attached_file( $logo_id );
 		$html  = preg_replace( "/<img[^>]+\>/i", file_get_contents( $image ), $html );
+		//add an aria-label if none found
+
+		if( ! preg_match('/aria-label=\"([^"]*)\"/', $html)){
+			$html = str_replace('<svg ', '<svg aria-label="logo" ', $html);
+		}
 	}
 
 	return $html;

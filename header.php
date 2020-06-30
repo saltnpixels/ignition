@@ -31,9 +31,10 @@ $app_menu = ign_get_config("mobile_menu_type", 'regular_menu'); //accepts svg ic
 
 <body <?php body_class( $app_menu ); ?>>
 
-<a class="skip-link screen-reader-text" href="#site-content">
+<a class="skip-link screen-reader-text" href="#site-content-skip">
 	<?php _e( 'Skip to content', 'ignition' ); ?>
 </a>
+
 
 <div class="site-container" id="site-container">
     <div id="panel-left"></div>
@@ -46,11 +47,12 @@ $app_menu = ign_get_config("mobile_menu_type", 'regular_menu'); //accepts svg ic
     }
 	?>
 
-    <button aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
+    <button id="panel-left-toggle" aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
         <span class="navigation-menu-icon"><?php echo $menu_icon; ?></span>
     </button>
 
     <div id="page" class="site">
 
 	    <?php locate_template('src/parts/global/site-top.php', true, true); ?>
+	    <a id="site-content-skip" class="screen-reader-skip">-</a>
         <div id="site-content" class="site-content">

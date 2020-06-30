@@ -27,16 +27,16 @@
   --black: #191919;
   --dark-grey: #4c545d;
   --grey: #cacaca;
-  --blue: #00b9eb;
+  --blue: #007eac;
   --light-blue: rgba(0, 185, 235, 0.73);
-  --dark-blue: #119fcc;
+  --dark-blue: #007fb0;
 
 
   //Applied Colors. Add your own applied areas
   --body-bg: white; //found in page.scss
   --main-text-color: var(--black); //used in various files
   --subtle-text-color: var(--grey); //used in forms.scss and page.scss
-  --site-top: var(--blue);
+  --site-top: var(--dark-blue);
   --footer-bg: var(--dark-grey); //found in page.scss
   --header-bg: var(--dark-grey); //found in page.scss
 
