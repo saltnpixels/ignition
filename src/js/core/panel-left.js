@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
       menuToggle.addEventListener('afterToggle', e => {
          //if button has been toggled on
          if (menuToggle.classList.contains('toggled-on')) {
-            console.log('body-locked');
             body.classList.add('body-lock');
 
             //clicking anywhere outside the menu will close it

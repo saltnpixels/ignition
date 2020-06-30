@@ -37,19 +37,23 @@ $app_menu = ign_get_config("mobile_menu_type", 'regular_menu'); //accepts svg ic
 
 
 <div class="site-container" id="site-container">
-    <div id="panel-left"></div>
-    <div id="panel-right"></div>
-
 	<?php
 	$menu_icon = ign_get_config( 'menu_icon', 'icon-regular' );
 	if($menu_icon == 'icon-regular'){
-	    $menu_icon = "<span class='$menu_icon'></span>";
-    }
+		$menu_icon = "<span class='$menu_icon'></span>";
+	}
 	?>
 
-    <button id="panel-left-toggle" aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
-        <span class="navigation-menu-icon"><?php echo $menu_icon; ?></span>
-    </button>
+	<button tabindex="1" id="panel-left-toggle" aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
+		<span class="navigation-menu-icon"><?php echo $menu_icon; ?></span>
+	</button>
+
+    <div id="panel-left"></div>
+    <div id="panel-right"></div>
+
+
+
+
 
     <div id="page" class="site">
 

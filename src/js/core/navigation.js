@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       let focusOutElement = e.target
 
-      //if clicked off the entire menu system
+
       if (focusOutElement.closest('.menu-item')) {
 
          const liItem = focusOutElement.closest('.top-level-item')
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //if active element is not even a menu-item close menu
             activeElement = document.activeElement
 
-            //close element if click off somewhere else
+            //if clicked off the entire menu system
             if (!activeElement.closest('.top-level-item')) {
                closeSubMenu(liItem)
             }
@@ -203,6 +203,8 @@ document.addEventListener('DOMContentLoaded', function () {
             once: true
          })
       }
+
+
    })
 
 
