@@ -44,13 +44,15 @@ $app_menu = ign_get_config("mobile_menu_type", 'regular_menu'); //accepts svg ic
 	}
 	?>
 
+
+
+    <div id="panel-left"></div>
+    <div id="panel-right"></div>
+
 	<button aria-haspopup="true" tabindex="1" id="panel-left-toggle" aria-label="Toggle Left Panel" class="panel-left-toggle" data-toggle="menu-open" data-target="body">
 		<span class="navigation-menu-icon"><?php echo $menu_icon; ?></span>
 		<span class="screen-reader-text">Open left Panel</span>
 	</button>
-
-    <div id="panel-left"></div>
-    <div id="panel-right"></div>
 
 
 
