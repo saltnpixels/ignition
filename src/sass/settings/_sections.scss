@@ -23,10 +23,8 @@ section, .section {
 }
 
 //if a section does not have a background and its near another one with no background, the space between them looks large. remove the second ones top space
-section.no-bg, .section.no-bg{
-	+ section.no-bg, + .section.no-bg{
-		padding-top: 0;
-	}
+.no-bg + .no-bg {
+  padding-top: 0;
 }
 
 
