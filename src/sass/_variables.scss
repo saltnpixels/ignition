@@ -54,7 +54,8 @@
 
   /*------- Menu Variables --------*/
   --nav-move: #{$media-nav}; //should match $media-nav. when main menu in site-top should move into panel left. Used by data-moveat event
-  --media-sidebar: 1200px;
+  --sidebar-move: 1000px; //when it moves to the panel right
+  --media-sidebar: #{$media-sidebar}; //when it is no longer flexed
   --desktop-menu-alignment: center; //can be flex-end or flex-start or center for top level menu-items positioning on desktop
 
   /*------- Layout --------*/
