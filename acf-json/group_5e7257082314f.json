@@ -16,7 +16,7 @@
                 "id": ""
             },
             "admin_only": 0,
-            "message": "Welcome to your theme. You can edit some general settings under the <a target=\"_blank\" href=\"http:\/\/ignition.local\/wp-admin\/customize.php\">WP Customizer<\/a>. \r\nThere you can choose a logo, set up some main menu options and choose a default header image.\r\n\r\nOtherwise settings can be changed here. \r\nGoogle Fonts are set in the functions.php file (search \"google\").",
+            "message": "Welcome to your theme. You can edit some general settings under the WP Customizer. \r\nOtherwise settings can be changed here and in the theme.config file.",
             "new_lines": "wpautop",
             "esc_html": 0
         },
@@ -106,7 +106,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1584567801
+    "modified": 1594743211
 }

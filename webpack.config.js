@@ -14,6 +14,12 @@ module.exports = {
       backEnd: './src/admin-index.js',
       //add separate js files here if you dont want them concatenated into the others
    },
+   resolve: {
+      alias: {
+         src: path.resolve(__dirname, 'src/'),
+         inc: path.resolve(__dirname, 'inc/'),
+      }
+   },
    devtool: 'source-map',
    output: {
       path: path.resolve(__dirname, 'dist'),
@@ -36,7 +42,11 @@ module.exports = {
          },
          { test: /\.svg$/, use: 'svg-inline-loader' },
          { test: /\.(js)$/, use: ['babel-loader', 'import-glob-loader'] }, //turns jsx into js the browser can understand and also allows for es6 to be used
-         { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
+         {
+            test: /\.css$/, use: [{
+               loader: MiniCssExtractPlugin.loader,
+            }, 'css-loader']
+         },
          {
             test: /\.s[ac]ss$/i, use: [
                {
@@ -65,15 +75,25 @@ module.exports = {
    plugins: [
       new MiniCssExtractPlugin(),
       new BrowserSyncPlugin({
-             host: themeConfig.local,
-             proxy: themeConfig.local,
+             host: themeConfig.server,
+             proxy: themeConfig.server,
              https: true,
-
              files: [
-                '**/*.php'
+                '**/*.php',
+                '**/*.css',
+             ],
+             //if using a local server with .local, will load that domain
+             open: themeConfig.server.includes('.local') ? 'external':'local',
+             //magic for seeing changes on a live site. no local server needed. However php cannot be changed
+             serveStatic: ['.'],
+             rewriteRules: [
+                {
+                   match: /wp-content\/themes\/\w+\//g,
+                   replace: ''
+                }
              ],
              reloadDelay: 0
-          }
+          }, { reload: false } //make css load without reload}
       ),
    ]
 }

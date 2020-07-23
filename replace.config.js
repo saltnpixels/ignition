@@ -6,7 +6,7 @@ const jsonContent = fs.readFileSync('./theme.config.json')
 const themeConfig = JSON.parse(jsonContent)
 
 const args = require('minimist')(process.argv)
-const dry = args['dry'] //process.argv;  //change this if you need to replace again. This should match the old Name
+const dry = args['dry'] //dry mode run wont change anything
 
 
 // let packageName = new RegExp(`@package ${fromName}`, 'g')
@@ -63,8 +63,8 @@ const questions = [
    },
    {
       type: 'text',
-      name: 'local',
-      message: 'Development Url',
+      name: 'server',
+      message: 'Development or Remote Url',
       initial: 'ignition.local'
    }
 ];
@@ -79,11 +79,14 @@ const questions = [
        const response = await prompts(questions, { onCancel })
 
 
+       //name and slug and all questions answered must be true
        if (response.name && response.slug && allQuestions) {
+          //fixing responses
           response.slug = response.slug.replace(' ', '-').toLowerCase()
           let underscoreSlug = response.slug.replace('-', '_')
           let underscoreOldSlug = themeConfig.slug.replace('-', '_')
 
+          //all the regex patterns for replacement
           let packageName = new RegExp(`@package ${themeConfig.name}`, 'g')
           let lowercaseDash = new RegExp(`${themeConfig.slug}-`, 'g')
           let inAString = new RegExp(`'${themeConfig.slug}'`, 'g')
@@ -91,6 +94,7 @@ const questions = [
           let internationalize = new RegExp(`__\\( '${themeConfig.slug}'`, 'g')
 
 
+          //replacement options. setup files to replace
           const options = {
              files: './**/*',
              ignore: ['./*.md', './*.json', './webpack.config.js', './replace.config.js', './theme.config.json', './node_modules/**', './acf-json/**'],
@@ -110,13 +114,13 @@ const questions = [
              console.error('Error occurred:', error)
           }
 
-          //second replace. change themes config only afterwards change one json file
+          //second replace. change themes config options
           const optionsConfig = {
              files: './theme.config.json',
              dry: args['dry'] || false,
              verbose: true,
-             from: [/"name": ".*/g, /"slug": ".*/g, /"local": ".*/g],
-             to: [`"name": "${response.name}",`, `"slug": "${response.slug}",`, `"local": "${response.local}",`]
+             from: [/"name": ".*/g, /"slug": ".*/g, /"server": ".*/g],
+             to: [`"name": "${response.name}",`, `"slug": "${response.slug}",`, `"server": "${response.server}",`]
           }
 
           try {
