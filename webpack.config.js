@@ -44,13 +44,13 @@ module.exports = {
          { test: /\.(js)$/, use: ['babel-loader', 'import-glob-loader'] }, //turns jsx into js the browser can understand and also allows for es6 to be used
          {
             test: /\.css$/, use: [{
-               loader: MiniCssExtractPlugin.loader,
+               loader: MiniCssExtractPlugin.loader
             }, 'css-loader']
          },
          {
             test: /\.s[ac]ss$/i, use: [
                {
-                  loader: MiniCssExtractPlugin.loader,
+                  loader: MiniCssExtractPlugin.loader
                }, 'css-loader',
                {
                   loader: 'postcss-loader', options: {
@@ -81,6 +81,12 @@ module.exports = {
              files: [
                 '**/*.php',
                 '**/*.css',
+                {
+                   match: '**/*.js',
+                   options:{
+                      ignored: 'dist/**/*.js'
+                   }
+                }
              ],
              //if using a local server with .local, will load that domain
              open: themeConfig.server.includes('.local') ? 'external':'local',

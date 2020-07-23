@@ -25,7 +25,7 @@
     "add": "^2.0.6",
     "autoprefixer": "^9.8.0",
     "babel-loader": "^8.1.0",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.26.10",
     "browser-sync-webpack-plugin": "^2.2.2",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
