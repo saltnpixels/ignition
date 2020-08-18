@@ -12,6 +12,7 @@ module.exports = {
    entry: {
       frontEnd: './src/index.js',
       backEnd: './src/admin-index.js',
+      login: './src/admin-login.js',
       //add separate js files here if you dont want them concatenated into the others
    },
    resolve: {

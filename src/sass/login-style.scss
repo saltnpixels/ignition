@@ -1,0 +1,55 @@
+
+html{
+  font-size: 62.5%;
+}
+
+body, input {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+body #login{
+  padding: 0;
+}
+
+#login h1 a,
+.login h1 a {
+  display: none;
+  padding-bottom: 30px;
+}
+
+body .custom-logo-link {
+  margin: 0 auto 30px;
+  display: block;
+  text-align: center;
+}
+
+.custom-logo-link svg {
+  max-width: 100%;
+  height: auto;
+  fill: currentColor;
+}
+
+path{
+  fill: currentColor;
+}
+
+.custom-logo-link img{
+  max-width: 100%;
+  height: auto;
+}
+
+.site-title{
+  font-size: 2rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.site-title a{
+  text-decoration: none;
+}
+
+*::placeholder{
+  font-size: inherit;
+}
