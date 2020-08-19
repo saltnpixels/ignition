@@ -1,105 +1,127 @@
 import { ignSlideDown, ignSlidePropertyReset, debounce, throttle, ignSlideUp } from './setup'
+import {
+   fixOffScreenMenu,
+   toggleSubMenu,
+   toggleTopLevelVerticalMenu,
+   toggleTopLevelHorizontalMenu
+} from './navigation_callbacks'
 import * as themeConfig from '../../../theme.config'
 
 
-//change these functions so that the menus appear how you want them to. default is to slide open and closed
-//adds toggled-on to menu li and to submenu if exists, also slides down submenu if theme config has this setting
-export function openSubMenu(menuItem, subMenu = '') {
-   if (!subMenu) {
-      subMenu = menuItem.querySelector('.sub-menu')
+//toggle logic functionality that calls the above functions
+//use this one to run the opening and closing of a menu item. dont call above functions directly
+function toggleMenuItem(menuItem, toggleState = true,) {
+
+   let topLevel = isTopLevel(menuItem)
+   let horizontalMenu = isHorizontalMenu(menuItem)
+
+   //toplevel horizontal on tablet
+   if (topLevel && horizontalMenu) {
+      //also check if menu is offscreen and give it a class
+      //checkOffScreenMenu(menuItem.querySelector('.sub-menu'))
+      toggleTopLevelHorizontalMenu(menuItem, toggleState)
+      return
    }
-
-   menuItem.classList.add('toggled-on')
-
-   if (subMenu) {
-      subMenu.classList.add('toggled-on')
-      //move top level submenu over if it would end up offscreen
-      if (menuItem.classList.contains('top-level-item')) {
-         fixOffScreenMenu(subMenu)
-      }
-
-      if (subMenu) {
-         ignSlideDown(subMenu)
-      }
-
+   //toplevel vertical on tablet
+   if (topLevel && !horizontalMenu) {
+      toggleTopLevelVerticalMenu(menuItem, toggleState)
+      return
    }
-}
-
-export function closeSubMenu(menuItem, subMenu = '') {
-   if (!subMenu) {
-      subMenu = menuItem.querySelector('.sub-menu')
-   }
-
-   menuItem.classList.remove('toggled-on')
-   if (subMenu) {
-      subMenu.classList.remove('toggled-on')
-      if (subMenu) {
-         ignSlideUp(subMenu)
-      }
-   }
+   toggleSubMenu(menuItem, toggleState)
 }
 
 
-/**
- * if hovered on, it opens, hover off closes - this is only for a mouse
- * if pen or touch, it requires a click
- */
-export function createMenuListener(menuItem) {
-   if (!menuItem.id) {
-      menuItem.id = 'menu-item' + Date.now()
-   }
-
-   //click / mousehover event
-   menuItem.addEventListener('pointerover', (e) => {
-      //sometimes there are nested menus, we dont want them all firing
+//MAIN MENU EVENT. CAN BE CALLED ON ANY MENU ITEM WITH CHILDREN
+let menuClickEvent = false //make only one click event once a click is used
+function createMenuListener(menuItem) {
+   menuItem.addEventListener('pointerover', function (e) {
       e.stopPropagation()
 
-      //if this is a touch or pen item, this will open and close the menu
-      if (e.pointerType!=='mouse') {
-         if (e.target.closest('.menu a[href="#"]')) {
-            e.preventDefault()
-         }
-         //if its not a mouse its a click event and will toggle open and closed
-         if (!menuItem.classList.contains('toggled-on')) {
-            openSubMenu(menuItem)
-         } else {
-            setTimeout(function () {
-               document.activeElement.blur()
-               closeSubMenu(menuItem)
-            }, 100)
-         }
-      } else {
-         //mouseover event will open on hover always
-         if (!menuItem.classList.contains('toggled-on')) {
-            openSubMenu(menuItem)
-         }
-      }
-   })
+      let toggleState = true //always open unless touch event which changes this below
 
-   //only for mouse, touch will return
-   menuItem.addEventListener('pointerleave', (e) => {
+      //TOUCH CLICK EVENT
       if (e.pointerType!=='mouse') {
-         return
-      }
+         //clicking a real link opens it
+         if (!e.target.closest(`a[href^="#"]`) && !e.target.closest('.submenu-dropdown-toggle')) {
+            return
+         }
+         if (menuItem.classList.contains('toggled-on')) {
+            toggleState = false
+         }
+         //if were opening a top level on horizontal with a click, we need a way to close another that may be opened
+         if (isTopLevel(menuItem) && !menuItem.classList.contains('toggled-on') && isHorizontalMenu(menuItem)) {
+            closeAllTopMenus()
+         }
+      }//touch device
+
+      //open close for hover and device touch
+      toggleMenuItem(menuItem, toggleState)
+
+
+   }) //pointerover
+
+   menuItem.addEventListener('pointerleave', function (e) {
       e.stopPropagation()
 
-
-      if (!menuItem.classList.contains('toggled-on')) {
-         return
+      //simply close for hover
+      if (e.pointerType==='mouse') {
+         toggleMenuItem(menuItem, false)
       }
 
-      //smart way to make sure pointer out only runs when its off the parent item
-      let elementTo = e.toElement || e.relatedTarget //where we went out to
-      //if its a child dont close it
-      if (elementTo!==null && elementTo.closest('#' + menuItem.id)) {
-         return
+      //triggers when the lcick on is removed...too fast so we need to add another event for clicking off
+      if (e.pointerType!=='mouse') {
+         //clicked up on touch now we want that fi they click elsewhere to close everything
+         if (!menuClickEvent) {
+            menuClickEvent = true
+            document.addEventListener('click', (e) => {
+               //if were not clicking a menu, close any menus opened
+               if (!e.target.closest('.menu')) {
+                  closeAllTopMenus()
+               }
+            })
+         }
       }
-      closeSubMenu(menuItem)
-      setTimeout(function () {
-         document.activeElement.blur()
-      }, 300)
+
    })
 }
+
+//close all top level menus
+function closeAllTopMenus() {
+   let otherMenuItems = document.querySelectorAll('.top-level-item.toggled-on')
+   if (otherMenuItems) {
+      otherMenuItems.forEach((item) => {
+         toggleMenuItem(item, false)
+      })
+   }
+}
+
+
+function isTopLevel(menuItem) {
+   return menuItem.classList.contains('top-level-item')
+}
+
+//if the item is inside a submenu inside another submenu
+function isNestedSubMenu(menuItem) {
+   return menuItem.classList.contains('nested-menu-item')
+}
+
+function isHorizontalMenu(menuItem) {
+   return getComputedStyle(menuItem.closest('.menu')).flexDirection!=='column'
+}
+
+
+//fix and reset on resize
+document.addEventListener('afterResize', function () {
+   document.querySelectorAll('.top-level-item.menu-item-has-children').forEach((item) => {
+      toggleMenuItem(item, false)
+      item.querySelector('.sub-menu').style.removeProperty('display')
+
+      if (isHorizontalMenu(item)) {
+         checkOffScreenMenu(item.querySelector('.sub-menu'))
+      }
+
+   })
+})
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -107,124 +129,62 @@ document.addEventListener('DOMContentLoaded', function () {
    //adds menu events to all menus. more menus can be added later by passing it through createMenuListener
    let menus = document.querySelectorAll('.menu .menu-item-has-children')
    menus.forEach((menuItem, index) => {
-      if (!menuItem.id) {
-         menuItem.id = 'menu-item-' + index
-      }
       createMenuListener(menuItem)
    })
-
 
    //on load if its a vertical menu, open the parent dropdown right away
    document.querySelectorAll('.menu .current-menu-item, .menu .current-menu-parent').forEach(menu => {
       //if its a vertical menu. we can know by the flex direction of menu
       if (getComputedStyle(menu.closest('.menu')).flexDirection==='column') {
-         openSubMenu(menu)
-      }
-
-   })
-
-
-   // FOCUS EVENTS
-   document.body.addEventListener('focusin', e => {
-
-      const focusInElement = e.target
-
-      if (focusInElement.closest('.menu-item')) {
-         //get this links {a} li element
-         const liItem = focusInElement.closest('.menu-item')
-         //checking if this was a keyboard tab
-         window.addEventListener('keyup', function (e) {
-
-            let code = (e.keyCode ? e.keyCode:e.which)
-            if (code===9 || code===16) {
-
-               if (liItem.classList.contains('menu-item-has-children')) {
-                  if (!liItem.classList.contains('toggled-on')) {
-                     openSubMenu(liItem)
-
-                     if (code===16) {
-                        const lastMenuItem = liItem.querySelectorAll('.sub-menu li:last-child a')
-                        lastMenuItem[lastMenuItem.length - 1].focus()
-                     }
-                  }
-               }
-            }
-
-
-         }, { once: true })
+         toggleMenuItem(menu)
       }
    })
 
-   let activeElement = '' //new active element
-   document.body.addEventListener('focusout', e => {
-
-      let focusOutElement = e.target
+})
 
 
-      if (focusOutElement.closest('.menu-item')) {
+// FOCUS EVENTS - only for keyboard
+let menuMightBeOpen = false
+document.body.addEventListener('focusin', e => {
+   const menuItem = e.target.closest('.menu-item')
 
-         const liItem = focusOutElement.closest('.top-level-item')
+   if (menuItem && menuItem.classList.contains('menu-item-has-children')) {
+      window.addEventListener('keyup', function (e) {
+         let code = (e.keyCode ? e.keyCode:e.which)
+         if (code===9 || code===16) {
+            menuMightBeOpen = true
 
-         setTimeout(function () {
-            //if active element is not even a menu-item close menu
-            activeElement = document.activeElement
-
-            //if clicked off the entire menu system
-            if (!activeElement.closest('.top-level-item')) {
-               closeSubMenu(liItem)
-            }
-            return 2
-         }, 200)
-
-
-         window.addEventListener('keyup', function (e) {
-
-            let code = (e.keyCode ? e.keyCode:e.which)
-
-            //if shift tabbing off a current li that has a submenu
-            if (code===16) {
-               if (liItem && liItem.classList.contains('toggled-on')) {
-                  closeSubMenu(liItem)
-               }
+            //close other top menus when this one is turned on
+            if (isTopLevel(menuItem)) {
+               closeAllTopMenus()
             }
 
-            //closing the whole menu if we tab off last item in the submenu
-            if (code===9) {
-               if (liItem.closest('.sub-menu li:last-child') && ! liItem.classList.contains('menu-item-has-children')) {
-                  let menuParent = liItem.closest('.top-level-item')
-
-                  if (menuParent.classList.contains('toggled-on')) {
-                     closeSubMenu(menuParent)
-                  }
-               }
-            }
-
-         }, {
-            once: true
-         })
-      }
-
-
-   })
-
+            toggleMenuItem(menuItem, true)
+         }
+      }, { once: true })
+   }
+   if (menuMightBeOpen) {
+      closeAllTopMenus()
+      menuMightBeOpen = false
+   }
 
 })
 
 
 /*------- move submenus if too close to edge on desktop --------*/
-function fixOffScreenMenu(menu) {
-   let display = window.getComputedStyle(menu).display
+function checkOffScreenMenu(submenu) {
+   let display = window.getComputedStyle(submenu).display
    if (display!=='block') {
-      menu.style.display = 'block'
+      submenu.style.display = 'block'
    }
    //make item visible so we can get left edge
 
-   let rightEdge = menu.getBoundingClientRect().right
-   let leftEdge = menu.getBoundingClientRect().right
+   let rightEdge = submenu.getBoundingClientRect().right
+   let leftEdge = submenu.getBoundingClientRect().left
    //set menu back
 
    if (display!=='block') {
-      menu.style.removeProperty('display')
+      submenu.style.removeProperty('display')
    }
 
 
@@ -232,11 +192,14 @@ function fixOffScreenMenu(menu) {
 
    //if the submenu is off the page, pull it back somewhat
    if (rightEdge > viewport) {
-      menu.style.left = '40px'
+      fixOffScreenMenu(submenu, 'right')
+      return
    }
 
    if (leftEdge < 0) {
-      menu.style.left = '60%'
+      fixOffScreenMenu(submenu, 'left')
+   } else {
+      fixOffScreenMenu(submenu, 'none')
    }
 }
 

@@ -53,62 +53,122 @@ export function throttle(fn, threshhold, scope) {
 
 
 ///slide elements
-let ignSlideTimer = {}
+let ignSlideTimer = Array //{} //turn into array nad ad a data-sliding wirth a number use that number as index to clear it
 
 //remove inline styling if any found except display
-export function ignSlidePropertyReset(target) {
+export function ignSlidePropertyReset(target, direction) {
+
+
+   if (direction==='up') {
+      target.style.display = 'none'
+   }
+
    //clear these properties
+   target.style.removeProperty('transition-duration')
+   target.style.removeProperty('transition-property')
+   target.style.removeProperty('height')
+
    target.style.removeProperty('padding-top')
    target.style.removeProperty('padding-bottom')
    target.style.removeProperty('margin-top')
    target.style.removeProperty('margin-bottom')
    target.style.removeProperty('overflow')
+   target.removeAttribute('slideTimer')
+
 }
 
 
 export function ignSlideUp(target, duration = .5) {
+   return ignSlide('up', target, duration)
+}
 
-   return new Promise(function (resolve) {
-      // stop slideDown from continuing
-      if (ignSlideTimer[target]) {
-         clearTimeout(ignSlideTimer[target])
+
+export function ignSlide(direction = 'up', target, duration = .5) {
+   return new Promise(function (resolve, reject) {
+
+      if (target.dataset.slideTimer) {
+         clearTimeout(parseInt(target.dataset.slideTimer))
+         target.removeAttribute('slide-timer')
       }
-      //no sense sliding up if its hidden
-      if (window.getComputedStyle(target).display==='none') {
-         return
-      }
-
-      //set height just in case there is none. cannot be nothing or auto
-      target.style.height = `${target.scrollHeight}px`
 
 
+      const slideTimer = setTimeout(function () {
+         ignSlidePropertyReset(target, direction)
+         resolve()
+      }, duration * 1000)
+      target.dataset.slideTimer = slideTimer + ''
+
+
+
+      //set transitions and overflow
       target.style.transitionProperty = 'height, margin, padding'
       target.style.transitionDuration = duration + 's'
 
-      //setting styles to 0
-      target.style.overflow = 'hidden'
 
-      //then closing the height from wherever it is currently
-      setTimeout(() => {
-         target.style.height = 0 //closing item
-         target.style.paddingTop = 0
-         target.style.paddingBottom = 0
-         target.style.marginBottom = 0
-         target.style.marginTop = 0
-      }, 100)
+      if (direction==='up') {
+         target.style.overflow = 'hidden'
+         //no point sliding up if its been set to hidden via css
+         if (window.getComputedStyle(target).display==='none') {
+            return
+         }
+
+         //set height just in case there is none. cannot be nothing or auto
+         target.style.height = `${target.scrollHeight}px`
 
 
-      //after duration, set to hidden and reset touched properties. all that's left now is display:none;
-      ignSlideTimer[target] = setTimeout(() => {
-         target.style.display = 'none'
-         ignSlidePropertyReset(target) //remove all margin,  paddings added once display is none
-         target.style.removeProperty('transition-duration')
-         target.style.removeProperty('transition-property')
-         target.style.removeProperty('height')
-         resolve()
-      }, duration * 1000)
+         //1 split second after: closing the height from wherever it is currently
+         setTimeout(() => {
+            target.style.height = 0 //closing item now
+            target.style.paddingTop = 0
+            target.style.paddingBottom = 0
+            target.style.marginBottom = 0
+            target.style.marginTop = 0
+         }, 100)
+
+      } else {
+         //sliding down
+
+         // save original margins, and padding, no the inline ones
+         let height = window.getComputedStyle(target).height //might be open... or have a set height
+         let display = window.getComputedStyle(target).display
+         let paddingTop = window.getComputedStyle(target).paddingTop || 0
+         let paddingBottom = window.getComputedStyle(target).paddingBottom || 0
+         let marginBottom = window.getComputedStyle(target).marginBottom || 0
+         let marginTop = window.getComputedStyle(target).marginTop || 0
+         target.style.removeProperty('overflow')
+
+
+         //cant animate from auto
+         if (height==='auto') {
+            target.style.height = 0
+         }
+
+         //if its not showing now, we will show from 0 on everything
+         if (display==='none') {
+            display = 'block' //we will be setting this to show
+            paddingBottom = paddingTop = marginBottom = marginTop = 0 //animating from 0
+            target.style.height = 0
+         }
+
+         //display must be set before transitioning below
+         target.style.display = display
+
+         //actual transitions
+         setTimeout(() => {
+            //animate properties to open and normal
+            target.style.height = `${target.scrollHeight}px`
+
+            //also animating the padding and margins
+            target.style.paddingTop = paddingTop
+            target.style.paddingBottom = paddingBottom
+            target.style.marginTop = marginTop
+            target.style.marginBottom = marginBottom
+
+         }, 0)
+
+
+      }
    })
-
 }
 
 
@@ -120,71 +180,7 @@ export function ignSlideUp(target, duration = .5) {
  * Style element as it should show then set it to display none (or have it get display none from slide up or something else)
  */
 export function ignSlideDown(target, duration = .5) {
-   return new Promise(function (resolve, reject) {
-
-      // stop slideUp from continuing
-      if (ignSlideTimer[target]) {
-         clearTimeout(ignSlideTimer[target])
-      }
-
-      //open item by getting its padding margin and height.
-      // //if its display none, then we can assume we are opening from a height of 0.
-
-      //save original margins, and padding
-      let height = window.getComputedStyle(target).height //might be open... or have a set height
-      let display = window.getComputedStyle(target).display
-      let paddingTop = window.getComputedStyle(target).paddingTop || 0
-      let paddingBottom = window.getComputedStyle(target).paddingBottom || 0
-      let marginBottom = window.getComputedStyle(target).marginBottom || 0
-      let marginTop = window.getComputedStyle(target).marginTop || 0
-
-      //cant animate from auto
-      if (height==='auto') {
-         target.style.height = 0
-      }
-
-      //if its hidden, it currently takes up no room
-      // we will show from a height of 0 with no paddings or margins. those will animate in too so its a smooth height and margin
-      if (display==='none') {
-         display = 'block' //we will be setting this to show
-         paddingBottom = paddingTop = marginBottom = marginTop = 0
-         target.style.height = 0
-      }
-
-      //if its not display none, it may have space on the page (ie margin still might be showing even with height of 0)
-      //in that case we dont want to touch those
-
-      //set up transitions
-      target.style.transitionProperty = 'height, margin, padding'
-      target.style.transitionDuration = duration + 's'
-      //make sure its overflow is set
-      target.style.overflow = 'hidden'
-
-      //finally set the display to show if not showing. happens fast
-      target.style.display = display
-
-
-      //with item showing and transitions enabled, we can slide it open. this runs after transitions set via a settimeout
-      setTimeout(() => {
-         //animate properties to open and normal
-         target.style.paddingTop = paddingTop
-         target.style.paddingBottom = paddingBottom
-         target.style.height = `${target.scrollHeight}px`
-         target.style.marginTop = marginTop
-         target.style.marginBottom = marginBottom
-
-      }, 0)
-
-      //after it slides open remove certain properties
-      ignSlideTimer[target] = setTimeout(() => {
-         ignSlidePropertyReset(target)
-         target.style.removeProperty('transition-duration')
-         target.style.removeProperty('transition-property')
-         target.style.removeProperty('height')
-         resolve()
-      }, duration * 1000)
-
-   })
+   return ignSlide('down', target, duration)
 }
 
 export function ignSlideToggle(target, duration = .5) {

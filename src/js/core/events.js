@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	//it will move there when the site reaches smaller than a size defaulted to 1030 or set that with data-moveat
 	//the whole div, including the data att moveto moves back and forth
 	let movedId = 0;
-
+   const moveEvent = new Event('afterResize', {bubbles: true}); //bubble allows for delegation on body
 	function moveItems() {
 
 
@@ -276,6 +276,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.querySelectorAll('.fixed-holder').forEach(fixed=>{
 			fixed.style.height = fixed.firstElementChild.clientHeight + 'px';
 		});
+
+		document.dispatchEvent(moveEvent)
 
 	}
 

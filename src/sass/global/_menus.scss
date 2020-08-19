@@ -1,15 +1,11 @@
 @use "../resources" as *; //should also load resources
 
-/*
-  Menu items .menu-item>.menu-item-link>a+button
-  Menu items have an li and a li > menu-item-link that can be styled.
-  Sometimes if you style the li, this will include the sub menu inside.
-  menu-item-link only styles the current link, not the submenus
- */
+
 /*--------------------------------------------------------------
-# Menu Styling: Vertical Menus Anywhere (sidebars etc...)
+# Basic Menu Styling
 --------------------------------------------------------------*/
-//menu items default
+//this will affect all vertical menus everywhere (sidebar, panel-left,  etc...)
+
 .menu li {
   color: white;
 }
@@ -19,16 +15,20 @@
   color: black;
 }
 
+//todo submenu stuff here
 
-//menu items in the left panel overrides
+
+/*--------------------------------------------------------------
+# Vertical Menu in Panel Left overrides
+--------------------------------------------------------------*/
 #panel-left {
   //current menu and a toggled-open one
-  .menu .current-menu-item, .menu li.toggled-on{
+  .menu .current-menu-item, .menu li.toggled-on {
     background: rgba(0, 0, 0, .3);
     color: white;
 
     //top level item
-    > .menu-item-link{
+    > .menu-item-link {
       background: rgba(0, 0, 0, .5);
     }
   }
@@ -36,12 +36,12 @@
 
 
 /*--------------------------------------------------------------
-# Desktop Menu Styling overrides and default menus that are horizontal
+# Horizontal Menu Styling overrides
 --------------------------------------------------------------*/
+
 @media(min-width: $media-nav) {
   .site-top .menu, .horizontal-menu .menu {
 
-    //all menu items default
     li {
       color: white;
       font-weight: bold;
@@ -50,38 +50,95 @@
     //top level items:
     .top-level-item {
 
-      //top level menu item
-      &.toggled-on, &:hover, &:focus-within{
-        background: transparent;
-        color: black;
-      }
 
-      //top level submenu dropdowns
-      & > .sub-menu {
-        display: none; //if you wont use the slide down effect change this, but change the functions in navigations.js too
+      //dropdown boxes from top level item
+      & > .sub-menu, & > .children {
+        opacity: 0;
+        visibility: hidden;
+        transform: perspective(100px) translate3d(-50%, 0, 0) rotateX(-8deg);
+        transition: all .3s;
         background: white;
-        border-radius: 0 0 3px 3px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, .17);
+        border-radius: 3px;
+        transform-style: preserve-3d;
+        transform-origin: 0 top;
+        overflow: visible;
+        padding: 5px 0;
 
+        a {
+          flex-shrink: 1;
+        }
 
+        //top arrow piece
+        &:before {
+          content: '';
+          width: 16px;
+          height: 16px;
+          background: inherit;
+          display: block;
+          transform: rotate(45deg);
+          position: absolute;
+          top: -8px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          z-index: 1;
+        }
+
+        //dropdown inner links
         .menu-item-link {
           transition: all .5s;
           color: var(--highlight);
+          z-index: 2;
+          position: relative;
         }
 
-
-        //all li's inside sub menu: current and hovered
-        li:hover > .menu-item-link, li:focus-within > .menu-item-link {
+        //inner links hovered
+        .menu-item-link:hover, .menu-item-link:focus-within{
           background: var(--highlight);
           color: white;
         }
       }
 
+
+      //top level menu item turned on
+      &.toggled-on, &:focus-within {
+        background: transparent;
+        color: black;
+
+        //open submenu
+        & > .sub-menu, & > .children {
+          transform: translate3d(-50%, -5px, 0) rotateX(0);
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+
+      &.offscreen-right > .sub-menu{
+        left: -50px;
+        &:before{
+          content: none;
+        }
+      }
+      
+    } //top-level items
+  } //horizontal menus
+
+  .top-level-item > .menu-item-link{
+    .submenu-dropdown-toggle{
+      display: none;
     }
-
-    //top-level items
   }
-
 }
+
+
+.touch-device .top-level-item > .menu-item-link{
+  .submenu-dropdown-toggle{
+    display: block;
+  }
+}
+
 
 
 /*--------------------------------------------------------------
@@ -89,6 +146,10 @@
 --------------------------------------------------------------*/
 .submenu-dropdown-toggle .icon {
   transition: transform .4s;
+}
+
+.menu-item.toggled-on > .menu-item-link .icon, .menu-item:focus-within > .menu-item-link.icon {
+  transform: rotate(90deg);
 }
 
 .submenu-dropdown-toggle,
@@ -105,9 +166,6 @@
   color: inherit;
 }
 
-.menu-item.toggled-on > .menu-item-link .icon {
-  transform: rotate(90deg);
-}
 
 //for more panel-left styling see panels.scss
 

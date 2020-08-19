@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
       menuToggle.addEventListener('afterToggle', e => {
          //if button has been toggled on
          if (menuToggle.classList.contains('toggled-on')) {
-            body.classList.add('body-lock');
+            if (body.classList.contains('app-menu')) {
+               body.classList.add('mobile-menu-body-lock');
+            }
 
             //clicking anywhere outside the menu will close it
             document.querySelector('.site-content').addEventListener('click', closeAppMenu, { once: true });
@@ -32,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (body.classList.contains('app-menu')) {
                page.addEventListener('transitionend', function () {
-                  body.classList.remove('body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
+                  body.classList.remove('mobile-menu-body-lock'); //only remove toggle and hide menu once page holder finishes its transition to cover it.
                }, { once: true });
             } else {
-               body.classList.remove('body-lock');
+               //body.classList.remove('mobile-menu-body-lock');
             }
          }
 

@@ -46,16 +46,20 @@ if ( ! function_exists( 'ign_google_fonts_url' ) ) {
  *
  * @return array
  */
-function ign_nav_menu_css_class( $classes, $item, $depth ) {
+function ign_nav_menu_css_class( $classes, $item, $args, $depth ) {
 
 	if ( $item->menu_item_parent == 0 ) { //Count top level menu items
 		$classes[] = 'top-level-item';
 	}
 
+	if ( $depth >= 2 ) { //Count top level menu items
+		$classes[] = 'nested-menu-item';
+	}
+
 	return $classes;
 }
 
-add_filter( 'nav_menu_css_class', 'ign_nav_menu_css_class', 10, 3 );
+add_filter( 'nav_menu_css_class', 'ign_nav_menu_css_class', 10, 4 );
 
 
 /**

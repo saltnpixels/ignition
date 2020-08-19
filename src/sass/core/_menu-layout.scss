@@ -53,7 +53,7 @@
         font-size: inherit;
       }
 
-      //icon for submenu button layout
+      // > icon for submenu button layout
       .submenu-dropdown-toggle {
         padding-left: 10px;
         padding-right: 0;
@@ -65,7 +65,7 @@
     }
 
 
-    //sub-menu basic styling for vertical and horizontal
+    //sub-menu basic styling for vertical
     .sub-menu, .children {
       list-style: none;
       margin: 0;
@@ -75,7 +75,7 @@
       white-space: nowrap;
       padding: 0;
 
-      //inner items move over a bit
+      //vertical inner items inner submenu items over a bit as they are listed down
       .menu-item-link {
         padding-left: 30px;
       }
@@ -94,14 +94,17 @@
 /*--------------------------------------------------------------
 # Horizontal Menus
 --------------------------------------------------------------*/
+//vertical menus with a class of .horizontal-menu can become horizontal when the screen is wide enough
 @mixin horizontal-menu($breakpoint: $media-nav) {
 
   @media(min-width: $breakpoint) {
 
+    //removing padding on right of last item
     .top-level-item:last-child > .menu-item-link {
       padding-right: 0;
     }
 
+    //removing padding on left of first item
     .top-level-item:first-child > .menu-item-link {
       padding-left: 0;
     }
@@ -116,25 +119,28 @@
       height: 100%;
 
 
-      //make top level items flexed so they can be positioned at top or bottom
-      .top-level-item .menu-item-link {
+
+      //make top level items flexed so they can be positioned at top or bottom of site-top
+      .top-level-item > .menu-item-link {
         display: flex;
         height: 100%;
         align-items: var(--desktop-menu-alignment);
       }
 
-      //top level sub menus layout. appear right below the top level item
+
+      //top level sub-menus
       .top-level-item > .sub-menu, .top-level-item > .children {
         position: absolute;
         z-index: 10;
-        top: 100%;
+        top: 100%; //right below nav bar
         left: 50%;
-        transform: translate(-50%, 0);
+        transform: translate(-50%, 0); //magically centers the element
+        display: block;
+
 
         a {
           flex-shrink: 1;
         }
-
       }
 
       .sub-menu .menu-item-link {
@@ -373,10 +379,20 @@
     }
   }
 
+  .mobile-menu-body-lock {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+
+    .site-container {
+      height: 100%;
+    }
+  }
+
 }
 
 //lock body needed to make it look right and no scrolling around
-.body-lock {
+.body-lock{
   overflow: hidden;
   height: 100vh;
   width: 100vw;
@@ -386,11 +402,11 @@
   }
 }
 
-//ios must have position relative on body for lock to work
-@supports (-webkit-overflow-scrolling: touch) {
+//ios changes
+@supports (-webkit-touch-callout: none) {
   /* CSS specific to iOS devices */
-  .body-lock {
-    position: fixed; // todo check on ios that it works
+  .app-menu.menu-open #page {
+    transform: translate(50vw, -5vh) scale(.75);
   }
 }
 

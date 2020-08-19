@@ -285,11 +285,11 @@ function ign_gutenberg_styles() {
 /**
  * Add login stylehseet
  */
-function my_login_styles() {
-	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/admin-index_bundle.css', '', wp_get_theme()->get( 'Version' ) ); //todo make another entry or use admin?
+function login_styles() {
+	wp_enqueue_style( 'custom-admin', get_stylesheet_directory_uri() . '/dist/login.css', '', wp_get_theme()->get( 'Version' ) );
 }
 
-add_action( 'login_enqueue_scripts', 'my_login_styles' );
+add_action( 'login_enqueue_scripts', 'login_styles' );
 
 
 /**
