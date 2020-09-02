@@ -7,8 +7,11 @@
 
 //.editor-styles-wrapper holds the title area and well as all blocks and contains the entire gutenberg part
 //.block-editor-block-list__layout holds all .wp-block items that are inside .editor-styles-wrapper
+div .editor-styles-wrapper{
+  padding: 15px 0;
+}
 
-
+//this element directly holds all blocks under the title
 //here we make it act like an entry-content.container-content
 div .block-editor-block-list__layout {
   padding: 0 var(--container-padding);
@@ -57,17 +60,19 @@ div .acf-block-component {
   width: 100%; //always make sidebar full width of parent
 }
 
-//widening sidebar
-@media(min-width: 1560px) {
-  .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
-	width: 32%;
-  }
 
+
+////widening sidebar
+@media(min-width: 1560px) {
+  .interface-interface-skeleton__sidebar{
+  width: 32%;
 }
 
-//hiding sidebar on small screens so you can have a full screen experience with hover widening it
+}
+//
+////hiding sidebar on small screens so you can have a full screen experience with hover widening it
 @media(max-width: 1560px) {
-  .edit-post-layout.is-sidebar-opened .block-editor-editor-skeleton__sidebar {
+  .edit-post-layout.is-sidebar-opened .interface-interface-skeleton__sidebar{
 	transition: width .5s;
 	width: 32%;
 

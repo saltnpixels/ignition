@@ -2,7 +2,7 @@
 
 /**
  * Default Header Blocks
- * This file checks the theme config and takes all post types found in default-acf-header-block and gives it a default block template when a new post is made.
+ * This file checks the theme config and takes all post types found in default_acf_header_block and gives it a default block template when a new post is made.
  * If a file header-{post-type} exists inside the post type folder, that will be used and shown as the header block template! Otherwise header-post.php is used
  * You can then go and add a acf group and match it to the new header block template and make new fields!
  *
@@ -13,7 +13,7 @@
 function add_header_block_default() {
 
 	if ( function_exists( 'acf_register_block_type' ) ) {
-		$post_types = ign_get_config( 'default-acf-header-block' );
+		$post_types = ign_get_config( 'default_acf_header_block' );
 
 		foreach ( $post_types as $post_type ) {
 
@@ -79,7 +79,7 @@ function ign_register_header_block( $post_type ) {
  * @param $is_preview
  * @param $post_id
  *
- * Render header block which in turn gets the header-{post-type}.php with loop fully loaded.
+ * Render header block with a function instead of a template which in turn gets the header-{post-type}.php template with loop fully loaded.
  * the_title will also change on the fly for smooth experience
  */
 function render_default_block( $block, $content, $is_preview, $post_id ) {

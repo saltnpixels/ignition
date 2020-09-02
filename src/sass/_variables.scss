@@ -4,7 +4,6 @@
 //Change your overall colors and fonts and stuff here
 //Don't forget to also check out theme.config.json and functions.php for a few more overall settings
 
-
 @forward "resources";
 @use "resources" as *; //sass vars and mixins and functions
 
@@ -16,7 +15,7 @@
 :root {
   //Fonts. change to the fonts you want. Defaults to OS Fonts. Load google fonts via theme.config.json
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; //for headings etc..
   --line-height: 1.5;
   --font-pre: 'Source Code Pro', monospace;
   --line-height-pre: 22px;

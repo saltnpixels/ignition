@@ -15,8 +15,8 @@
   "admin_access_capability": "manage_options",
   "load_custom_icons": false,
   "mobile_menu_type": "app-menu",
-  "logo-position": "logo-left",
-  "site-top-container": "container",
-  "default-acf-header-block" : ["post", "page"]
+  "logo_position": "logo-left",
+  "site_top_container": "container",
+  "default_acf_header_block" : ["post", "page"]
 }
 

@@ -18,7 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
  - theme.config file allows for quick settings for all sorts of things
  - 'npm run setup' to create new theme and replace 'ignition' throughout files
  - You can still create underscore files of js, scss, and php in folder inc, parts, and blocks for automatic importing to the site.
- - Default header block for posts listed in theme.config under default-acf-header-block
+ - Default header block for posts listed in theme.config under default_acf_header_block
  - Change header block template by making header-{post-type}.php file in the post type folder.
 
 ## [3.5.0] - Apr 1, 2020

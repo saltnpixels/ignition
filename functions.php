@@ -10,7 +10,7 @@
  * The first file to look at is theme.config.json where you can quickly set up some theme settings
  * like google fonts, icons for various areas and logo position
  * you can also set the mobile menu by editing the mobile_menu_type option to open as app-menu or leave blank to open regular
- * default-acf-header-block: add your post types here to force them to have a header block when a new post is made.
+ * default_acf_header_block: add your post types here to force them to have a header block when a new post is made.
  *
  * Then you should set your CSS variables in variables.scss
  *
@@ -28,7 +28,7 @@
  * Ignition only works in WordPress 4.7 or later. Here we check before allowing the theme to be used.
  * There is nothing here for you to do.
  */
-if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
+if ( version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ) {
 	require get_template_directory() . '/inc/core/back-compat.php';
 	return;
 }

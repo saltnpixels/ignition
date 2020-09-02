@@ -5,12 +5,12 @@
 //Add your own query variables below
 
 /*------- Media Query Sizes. Add your own --------*/
-$media-nav: 800px; //when navigations should go mobile. Should prob match --nav-move
+$media-nav: 800px; //when navigations should go mobile. Should prob match --nav-move found in variables.scss
 $media-sidebar: 1000px; //when .secondary would go mobile if you are using it.
 $media-small: 576px;
 $media-medium: 768px;
 $media-large: 1030px;
-$media-container: 1200px; //match the container css variable
+$media-container: 1200px; //should match the container css variable
 
 
 $gap: 30px; //still used in some queries and instances

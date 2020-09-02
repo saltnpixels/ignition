@@ -10,8 +10,8 @@
 
 ?>
 
-<div class="site-top <?php echo ign_get_config( 'logo-position', 'logo-left' ); ?>">
-    <div class="site-top-container <?php echo ign_get_config( 'site-top-container', 'container' ); ?>">
+<div class="site-top <?php echo ign_get_config( 'logo_position', 'logo-left' ); ?>">
+    <div class="site-top-container <?php echo ign_get_config( 'site_top_container', 'container' ); ?>">
         <div class="site-navigation horizontal-menu flex">
 			<?php echo ign_logo(); ?>
 

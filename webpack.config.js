@@ -19,6 +19,7 @@ module.exports = {
       alias: {
          src: path.resolve(__dirname, 'src/'),
          inc: path.resolve(__dirname, 'inc/'),
+         root: path.resolve(__dirname, '.'),
       }
    },
    devtool: 'source-map',

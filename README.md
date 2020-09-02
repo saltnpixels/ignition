@@ -65,9 +65,9 @@ npm run setup
     "admin_access_capability": "manage_options", //capability of who can access back end
     "load_custom_icons": false, //now that we use iconify.design you might not need to load any custom icons, although you can still add them
     "mobile_menu_type": "app-menu", //fancy mobile menu, leave blank for regular
-    "logo-position": "logo-left", //logo position with menu
-    "site-top-container": "container", //contain the menu and logo takes container, container-fluid or nothing
-    "default-acf-header-block" : ["post", "page"] //create default header block for these post types (assumes they use Gutenberg)
+    "logo_position": "logo-left", //logo position with menu
+    "site_top_container": "container", //contain the menu and logo takes container, container-fluid or nothing
+    "default_acf_header_block" : ["post", "page"] //create default header block for these post types (assumes they use Gutenberg)
 }
 ```
 By setting these up here you wont have to delve into files or through setting pages. It's fast and easy!
@@ -197,7 +197,7 @@ You can change this by adding a string inside so a different file is loaded.
 Default headers per post type are great, but they are not blocks... They wont show up on the back end when your client is creating posts and pages with Gutenberg. This does not result in a smooth experience!
 While the template part would load on the front end it will not show up on the back. However, wouldn't it be nice if this file can be seen in the back end as well and act like a Gutenberg block so the client gets a smooth experience when using the default header?
 
-Ignition to the rescue! In the themes.config file there is a setting for `default-acf-header-block`. Add your post type here and automatically your header-{post-type}.php template file will be added as a choosable block for that post type. Whats more it will be automatically loaded when the client goes to make a new post!<br>
+Ignition to the rescue! In the themes.config file there is a setting for `default_acf_header_block`. Add your post type here and automatically your header-{post-type}.php template file will be added as a choosable block for that post type. Whats more it will be automatically loaded when the client goes to make a new post!<br>
 This gives the client a smooth experience when creating a page. It even updates when the client changes the title! The header template file can continue being used as a template file and works the same. You can use `the_title()` or any in-the-loop template tags, that you normally might not have access to in a block. It's magic.
 
 You can add an ACF group and connect it to your default header block...er... template hybrid.

@@ -204,13 +204,13 @@ endif;
 
 /**
  * @param string $file_prefix
- * @param string $vars
+ * @param array $vars
  *  * Gets the proper template file to show for the WP LOOP
  * Simply routes the page to the right folder and file, or falls back on the post folder.
  * post formats should be used at end of file like: card-link.php
  *
  */
-function ign_template( $file_prefix = 'content', $vars = '' ) {
+function ign_template( $file_prefix = 'content', $vars = array() ) {
 
 	$format = '';
 	if ( get_post_format() ) {
@@ -219,16 +219,9 @@ function ign_template( $file_prefix = 'content', $vars = '' ) {
 	$post_type = get_post_type();
 
 	//if no vars are passed, at least pass empty $block because there is a chance we are grabbing a template that expects $block to exist for block attributes.
-	if ( ! $vars ) {
-		$vars = array( 'block' => '' );
-	}
+	$vars = wp_parse_args($vars, array('block' => ''));
+	set_query_var( 'block', $vars['block'] ); //you can use $blocks without having to parse args for fast reference
 
-
-	if ( is_array( $vars ) ) {
-		foreach ( $vars as $key => $value ) {
-			set_query_var( $key, $value );
-		}
-	}
 
 	//also allow for full paths. if / is found in prefix then we wont check src. we expect a full path no prefix
 	if ( strpos( $file_prefix, '/' ) !== false ) {
@@ -237,16 +230,17 @@ function ign_template( $file_prefix = 'content', $vars = '' ) {
 
 		locate_template( array(
 			'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . $post_type . '.php',
-			//searches for {prefix}-{post-type}.php inside post type folder
+			//searches for post-type/{prefix}-{post-type}.php inside post type folder
 			'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . '.php',
-			//if it cant find the above, searches for {prefix}.php in post-type folder
+			//if it cant find the above, searches for post-type/{prefix}.php in post-type folder
 			'src/parts/post/' . $file_prefix . '-' . $format . 'post.php',
-			//searches for {prefix}-post.php
+			//searches for post/{prefix}-post.php
 			'src/parts/post/content-' . $format . 'post.php',
-			//gets content.php
+			//gets post/content.php
 		),
 			true,
-			false
+			false,
+		$vars
 		);
 
 	}
@@ -484,12 +478,13 @@ function ign_get_block_anchor( $block ) {
 	}
 }
 
+
 /**
  * @param $block
  * @param string $custom_classes
  * @param bool $include_align
  */
-function ign_block_attrs( $block, $custom_classes = '', $include_align = true ) {
+function ign_block_attrs( $block = '', $custom_classes = '', $include_align = true ) {
 	if ( $block ) {
 		$block_id    = ign_get_block_anchor( $block );
 		$block_class = ign_block_class( $block, $custom_classes, $include_align, false );
@@ -516,6 +511,7 @@ function ign_header_block($prefix = 'header') {
 
 
 //fuzzy has_block search for any block with word header-
+//has_block searches for exact block names, this searches for a block that starts with header-
 /**
  * @param string $block_name
  * @param null $post
