@@ -127,13 +127,13 @@ document.addEventListener('afterResize', function () {
 document.addEventListener('DOMContentLoaded', function () {
 
    //adds menu events to all menus. more menus can be added later by passing it through createMenuListener
-   let menus = document.querySelectorAll('.menu .menu-item-has-children')
+   let menus = document.querySelectorAll('.menu-item')
    menus.forEach((menuItem, index) => {
       createMenuListener(menuItem)
    })
 
    //on load if its a vertical menu, open the parent dropdown right away
-   document.querySelectorAll('.menu .current-menu-item, .menu .current-menu-parent').forEach(menu => {
+   document.querySelectorAll('.menu .current-menu-item.menu-item-has-children, .menu .current-menu-parent').forEach(menu => {
       //if its a vertical menu. we can know by the flex direction of menu
       if (getComputedStyle(menu.closest('.menu')).flexDirection==='column') {
          toggleMenuItem(menu)

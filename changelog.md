@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). :)
+
+## [4.0.2] Sep 2, 2020
+- Updated for support with WP 5.5
+
 ## [4.0.1] Jul 1, 2020
 - Added images loader to webpack
 - fixed the menu so it tabs better for ADA compliance
@@ -14,7 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
  - Currently still relies on acf blocks
  - The assets folder is now src and also holds the template-parts now known as parts
  - JS modules are used as well as SASS modules with @use and @import
- - Easy templating with ign_template() which also supports passing variables in an second parameter
+ - Easy templating with ign_template() which also supports passing variables in a second parameter
  - theme.config file allows for quick settings for all sorts of things
  - 'npm run setup' to create new theme and replace 'ignition' throughout files
  - You can still create underscore files of js, scss, and php in folder inc, parts, and blocks for automatic importing to the site.

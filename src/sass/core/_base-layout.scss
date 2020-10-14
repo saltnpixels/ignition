@@ -98,7 +98,7 @@ html * {
   overflow: hidden;
   width: 0;
   clip: rect(1px, 1px, 1px, 1px);
-}
+} //placed on an item where we want the screen reader to skip to.
 
 .screen-reader-text {
   clip: rect(1px, 1px, 1px, 1px);
@@ -120,8 +120,7 @@ html * {
   clip: auto !important;
   color: #21759b;
   display: block;
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 1.4rem;
   font-weight: 700;
   height: auto;
   left: 5px;

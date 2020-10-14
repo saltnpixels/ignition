@@ -50,8 +50,20 @@
     //top level items:
     .top-level-item {
 
+      //top level menu item turned on or hovered on, or item within is hovered on
+      &.toggled-on, &:focus-within {
+        background: transparent;
+        color: black;
 
-      //dropdown boxes from top level item
+        //open submenu if there is one.
+        & > .sub-menu, & > .children {
+          transform: translate3d(-50%, -5px, 0) rotateX(0);
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      //dropdown boxes styling from top level item on horizontal menus
       & > .sub-menu, & > .children {
         opacity: 0;
         visibility: hidden;
@@ -69,7 +81,7 @@
           flex-shrink: 1;
         }
 
-        //top arrow piece
+        //top cute arrow piece
         &:before {
           content: '';
           width: 16px;
@@ -85,7 +97,7 @@
           z-index: 1;
         }
 
-        //dropdown inner links
+        //submenu inner links
         .menu-item-link {
           transition: all .5s;
           color: var(--highlight);
@@ -101,18 +113,7 @@
       }
 
 
-      //top level menu item turned on
-      &.toggled-on, &:focus-within {
-        background: transparent;
-        color: black;
 
-        //open submenu
-        & > .sub-menu, & > .children {
-          transform: translate3d(-50%, -5px, 0) rotateX(0);
-          opacity: 1;
-          visibility: visible;
-        }
-      }
 
 
       &.offscreen-right > .sub-menu{
@@ -132,7 +133,7 @@
   }
 }
 
-
+//show the dropdown arrow when hover events are not available
 .touch-device .top-level-item > .menu-item-link{
   .submenu-dropdown-toggle{
     display: block;
@@ -142,7 +143,7 @@
 
 
 /*--------------------------------------------------------------
-# Sub-Menu Dropdown Buttons styling
+# Sub-Menu Dropdown Button styling
 --------------------------------------------------------------*/
 .submenu-dropdown-toggle .icon {
   transition: transform .4s;
