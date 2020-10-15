@@ -17,6 +17,9 @@
 if ( ! function_exists( 'ign_google_fonts_url' ) ) {
 	function ign_google_fonts_url() {
 
+		if(! ign_get_config('google_fonts')){
+			return false;
+		}
 
 		//ADD YOUR FONTS HERE
 		//when adding from google remove the + between words Ex: 'Source+Code' becomes 'Source Code'

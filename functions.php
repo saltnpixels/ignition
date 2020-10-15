@@ -25,11 +25,12 @@
  */
 
 /**
- * Ignition only works in WordPress 4.7 or later. Here we check before allowing the theme to be used.
+ * Ignition only works in WordPress 5.5 or later. Here we check before allowing the theme to be used.
  * There is nothing here for you to do.
  */
 if ( version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ) {
 	require get_template_directory() . '/inc/core/back-compat.php';
+
 	return;
 }
 
@@ -171,10 +172,9 @@ add_action( 'after_setup_theme', 'ignition_setup' );
  */
 
 
-
 if ( ! function_exists( 'disable_admin_bar' ) ) {
 	function disable_admin_bar() {
-		if ( ! current_user_can( ign_get_config('admin_access_capability', 'manage_options') ) ) {
+		if ( ! current_user_can( ign_get_config( 'admin_access_capability', 'manage_options' ) ) ) {
 			add_filter( 'show_admin_bar', '__return_false' );
 		}
 	}
@@ -188,7 +188,7 @@ add_action( 'after_setup_theme', 'disable_admin_bar' );
 if ( ! function_exists( 'redirect_admin' ) ) {
 
 	function redirect_admin() {
-		if ( ! current_user_can( ign_get_config('admin_access_capability', 'manage_options') ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+		if ( ! current_user_can( ign_get_config( 'admin_access_capability', 'manage_options' ) ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 			wp_redirect( home_url() );
 			exit;
 		}
@@ -209,7 +209,10 @@ function ignition_scripts() {
 	global $wp;
 
 	// Add google fonts
-	wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), wp_get_theme()->get( 'Version' ) );
+	if ( ign_get_config( 'google_fonts' ) ) {
+		wp_enqueue_style( 'ignition-fonts', ign_google_fonts_url(), array(), wp_get_theme()->get( 'Version' ) );
+	}
+
 
 	// Theme stylesheet. Will get this stylesheet or a child themes stylesheet.
 	wp_enqueue_style( 'ignition-style', get_stylesheet_uri(), '', wp_get_theme()->get( 'Version' ) );
@@ -226,8 +229,7 @@ function ignition_scripts() {
 	wp_deregister_script( 'jquery-core' );
 	wp_register_script( 'jquery-core', "https://code.jquery.com/jquery-3.5.1.min.js", array(), '3.5.1' );
 	wp_deregister_script( 'jquery-migrate' );
-	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.3.0.min.js", array('jquery-core'), '3.3.0' );
-
+	wp_register_script( 'jquery-migrate', "https://code.jquery.com/jquery-migrate-3.3.0.min.js", array( 'jquery-core' ), '3.3.0' );
 
 
 	//any javascript file in assets/js that ends with custom.js will be lumped into this file.
@@ -242,7 +244,7 @@ function ignition_scripts() {
 		'ajaxurl'    => admin_url( 'admin-ajax.php' ),
 		'nonce'      => wp_create_nonce( 'ajax_nonce' ),
 		'url'        => home_url(),
-		'currentUrl' => home_url($wp->request )
+		'currentUrl' => home_url( $wp->request )
 	) );
 
 
