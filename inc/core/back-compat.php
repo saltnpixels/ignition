@@ -35,7 +35,7 @@ add_action( 'after_switch_theme', 'ignition_switch_theme' );
  * @global string $wp_version WordPress version.
  */
 function ignition_upgrade_notice() {
-	$message = sprintf( __( 'Ignition requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'ignition' ), $GLOBALS['wp_version'] );
+	$message = sprintf( __( 'Ignition requires at least WordPress version 5.5. You are running version %s. Please upgrade and try again.', 'ignition' ), $GLOBALS['wp_version'] );
 	printf( '<div class="error"><p>%s</p></div>', $message );
 }
 
@@ -47,7 +47,7 @@ function ignition_upgrade_notice() {
  * @global string $wp_version WordPress version.
  */
 function ignition_customize() {
-	wp_die( sprintf( __( 'Ignition requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'ignition' ), $GLOBALS['wp_version'] ), '', array(
+	wp_die( sprintf( __( 'Ignition requires at least WordPress version 5.5. You are running version %s. Please upgrade and try again.', 'ignition' ), $GLOBALS['wp_version'] ), '', array(
 		'back_link' => true,
 	) );
 }
