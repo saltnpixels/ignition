@@ -78,7 +78,7 @@ module.exports = {
       new MiniCssExtractPlugin(),
       new BrowserSyncPlugin({
              host: themeConfig.server,
-             proxy: themeConfig.server,
+             proxy: `https://${themeConfig.server}`,
              https: true,
              files: [
                 '**/*.php',
