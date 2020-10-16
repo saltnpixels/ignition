@@ -4,13 +4,17 @@
 
 ## The Starter Theme that Could
 
-Ignition is an amazing WordPress starter theme that aims to make your life easier. The website documentation is a bit behind! Please use the info below for 4.0:
+Ignition is an amazing WordPress starter theme that aims to make your life easier and your development faster!
+
+Note: The site below has a splash page that is a bit old and mentions one day incorporating Gutenberg... We are long past that!
+Luckily the documentation has been updated. Please stand by while we find time to update the splash page.
+
 ### https://ignition.press
 
 ## Ignition 4.0
 Ignition 4.0 is out as of Jun 16, 2020
-The documentation on the site listed above, is a bit behind and needs time to be updated.
-However the info below should get you started!
+
+
 
 ## Features
 Ignition has a lot of features while remaining lightweight and bare bones.
