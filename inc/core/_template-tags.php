@@ -219,9 +219,9 @@ function ign_template( $file_prefix = 'content', $vars = array() ) {
 	$post_type = get_post_type();
 
 	//if no vars are passed, at least pass empty $block because there is a chance we are grabbing a template that expects $block to exist for block attributes.
-	$vars = wp_parse_args($vars, array('block' => ''));
+	$vars = wp_parse_args($vars, array('block' => '', 'post_id'=> get_the_ID()));
 	set_query_var( 'block', $vars['block'] ); //you can use $blocks without having to parse args for fast reference
-
+	set_query_var('post_id', $vars['post_id']);
 
 	//also allow for full paths. if / is found in prefix then we wont check src. we expect a full path no prefix
 	if ( strpos( $file_prefix, '/' ) !== false ) {
