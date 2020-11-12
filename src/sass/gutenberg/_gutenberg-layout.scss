@@ -7,8 +7,19 @@
 
 //.editor-styles-wrapper holds the title area and well as all blocks and contains the entire gutenberg part
 //.block-editor-block-list__layout holds all .wp-block items that are inside .editor-styles-wrapper
-div .editor-styles-wrapper{
+div .editor-styles-wrapper {
   padding: 15px 0;
+}
+
+
+//remove margins between blocks
+.components-popover.block-editor-block-list__block-popover .components-popover__content .block-editor-block-contextual-toolbar{
+  margin-bottom: 0;
+}
+
+.block-editor-block-list__block{
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 //this element directly holds all blocks under the title
@@ -19,9 +30,9 @@ div .block-editor-block-list__layout {
   z-index: 10;
 
   > *:not([data-align="full"] ):not([data-align="wide"] ):not(.is-reusable) {
-	max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
-	margin-right: auto;
-	margin-left: auto;
+    max-width: var(--container-content) !important; //needs to override the figures or any other elements with inline widths
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
@@ -49,7 +60,7 @@ div .editor-styles-wrapper p {
 --------------------------------------------------------------*/
 div .acf-block-component {
   textarea {
-	font-size: 16px;
+    font-size: 16px;
   }
 }
 
@@ -61,25 +72,25 @@ div .acf-block-component {
 }
 
 
-
 ////widening sidebar
 @media(min-width: 1560px) {
-  .interface-interface-skeleton__sidebar{
-  width: 32%;
-}
+  .interface-interface-skeleton__sidebar {
+    width: 32%;
+  }
 
 }
+
 //
 ////hiding sidebar on small screens so you can have a full screen experience with hover widening it
 @media(max-width: 1560px) {
-  .edit-post-layout.is-sidebar-opened .interface-interface-skeleton__sidebar{
-	transition: width .5s;
-	width: 32%;
+  .edit-post-layout.is-sidebar-opened .interface-interface-skeleton__sidebar {
+    transition: width .5s;
+    width: 32%;
 
-	&:hover {
-	  width: 50%;
-	  opacity: 1;
-	}
+    &:hover {
+      width: 50%;
+      opacity: 1;
+    }
   }
 
 }
@@ -88,40 +99,40 @@ div .acf-block-component {
 //button changes
 .wp-core-ui .acf-block-preview, .block-editor-rich-text {
   .button {
-	line-height: 1.5;
-	height: auto;
-	font-size: inherit;
+    line-height: 1.5;
+    height: auto;
+    font-size: inherit;
   }
 
 }
-
 
 
 /*--------------------------------------------------------------
 # Fixing inputs on back end
 --------------------------------------------------------------*/
 //broke from setting html font size to 65.5%
-input[type="radio"], input[type="checkbox"]{
+input[type="radio"], input[type="checkbox"] {
   width: 1.6rem;
   height: 1.6rem;
 }
-input[type=checkbox]:checked::before{
+
+input[type=checkbox]:checked::before {
   width: 2.1rem;
   height: 2.1rem;
   margin: -.2885rem 0 0 -.4rem;
 }
 
-input[type=radio]:checked::before{
+input[type=radio]:checked::before {
   width: .8rem;
   height: .8rem;
   margin: .3rem;
 }
 
-.components-base-control .components-base-control__label{
+.components-base-control .components-base-control__label {
   display: block;
 }
 
 
- #editor .has-inner-blocks{
-   display: block;
- }
+#editor .has-inner-blocks {
+  display: block;
+}

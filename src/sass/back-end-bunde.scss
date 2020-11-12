@@ -3,7 +3,10 @@
 @use "gutenberg/gutenberg-layout";
 @use "gutenberg/gutenberg-styles";
 
-@import "../parts/**/_?*.scss"; //glob does not support @use
-@import "../blocks/**/_?*.scss"; //glob does not support @use
-@import "../../inc/**/_?*.scss"; //glob does not support @use
 
+.editor-styles-wrapper .acf-block-preview{
+  @import "../parts/**/_?*.scss"; //glob does not support @use
+  @import "../blocks/**/_?*.scss"; //glob does not support @use
+}
+
+@import "../../inc/**/_?*.scss"; //glob does not support @use

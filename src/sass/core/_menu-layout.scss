@@ -81,7 +81,7 @@
       }
     }
 
-    .current-menu-item > .sub-menu{
+    .current-menu-item > .sub-menu {
       display: block;
     }
 
@@ -119,7 +119,6 @@
       height: 100%;
 
 
-
       //make top level items flexed so they can be positioned at top or bottom of site-top
       .top-level-item > .menu-item-link {
         display: flex;
@@ -146,7 +145,6 @@
       .sub-menu .menu-item-link {
         padding: 3px 15px;
       }
-
 
 
       //even lower sub-menus
@@ -392,7 +390,7 @@
 }
 
 //lock body needed to make it look right and no scrolling around
-.body-lock{
+.body-lock {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
