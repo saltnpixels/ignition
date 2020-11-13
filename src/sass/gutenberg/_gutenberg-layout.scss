@@ -17,9 +17,13 @@ div .editor-styles-wrapper {
   margin-bottom: 0;
 }
 
-.block-editor-block-list__block{
+.block-editor-block-list__block:not(.rich-text){
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.block-editor-block-list__block.rich-text{
+  margin-top: 30px;
 }
 
 //this element directly holds all blocks under the title
