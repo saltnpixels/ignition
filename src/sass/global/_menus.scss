@@ -48,6 +48,10 @@
     //top level items:
     .top-level-item {
 
+      &.current-menu-item .menu-item-link{
+        color: var(--main-text-color);
+      }
+
       //top level menu item turned on or hovered on, or item within is hovered on
       &.toggled-on, &:focus-within {
         background: transparent;
