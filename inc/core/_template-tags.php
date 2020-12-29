@@ -214,34 +214,61 @@ function ign_template( $file_prefix = 'content', $vars = array() ) {
 
 	$format = '';
 	if ( get_post_format() ) {
-		$format = get_post_format() . '-';
+		$format = get_post_format();
 	}
 	$post_type = get_post_type();
 
 	//if no vars are passed, at least pass empty $block because there is a chance we are grabbing a template that expects $block to exist for block attributes.
-	$vars = wp_parse_args($vars, array('block' => '', 'post_id'=> get_the_ID()));
-	set_query_var( 'block', $vars['block'] ); //you can use $blocks without having to parse args for fast reference
-	set_query_var('post_id', $vars['post_id']);
+	$vars = wp_parse_args( $vars, array( 'block' => '', 'post_id' => get_the_ID() ) );
+	//you can use $blocks without having to parse args for fast reference. same with post_id
+	set_query_var( 'block', $vars['block'] );
+	set_query_var( 'post_id', $vars['post_id'] );
 
 	//also allow for full paths. if / is found in prefix then we wont check src. we expect a full path no prefix
 	if ( strpos( $file_prefix, '/' ) !== false ) {
-		locate_template( $file_prefix, true, false );
+		locate_template( $file_prefix, true, false, $vars );
 	} else {
 
-		locate_template( array(
-			'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . $post_type . '.php',
-			//searches for post-type/{prefix}-{post-type}.php inside post type folder
-			'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . '.php',
-			//if it cant find the above, searches for post-type/{prefix}.php in post-type folder
-			'src/parts/post/' . $file_prefix . '-' . $format . 'post.php',
-			//searches for post/{prefix}-post.php
-			'src/parts/post/content-' . $format . 'post.php',
-			//gets post/content.php
-		),
-			true,
-			false,
-		$vars
-		);
+		if ( $format ) {
+			locate_template( array(
+				//search for name with format in it
+				'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . '-' . $post_type . '.php',
+				'src/parts/' . $post_type . '/' . $file_prefix . '-' . $format . '.php',
+
+				//search for regular name
+				'src/parts/' . $post_type . '/' . $file_prefix . '-' . $post_type . '.php',
+				'src/parts/' . $post_type . '/' . $file_prefix . '.php',
+
+				//fallback to post folder
+				'src/parts/post/' . $file_prefix . '-' . $format . '-post.php',
+				'src/parts/post/' . $file_prefix . '-' . $format . '.php',
+				'src/parts/post/' . $file_prefix . '-post.php',
+				'src/parts/post/' . $file_prefix . '.php',
+				
+				'src/parts/post/content-post.php',
+			),
+				true,
+				false,
+				$vars );
+		} else {
+			locate_template( array(
+				//search for regular name
+				'src/parts/' . $post_type . '/' . $file_prefix . '-' . $post_type . '.php',
+				'src/parts/' . $post_type . '/' . $file_prefix . '.php',
+
+				//fallback to posts folder
+				'src/parts/post/' . $file_prefix . '-post.php',
+				'src/parts/post/' . $file_prefix . '.php',
+
+				//fallback to safe known default file
+				'src/parts/post/content-post.php',
+			),
+				true,
+				false,
+				$vars
+			);
+		}
+
 
 	}
 }
@@ -496,15 +523,12 @@ function ign_block_attrs( $block = '', $custom_classes = '', $include_align = tr
 }
 
 
-
-
-
 /**
  * @param string $prefix
  * Shows a header block if none is in the content
  */
-function ign_header_block($prefix = 'header') {
-	if (! ign_has_header_block() ) {
+function ign_header_block( $prefix = 'header' ) {
+	if ( ! ign_has_header_block() ) {
 		ign_template( $prefix, array( 'block' => '' ) );
 	}
 }
