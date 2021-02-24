@@ -54,8 +54,8 @@ get_header();
                 <div class="container card-pagination text-center">
 					<?php
 					the_posts_pagination( array(
-						'prev_text'          => ign_get_svg( array( 'icon' => 'angle-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'ignition' ) . '</span>',
-						'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'ignition' ) . '</span>' . ign_get_svg( array( 'icon' => 'angle-right' ) ),
+						'prev_text'          => '<span class="iconify" data-icon="carbon:chevron-left"></span><span class="screen-reader-text">' . __( 'Previous page', 'ignition' ) . '</span>',
+						'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'ignition' ) . '</span><span class="iconify" data-icon="carbon:chevron-right"></span>',
 						'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'ignition' ) . ' </span>',
 					) );
 					?>
