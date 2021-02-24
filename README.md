@@ -33,6 +33,7 @@ Here are just some of the features found in ignition.
 - Javascript events for scroll animations and click events and even moving items from around the page with simple data attributes.
 - svg icons support with iconify.design
 - An automatic header block that can be added when a new post is made automatically using the theme config file
+- Drag and drop folders of js, css, and even php for plug and play. Any underscored files will be auto included in the build. Even underscored php files.
 
 ## Quick Install
 First things first! <br>
