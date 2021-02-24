@@ -34,20 +34,21 @@ Here are just some of the features found in ignition.
 - svg icons support with iconify.design
 - An automatic header block that can be added when a new post is made automatically using the theme config file
 
-## Setup
+## Quick Install
 First things first! <br>
 Download the theme into your WordPress theme directory.
-You should also install Advanced Custom Fields Pro as Ignition works best with it.
-Then run the following in the terminal (make sure the terminal is pointing to the theme directory)
 
- ```shell script
-npm run setup
+```shell script
+npx create-ignition-theme theme-directory-name --setup
 ```
- This will ask you for the new name of your theme. You must also give a slug which will be used as your text domain and in some functions.
- Example: Theme Name: My Amazing Theme, Slug: amazing-theme
- If you are using a local environment with something like flywheel, make sure to enter the local url. The default is ignition.local
 
- Answer all the questions and your theme will be all set up and ready to use!
+This will ask you for the new name of your theme. You must also give a slug which will be used as your text domain and in some functions.
+Example: Theme Name: My Amazing Theme, Slug: amazing-theme
+If you are using a local environment with something like flywheel, make sure to enter the local url. The default is ignition.local
+
+Answer all the questions and your theme will be all set up and ready to use!
+
+You should also install Advanced Custom Fields Pro as Ignition works best with it.
 
  ### Theme Config
  There is now a theme config file. It has some nifty quick settings for you without letting the client mess around. Some of these settings use to be in the WP customizer. We have moved them here. Note the name and slug here were created by running the setup. If you run the setup again, it will do a replacement based on whats here. So to change the theme name again, run the setup, don't just change those here!
