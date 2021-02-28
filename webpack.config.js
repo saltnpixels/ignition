@@ -43,7 +43,16 @@ module.exports = {
             ],
          },
          { test: /\.svg$/, use: 'svg-inline-loader' },
-         { test: /\.(js)$/, use: ['babel-loader', 'import-glob-loader'] }, //turns jsx into js the browser can understand and also allows for es6 to be used
+         {
+            test: /\.(js)$/, exclude: /node_modules/, use: [
+               {
+                  loader: 'babel-loader',
+                  options: {
+                     presets: ['@babel/preset-env']
+                  }
+               },
+               'import-glob-loader']
+         }, //turns jsx into js the browser can understand and also allows for es6 to be used
          {
             test: /\.css$/, use: [{
                loader: MiniCssExtractPlugin.loader
@@ -65,7 +74,9 @@ module.exports = {
                               },
                            ],
                         ]
-                     }}},
+                     }
+                  }
+               },
                { loader: 'resolve-url-loader' },
                {
                   loader: 'sass-loader',
@@ -89,7 +100,7 @@ module.exports = {
                 '**/*.css',
                 {
                    match: '**/*.js',
-                   options:{
+                   options: {
                       ignored: 'dist/**/*.js'
                    }
                 }
