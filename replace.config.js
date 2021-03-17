@@ -66,6 +66,11 @@ const questions = [
       name: 'server',
       message: 'Development or Remote Url',
       initial: 'ignition.local'
+   },
+   {
+      type: 'confirm',
+      name: 'ssl',
+      message: 'Does your local server have an SSL?',
    }
 ];
 
@@ -119,8 +124,19 @@ const questions = [
              files: './theme.config.json',
              dry: args['dry'] || false,
              verbose: true,
-             from: [/"name": ".*/g, /"slug": ".*/g, /"server": ".*/g],
-             to: [`"name": "${response.name}",`, `"slug": "${response.slug}",`, `"server": "${response.server}",`]
+             from: [
+               /"name": ".*/g,
+               /"slug": ".*/g,
+               /"server": ".*/g,
+               /"ssl": .*/g,
+            ]
+               ,
+             to: [
+               `"name": "${response.name}",`,
+               `"slug": "${response.slug}",`,
+               `"server": "${response.server}",`,
+               `"ssl": ${response.ssl},`
+            ]
           }
 
           try {
