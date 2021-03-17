@@ -70,7 +70,7 @@ const questions = [
    {
       type: 'confirm',
       name: 'ssl',
-      message: 'Does your server have an SSL?',
+      message: 'Does your local server have an SSL?',
    }
 ];
 
