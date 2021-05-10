@@ -86,6 +86,9 @@ export function ignSlideUp(target, duration = .5) {
 export function ignSlide(direction = 'up', target, duration = .5) {
    return new Promise(function (resolve, reject) {
 
+      // Exit function if no target it falsey, as we depend on the target to run this function
+      if(!target) return
+
       if (target.dataset.slideTimer) {
          clearTimeout(parseInt(target.dataset.slideTimer))
          target.removeAttribute('slide-timer')

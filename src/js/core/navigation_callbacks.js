@@ -33,6 +33,9 @@ export function toggleTopLevelVerticalMenu(menuItem, open = true) {
 //non on all top level submenus for click and hover
 export function toggleSubMenu(menuItem, open = true) {
    const subMenu = menuItem.querySelector('.sub-menu')
+   // Exit function if no subMenu is found.
+   if(!subMenu) return
+
    if (open) {
       //change to whatever you want ie: ignSlideDown...
       menuItem.classList.add('toggled-on')
